@@ -1,0 +1,119 @@
+.App {
+  font-family: "Poppins", sans-serif;
+  background-color: #c7c9c7;
+}
+.Content {
+  /* padding top left bottom right */
+  padding: 60px 0 80px 0;
+}
+#testHeader {
+  font-size: 100px;
+}
+
+/* NavBar Style */
+
+#myNavBar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #e63422;
+}
+
+#navBrand {
+  font-size: 25px;
+  font-weight: bold;
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 15px;
+}
+
+#navBrand:hover {
+  color: white;
+  background-color: #283266;
+  transition-duration: 0.4s;
+}
+
+.NavLink {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.NavLink:hover {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: black;
+  background-color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+/* End NavBar Style*/
+
+/* Footer Style */
+.FooterLink {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  transition-duration: 0.3s;
+}
+.FooterLink:hover {
+  background-color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #006cb0;
+}
+
+#footerDplop {
+  font-size: 25px;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 15px;
+  background-color: #283266;
+}
+
+/* End Footer Style */
+
+/* Courses Search */
+
+#searchBox {
+  background-color: #1d252d;
+  width: 100%;
+  color: white;
+
+  padding: 15px 15px 8px 15px;
+}
+#searchForm {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+#searchBar {
+  width: 50%;
+}
+
+#coursesBox {
+  background-color: #283266;
+  width: 100%;
+  align-content: center;
+}
+
+/* End Courses Search  */
