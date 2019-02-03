@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, FormControl, Button } from "react-bootstrap";
+import { FormCheck, Form, FormControl, Button } from "react-bootstrap";
+import FormCheckInput from "react-bootstrap/FormCheckInput";
 export class SearchBox extends Component {
   constructor() {
     super();
@@ -37,9 +38,51 @@ export class SearchBox extends Component {
           />
           <Button onClick={this.onSubmit}>Submit</Button>
         </Form>
-        <p>filters go here</p>
-        <p>filters go here</p>
-        <p>filters go here</p>
+
+        <div className="filterContainer">
+          <div className="filterNameContainer">
+            <div className="filterName">
+              <a>Service</a>
+            </div>
+          </div>
+
+          <div>
+            <Button className="filterChoices"> Yoga </Button>
+            <Button className="filterChoices"> Cardio </Button>
+            <Button className="filterChoices"> Weight Training </Button>
+          </div>
+        </div>
+
+        <div className="filterContainer">
+          <div className="filterNameContainer">
+            <div className="filterName">
+              <a>Location</a>
+            </div>
+          </div>
+
+          <div>
+            <Button className="filterChoices"> BTS </Button>
+            <Button className="filterChoices"> MRT </Button>
+            <Button className="filterChoices"> SIAM </Button>
+            <Button className="filterChoices"> ASOK </Button>
+            <Button className="filterChoices"> MOCHIT </Button>
+            <Button className="filterChoices"> RAMA IX </Button>
+          </div>
+        </div>
+
+        <div className="filterContainer">
+          <div className="filterNameContainer">
+            <div className="filterName">
+              <a>Trainer's Gender</a>
+            </div>
+          </div>
+
+          <div>
+            <Button className="filterChoices"> Male </Button>
+            <Button className="filterChoices"> Female </Button>
+            <Button className="filterChoices"> Others </Button>
+          </div>
+        </div>
       </div>
     );
   }

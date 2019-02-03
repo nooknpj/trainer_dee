@@ -124,6 +124,42 @@
   width: 80%;
 }
 
+.filterContainer {
+  color: black;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.filterNameContainer {
+  width: 30%;
+  min-width: 30%;
+  max-width: 30%;
+  margin-right: 5px;
+}
+
+.filterName {
+  font-weight: bold;
+  text-align: center;
+  padding-right: 5px;
+  background-color: #e63422;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+}
+
+.filterChoices {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
 #resultsContainer {
   background-color: #b9dcd2;
   width: 100%;
