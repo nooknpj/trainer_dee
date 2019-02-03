@@ -9,6 +9,9 @@ export class SearchResults extends Component {
         key={courseItem.id}
         title={courseItem.title}
         trainer={courseItem.trainer}
+        hours={courseItem.hours}
+        price={courseItem.price}
+        imgUrl={courseItem.imgUrl}
       />
     ));
   }

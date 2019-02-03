@@ -8,22 +8,38 @@ export class SearchCourses extends Component {
     // mockup courses from searchResults
     this.state = {
       searchResults: [
-        { id: "1", title: "Yoga 101", trainer: "John" },
+        {
+          id: "1",
+          title: "Yoga 101",
+          trainer: "John",
+          hours: "10",
+          price: "3000",
+          imgUrl: "imgHere"
+        },
 
         {
           id: "2",
           title: "WeightTraining for Beginners",
-          trainer: "Harry"
+          trainer: "Harry",
+          hours: "10",
+          price: "2500",
+          imgUrl: "imgHere"
         },
         {
           id: "3",
           title: "Yoga for health",
-          trainer: "Mary"
+          trainer: "Mary",
+          hours: "5",
+          price: "1200",
+          imgUrl: "imgHere"
         },
         {
           id: "4",
           title: "Half-Marathon Prep",
-          trainer: "Elizabeth"
+          trainer: "Elizabeth",
+          hours: "20",
+          price: "3000",
+          imgUrl: "imgHere"
         }
       ]
     };
