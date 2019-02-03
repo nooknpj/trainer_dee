@@ -4,7 +4,9 @@ export class CourseItem extends Component {
   render() {
     return (
       <div style={courseItemStyle}>
-        <h>{this.props.title}</h>
+        <h5> Course Name --> {this.props.title}</h5>
+
+        <p> Trainer --> {this.props.trainer}</p>
       </div>
     );
   }

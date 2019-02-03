@@ -5,10 +5,8 @@ import CoursesBox from "../components/CoursesBox";
 export class TestCss extends Component {
   render() {
     return (
-      <div style={searchContainerStyle}>
-        <SearchBox />
-
-        <CoursesBox />
+      <div>
+        <p>blank page</p>
       </div>
     );
   }
