@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import CourseItem from "./CourseItem";
 export class SearchResults extends Component {
   render() {
-    return (
-      <div id="searchResults">
-        <CourseItem title={"course1"} />
-        <CourseItem title={"course2"} />
-        <CourseItem title={"course3"} />
-      </div>
-    );
+    // display the course item for each courseItem
+    // in searchResults( passed as props from state of SearchCoursesPage)
+    return this.props.searchResults.map(courseItem => (
+      <CourseItem
+        key={courseItem.id}
+        title={courseItem.title}
+        trainer={courseItem.trainer}
+      />
+    ));
   }
 }
 
