@@ -10,7 +10,7 @@ export class Home extends Component {
           <img src={firstImg} width="100%" height="20%" />
         </div>
 
-        <h style={headerStyle}>What is Trainer Dee?</h>
+        <h style={headerStyle}>What is Trainer D?</h>
         <p style={paragraphStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
           eu convallis eros, at posuere nunc. Quisque a interdum libero,
@@ -35,7 +35,7 @@ export class Home extends Component {
         <div style={{ paddingTop: "20px", paddingBottom: "20px" }}>
           <img src={secondImg} width="100%" />
         </div>
-        <h style={headerStyle}>Why Trainer Dee?</h>
+        <h style={headerStyle}>Why Trainer D?</h>
         <p style={paragraphStyle}>
           Proin eu faucibus sem. Duis gravida dolor felis, eget tincidunt mi
           porttitor ac. Cras in justo sollicitudin, cursus orci quis, interdum

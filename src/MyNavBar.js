@@ -8,7 +8,7 @@ export class MyNavBar extends Component {
         <Navbar id="myNavBar" expand="lg" collapseOnSelect>
           <NavbarBrand id="navBrand" href="/">
             {" "}
-            Trainer Dee
+            Trainer D
           </NavbarBrand>
 
           <Nav>
