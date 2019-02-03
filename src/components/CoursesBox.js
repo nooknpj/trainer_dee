@@ -1,48 +1,15 @@
 import React, { Component } from "react";
+import SearchResults from "./SearchResults";
 
 export class CoursesBox extends Component {
   render() {
     return (
       <div id="coursesBox">
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
-        <h5>courses</h5>
+        <div id="sortBarContainer">
+          <h> sort bar goes here</h>
+        </div>
+
+        <SearchResults />
       </div>
     );
   }

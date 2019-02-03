@@ -15,7 +15,7 @@ export class MyNavBar extends Component {
             <a className="NavLink" href="/">
               Home
             </a>
-            <a className="NavLink" href="/courses">
+            <a className="NavLink" href="/searchCourses">
               Courses
             </a>
           </Nav>

@@ -15,7 +15,7 @@ export class SearchBox extends Component {
         </Form>
         <p>filters go here</p>
         <p>filters go here</p>
-        <p>sort bys go here</p>
+        <p>filters go here</p>
       </div>
     );
   }
