@@ -42,7 +42,7 @@ export class SearchCourses extends Component {
   };
 
   render() {
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <div id="searchCoursesContainer">
         <div id="searchContainer">

@@ -25,8 +25,6 @@ export class CoursesBox extends Component {
             <p> We couldn't find any course that matches your search.</p>
           </div>
         )}
-
-        <SearchResults searchResults={this.props.searchResults} />
       </div>
     );
   }
