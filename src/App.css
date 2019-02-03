@@ -91,12 +91,26 @@
 
 /* End Footer Style */
 
-/* Courses Search */
+/* SearchCourses Page */
+#searchCoursesContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
 
+#searchContainer {
+  width: 55%;
+  margin-right: 10px;
+}
 #searchBox {
   background-color: #1d252d;
+
   width: 100%;
   color: white;
+  border: solid #574676 5px;
+  border-radius: 10px;
 
   padding: 15px 15px 8px 15px;
 }
@@ -107,13 +121,45 @@
 }
 
 #searchBar {
-  width: 50%;
+  width: 80%;
 }
 
-#coursesBox {
-  background-color: #283266;
+#resultsContainer {
+  background-color: #b9dcd2;
   width: 100%;
-  align-content: center;
+  border: solid #284734 5px;
+  border-radius: 10px;
 }
 
+#sortBarContainer {
+  background-color: #284734;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+
+  color: white;
+}
+
+#searchResult {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#courseItem {
+  border: solid white 5px;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+#courseImgContainer {
+  background-color: white;
+  margin-right: 15px;
+}
 /* End Courses Search  */

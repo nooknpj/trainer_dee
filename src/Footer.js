@@ -12,7 +12,7 @@ export class Footer extends Component {
           Courses
         </a>
         <div style={FooterDplopBox}>
-          <a id="footerDplop">Trainer Dee By D'Plop</a>
+          <a id="footerDplop">Trainer D By D'Plop</a>
         </div>
         <p> © Copyright. 2019 D'Plop Company. All rights reserved.</p>
       </div>

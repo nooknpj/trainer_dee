@@ -8,15 +8,15 @@ export class MyNavBar extends Component {
         <Navbar id="myNavBar" expand="lg" collapseOnSelect>
           <NavbarBrand id="navBrand" href="/">
             {" "}
-            Trainer Dee
+            Trainer D
           </NavbarBrand>
 
           <Nav>
             <a className="NavLink" href="/">
               Home
             </a>
-            <a className="NavLink" href="/courses">
-              Courses
+            <a className="NavLink" href="/searchCourses">
+              Search Courses
             </a>
           </Nav>
 
