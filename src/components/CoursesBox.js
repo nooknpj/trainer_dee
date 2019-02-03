@@ -12,7 +12,6 @@ export class CoursesBox extends Component {
         <div id="sortBarContainer">
           <h> sort bar goes here</h>
         </div>
-
         <SearchResults searchResults={this.props.searchResults} />
       </div>
     );

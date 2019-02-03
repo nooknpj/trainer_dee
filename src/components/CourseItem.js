@@ -3,24 +3,18 @@ import React, { Component } from "react";
 export class CourseItem extends Component {
   render() {
     return (
-      <div style={courseItemStyle}>
-        <h5> Course Name --> {this.props.title}</h5>
-
-        <p> Trainer --> {this.props.trainer}</p>
+      <div id="courseItem" style={courseItemStyle}>
+        <div id="courseImgContainer">CourseImgHere</div>
+        <div id="courseItemInfo">
+          <h3> {this.props.title}</h3>
+          <p> Trainer --> {this.props.trainer}</p>
+        </div>
       </div>
     );
   }
 }
 
 const courseItemStyle = {
-  backgroundColor: "black",
-  border: "solid white 5px",
-  borderRadius: "10px",
-  color: "white",
-  padding: "10px",
-  marginTop: "10px",
-  marginBottom: "10px",
-  marginLeft: "5px",
-  marginRight: "5px"
+  backgroundColor: "black"
 };
 export default CourseItem;
