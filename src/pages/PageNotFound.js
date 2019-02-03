@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-
+import pageNotFoundImg from "../img/pageNotFoundImg.jpg";
 export class PageNotFound extends Component {
   render() {
     return (
       <div>
-        <h> Sorry, 404 page not found!! try other paths!</h>
+        <img src={pageNotFoundImg} width="100%" />
       </div>
     );
   }

@@ -5,6 +5,7 @@ export class CourseItem extends Component {
     return (
       <div id="courseItem" style={courseItemStyle}>
         <div id="courseImgContainer">CourseImgHere</div>
+
         <div id="courseItemInfo">
           <h3> {this.props.title}</h3>
           <p> Trainer --> {this.props.trainer}</p>

@@ -29,12 +29,24 @@ export class SearchCourses extends Component {
     };
   }
 
+  // functions -> need to be passed via props to inner components
+
+  // upDateSearchResults (parameters) then call backend
+  upDateSearchResults = () => {
+    // this is currently a mockup
+    // setState equals to json returned from backend
+    this.setState({
+      searchResults: []
+      // searchResults: [{ id: "1", title: "Updated", trainer: "NewJohn" }]
+    });
+  };
+
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div id="searchCoursesContainer">
         <div id="searchContainer">
-          <SearchBox />
+          <SearchBox upDateSearchResults={this.upDateSearchResults} />
         </div>
 
         <div id="resultsContainer">
