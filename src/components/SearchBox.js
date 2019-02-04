@@ -35,9 +35,10 @@ export class SearchBox extends Component {
   onSearchSubmit = e => {
     //console.log("submit");
     console.log("this current keyword is");
-    console.log(this.state.searchKeyWords);
+
     this.props.upDateSearchResults();
     e.preventDefault();
+    console.log(this.state);
   };
 
   onServiceFilterClick = e => {
