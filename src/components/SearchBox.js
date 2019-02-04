@@ -1,29 +1,90 @@
 import React, { Component } from "react";
-import { FormCheck, Form, FormControl, Button } from "react-bootstrap";
+import { Form, FormControl, Button } from "react-bootstrap";
 import FormCheckInput from "react-bootstrap/FormCheckInput";
+
 export class SearchBox extends Component {
   constructor() {
     super();
     this.state = {
-      searchKeyWords: ""
+      searchKeyWords: "",
+
+      serviceFilter: {
+        yoga: 1,
+        weightTraining: 1,
+        cardio: 1
+      },
+
+      genderFilter: {
+        male: 1,
+        female: 1,
+        others: 1
+      }
     };
   }
 
   //capture keyword change in searchBar
-  onChange = e => {
+  onSearchBarChange = e => {
     this.setState({ searchKeyWords: e.target.value });
-    // onKeyWordChange should called this.props.upDateSearchResults() (with parameters)
+    console.log(this.state);
+    //this.props.upDateSearchResults();
+    // onKeyWordChange should called this.props.upDateSearchResults() (this.state should be sent)
   };
 
   // this is currently a mock up function
-  // onSubmit (parameters) call backend to updateSearchResults
-  onSubmit = e => {
+  // onSubmit (this.state should be sent) call backend to updateSearchResults
+  onSearchSubmit = e => {
     //console.log("submit");
     console.log("this current keyword is");
     console.log(this.state.searchKeyWords);
     this.props.upDateSearchResults();
     e.preventDefault();
   };
+
+  onServiceFilterClick = e => {
+    //console.log(e.target.value);
+    //console.log(e.target.id);
+    e.target.value = e.target.value ^ 1;
+    if (e.target.value == 0) {
+      this.state.serviceFilter[e.target.title] = 0;
+    } else {
+      this.state.serviceFilter[e.target.title] = 1;
+    }
+
+    console.log(this.state);
+  };
+
+  onGenderFilterClick = e => {
+    //console.log(e.target.value);
+    //console.log(e.target.id);
+    e.target.value = e.target.value ^ 1;
+    if (e.target.value == 0) {
+      this.state.genderFilter[e.target.title] = 0;
+    } else {
+      this.state.genderFilter[e.target.title] = 1;
+    }
+
+    console.log(this.state);
+  };
+
+  //test
+  toggleValue = e => {
+    e.target.value = e.target.value ^ 1;
+    console.log(e.target.value);
+  };
+
+  // // get Filter Choice Style
+  // // Depends on its props (e.value)
+  // getFilterChoiceStyle = () => {
+  //   if (this.value == 0) {
+  //     return {
+  //       background: "#f4f4f4"
+  //     };
+  //   } else {
+  //     return {
+  //       background: "#f4f4f4"
+  //     };
+  //   }
+  // };
 
   render() {
     return (
@@ -34,9 +95,9 @@ export class SearchBox extends Component {
             type="text"
             placeholder="Search..."
             className="mr-sm-2"
-            onChange={this.onChange}
+            onChange={this.onSearchBarChange}
           />
-          <Button onClick={this.onSubmit}>Submit</Button>
+          <Button onClick={this.onSearchSubmit}>Submit</Button>
         </Form>
 
         <div className="filterContainer">
@@ -47,26 +108,31 @@ export class SearchBox extends Component {
           </div>
 
           <div>
-            <Button className="filterChoices"> Yoga </Button>
-            <Button className="filterChoices"> Cardio </Button>
-            <Button className="filterChoices"> Weight Training </Button>
-          </div>
-        </div>
+            <Button
+              title="yoga"
+              value={1}
+              className="filterChoices"
+              onClick={this.onServiceFilterClick}
+            >
+              Yoga
+            </Button>
 
-        <div className="filterContainer">
-          <div className="filterNameContainer">
-            <div className="filterName">
-              <a>Location</a>
-            </div>
-          </div>
-
-          <div>
-            <Button className="filterChoices"> BTS </Button>
-            <Button className="filterChoices"> MRT </Button>
-            <Button className="filterChoices"> SIAM </Button>
-            <Button className="filterChoices"> ASOK </Button>
-            <Button className="filterChoices"> MOCHIT </Button>
-            <Button className="filterChoices"> RAMA IX </Button>
+            <Button
+              id="cardio"
+              value={1}
+              className="filterChoices"
+              onClick={this.onServiceFilterClick}
+            >
+              Cardio
+            </Button>
+            <Button
+              title="weightTraining"
+              value={1}
+              className="filterChoices"
+              onClick={this.onServiceFilterClick}
+            >
+              Weight Training
+            </Button>
           </div>
         </div>
 
@@ -78,9 +144,35 @@ export class SearchBox extends Component {
           </div>
 
           <div>
-            <Button className="filterChoices"> Male </Button>
-            <Button className="filterChoices"> Female </Button>
-            <Button className="filterChoices"> Others </Button>
+            <Button
+              className="filterChoices"
+              title="male"
+              value={1}
+              onClick={this.onGenderFilterClick}
+            >
+              {" "}
+              Male{" "}
+            </Button>
+
+            <Button
+              className="filterChoices"
+              title="female"
+              value={1}
+              onClick={this.onGenderFilterClick}
+            >
+              {" "}
+              Female{" "}
+            </Button>
+
+            <Button
+              className="filterChoices"
+              title="others"
+              value={1}
+              onClick={this.onGenderFilterClick}
+            >
+              {" "}
+              Others{" "}
+            </Button>
           </div>
         </div>
       </div>
