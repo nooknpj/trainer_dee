@@ -49,11 +49,8 @@ export class SearchCourses extends Component {
 
   // upDateSearchResults (parameters) then call backend
   upDateSearchResults = e => {
-    // this is currently a mockup
-    // setState equals to json returned from backend
     this.setState({
       searchResults: e
-      // searchResults: [{ id: "1", title: "Updated", trainer: "NewJohn" }]
     });
   };
 
