@@ -22,6 +22,30 @@ export class SearchBox extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getDefaultSearchResults();
+  }
+
+  async getDefaultSearchResults() {
+    try {
+      const data = this.state.serviceFilter;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/filter_by_service", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+
+      this.props.upDateSearchResults(results);
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
+  }
+
   async fetchFilterdService(e) {
     try {
       const data = this.state.serviceFilter;
