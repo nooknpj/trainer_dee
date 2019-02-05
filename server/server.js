@@ -90,16 +90,51 @@ app.post("/trainer_dee/filter_by_service", (req, res) => {
 });
 
 app.post("/trainer_dee/filter_by_gender", (req, res) => {
-  let sql =
-    "SELECT * from course c where c.CourseID = (Select CourseID FROM user u natural join trainer t natural join course c where u.Gender = ?)";
+  let desiredFilters = [];
+  let sql = "";
+  if (req.body["male"] == 1) desiredFilters.push(0);
+  if (req.body["female"] == 1) desiredFilters.push(1);
+  if (req.body["others"] == 1) desiredFilters.push(2);
 
-  connection.query(sql, req.body["Gender"], (error, result) => {
-    if (error) throw error;
+  if (desiredFilters.length == 0) {
+    res.send([]);
+  } else if (desiredFilters.length == 1) {
+    let sql =
+      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid and u.Gender = ?";
 
-    let all = JSON.parse(JSON.stringify(result));
-    res.send(all);
-    //console.log(all);
-  });
+    connection.query(sql, [desiredFilters[0]], (error, result) => {
+      if (error) throw error;
+
+      let all = JSON.parse(JSON.stringify(result));
+      res.send(all);
+      //console.log(all);
+    });
+  } else if (desiredFilters.length == 2) {
+    let sql =
+      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid and (u.Gender = ? or u.Gender = ?)";
+
+    connection.query(
+      sql,
+      [desiredFilters[0], desiredFilters[1]],
+      (error, result) => {
+        if (error) throw error;
+
+        let all = JSON.parse(JSON.stringify(result));
+        res.send(all);
+        console.log(all);
+      }
+    );
+  } else if (desiredFilters.length == 3) {
+    let sql =
+      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid";
+
+    connection.query(sql, (error, result) => {
+      if (error) throw error;
+
+      let all = JSON.parse(JSON.stringify(result));
+      res.send(all);
+      console.log(all);
+    });
+  }
 });
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
