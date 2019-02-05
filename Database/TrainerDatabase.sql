@@ -89,7 +89,7 @@ CREATE TABLE Authen(
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO User(SSN , FName , SName , Gender , DateOfBirth, TelNo ,  NickName , Address) 
+INSERT INTO User(SSN , FName , SName , Gender , DateOfBirth, NickName , TelNo , Address) 
 values ('1103698745210','Yuki','Oberon','F','1995-06-13','Mini', '0589665489' ,'205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
 		('5521368954697','Jiro','Talbot','M','1998-4-10','Loki','7856663214','314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
         ('1245869852317','Rina','Saltzman','F','1996-5-3','Rina','7895412305','269-1022, Nunobeichi, Furano-shi, Hokkaido');
