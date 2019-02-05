@@ -16,11 +16,12 @@ export class CourseItem extends Component {
 
         <div id="courseItemInfo">
           <h3> {this.props.CName}</h3>
-          <p> Trainer --> {this.props.TrainerID}</p>
+
           <p> Service --> {this.getService()} </p>
+          <p> Trainer --> {this.props.TrainerID}</p>
+          <p> Description --> {this.props.CourseDescription}</p>
           <p> Hours --> {this.props.CourseHour}</p>
           <p> Cost --> {this.props.Cost}</p>
-          <p> service --> {this.props.service}</p>
         </div>
       </div>
     );
