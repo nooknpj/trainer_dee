@@ -5,18 +5,21 @@ use trainer_dee ;
 
 CREATE TABLE User (
 	userID integer(10) auto_increment,
-    SSN varchar(13) ,
-    FName varchar(20),
-    SName varchar(20) ,
-    Gender varchar(1) ,
-    DateOfBirth date ,
+    SSN varchar(13) NOT NULL,
+    FName varchar(20) NOT NULL,
+    SName varchar(20)  NOT NULL,
+    Gender varchar(1)  NOT NULL,
+    DateOfBirth date  NOT NULL,
+    TelNo varchar(10) , 
     NickName varchar(10),
     Address varchar(100),
+    
     PRIMARY KEY(userID)
  );
  CREATE TABLE Trainer(
 	TrainerID integer(10),
     Certificate varchar(256),
+    
     PRIMARY KEY(TrainerID),
     CONSTRAINT FK_Trainer_User FOREIGN KEY(TrainerID) 
     REFERENCES User(UserID) 
@@ -24,10 +27,14 @@ CREATE TABLE User (
  );
  CREATE TABLE Course(
 	CourseID varchar(10) ,
-    Service varchar(10) ,
-    CName varchar(30) ,
-    Description varchar(100),
+    CName varchar(30) NOT NULL,
+    Service varchar(10) NOT NULL ,
+    Cost integer(6),
+    Hour unsigned tinyint ,
+    ImageUrl String ,
+    courseDescription varchar(100),
     TrainerID integer(10),
+    
     PRIMARY KEY (CourseID) ,
     CONSTRAINT FK_Course_Trainer FOREIGN KEY(TrainerID) 
     REFERENCES Trainer(TrainerID) 
@@ -37,9 +44,11 @@ CREATE TABLE User (
  CREATE TABLE Location(
 	LocationID varchar(10) ,
     LocateCourseID varchar(10) ,
-    LName varchar(20) ,
+    LName varchar(20) NOT NULL,
     Station varchar(20) ,
+    
     PRIMARY KEY (LocationID,LocateCourseID),
+    
     CONSTRAINT FK_Location_Course FOREIGN KEY(LocateCourseID)
     REFERENCES Course(CourseID) 
 	ON DELETE CASCADE ON UPDATE CASCADE
@@ -48,7 +57,9 @@ CREATE TABLE User (
 CREATE TABLE Search(
 	Search_UserID integer(10) ,
     Search_CourseID varchar(10) ,
+    
     PRIMARY KEY (Search_UserID,Search_CourseID),
+    
     CONSTRAINT FK_Search_Course FOREIGN KEY(Search_CourseID)
     REFERENCES Course(CourseID) ,
     CONSTRAINT FK_Search_User FOREIGN KEY(Search_UserID)
@@ -58,7 +69,9 @@ CREATE TABLE Search(
 
 CREATE TABLE Client(
 	ClientID integer(10) ,
+    
     PRIMARY KEY (ClientID) ,
+    
     CONSTRAINT FK_Client_User FOREIGN KEY(ClientID)
     REFERENCES User(UserID) 
 	ON DELETE CASCADE ON UPDATE CASCADE
@@ -68,9 +81,17 @@ CREATE TABLE Authen(
 	AuthenID integer(10) ,
     Username varchar(20) ,
     Password varchar(20) ,
+    
     PRIMARY KEY(AuthenID,Username , Password) ,
     
     CONSTRAINT FK_Authen_User FOREIGN KEY(AuthenID)
     REFERENCES User(userID) 
     ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+INSERT INTO User(SSN , FName , SName , Gender , DateOfBirth ,  NickName , Address) 
+values ('1103698745210','Yuki','Oberon','F','1995-06-13','Mini','205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
+		('5521368954697','Jiro','Talbot','M','1998-4-10','Loki','314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
+        ();
+INSERT INTO Course(CourseID , CName ,Service , Description , TrainerID ) 
+values () ;
