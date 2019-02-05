@@ -51,6 +51,36 @@ export class SearchBox extends Component {
       this.state.serviceFilter[e.target.title] = 1;
     }
 
+
+    try {
+      //const data = { Service : e.target.value }
+      const data = this.state
+      
+      console.log('hi');
+      console.log(JSON.stringify(data))
+      const response = fetch('/trainer_dee/filter_by_service', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+
+      })
+      // this.setState({
+      //     tripTable: []
+      // })
+      // const response = await fetch('/dplop/list_trip')
+      const results = response.json();
+      console.log(results)
+      // await this.setState({ tripTable: results });
+      // this.setState({
+      //   list_trip_dateTB: ''
+      // })
+    } catch (error) {
+      console.log('Filter failed', error);
+    }
+
+
     console.log(this.state);
   };
 
