@@ -92,15 +92,19 @@ app.post("/trainer_dee/filter_by_service", (req, res) => {
 app.post("/trainer_dee/filter_by_gender", (req, res) => {
   let desiredFilters = [];
   let sql = "";
-  if (req.body["male"] == 1) desiredFilters.push(0);
-  if (req.body["female"] == 1) desiredFilters.push(1);
-  if (req.body["others"] == 1) desiredFilters.push(2);
+  if (req.body["male"] == 1) desiredFilters.push("M");
+  if (req.body["female"] == 1) desiredFilters.push("F");
+  if (req.body["others"] == 1) desiredFilters.push("O");
 
   if (desiredFilters.length == 0) {
+    console.log("gender case 0");
     res.send([]);
   } else if (desiredFilters.length == 1) {
+    console.log("gender case 1");
     let sql =
-      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid and u.Gender = ?";
+      "Select  c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,u.fName,u.sName,u.gender,u.telNo\
+       FROM user u, trainer t, course c \
+       where u.userid = t.trainerid and t.trainerid = c.trainerid and u.Gender = ?";
 
     connection.query(sql, [desiredFilters[0]], (error, result) => {
       if (error) throw error;
@@ -110,8 +114,12 @@ app.post("/trainer_dee/filter_by_gender", (req, res) => {
       //console.log(all);
     });
   } else if (desiredFilters.length == 2) {
+    console.log("gender case 2");
+
     let sql =
-      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid and (u.Gender = ? or u.Gender = ?)";
+      "Select  c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,u.fName,u.sName,u.gender,u.telNo\
+       FROM user u, trainer t, course c \
+       where u.userid = t.trainerid and t.trainerid = c.trainerid and (u.Gender = ? or u.Gender = ?)";
 
     connection.query(
       sql,
@@ -125,8 +133,12 @@ app.post("/trainer_dee/filter_by_gender", (req, res) => {
       }
     );
   } else if (desiredFilters.length == 3) {
+    console.log("gender case 3");
+
     let sql =
-      "Select * FROM user u, trainer t, course c where u.userid = t.trainerid and t.trainerid = c.trainerid";
+      "Select  c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,u.fName,u.sName,u.gender,u.telNo\
+       FROM user u, trainer t, course c\
+        where u.userid = t.trainerid and t.trainerid = c.trainerid";
 
     connection.query(sql, (error, result) => {
       if (error) throw error;
