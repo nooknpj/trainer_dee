@@ -20,8 +20,8 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-app.get('/trainer_dee/filter_by_service', (req, res) => {
-  let sql = 'select * from course c where c.CourseID = (select CourseID FROM course c where c.Service = '0')';
+app.post('/trainer_dee/filter_by_service', (req, res) => {
+  let sql = 'select * from course c where c.CourseID = (select CourseID FROM course c where c.Service = ?)';
 
   connection.query(sql, req.body['Service'], (error, result) => {
     if (error) throw error;
@@ -35,7 +35,7 @@ app.get('/trainer_dee/filter_by_service', (req, res) => {
   });
 });
 
-app.get('/trainer_dee/filter_by_gender', (req, res) => {
+app.post('/trainer_dee/filter_by_gender', (req, res) => {
   let sql = 'SELECT * from course c where c.CourseID = (Select CourseID FROM user u natural join trainer t natural join course c where u.Gender = ?)';
 
   connection.query(sql, req.body['Gender'], (error, result) => {
