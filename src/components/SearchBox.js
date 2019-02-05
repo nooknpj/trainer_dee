@@ -28,31 +28,19 @@ export class SearchBox extends Component {
 
   async getDefaultSearchResults() {
     try {
-      // console.log(JSON.stringify(data));
-      // const response = await fetch("/trainer_dee/filter_by_service", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify(data)
-      // });
+      const data = this.state.serviceFilter;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/filter_by_service", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
-      // const results = await response.json();
-      // console.log(results);
-      let tmp = [
-        {
-          CourseID: "5",
-          CName: "yoga mockUp",
-          Service: "0",
-          CourseDescription: "hello",
-          Cost: "500",
-          TrainerID: "112",
-          CourseHour: "300000",
-          ImageUrl: "course Image Url"
-        }
-      ];
+      const results = await response.json();
 
-      this.props.upDateSearchResults(tmp);
+      this.props.upDateSearchResults(results);
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
