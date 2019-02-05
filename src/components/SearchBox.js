@@ -24,7 +24,12 @@ export class SearchBox extends Component {
 
   // default search result after starts
   componentDidMount() {
-    this.getDefaultSearchResults();
+    //this.getDefaultSearchResults();
+    this.getMockUpResult();
+  }
+
+  getMockUpResult() {
+    this.props.upDateSearchResults(mockUpResult);
   }
 
   async getDefaultSearchResults() {
@@ -228,4 +233,67 @@ export class SearchBox extends Component {
   }
 }
 
+const mockUpResult = [
+  {
+    cName:
+      "Default SearchResults is currently not fetching post request to backend",
+    cost: "3000",
+    imageUrl: " yoga image here ",
+    courseHour: "10",
+    fName: "Jamie",
+    sName: "Jamie2",
+    service: "0",
+    courseDescription: "yoga mock up"
+  },
+  {
+    cName: "This is from array of object (const mockUpResult) in SearchBox.js",
+    cost: "99999999",
+    imageUrl: " yoga image here ",
+    courseHour: "120",
+    fName: "Jamie",
+    sName: "Jamie2",
+    service: "0",
+    courseDescription: "yoga for rich people"
+  },
+  {
+    cName: "ZZZZZZZZ",
+    cost: "0",
+    imageUrl: " IMG HERE ",
+    courseHour: "2",
+    fName: "Kelsey",
+    sName: "NNNNNN",
+    service: "1",
+    courseDescription: "quick cardio"
+  },
+  {
+    cName: "WeightTraining 21102345",
+    cost: "7",
+    imageUrl: " IMG HERE ",
+    courseHour: "1000000",
+    fName: "Kelsey",
+    sName: "NNNNNN",
+    service: "2",
+    courseDescription: "weight training for life"
+  },
+  {
+    cName: "a",
+    cost: "2",
+    imageUrl: " IMG HERE ",
+    courseHour: "1000000",
+    fName: "Kelsey",
+    sName: "NNNNNN",
+    service: "2",
+    courseDescription: "weight training for life"
+  },
+  {
+    cName: "A",
+    cost: "7",
+    imageUrl: " IMG HERE ",
+    courseHour: "1000000",
+    fName: "Kelsey",
+    sName: "NNNNNN",
+    service: "2",
+    courseDescription: "weight training for life"
+  }
+];
 export default SearchBox;

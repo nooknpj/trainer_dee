@@ -1,16 +1,76 @@
 import React, { Component } from "react";
 import SearchResults from "./SearchResults";
 import noSearchResultImg from "../img/noSearchResultImg.png";
+import { Button, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+
 export class CoursesBox extends Component {
+  constructor() {
+    super();
+    this.state = {
+      sortBy: "cName"
+    };
+  }
+
+  onRadioButtonClick = e => {
+    this.state.sortBy = e.target.value;
+    let result = this.props.searchResults;
+    let sortParameter = this.state.sortBy;
+
+    if (sortParameter == "cName") {
+      result.sort(byName);
+    } else if (sortParameter == "courseHour") {
+      result.sort(byHours);
+    } else if (sortParameter == "cost") {
+      result.sort(byCost);
+    } else if (sortParameter == "rating") {
+      result.sort(byRating);
+    }
+    this.props.upDateSearchResults(result);
+  };
+
   render() {
-    // console.log("from cbox");
-    // console.log(this.props.searchResults);
+    //console.log("from cbox");
+    //console.log(this.props.searchResults);
     // console.log("from cbox");
 
     return (
       <div id="coursesBox">
         <div id="sortBarContainer">
-          <h> sort bar goes here</h>
+          <p style={sortBarTextStyle}> Sort By : </p>
+
+          <Button
+            style={radioButtonStyle}
+            value={"rating"}
+            // rating currently disable (waiting for database update)
+            // onClick={this.onRadioButtonClick}
+          >
+            {" "}
+            Course Rating{" "}
+          </Button>
+          <Button
+            style={radioButtonStyle}
+            value={"cName"}
+            onClick={this.onRadioButtonClick}
+          >
+            {" "}
+            Course Name{" "}
+          </Button>
+          <Button
+            style={radioButtonStyle}
+            value={"courseHour"}
+            onClick={this.onRadioButtonClick}
+          >
+            {" "}
+            Course Duration{" "}
+          </Button>
+          <Button
+            style={radioButtonStyle}
+            value={"cost"}
+            onClick={this.onRadioButtonClick}
+          >
+            {" "}
+            Course Cost{" "}
+          </Button>
         </div>
 
         {/* check if the search results if empty or not 
@@ -30,12 +90,49 @@ export class CoursesBox extends Component {
   }
 }
 
+// sort By(s)
+function byName(a, b) {
+  if (a.cName < b.cName) return -1;
+  if (a.cName > b.cName) return 1;
+  return 0;
+}
+function byHours(a, b) {
+  if (parseInt(a.courseHour) < parseInt(b.courseHour)) return -1;
+  if (parseInt(a.courseHour) > parseInt(b.courseHour)) return 1;
+  return 0;
+}
+function byCost(a, b) {
+  if (parseInt(a.cost) < parseInt(b.cost)) return -1;
+  if (parseInt(a.cost) > parseInt(b.cost)) return 1;
+  return 0;
+}
+function byRating(a, b) {
+  if (parseInt(a.rating) > parseInt(b.rating)) return -1;
+  if (parseInt(a.rating) < parseInt(b.rating)) return 1;
+  return 0;
+}
+
 const noSearchResultMessageStyle = {
   textAlign: "center",
   marginTop: "70px",
   marginBottom: "120px",
   fontSize: "50px",
   fontWeight: "bold"
+};
+
+const sortBarTextStyle = {
+  marginLeft: "10px",
+  marginRight: "10px",
+  marginTop: "5px",
+  marginBottom: "5px",
+  fontWeight: "bold",
+  fontSize: "20px"
+};
+
+const radioButtonStyle = {
+  marginLeft: "10px",
+  marginRight: "10px",
+  borderRadius: "10px"
 };
 
 export default CoursesBox;

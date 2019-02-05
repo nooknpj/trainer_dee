@@ -21,7 +21,7 @@ export class SearchCourses extends Component {
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     return (
       <div id="searchCoursesContainer">
         <div id="searchContainer">
@@ -29,7 +29,10 @@ export class SearchCourses extends Component {
         </div>
 
         <div id="resultsContainer">
-          <CoursesBox searchResults={this.state.searchResults} />
+          <CoursesBox
+            searchResults={this.state.searchResults}
+            upDateSearchResults={this.upDateSearchResults}
+          />
         </div>
       </div>
     );
