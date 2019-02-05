@@ -20,4 +20,33 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+app.get('/trainer_dee/filter_by_service', (req, res) => {
+  let sql = 'select * from course c where c.CourseID = (select CourseID FROM course c where c.Service = '0')';
+
+  connection.query(sql, req.body['Service'], (error, result) => {
+    if (error) throw error;
+    // let list_result = [];
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    console.log(all);
+    console.log(result);
+
+  });
+});
+
+app.get('/trainer_dee/filter_by_gender', (req, res) => {
+  let sql = 'SELECT * from course c where c.CourseID = (Select CourseID FROM user u natural join trainer t natural join course c where u.Gender = ?)';
+
+  connection.query(sql, req.body['Gender'], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    console.log(all);
+    console.log(result);
+
+  });
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
