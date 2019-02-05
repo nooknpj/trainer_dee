@@ -100,7 +100,10 @@ values ('1010101010101', 'Kridtin', 'Chawalratikool', 'M', '19971010', 'Kan', 'H
 
 insert into trainer(TrainerID)
 values (0000000001)
-, (0000000002);
+, (0000000002)
+, (0000000003)
+, (0000000004)
+, (0000000005);
 
 insert into course(CourseID, Service, CName, CourseDescription, TrainerID)
 values ('0000000001', '0', 'Yoga For Life', 'Yoga, good for your health', 0000000001)
@@ -110,6 +113,6 @@ values ('0000000001', '0', 'Yoga For Life', 'Yoga, good for your health', 000000
 , ('0000000005', '2', 'Weight Training', 'Cardio is better than yoga', 0000000001);
         
 INSERT INTO Course(CourseID , CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID ) 
-values ('555212','Fit and Health','1',45000,45,'','abc','265874'),
-	('555213','We love Fitness','0',30000,25,'ABD','265875') ,
-    ('555213','We love Fitness','0',40000,25,'Find some ...','265876')  ;
+values ('555212','Fit and Health','1',45000,45,'','abc',0000000003),
+	('555213','We love Fitness','0',30000,25,'','ABD',0000000004) ,
+    ('555214','We love Fitness','0',40000,25,'','Find some ...',0000000005)  ;
