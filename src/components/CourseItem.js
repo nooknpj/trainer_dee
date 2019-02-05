@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export class CourseItem extends Component {
   getService = () => {
-    let serviceCode = this.props.Service;
+    let serviceCode = this.props.service;
     if (serviceCode == 0) return "Yoga";
     if (serviceCode == 1) return "Cardio";
     if (serviceCode == 2) return "WeightTraining";
@@ -11,17 +11,18 @@ export class CourseItem extends Component {
     return (
       <div id="courseItem" style={courseItemStyle}>
         <div id="courseImgContainer">
-          <p> {this.props.ImageUrl} </p>
+          <p> {this.props.imageUrl} </p>
         </div>
 
         <div id="courseItemInfo">
-          <h3> {this.props.CName}</h3>
+          <h3> {this.props.cName}</h3>
 
           <p> Service --> {this.getService()} </p>
-          <p> Trainer --> {this.props.TrainerID}</p>
-          <p> Description --> {this.props.CourseDescription}</p>
-          <p> Hours --> {this.props.CourseHour}</p>
-          <p> Cost --> {this.props.Cost}</p>
+          <p> Trainer --> {this.props.trainerName}</p>
+          <p> Surname --> {this.props.trainerSName} </p>
+          <p> Description --> {this.props.courseDescription}</p>
+          <p> Hours --> {this.props.courseHour}</p>
+          <p> Cost --> {this.props.cost}</p>
         </div>
       </div>
     );
