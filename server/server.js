@@ -19,6 +19,14 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+app.post('/trainer_dee/search_keyword', (req, res) => {
+  // let sql = "SELECT * FROM trainer t natural join course co natural join user u WHERE CONCAT(CName, CourseID, Service) LIKE '? %'";
+  let sql = "SELECT * FROM tuser u";
+  connection.query(sql, (error, result) => {
+    //DO SOMETHING
+  });
+});
+
 app.post("/trainer_dee/filter_by_service", (req, res) => {
   let desiredFilters = new Set();
   if (req.body["yoga"] == 1) desiredFilters.add(0);
