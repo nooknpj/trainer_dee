@@ -27,6 +27,55 @@ app.post("/trainer_dee/search_keyword", (req, res) => {
   });
 });
 
+
+app.post("/trainer_dee/search_filter", (req, res) => {
+  let desiredFilters = req.body;
+  let filteredOutItem = [];
+  console.log(desiredFilters);
+
+  let sql = "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,u.fName,u.sName,u.gender,u.telNo \
+  FROM course c, user u, trainer t \
+  where c.TrainerId = u.userID";
+  if (req.body.serviceFilter["yoga"] == 0){
+    sql += " and c.service != ? "
+    filteredOutItem.push(0);
+  }
+  if (req.body.serviceFilter["cardio"] == 0){
+    sql += " and c.service != ? "
+    filteredOutItem.push(1);
+  }
+  if (req.body.serviceFilter["weightTraining"] == 0){
+    sql += " and c.service != ? "
+    filteredOutItem.push(2);
+  }
+  if (req.body.genderFilter["male"] == 0){
+    sql += " and u.Gender != ? "
+    filteredOutItem.push('M');
+  }
+  if (req.body.genderFilter["female"] == 0){
+    sql += " and u.Gender != ? "
+    filteredOutItem.push('F');
+  }
+  if (req.body.genderFilter["others"] == 0){
+    sql += " and u.Gender != ? "
+    filteredOutItem.push('O');
+  }
+
+  console.log(filteredOutItem);
+
+  connection.query(sql, filteredOutItem, (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    //console.log(all);
+  });
+});
+
+
+//OLD ONE
+
+
 app.post("/trainer_dee/filter_by_service", (req, res) => {
   let desiredFilters = [];
   let sql = "";
