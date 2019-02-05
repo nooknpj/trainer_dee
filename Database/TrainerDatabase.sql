@@ -94,5 +94,7 @@ values ('1103698745210','Yuki','Oberon','F','1995-06-13','Mini', '0589665489' ,'
 		('5521368954697','Jiro','Talbot','M','1998-4-10','Loki','7856663214','314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
         ('1245869852317','Rina','Saltzman','F','1996-5-3','Rina','7895412305','269-1022, Nunobeichi, Furano-shi, Hokkaido');
         
-#INSERT INTO Course(CourseID , CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID ) 
-#values ('555212','Fit and Health','1','Find some ...','265874') ;
+INSERT INTO Course(CourseID , CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID ) 
+values ('555212','Fit and Health','1',45000,45,'','abc','265874'),
+	('555213','We love Fitness','0',30000,25,'ABD','265875') ,
+    ('555213','We love Fitness','0',40000,25,'Find some ...','265876')  ;
