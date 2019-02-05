@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS trainer ;
-CREATE DATABASE trainer ;
+DROP DATABASE IF EXISTS trainer_dee ;
+CREATE DATABASE trainer_dee ;
 
-use trainer ;
+use trainer_dee ;
 
 CREATE TABLE User (
 	userID integer(10) auto_increment,
