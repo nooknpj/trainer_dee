@@ -22,6 +22,42 @@ export class SearchBox extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getDefaultSearchResults();
+  }
+
+  async getDefaultSearchResults() {
+    try {
+      // console.log(JSON.stringify(data));
+      // const response = await fetch("/trainer_dee/filter_by_service", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify(data)
+      // });
+
+      // const results = await response.json();
+      // console.log(results);
+      let tmp = [
+        {
+          CourseID: "5",
+          CName: "yoga mockUp",
+          Service: "0",
+          CourseDescription: "hello",
+          Cost: "500",
+          TrainerID: "112",
+          CourseHour: "300000",
+          ImageUrl: "course Image Url"
+        }
+      ];
+
+      this.props.upDateSearchResults(tmp);
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
+  }
+
   async fetchFilterdService(e) {
     try {
       const data = this.state.serviceFilter;
