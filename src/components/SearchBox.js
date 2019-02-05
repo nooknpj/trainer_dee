@@ -39,6 +39,21 @@ export class SearchBox extends Component {
       // const response = await fetch('/dplop/list_trip')
       const results = await response.json();
       console.log(results);
+      let tmp = [
+        {
+          CourseID: "5",
+          CName: "yoga mockUp",
+          Service: "1",
+          CourseDescription: "hello",
+          Cost: "500",
+          TrainerID: "112",
+          CourseHour: "300000",
+          ImageUrl: "course Image Url"
+        }
+      ];
+      // this.props.upDateSearchResults(tmp);
+      this.props.upDateSearchResults(results);
+
       // await this.setState({ tripTable: results });
       // this.setState({
       //   list_trip_dateTB: ''
@@ -152,13 +167,14 @@ export class SearchBox extends Component {
             </Button>
 
             <Button
-              id="cardio"
+              title="cardio"
               value={1}
               className="filterChoices"
               onClick={this.onServiceFilterClick}
             >
               Cardio
             </Button>
+
             <Button
               title="weightTraining"
               value={1}
