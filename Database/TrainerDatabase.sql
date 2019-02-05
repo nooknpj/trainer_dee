@@ -29,7 +29,10 @@ CREATE TABLE User (
 	CourseID varchar(10) ,
     CName varchar(30) NOT NULL,
     Service varchar(10) NOT NULL ,
-    Description varchar(100),
+    Cost integer(6),
+    Hour unsigned tinyint ,
+    ImageUrl String ,
+    courseDescription varchar(100),
     TrainerID integer(10),
     
     PRIMARY KEY (CourseID) ,
