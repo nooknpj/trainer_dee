@@ -22,30 +22,29 @@ export class SearchBox extends Component {
     };
   }
 
-  async fetchFilterdService(e){
+  async fetchFilterdService(e) {
     try {
-      const data = { Service : e.target.value }
-      console.log(JSON.stringify(data))
-      const response = await fetch('/trainer_dee/filter_by_service', {
-        method: 'POST',
+      const data = { Service: e.target.value };
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/filter_by_service", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-
-      })
+      });
       // this.setState({
       //     tripTable: []
       // })
       // const response = await fetch('/dplop/list_trip')
       const results = await response.json();
-      console.log(results)
+      console.log(results);
       // await this.setState({ tripTable: results });
       // this.setState({
       //   list_trip_dateTB: ''
       // })
     } catch (error) {
-      console.log('Filter failed', error);
+      console.log("Filter failed", error);
     }
   }
 
@@ -80,7 +79,7 @@ export class SearchBox extends Component {
         price: "2500",
         imgUrl: "imgHere"
       }
-    ]
+    ];
     this.props.upDateSearchResults(x);
     e.preventDefault();
     console.log(this.state);
@@ -97,8 +96,7 @@ export class SearchBox extends Component {
     }
 
     this.fetchFilterdService(e);
-    
-    
+
     // this.props.upDateSearchResults(tmp);
     console.log(this.state);
   };
@@ -121,20 +119,6 @@ export class SearchBox extends Component {
     e.target.value = e.target.value ^ 1;
     console.log(e.target.value);
   };
-
-  // // get Filter Choice Style
-  // // Depends on its props (e.value)
-  // getFilterChoiceStyle = () => {
-  //   if (this.value == 0) {
-  //     return {
-  //       background: "#f4f4f4"
-  //     };
-  //   } else {
-  //     return {
-  //       background: "#f4f4f4"
-  //     };
-  //   }
-  // };
 
   render() {
     return (
