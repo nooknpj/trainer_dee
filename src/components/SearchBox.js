@@ -24,7 +24,8 @@ export class SearchBox extends Component {
 
   async fetchFilterdService(e) {
     try {
-      const data = { Service: e.target.value };
+      const data = this.state.serviceFilter;
+      //const data = { Service: e.target.value };
       console.log(JSON.stringify(data));
       const response = await fetch("/trainer_dee/filter_by_service", {
         method: "POST",
