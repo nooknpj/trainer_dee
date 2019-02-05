@@ -48,11 +48,11 @@ export class SearchCourses extends Component {
   // functions -> need to be passed via props to inner components
 
   // upDateSearchResults (parameters) then call backend
-  upDateSearchResults = () => {
+  upDateSearchResults = e => {
     // this is currently a mockup
     // setState equals to json returned from backend
     this.setState({
-      searchResults: []
+      searchResults: e
       // searchResults: [{ id: "1", title: "Updated", trainer: "NewJohn" }]
     });
   };
