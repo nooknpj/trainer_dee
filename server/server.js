@@ -45,7 +45,6 @@ app.post("/trainer_dee/filter_by_service", (req, res) => {
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
     //console.log(all);
-    //console.log(result);
   });
 });
 
@@ -59,7 +58,6 @@ app.post("/trainer_dee/filter_by_gender", (req, res) => {
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
     console.log(all);
-    console.log(result);
   });
 });
 
