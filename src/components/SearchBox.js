@@ -22,6 +22,33 @@ export class SearchBox extends Component {
     };
   }
 
+  async fetchFilterdService(e){
+    try {
+      const data = { Service : e.target.value }
+      console.log(JSON.stringify(data))
+      const response = await fetch('/trainer_dee/filter_by_service', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+
+      })
+      // this.setState({
+      //     tripTable: []
+      // })
+      // const response = await fetch('/dplop/list_trip')
+      const results = await response.json();
+      console.log(results)
+      // await this.setState({ tripTable: results });
+      // this.setState({
+      //   list_trip_dateTB: ''
+      // })
+    } catch (error) {
+      console.log('Filter failed', error);
+    }
+  }
+
   //capture keyword change in searchBar
   onSearchBarChange = e => {
     this.setState({ searchKeyWords: e.target.value });
@@ -35,8 +62,26 @@ export class SearchBox extends Component {
   onSearchSubmit = e => {
     //console.log("submit");
     console.log("this current keyword is");
+    let x = [
+      {
+        id: "1",
+        title: "Update1",
+        trainer: "John",
+        hours: "10",
+        price: "3000",
+        imgUrl: "imgHere"
+      },
 
-    this.props.upDateSearchResults();
+      {
+        id: "2",
+        title: "Update",
+        trainer: "Harry",
+        hours: "10",
+        price: "2500",
+        imgUrl: "imgHere"
+      }
+    ]
+    this.props.upDateSearchResults(x);
     e.preventDefault();
     console.log(this.state);
   };
@@ -51,36 +96,10 @@ export class SearchBox extends Component {
       this.state.serviceFilter[e.target.title] = 1;
     }
 
-
-    try {
-      //const data = { Service : e.target.value }
-      const data = this.state
-      
-      console.log('hi');
-      console.log(JSON.stringify(data))
-      const response = fetch('/trainer_dee/filter_by_service', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-
-      })
-      // this.setState({
-      //     tripTable: []
-      // })
-      // const response = await fetch('/dplop/list_trip')
-      const results = response.json();
-      console.log(results)
-      // await this.setState({ tripTable: results });
-      // this.setState({
-      //   list_trip_dateTB: ''
-      // })
-    } catch (error) {
-      console.log('Filter failed', error);
-    }
-
-
+    this.fetchFilterdService(e);
+    
+    
+    // this.props.upDateSearchResults(tmp);
     console.log(this.state);
   };
 
