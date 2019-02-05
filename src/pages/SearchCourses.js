@@ -7,53 +7,16 @@ export class SearchCourses extends Component {
     super();
     // mockup courses from searchResults
     this.state = {
-      searchResults: [
-        {
-          id: "1",
-          title: "Yoga 101",
-          trainer: "John",
-          hours: "10",
-          price: "3000",
-          imgUrl: "imgHere"
-        },
-
-        {
-          id: "2",
-          title: "WeightTraining for Beginners",
-          trainer: "Harry",
-          hours: "10",
-          price: "2500",
-          imgUrl: "imgHere"
-        },
-        {
-          id: "3",
-          title: "Yoga for health",
-          trainer: "Mary",
-          hours: "5",
-          price: "1200",
-          imgUrl: "imgHere"
-        },
-        {
-          id: "4",
-          title: "Half-Marathon Prep",
-          trainer: "Elizabeth",
-          hours: "20",
-          price: "3000",
-          imgUrl: "imgHere"
-        }
-      ]
+      searchResults: []
     };
   }
 
   // functions -> need to be passed via props to inner components
 
   // upDateSearchResults (parameters) then call backend
-  upDateSearchResults = () => {
-    // this is currently a mockup
-    // setState equals to json returned from backend
+  upDateSearchResults = e => {
     this.setState({
-      searchResults: []
-      // searchResults: [{ id: "1", title: "Updated", trainer: "NewJohn" }]
+      searchResults: e
     });
   };
 

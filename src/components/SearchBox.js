@@ -22,6 +22,72 @@ export class SearchBox extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getDefaultSearchResults();
+  }
+
+  async getDefaultSearchResults() {
+    try {
+      const data = this.state.serviceFilter;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/filter_by_service", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+
+      this.props.upDateSearchResults(results);
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
+  }
+
+  async fetchFilterdService(e) {
+    try {
+      const data = this.state.serviceFilter;
+      //const data = { Service: e.target.value };
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/filter_by_service", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      // this.setState({
+      //     tripTable: []
+      // })
+      // const response = await fetch('/dplop/list_trip')
+      const results = await response.json();
+      console.log(results);
+      let tmp = [
+        {
+          CourseID: "5",
+          CName: "yoga mockUp",
+          Service: "1",
+          CourseDescription: "hello",
+          Cost: "500",
+          TrainerID: "112",
+          CourseHour: "300000",
+          ImageUrl: "course Image Url"
+        }
+      ];
+      // this.props.upDateSearchResults(tmp);
+      this.props.upDateSearchResults(results);
+
+      // await this.setState({ tripTable: results });
+      // this.setState({
+      //   list_trip_dateTB: ''
+      // })
+    } catch (error) {
+      console.log("Filter failed", error);
+    }
+  }
+
   //capture keyword change in searchBar
   onSearchBarChange = e => {
     this.setState({ searchKeyWords: e.target.value });
@@ -35,8 +101,26 @@ export class SearchBox extends Component {
   onSearchSubmit = e => {
     //console.log("submit");
     console.log("this current keyword is");
+    let x = [
+      {
+        id: "1",
+        title: "Update1",
+        trainer: "John",
+        hours: "10",
+        price: "3000",
+        imgUrl: "imgHere"
+      },
 
-    this.props.upDateSearchResults();
+      {
+        id: "2",
+        title: "Update",
+        trainer: "Harry",
+        hours: "10",
+        price: "2500",
+        imgUrl: "imgHere"
+      }
+    ];
+    this.props.upDateSearchResults(x);
     e.preventDefault();
     console.log(this.state);
   };
@@ -51,36 +135,9 @@ export class SearchBox extends Component {
       this.state.serviceFilter[e.target.title] = 1;
     }
 
+    this.fetchFilterdService(e);
 
-    try {
-      //const data = { Service : e.target.value }
-      const data = this.state
-      
-      console.log('hi');
-      console.log(JSON.stringify(data))
-      const response = fetch('/trainer_dee/filter_by_service', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-
-      })
-      // this.setState({
-      //     tripTable: []
-      // })
-      // const response = await fetch('/dplop/list_trip')
-      const results = response.json();
-      console.log(results)
-      // await this.setState({ tripTable: results });
-      // this.setState({
-      //   list_trip_dateTB: ''
-      // })
-    } catch (error) {
-      console.log('Filter failed', error);
-    }
-
-
+    // this.props.upDateSearchResults(tmp);
     console.log(this.state);
   };
 
@@ -102,20 +159,6 @@ export class SearchBox extends Component {
     e.target.value = e.target.value ^ 1;
     console.log(e.target.value);
   };
-
-  // // get Filter Choice Style
-  // // Depends on its props (e.value)
-  // getFilterChoiceStyle = () => {
-  //   if (this.value == 0) {
-  //     return {
-  //       background: "#f4f4f4"
-  //     };
-  //   } else {
-  //     return {
-  //       background: "#f4f4f4"
-  //     };
-  //   }
-  // };
 
   render() {
     return (
@@ -149,13 +192,14 @@ export class SearchBox extends Component {
             </Button>
 
             <Button
-              id="cardio"
+              title="cardio"
               value={1}
               className="filterChoices"
               onClick={this.onServiceFilterClick}
             >
               Cardio
             </Button>
+
             <Button
               title="weightTraining"
               value={1}
