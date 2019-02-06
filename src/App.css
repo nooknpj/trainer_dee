@@ -170,14 +170,14 @@
 }
 
 #resultsContainer {
-  background-color: #b9dcd2;
+  background-color: #98dbce;
   width: 100%;
-  border: solid #284734 5px;
+  border: solid white 5px;
   border-radius: 10px;
 }
 
 #sortBarContainer {
-  background-color: #284734;
+  background-color: #00b398;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
@@ -210,8 +210,13 @@
   max-height: 300px; */
 }
 
+.courseImg {
+  border-radius: 10px;
+  border: 5px solid #21366e;
+}
+
 #courseImgContainer {
-  background-color: white;
+  background-color: #ffc845;
   border-radius: 20px;
   margin-right: 15px;
   color: black;
@@ -302,11 +307,43 @@
   border: #21366e solid 2px;
 }
 
-.trainerNameContainer {
-  width: 60%;
-  min-width: 60%;
-  max-width: 60%;
+.trainerInfoTitleContainer {
+  width: 15%;
+  min-width: 15%;
+  max-width: 15%;
+  margin-right: 5px;
+  background-color: #21366e;
+  border: #21366e solid 2px;
+  border-radius: 5px;
+  text-align: center;
+  /* background-color: blue; */
+}
+.trainerInfoContainer {
+  width: 80%;
+  max-width: 80%;
   font-weight: bold;
+  display: flex;
+  flex-direction: bold;
+  color: #21366e;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  border: #21366e solid 2px;
+}
+
+.trainerName {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.ratingContainer {
+  margin-left: 10px;
+  background-color: #21366e;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fed141;
 }
 .descriptionTitle {
   background-color: #21366e;

@@ -39,6 +39,7 @@ export class CoursesBox extends Component {
           <p style={sortBarTextStyle}> Sort By : </p>
 
           <Button
+            variant="light"
             style={radioButtonStyle}
             value={"rating"}
             onClick={this.onRadioButtonClick}
@@ -48,6 +49,7 @@ export class CoursesBox extends Component {
           </Button>
 
           <Button
+            variant="light"
             style={radioButtonStyle}
             value={"cName"}
             onClick={this.onRadioButtonClick}
@@ -56,6 +58,7 @@ export class CoursesBox extends Component {
             Course Name{" "}
           </Button>
           <Button
+            variant="light"
             style={radioButtonStyle}
             value={"courseHour"}
             onClick={this.onRadioButtonClick}
@@ -64,6 +67,7 @@ export class CoursesBox extends Component {
             Course Duration{" "}
           </Button>
           <Button
+            variant="light"
             style={radioButtonStyle}
             value={"cost"}
             onClick={this.onRadioButtonClick}
@@ -133,7 +137,8 @@ const sortBarTextStyle = {
 const radioButtonStyle = {
   marginLeft: "10px",
   marginRight: "10px",
-  borderRadius: "10px"
+  borderRadius: "10px",
+  fontWeight: "bold"
 };
 
 export default CoursesBox;

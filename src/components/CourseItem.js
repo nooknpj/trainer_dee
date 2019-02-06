@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import starIcon from "../img/star.png";
 
 export class CourseItem extends Component {
   getService = () => {
@@ -7,11 +8,32 @@ export class CourseItem extends Component {
     if (serviceCode == 1) return "Cardio";
     if (serviceCode == 2) return "WeightTraining";
   };
+
+  getGenderStyle = () => {
+    let genderStyle = {
+      backgroundColor: "green",
+      color: "white",
+      paddingLeft: "10px",
+      paddingRight: "10px",
+      borderRadius: "5px",
+      marginRight: "5px",
+      marginLeft: "5px",
+      align: "center"
+    };
+    if (this.props.gender == "M") {
+      genderStyle["backgroundColor"] = "#0084D5";
+    } else if (this.props.gender == "F") {
+      genderStyle["backgroundColor"] = "#EF6079";
+    }
+
+    return genderStyle;
+  };
+
   render() {
     return (
       <div id="courseItem">
         <div id="courseImgContainer">
-          <img src={this.props.imageUrl} width="100%" />
+          <img className="courseImg" src={this.props.imageUrl} width="100%" />
 
           {/* <p> {this.props.imageUrl} </p> */}
         </div>
@@ -30,15 +52,26 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="infoTitleContainer">
+            <div className="trainerInfoTitleContainer">
               <a className="infoTitle"> Trainer</a>
             </div>
 
-            <div className="trainerNameContainer">
-              <a> {this.props.fName}</a>
-              <a> {this.props.sName} </a>
-              <a> {this.props.gender}</a>
-              <a> {this.props.rating}</a>
+            <div className="trainerInfoContainer">
+              <div className="trainerName">
+                <a> {this.props.fName}</a>
+                <a> {this.props.sName} </a>
+              </div>
+              <div style={this.getGenderStyle()}>
+                <a> {this.props.gender}</a>
+              </div>
+
+              <div className="ratingContainer">
+                <a style={{ marginRight: "5px" }}>
+                  {" "}
+                  {this.props.rating.toFixed(1)}
+                </a>
+                <img style={starIconStyle} src={starIcon} />
+              </div>
             </div>
           </div>
 
@@ -75,6 +108,13 @@ export class CourseItem extends Component {
   }
 }
 
+const starIconStyle = {
+  maxWidth: "20px",
+  maxHeight: "20px",
+  align: "center",
+  paddingTop: "1px",
+  paddingBottom: "3px"
+};
 //CourseItemProps;
 // CourseID={courseItem.CourseID}
 // CName={courseItem.CName}
