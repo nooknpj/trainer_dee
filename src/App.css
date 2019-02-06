@@ -198,8 +198,8 @@
   font-size: 20px;
 
   background-color: #ffc845;
-  min-height: 300px;
-  max-height: 300px;
+  /* min-height: 300px;
+  max-height: 300px; */
 }
 
 #courseImgContainer {
