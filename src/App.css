@@ -378,6 +378,8 @@
   width: 30%;
   max-width: 30%;
   text-align: center;
+
+  border: #21366e solid 2px;
 }
 
 .toggleButton {
