@@ -5,12 +5,13 @@ export class MyNavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar id="myNavBar" collapseOnSelect>
+        <Navbar id="myNavBar" expand="md" collapseOnSelect>
           <NavbarBrand id="navBrand" href="/">
             {" "}
             Trainer D
           </NavbarBrand>
-
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
           <Nav>
             <a className="NavLink" href="/">
               Home
@@ -28,6 +29,8 @@ export class MyNavBar extends Component {
               Login
             </a>
           </Nav>
+          </Navbar.Collapse>
+          
         </Navbar>
       </div>
     );
