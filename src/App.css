@@ -347,10 +347,11 @@
 }
 .descriptionTitle {
   background-color: #21366e;
+  padding-top: 1px;
   font-weight: bold;
   padding-left: 5px;
   padding-right: 5px;
-  border-radius: 5px;
+  border-radius: 2px;
 }
 
 .descriptionLine {
