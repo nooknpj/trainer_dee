@@ -33,7 +33,7 @@ app.post("/trainer_dee/search_filter", (req, res) => {
   console.log(desiredFilters);
 
   let sql =
-    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,u.fName,u.sName,u.gender,u.telNo \
+    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo \
   FROM course c, user u, trainer t \
   where c.TrainerId = u.userID and u.userID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {

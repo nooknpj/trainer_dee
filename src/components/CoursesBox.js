@@ -41,8 +41,8 @@ export class CoursesBox extends Component {
           <Button
             style={radioButtonStyle}
             value={"rating"}
-            // rating currently disable (waiting for database update)
-            // onClick={this.onRadioButtonClick}
+            
+            onClick={this.onRadioButtonClick}
           >
             {" "}
             Course Rating{" "}

@@ -15,6 +15,7 @@ export class SearchResults extends Component {
         courseHour={courseItem.courseHour}
         gender={courseItem.gender}
         imageUrl={courseItem.imageUrl}
+        rating={courseItem.rating}
       />
     ));
   }
