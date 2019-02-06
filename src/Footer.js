@@ -9,7 +9,7 @@ export class Footer extends Component {
         </a>{" "}
         |{" "}
         <a className="FooterLink" href="/searchCourses">
-          Courses
+          Search Courses
         </a>
         <div style={FooterDplopBox}>
           <a id="footerDplop">Trainer D By D'Plop</a>
