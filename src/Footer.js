@@ -8,7 +8,7 @@ export class Footer extends Component {
           Home
         </a>{" "}
         |{" "}
-        <a className="FooterLink" href="/courses">
+        <a className="FooterLink" href="/searchCourses">
           Courses
         </a>
         <div style={FooterDplopBox}>
