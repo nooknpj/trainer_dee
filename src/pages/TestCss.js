@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import SearchBox from "../components/SearchBox";
 import CoursesBox from "../components/CoursesBox";
+import MyToggleButton from "../components/MyToggleButton";
 
 export class TestCss extends Component {
   render() {
     return (
       <div>
-        <p>blank page</p>
+        <MyToggleButton />
       </div>
     );
   }

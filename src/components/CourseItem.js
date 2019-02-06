@@ -49,6 +49,7 @@ export class CourseItem extends Component {
             </div>
             <div className="infoText">
               <a> {this.props.courseHour}</a>
+              <a> Hours</a>
             </div>
           </div>
 
@@ -59,6 +60,7 @@ export class CourseItem extends Component {
 
             <div className="infoText">
               <a> {this.props.cost}</a>
+              <a> Baht</a>
             </div>
           </div>
         </div>

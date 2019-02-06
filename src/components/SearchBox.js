@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, FormControl, Button } from "react-bootstrap";
 import FormCheckInput from "react-bootstrap/FormCheckInput";
+import MyToggleButton from "../components/MyToggleButton";
 
 export class SearchBox extends Component {
   constructor() {
@@ -86,30 +87,9 @@ export class SearchBox extends Component {
     //this.fetchFilterService(e);
     this.fetchFilterSearch(e);
     console.log(this.state);
+    console.log("hey");
+    this.getServiceFilterStyle(e);
   };
-
-  // fetch results from back-end after service filter change
-  // and call updateSearchResults
-  async fetchFilterService(e) {
-    try {
-      const data = this.state.serviceFilter;
-      console.log(JSON.stringify(data));
-      const response = await fetch("/trainer_dee/filter_by_service", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const results = await response.json();
-      console.log(results);
-
-      this.props.upDateSearchResults(results);
-    } catch (error) {
-      console.log("Service Filter failed", error);
-    }
-  }
 
   // handle gender filter click
   onGenderFilterClick = e => {
@@ -122,6 +102,8 @@ export class SearchBox extends Component {
     //this.fetchFilterGender(e);
     this.fetchFilterSearch(e);
     console.log(this.state);
+    console.log("hey!");
+    this.getGenderFilterStyle(e);
   };
   // fetch results from back-end after gender filter change
   // and call updateSearchResults
@@ -162,6 +144,31 @@ export class SearchBox extends Component {
     console.log(this.state);
   };
 
+  //-------------------------------------------------------UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
+  getServiceFilterStyle = e => {
+    e.preventDefault();
+    let thisButtonState = this.state.serviceFilter[e.target.title];
+    if (thisButtonState) {
+      e.target.className = "toggleButton btn btn-primary btn-success ";
+    } else {
+      e.target.className =
+        "toggleButton btn btn-primary btn-success deactivatedButton";
+    }
+    console.log(thisButtonState);
+  };
+
+  getGenderFilterStyle = e => {
+    e.preventDefault();
+    let thisButtonState = this.state.genderFilter[e.target.title];
+    if (thisButtonState) {
+      e.target.className = "toggleButton btn btn-primary btn-success ";
+    } else {
+      e.target.className =
+        "toggleButton btn btn-primary btn-success deactivatedButton";
+    }
+    console.log(thisButtonState);
+  };
+  //-----------------------------------------------------END UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   render() {
     return (
       <div id="searchBox">
@@ -173,7 +180,7 @@ export class SearchBox extends Component {
             className="mr-sm-2"
             onChange={this.onSearchBarChange}
           />
-          <Button onClick={this.onSearchSubmit}>Submit</Button>
+          {/* <Button onClick={this.onSearchSubmit}>Submit</Button> */}
         </Form>
 
         <div className="filterContainer">
@@ -183,12 +190,13 @@ export class SearchBox extends Component {
             </div>
           </div>
 
-          <div>
+          <div className="buttonGroup">
             <Button
               title="yoga"
               value={1}
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               onClick={this.onServiceFilterClick}
+              type="serviceFilter"
             >
               Yoga
             </Button>
@@ -196,7 +204,7 @@ export class SearchBox extends Component {
             <Button
               title="cardio"
               value={1}
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               onClick={this.onServiceFilterClick}
             >
               Cardio
@@ -205,7 +213,7 @@ export class SearchBox extends Component {
             <Button
               title="weightTraining"
               value={1}
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               onClick={this.onServiceFilterClick}
             >
               Weight Training
@@ -220,9 +228,9 @@ export class SearchBox extends Component {
             </div>
           </div>
 
-          <div>
+          <div className="buttonGroup">
             <Button
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               title="male"
               value={1}
               onClick={this.onGenderFilterClick}
@@ -232,7 +240,7 @@ export class SearchBox extends Component {
             </Button>
 
             <Button
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               title="female"
               value={1}
               onClick={this.onGenderFilterClick}
@@ -242,7 +250,7 @@ export class SearchBox extends Component {
             </Button>
 
             <Button
-              className="filterChoices"
+              className="toggleButton btn btn-success btn-primary"
               title="others"
               value={1}
               onClick={this.onGenderFilterClick}
