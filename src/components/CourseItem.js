@@ -33,6 +33,7 @@ export class CourseItem extends Component {
               <a> {this.props.fName}</a>
               <a> {this.props.sName} </a>
               <a> {this.props.gender}</a>
+              <a> {this.props.rating}</a>
             </div>
           </div>
 
