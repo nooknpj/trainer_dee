@@ -113,26 +113,17 @@ CREATE TABLE User
     values
         ('1103698745210', 'Yuki', 'Oberon', 'F', '1995-06-13', 'Mini', '0589665489' , '205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
         ('5521368954697', 'Jiro', 'Talbot', 'M', '1998-4-10', 'Loki', '7856663214', '314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
-        ('1245869852317', 'Rina', 'Saltzman', 'F', '1996-5-3', 'Rina', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido');
-
-    insert into user
-        (SSN, FName, SName, Gender, DateOfBirth, NickName, Address)
-    values
-        ('1010101010101', 'Kridtin', 'Chawalratikool', 'M', '19971010', 'Kan', 'HOME')
-,
-        ('2020202020202', 'Kongpobpisit', 'Termphrateep', 'M', '19981202', 'Porsche', 'PHome');
+        ('1245869852317', 'Rina', 'Saltzman', 'F', '1996-5-3', 'Rina', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido'),
+        ('1010101010101', 'Kridtin', 'Chawalratikool', 'M', '19971010', 'Kan', '0891111111', 'HOME'),
+        ('2020202020202', 'Kongpobpisit', 'Termphrateep', 'M', '19981202', 'Porsche','0891111112', 'PHome');
 
     insert into trainer
         (TrainerID, Rating)
     values
-        (0000000001, 3.5)
-,
-        (0000000002, 2.0)
-,
-        (0000000003, 4.7)
-,
-        (0000000004, 5.0)
-,
+        (0000000001, 3.5),
+        (0000000002, 2.0),
+        (0000000003, 4.7),
+        (0000000004, 5.0),
         (0000000005, 3.2);
 
     INSERT INTO Course
