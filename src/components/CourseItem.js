@@ -13,7 +13,7 @@ export class CourseItem extends Component {
       <div id="courseItem">
         <div id="courseImgContainer">
           
-          <img src={this.props.imageUrl} />
+          <img src={this.props.imageUrl} width="100%" />
 
           {/* <p> {this.props.imageUrl} </p> */}
         </div>
