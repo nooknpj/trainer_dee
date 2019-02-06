@@ -32,6 +32,7 @@ CREATE TABLE User
     (
         TrainerID integer(10),
         Certificate varchar(256),
+        Rating FLOAT(2,1),
 
         PRIMARY KEY(TrainerID),
         CONSTRAINT FK_Trainer_User FOREIGN KEY(TrainerID) 
@@ -122,17 +123,17 @@ CREATE TABLE User
         ('2020202020202', 'Kongpobpisit', 'Termphrateep', 'M', '19981202', 'Porsche', 'PHome');
 
     insert into trainer
-        (TrainerID)
+        (TrainerID, Rating)
     values
-        (0000000001)
+        (0000000001, 3.5)
 ,
-        (0000000002)
+        (0000000002, 2.0)
 ,
-        (0000000003)
+        (0000000003, 4.7)
 ,
-        (0000000004)
+        (0000000004, 5.0)
 ,
-        (0000000005);
+        (0000000005, 3.2);
 
     INSERT INTO Course
         (CourseID , CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )
@@ -142,7 +143,7 @@ CREATE TABLE User
         ('555214', 'We love Fitness', '0', 40000, 25, '', 'Find some ...', 0000000005),
         ('000001', 'Yoga For Life', '0', 9, 10, 'imgHere', 'yoga forever', '0000000001'),
         ('000002', 'Mini Marathon Prep', '1', 2000, 15, 'marathonBoy', '20km marathon preparation', '0000000002'),
-        ('000003', 'Full Body Cardio', '1', 2500, 10, 'img', 'GOGOGOGOGO CARDIO!', 0000000004),
+        ('000003', 'Full Body Cardio', '1', 2500, 10, 'img', 'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!', 0000000004),
         ('000004', 'Body Builders', '2', 3000, 20, '', 'welcome', 0000000002),
         ('000005', 'Weight 101', '2', 2000, 10, '', 'beginner training', 0000000002);
  
