@@ -9,21 +9,58 @@ export class CourseItem extends Component {
   };
   render() {
     return (
-      <div id="courseItem" style={courseItemStyle}>
+      <div id="courseItem">
         <div id="courseImgContainer">
           <p> {this.props.imageUrl} </p>
         </div>
 
         <div id="courseItemInfo">
-          <h3> {this.props.cName}</h3>
+          <div id="courseHeaderContainer">
+            <div id="courseTitleContainer">
+              <a className="courseTitle"> {this.props.cName} </a>
+            </div>
+            <div id="courseServiceContainer">
+              <p className="courseService"> {this.getService()} </p>
+            </div>
+          </div>
 
-          <p> Service -->{this.getService()} </p>
-          <p> Trainer --> {this.props.fName}</p>
-          <p> Surname --> {this.props.sName} </p>
-          <p> Surname --> {this.props.gender}</p>
-          <p> Description --> {this.props.courseDescription}</p>
-          <p> Hours --> {this.props.courseHour}</p>
-          <p> Cost --> {this.props.cost}</p>
+          <div className="infoLine">
+            <div className="infoTitleContainer">
+              <a className="infoTitle"> Trainer</a>
+            </div>
+
+            <div className="trainerNameContainer">
+              <a> {this.props.fName}</a>
+              <a> {this.props.sName} </a>
+              <a> {this.props.gender}</a>
+            </div>
+          </div>
+
+          <div className="descriptionLine">
+            <a className="descriptionTitle"> Course Description</a>
+            <div className="courseDescriptionBox">
+              <a> {this.props.courseDescription} </a>
+            </div>
+          </div>
+
+          <div className="infoLine">
+            <div className="infoTitleContainer">
+              <a className="infoTitle"> Course Duration</a>
+            </div>
+            <div className="infoText">
+              <a> {this.props.courseHour}</a>
+            </div>
+          </div>
+
+          <div className="infoLine">
+            <div className="infoTitleContainer">
+              <a className="infoTitle"> Course Cost</a>
+            </div>
+
+            <div className="infoText">
+              <a> {this.props.cost}</a>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -39,7 +76,5 @@ export class CourseItem extends Component {
 // TrainerID={courseItem.TrainerID}
 // CourseHour={courseItem.CourseHour}
 // ImageUrl={courseItem.Image}
-const courseItemStyle = {
-  backgroundColor: "black"
-};
+
 export default CourseItem;

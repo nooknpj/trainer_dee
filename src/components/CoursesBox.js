@@ -47,6 +47,7 @@ export class CoursesBox extends Component {
             {" "}
             Course Rating{" "}
           </Button>
+
           <Button
             style={radioButtonStyle}
             value={"cName"}
