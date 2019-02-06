@@ -12,11 +12,10 @@ export class CourseItem extends Component {
     return (
       <div id="courseItem">
         <div id="courseImgContainer">
-          {/* <img src="http://lh3.googleusercontent.com/H39vSnm9Va10y8fPoxN3xVPwv34cJT8pllL7h8pI6SU16TYR3Lm3zdJALjiH1stwCxjuGLbA_vXllLRGURgP13BGKZNpcZMwuQRvPf1e=s660" /> */}
           
           <img src={this.props.imageUrl} />
 
-          <p> {this.props.imageUrl} </p>
+          {/* <p> {this.props.imageUrl} </p> */}
         </div>
 
         <div id="courseItemInfo">

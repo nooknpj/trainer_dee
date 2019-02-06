@@ -138,12 +138,12 @@ CREATE TABLE User
     INSERT INTO Course
         (CourseID , CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )
     values
-        ('555212', 'Fit and Health', '1', 45000, 45, '', 'abc', 0000000003),
-        ('555213', 'YOGA FOR FUN 12', '0', 30000, 25, '', 'ABD', 0000000004) ,
-        ('555214', 'We love Fitness', '0', 40000, 25, '', 'Find some ...', 0000000005),
-        ('000001', 'Yoga For Life', '0', 9, 10, 'imgHere', 'yoga forever', '0000000001'),
-        ('000002', 'Mini Marathon Prep', '1', 2000, 15, 'marathonBoy', '20km marathon preparation', '0000000002'),
-        ('000003', 'Full Body Cardio', '1', 2500, 10, 'img', 'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!', 0000000004),
-        ('000004', 'Body Builders', '2', 3000, 20, '', 'welcome', 0000000002),
-        ('000005', 'Weight 101', '2', 2000, 10, '', 'beginner training', 0000000002);
+        ('555212', 'Fit and Health', '1', 45000, 45, 'https://darebee.com/images/workouts/time-crunch-cardio-workout.jpg', 'abc', 0000000003),
+        ('555213', 'YOGA FOR FUN 12', '0', 30000, 25, 'https://www.yogajournal.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_620/MTQ2MjI3ODcyMDE5OTgxOTIx/cow-face-with-eagle-arms-forhips.jpg', 'ABD', 0000000004) ,
+        ('555214', 'We love Fitness', '0', 40000, 25, 'https://images.pexels.com/photos/588561/pexels-photo-588561.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'Find some ...', 0000000005),
+        ('000001', 'Yoga For Life', '0', 9, 10, 'https://cdn1.medicalnewstoday.com/content/images/articles/318/318774/a-woman-practicing-yoga-on-the-beach.jpg', 'yoga forever', '0000000001'),
+        ('000002', 'Mini Marathon Prep', '1', 2000, 15, 'https://static01.nyt.com/images/2017/10/17/science/11physed-marathon-photo/11physed-marathon-photo-articleLarge.jpg?quality=75&auto=webp&disable=upscale', '20km marathon preparation', '0000000002'),
+        ('000003', 'Full Body Cardio', '1', 2500, 10, 'https://hips.hearstapps.com/womenshealth-production.s3.amazonaws.com/images/7685/best-cardio-for-fat-loss__medium_4x3.jpg', 'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!', 0000000004),
+        ('000004', 'Body Builders', '2', 3000, 20, 'https://content.active.com/Assets/Active.com+Content+Site+Digital+Assets/Article+Image+Update/Fitness/Benefits+of+Weight+Training/Carousel.jpg', 'welcome', 0000000002),
+        ('000005', 'Weight 101', '2', 2000, 10, 'https://www.healthline.com/hlcmsresource/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'beginner training', 0000000002);
  
