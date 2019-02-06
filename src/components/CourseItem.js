@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 export class CourseItem extends Component {
   getService = () => {
     let serviceCode = this.props.service;
@@ -13,7 +12,7 @@ export class CourseItem extends Component {
       <div id="courseItem">
         <div id="courseImgContainer">
           {/* <img src="http://lh3.googleusercontent.com/H39vSnm9Va10y8fPoxN3xVPwv34cJT8pllL7h8pI6SU16TYR3Lm3zdJALjiH1stwCxjuGLbA_vXllLRGURgP13BGKZNpcZMwuQRvPf1e=s660" /> */}
-          
+
           <img src={this.props.imageUrl} />
 
           <p> {this.props.imageUrl} </p>
@@ -22,7 +21,10 @@ export class CourseItem extends Component {
         <div id="courseItemInfo">
           <div id="courseHeaderContainer">
             <div id="courseTitleContainer">
-              <a className="courseTitle"> {this.props.cName} </a>
+              <a href="/searchCourses" className="courseTitle">
+                {" "}
+                {this.props.cName}{" "}
+              </a>
             </div>
             <div id="courseServiceContainer">
               <p className="courseService"> {this.getService()} </p>
