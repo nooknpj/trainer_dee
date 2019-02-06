@@ -24,8 +24,8 @@ export class SearchBox extends Component {
 
   // default search result after starts
   componentDidMount() {
-    //this.getDefaultSearchResults();
-    this.getMockUpResult();
+    this.getDefaultSearchResults();
+    //this.getMockUpResult();
   }
 
   getMockUpResult() {
@@ -34,9 +34,9 @@ export class SearchBox extends Component {
 
   async getDefaultSearchResults() {
     try {
-      const data = this.state.serviceFilter;
+      const data = this.state;
       console.log(JSON.stringify(data));
-      const response = await fetch("/trainer_dee/filter_by_service", {
+      const response = await fetch("/trainer_dee/search_filter", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -52,6 +52,28 @@ export class SearchBox extends Component {
     }
   }
 
+  //new fetch search results (service+gender)
+  async fetchFilterSearch(e) {
+    try {
+      const data = this.state;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/search_filter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      console.log(results);
+
+      this.props.upDateSearchResults(results);
+    } catch (error) {
+      console.log("Service Filter failed", error);
+    }
+  }
+
   // handle service filter click
   onServiceFilterClick = e => {
     e.target.value = e.target.value ^ 1;
@@ -61,7 +83,8 @@ export class SearchBox extends Component {
       this.state.serviceFilter[e.target.title] = 1;
     }
 
-    this.fetchFilterService(e);
+    //this.fetchFilterService(e);
+    this.fetchFilterSearch(e);
     console.log(this.state);
   };
 
@@ -96,7 +119,8 @@ export class SearchBox extends Component {
     } else {
       this.state.genderFilter[e.target.title] = 1;
     }
-    this.fetchFilterGender(e);
+    //this.fetchFilterGender(e);
+    this.fetchFilterSearch(e);
     console.log(this.state);
   };
   // fetch results from back-end after gender filter change
