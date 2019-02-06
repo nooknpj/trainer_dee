@@ -27,6 +27,7 @@
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 15px;
+  transition-duration: 400ms;
 }
 
 #navBrand:hover {
@@ -44,6 +45,7 @@
   font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
+  transition-duration: 200ms;
 }
 
 .NavLink:hover {
@@ -70,6 +72,7 @@
   padding-top: 3px;
   padding-bottom: 3px;
   transition-duration: 0.3s;
+  transition-duration: 200ms;
 }
 .FooterLink:hover {
   background-color: white;
@@ -234,22 +237,24 @@
   max-width: 100%;
   width: 100%;
 }
-#courseTitleContainer:hover {
-  color: white;
-}
+
 .courseTitle {
   font-size: 35px;
   font-weight: bold;
+  color: #21366e;
   background-color: white;
   border-radius: 10px;
   margin-right: 15px;
   padding-right: 10px;
   padding-left: 10px;
   border: #21366e solid 5px;
+  transition-duration: 350ms;
 }
 
 .courseTitle:hover {
   background-color: #21366e;
+  color: white;
+  text-decoration: none;
   transition-duration: 200ms;
 }
 #courseServiceContainer {
@@ -345,6 +350,7 @@
   border: solid 3px white;
   margin-left: 5px;
   margin-top: 5px;
+  transition-duration: 200ms;
 }
 
 .deactivatedButton {
@@ -354,6 +360,7 @@
   border: solid 3px white;
   margin-left: 5px;
   margin-top: 5px;
+  transition-duration: 200ms;
 }
 
 .toggleButton:hover {
