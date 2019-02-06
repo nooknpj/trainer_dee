@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import CourseItem from "./CourseItem";
 export class SearchResults extends Component {
+  componentDidMount() {
+    this.props.searchResults.sort(byName);
+  }
   render() {
     // display the course item for each courseItem
     // in searchResults( passed as props from state of SearchCoursesPage)
@@ -19,6 +22,12 @@ export class SearchResults extends Component {
       />
     ));
   }
+}
+
+function byName(a, b) {
+  if (a.cName < b.cName) return -1;
+  if (a.cName > b.cName) return 1;
+  return 0;
 }
 
 export default SearchResults;

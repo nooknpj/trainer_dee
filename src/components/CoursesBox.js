@@ -41,7 +41,6 @@ export class CoursesBox extends Component {
           <Button
             style={radioButtonStyle}
             value={"rating"}
-            
             onClick={this.onRadioButtonClick}
           >
             {" "}
@@ -77,6 +76,7 @@ export class CoursesBox extends Component {
         {/* check if the search results if empty or not 
         if (notEmpty) -> show searchResults Class
         if (empty)    -> show no results message */}
+        {console.log("sort here")}
 
         {this.props.searchResults.length ? (
           <SearchResults searchResults={this.props.searchResults} />

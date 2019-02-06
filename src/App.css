@@ -254,8 +254,8 @@
 }
 #courseServiceContainer {
   float: right;
-  min-width: 25%;
-  max-width: 25%;
+  min-width: 30%;
+  max-width: 30%;
   margin-right: 10px;
 }
 .courseService {
