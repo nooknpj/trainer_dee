@@ -20,7 +20,7 @@ export class CourseItem extends Component {
           <p> Service -->{this.getService()} </p>
           <p> Trainer --> {this.props.fName}</p>
           <p> Surname --> {this.props.sName} </p>
-          <p> Surname --> {this.props.gender}</p>
+          <p> Gender --> {this.props.gender}</p>
           <p> Description --> {this.props.courseDescription}</p>
           <p> Hours --> {this.props.courseHour}</p>
           <p> Cost --> {this.props.cost}</p>
