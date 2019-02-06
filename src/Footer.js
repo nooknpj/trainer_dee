@@ -8,8 +8,8 @@ export class Footer extends Component {
           Home
         </a>{" "}
         |{" "}
-        <a className="FooterLink" href="/courses">
-          Courses
+        <a className="FooterLink" href="/searchCourses">
+          Search Courses
         </a>
         <div style={FooterDplopBox}>
           <a id="footerDplop">Trainer D By D'Plop</a>
