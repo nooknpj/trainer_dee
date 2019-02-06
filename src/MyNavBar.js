@@ -5,7 +5,7 @@ export class MyNavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar id="myNavBar" expand="lg" collapseOnSelect>
+        <Navbar id="myNavBar" collapseOnSelect>
           <NavbarBrand id="navBrand" href="/">
             {" "}
             Trainer D
