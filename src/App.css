@@ -12,55 +12,6 @@
 
 /* NavBar Style */
 
-#myNavBar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  max-height: 30%;
-  background-color: #e63422;
-}
-
-#navBrand {
-  font-size: 25px;
-  font-weight: bold;
-  background-color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 15px;
-  transition-duration: 400ms;
-}
-
-#navBrand:hover {
-  color: white;
-  background-color: #283266;
-  transition-duration: 0.4s;
-}
-
-.NavLink {
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 10px;
-  transition-duration: 200ms;
-}
-
-.NavLink:hover {
-  padding-right: 15px;
-  padding-left: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  color: black;
-  background-color: white;
-  font-size: 20px;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 10px;
-  transition-duration: 0.3s;
-}
 /* End NavBar Style*/
 
 /* Footer Style */
