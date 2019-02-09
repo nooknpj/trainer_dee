@@ -1,0 +1,190 @@
+#courseItem {
+  border: solid white 5px;
+  border-radius: 10px;
+  color: #21366e;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+
+  background-color: #ffc845;
+  /* min-height: 300px;
+    max-height: 300px; */
+}
+
+.courseImg {
+  border-radius: 10px;
+  border: 5px solid #21366e;
+}
+
+#courseImgContainer {
+  background-color: #ffc845;
+  border-radius: 20px;
+  margin-right: 15px;
+  color: black;
+  min-width: 25%;
+  min-height: 50%;
+  max-height: 100%;
+  max-width: 25%;
+}
+
+#courseItemInfo {
+  width: 75%;
+  max-width: 75%;
+  min-width: 75%;
+}
+
+#courseHeaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+#courseTitleContainer {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
+}
+
+.courseTitle {
+  font-size: 35px;
+  font-weight: bold;
+  color: #21366e;
+  background-color: white;
+  border-radius: 10px;
+  margin-right: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: #21366e solid 5px;
+  transition-duration: 350ms;
+}
+
+.courseTitle:hover {
+  background-color: #21366e;
+  color: white;
+  text-decoration: none;
+  transition-duration: 200ms;
+}
+#courseServiceContainer {
+  float: right;
+  min-width: 30%;
+  max-width: 30%;
+  margin-right: 10px;
+}
+.courseService {
+  font-size: 15px;
+  font-weight: bold;
+  width: 90%;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 2px;
+  padding-left: 2px;
+  color: white;
+  background-color: #21366e;
+  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+.infoLine {
+  margin-top: 10px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.infoTitleContainer {
+  width: 30%;
+  min-width: 30%;
+  max-width: 30%;
+  /* background-color: blue; */
+}
+.infoTitle {
+  background-color: #21366e;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  width: 100%;
+  border: #21366e solid 2px;
+}
+
+.trainerInfoTitleContainer {
+  width: 15%;
+  min-width: 15%;
+  max-width: 15%;
+  margin-right: 5px;
+  background-color: #21366e;
+  border: #21366e solid 2px;
+  border-radius: 5px;
+  text-align: center;
+  /* background-color: blue; */
+}
+.trainerInfoContainer {
+  width: 80%;
+  max-width: 80%;
+  font-weight: bold;
+  display: flex;
+  flex-direction: bold;
+  color: #21366e;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 10px;
+  border: #21366e solid 2px;
+}
+
+.trainerName {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.ratingContainer {
+  margin-left: 10px;
+  background-color: #21366e;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fed141;
+}
+.descriptionTitle {
+  background-color: #21366e;
+  padding-top: 1px;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+}
+
+.descriptionLine {
+  margin-top: 10px;
+  background-color: white;
+  margin-right: 20px;
+  border-radius: 5px;
+  color: white;
+  border: #21366e solid 3px;
+}
+
+.courseDescriptionBox {
+  font-size: 18px;
+  color: #21366e;
+  margin-left: 5px;
+  background-color: white;
+}
+
+.infoText {
+  font-weight: bold;
+  font-size: 20px;
+  color: #21366e;
+  background-color: white;
+  border-radius: 10px;
+  width: 30%;
+  max-width: 30%;
+  text-align: center;
+
+  border: #21366e solid 2px;
+}

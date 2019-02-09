@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CoursesBox from "../components/CoursesBox";
 import SearchBox from "../components/SearchBox";
 import { Container } from "react-bootstrap";
+import "../css/searchCoursesPage.css";
 export class SearchCourses extends Component {
   constructor() {
     super();

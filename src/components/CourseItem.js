@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import starIcon from "../img/star.png";
+import "../css/courseItem.css";
 
 export class CourseItem extends Component {
   getService = () => {

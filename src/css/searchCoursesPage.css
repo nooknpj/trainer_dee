@@ -1,0 +1,21 @@
+#searchCoursesContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+#searchContainer {
+  width: 55%;
+  margin-right: 10px;
+  width: 25%;
+}
+
+#resultsContainer {
+  background-color: #98dbce;
+  width: 100%;
+  border: solid white 5px;
+  border-radius: 10px;
+  width: 75%;
+}

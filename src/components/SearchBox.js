@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, FormControl, Button } from "react-bootstrap";
 import FormCheckInput from "react-bootstrap/FormCheckInput";
 import MyToggleButton from "../components/MyToggleButton";
-
+import "../css/searchBox.css";
 export class SearchBox extends Component {
   constructor() {
     super();
@@ -138,12 +138,6 @@ export class SearchBox extends Component {
     console.log(tmp);
   };
 
-  // submit button currently not used
-  onSearchSubmit = e => {
-    e.preventDefault();
-    console.log(this.state);
-  };
-
   //-------------------------------------------------------UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   getServiceFilterStyle = e => {
     e.preventDefault();
@@ -190,7 +184,7 @@ export class SearchBox extends Component {
             </div>
           </div>
 
-          <div className="buttonGroup">
+          <div className="filterChoicesContainer">
             <Button
               title="yoga"
               value={1}
@@ -228,7 +222,7 @@ export class SearchBox extends Component {
             </div>
           </div>
 
-          <div className="buttonGroup">
+          <div className="filterChoicesContainer">
             <Button
               className="toggleButton btn btn-success btn-primary"
               title="male"

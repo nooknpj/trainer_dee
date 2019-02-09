@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchResults from "./SearchResults";
 import noSearchResultImg from "../img/noSearchResultImg.png";
 import { Button, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
+import "../css/courseBox.css";
 
 export class CoursesBox extends Component {
   constructor() {
@@ -36,7 +37,7 @@ export class CoursesBox extends Component {
     return (
       <div id="coursesBox">
         <div id="sortBarContainer">
-          <p style={sortBarTextStyle}> Sort By : </p>
+          <p style={sortBarTextStyle}> Sort By </p>
 
           <Button
             variant="light"
@@ -131,7 +132,7 @@ const sortBarTextStyle = {
   marginTop: "5px",
   marginBottom: "5px",
   fontWeight: "bold",
-  fontSize: "20px"
+  fontSize: "25px"
 };
 
 const radioButtonStyle = {
