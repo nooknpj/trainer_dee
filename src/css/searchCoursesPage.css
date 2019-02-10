@@ -9,7 +9,7 @@
 #searchContainer {
   width: 55%;
   margin-right: 10px;
-  width: 25%;
+  width: 30%;
 }
 
 #resultsContainer {
@@ -17,5 +17,5 @@
   width: 100%;
   border: solid white 5px;
   border-radius: 10px;
-  width: 75%;
+  width: 70%;
 }
