@@ -8,6 +8,7 @@ import PageNotFound from "./pages/PageNotFound";
 import MyNavBar from "./MyNavBar";
 import Footer from "./Footer";
 import Register from "./pages/Register";
+import TestSpace from "./pages/TestSpace";
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -19,16 +20,6 @@ class App extends Component {
       localStorage.setItem("isLoggedIn", 0);
     }
   }
-  updateLogin = e => {
-    localStorage.setItem("clientID", e.clientID);
-    localStorage.setItem("fName", e.fName);
-    localStorage.setItem("isLoggedIn", 1);
-  };
-
-  updateLogout = () => {
-    localStorage.clear();
-    localStorage.setItem("isLoggedIn", "0");
-  };
 
   render() {
     return (
@@ -45,6 +36,7 @@ class App extends Component {
               <Route path="/searchCourses" component={SearchCourses} />
               <Route path="/testCss" component={TestCss} />
               <Route path="/register" component={Register} />
+              <Route path="/testSpace" component={TestSpace} />
               <Route component={PageNotFound} />
             </Switch>
           </div>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CourseItem from "./CourseItem";
 export class SearchResults extends Component {
   componentDidMount() {
-    this.props.searchResults.sort(byName);
+    // this.props.searchResults.sort(byName);
   }
   render() {
     // display the course item for each courseItem

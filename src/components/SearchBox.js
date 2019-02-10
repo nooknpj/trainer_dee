@@ -3,9 +3,9 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import FormCheckInput from "react-bootstrap/FormCheckInput";
 import MyToggleButton from "../components/MyToggleButton";
 import "../css/searchBox.css";
-import Geosuggest from 'react-geosuggest';
+import Geosuggest from "react-geosuggest";
 
-const google = window.google
+const google = window.google;
 
 export class SearchBox extends Component {
   constructor() {
@@ -174,9 +174,18 @@ export class SearchBox extends Component {
   //-----------------------------------------------------END UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   render() {
     var fixtures = [
-      { label: 'BTS หมอชิต', location: { lat: 13.8022855, lng: 100.55383099999995 } },
-      { label: 'สยามพารากอน', location: { lat: 13.7461123, lng: 100.53410770000005 } },
-      { label: 'Fitness First - CentralPlaza Grand Rama9', location: { lat: 13.7593369, lng: 100.56665410000005 } }
+      {
+        label: "BTS หมอชิต",
+        location: { lat: 13.8022855, lng: 100.55383099999995 }
+      },
+      {
+        label: "สยามพารากอน",
+        location: { lat: 13.7461123, lng: 100.53410770000005 }
+      },
+      {
+        label: "Fitness First - CentralPlaza Grand Rama9",
+        location: { lat: 13.7593369, lng: 100.56665410000005 }
+      }
     ];
 
     return (
@@ -279,12 +288,13 @@ export class SearchBox extends Component {
 
           <div className="geosuggest__input-wrapper">
             <Geosuggest
-              ref={el => this._geoSuggest = el}
+              ref={el => (this._geoSuggest = el)}
               placeholder="Location.."
               fixtures={fixtures}
               onSuggestSelect={this.onSuggestSelect}
               location={new google.maps.LatLng(53.558572, 9.9278215)}
-              radius="20" />
+              radius="20"
+            />
           </div>
         </div>
       </div>
