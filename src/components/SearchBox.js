@@ -84,6 +84,29 @@ export class SearchBox extends Component {
     }
   }
 
+  // fetch results from back-end after search location change
+  // and call updateSearchResults
+  async fetchSearchLocation(e) {
+    try {
+      const data = e;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/search_location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      console.log(results);
+
+      this.props.upDateSearchResults(results);
+    } catch (error) {
+      console.log("Location search failed", error);
+    }
+  }
+
   // handle service filter click
   onServiceFilterClick = e => {
     e.target.value = e.target.value ^ 1;
@@ -114,51 +137,6 @@ export class SearchBox extends Component {
     console.log("hey!");
     this.getGenderFilterStyle(e);
   };
-  // fetch results from back-end after gender filter change
-  // and call updateSearchResults
-  async fetchFilterGender(e) {
-    try {
-      const data = this.state.genderFilter;
-      console.log(JSON.stringify(data));
-      const response = await fetch("/trainer_dee/filter_by_gender", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const results = await response.json();
-      console.log(results);
-
-      this.props.upDateSearchResults(results);
-    } catch (error) {
-      console.log("Gender filter failed", error);
-    }
-  }
-
-  // fetch results from back-end after search location change
-  // and call updateSearchResults
-  async fetchSearchLocation(e) {
-    try {
-      const data = e;
-      console.log(JSON.stringify(data));
-      const response = await fetch("/trainer_dee/search_location", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const results = await response.json();
-      console.log(results);
-
-      this.props.upDateSearchResults(results);
-    } catch (error) {
-      console.log("Location search failed", error);
-    }
-  }
 
   //capture keyword change in searchBar
   onSearchBarChange = e => {
