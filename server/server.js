@@ -19,16 +19,59 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-// app.post("/trainer_dee/add_course", (req, res) => {
-// let sql = "INSERT INTO Course \
-// (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID ) \
-// values ("
+// ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
+app.post("/trainer_dee/view_profile", (req, res) => {
+  let sql = "select * from user u where u.userid = ?"
+  connection.query(sql, [userID], (error, result) => {
+    if (error) throw error;
 
-//   let sql = "INSERT INTO \
-//   Location(LocationID, LocateCourseID, LName, Station) \
-//   values (?, ?, ?, ?)"
-// });
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    // console.log(all);
+  });
+});
 
+app.post("/trainer_dee/edit_profile", (req, res) => {
+  let sql = "UPDATE User \
+  SET FName = ?, LName = ?, Gender = ?, TelNo = ?, Address = ? \
+  WHERE userid = ?"
+  connection.query(sql, [firstName, lastName, gender, telNo, address, userID], (error, result) => {
+    if (error) throw error;
+
+    res.send('Edit successful');
+    // console.log(all);
+  });
+});
+
+app.post("/trainer_dee/add_course", (req, res) => {
+  let sql = "INSERT INTO Course \
+(CName, Service, Cost, CourseHour, ImageUrl, CourseDescription, TrainerID) \
+values (?, ?, ?, ?, ?, ?, ?)"
+const courseID = -1
+  connection.query(sql, [courseName, service, cost, courseHour, imgUrl, courseDesc, trainerID], (error, result) => {
+    if (error) throw error;
+
+    res.send('Course added');
+  });
+  sql = "select max(c.courseid) from course c"
+  connection.query(sql, (error, result) => {
+    if (error) throw error;
+
+    courseID = JSON.parse(JSON.stringify(result));
+  });
+  sql = "INSERT INTO \
+  Location(LocateCourseID, LName, Station, lat, lng) \
+  values (?, ?, ?, ?, ?)"
+  connection.query(sql, [courseID, locationName, station, lat, lng], (error, result) => {
+    if (error) throw error;
+
+    res.send('Location added');
+  });
+});
+
+
+
+// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 app.post("/trainer_dee/search_location", (req, res) => {
   let sql =
     "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
