@@ -75,6 +75,8 @@
   text-align: left;
 }
 .geosuggest__input {
+  border: solid white 5px;
+  border-radius: 10px;
   width: 100%;
   border: 2px solid transparent;
   box-shadow: 0 0 1px #3d464d;
