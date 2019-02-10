@@ -30,16 +30,21 @@ connection.connect();
 // });
 
 app.post("/trainer_dee/search_location", (req, res) => {
-  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo \
+  let sql =
+    "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
   from trainer t, user u, location l, course c \
-  where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)"
-  connection.query(sql, [req.body.lat, req.body.lat, req.body.lng, req.body.lng], (error, result) =>{
-    if (error) throw error;
+  where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
+  connection.query(
+    sql,
+    [req.body.lat, req.body.lat, req.body.lng, req.body.lng],
+    (error, result) => {
+      if (error) throw error;
 
-    let all = JSON.parse(JSON.stringify(result));
-    res.send(all);
-    // console.log(all);
-  });
+      let all = JSON.parse(JSON.stringify(result));
+      res.send(all);
+      // console.log(all);
+    }
+  );
 });
 
 app.post("/trainer_dee/search_filter", (req, res) => {
@@ -48,7 +53,7 @@ app.post("/trainer_dee/search_filter", (req, res) => {
   // console.log(desiredFilters);
 
   let sql =
-    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo \
+    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
   FROM course c, user u, trainer t \
   where c.TrainerId = u.userID and u.userID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {
@@ -75,10 +80,11 @@ app.post("/trainer_dee/search_filter", (req, res) => {
     sql += " and u.Gender != ?";
     filteredOutItem.push("O");
   }
-  sql += " and (c.cName like ? or c.courseDescription like ? or u.fname like ? or u.sname like ?)"
+  sql +=
+    " and (c.cName like ? or c.courseDescription like ? or u.fname like ? or u.lname like ?)";
   // console.log(sql);
-  for(i = 0; i < 4; i++){
-    filteredOutItem.push("%" + desiredFilters.searchKeyWords + "%")
+  for (i = 0; i < 4; i++) {
+    filteredOutItem.push("%" + desiredFilters.searchKeyWords + "%");
   }
 
   connection.query(sql, filteredOutItem, (error, result) => {
@@ -89,6 +95,43 @@ app.post("/trainer_dee/search_filter", (req, res) => {
     // console.log(all);
   });
 });
+
+//----------------------------Register and Login------------------------------------------------------------------------
+
+app.post("/trainer_dee/insert_registeredClient", (req, res) => {
+  // sql columns userID,FName,lName,Gender,Telno,isTrainer
+  console.log("hello");
+  let sqlUser =
+    "INSERT INTO user (userID,FName,lName,gender,telNo,Address,isTrainer) VALUE(?,?,?,?,?,?,?)";
+  connection.query(
+    sqlUser,
+    [
+      req.body.userID,
+      req.body.fName,
+      req.body.lName,
+      req.body.gender,
+      req.body.telNo,
+      req.body.address,
+      req.body.isTrainer
+    ],
+    error => {
+      if (error) throw error;
+      // console.log(all);
+    }
+  );
+
+  let sqlAuthen = "INSERT INTO authen (AuthenID,email,password) VALUE(?,?,?)";
+  connection.query(
+    sqlAuthen,
+    [req.body.userID, req.body.email, req.body.password],
+    error => {
+      if (error) throw error;
+      // console.log(all);
+    }
+  );
+});
+
+//------------------------------------------------------------------------------------------------------------------------
 
 //OLD ONE
 

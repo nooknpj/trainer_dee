@@ -7,7 +7,7 @@ import TestCss from "./pages/TestCss";
 import PageNotFound from "./pages/PageNotFound";
 import MyNavBar from "./MyNavBar";
 import Footer from "./Footer";
-import Register from "./pages/Register";
+import ClientRegister from "./pages/ClientRegister";
 import TestSpace from "./pages/TestSpace";
 
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/searchCourses" component={SearchCourses} />
               <Route path="/testCss" component={TestCss} />
-              <Route path="/register" component={Register} />
+              <Route path="/register" component={ClientRegister} />
               <Route path="/testSpace" component={TestSpace} />
               <Route component={PageNotFound} />
             </Switch>
