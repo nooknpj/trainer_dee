@@ -20,6 +20,18 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
+
+app.post("/trainer_dee/view_added_course", (req, res) => {
+  let sql = "select * from course c where c.trainerid = ?"
+  connection.query(sql, [trainerID], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    // console.log(all);
+  });
+});
+
 app.post("/trainer_dee/view_profile", (req, res) => {
   let sql = "select * from user u where u.userid = ?"
   connection.query(sql, [userID], (error, result) => {
