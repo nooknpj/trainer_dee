@@ -23,6 +23,11 @@ export class SearchBox extends Component {
         male: 1,
         female: 1,
         others: 1
+      },
+
+      searchLocation: {
+        lat: 0,
+        lng: 0
       }
     };
   }
@@ -132,6 +137,29 @@ export class SearchBox extends Component {
     }
   }
 
+  // fetch results from back-end after search location change
+  // and call updateSearchResults
+  async fetchSearchLocation(e) {
+    try {
+      const data = e;
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/search_location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      console.log(results);
+
+      this.props.upDateSearchResults(results);
+    } catch (error) {
+      console.log("Location search failed", error);
+    }
+  }
+
   //capture keyword change in searchBar
   onSearchBarChange = e => {
     this.setState({ searchKeyWords: e.target.value });
@@ -143,8 +171,20 @@ export class SearchBox extends Component {
   };
 
   //Select suggest location keyword
-  onSuggestSelect(suggest) {
-    console.log(suggest);
+  onSuggestSelect = suggest => {
+    if (typeof suggest !== 'undefined') {
+      console.log(suggest.location);
+      this.setState({ searchLocation: suggest.location });
+      this.fetchSearchLocation(suggest.location);
+    } else {
+      this.getDefaultSearchResults();
+    }
+  }
+
+  //Check if no location suggestion
+  onSuggestNoResults(userInput) {
+    //TO DO: SHOW NO SEARCH RESULT OR SHOW DEFAULT ITEM?
+    console.log('onSuggestNoResults for :' + userInput);
   }
 
   //-------------------------------------------------------UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
@@ -288,11 +328,12 @@ export class SearchBox extends Component {
 
           <div className="geosuggest__input-wrapper">
             <Geosuggest
-              ref={el => (this._geoSuggest = el)}
+              ref={el => this._geoSuggest = el}
               placeholder="Location.."
               fixtures={fixtures}
               onSuggestSelect={this.onSuggestSelect}
-              location={new google.maps.LatLng(53.558572, 9.9278215)}
+              onSuggestNoResults={this.onSuggestNoResults}
+              location={new google.maps.LatLng(1, 1)}
               radius="20"
             />
           </div>

@@ -30,12 +30,13 @@ connection.connect();
 // });
 
 app.post("/trainer_dee/search_location", (req, res) => {
-  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo from trainer t, user u, location l, course c where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and l.lat <=  ? + 0.0090909 and l.lng > ? - 0.0090909 and l.lng <= ? + 0.0090909"
-  connection.query(sql, [], (error, result) =>{
+  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo from trainer t, user u, location l, course c where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)"
+  connection.query(sql, [req.body.lat, req.body.lat, req.body.lng, req.body.lng], (error, result) =>{
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
+    // console.log(all);
   });
 });
 
