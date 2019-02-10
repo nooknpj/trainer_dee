@@ -30,7 +30,9 @@ connection.connect();
 // });
 
 app.post("/trainer_dee/search_location", (req, res) => {
-  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo from trainer t, user u, location l, course c where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)"
+  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo \
+  from trainer t, user u, location l, course c \
+  where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)"
   connection.query(sql, [req.body.lat, req.body.lat, req.body.lng, req.body.lng], (error, result) =>{
     if (error) throw error;
 
@@ -40,57 +42,51 @@ app.post("/trainer_dee/search_location", (req, res) => {
   });
 });
 
-app.post("/trainer_dee/search_keyword", (req, res) => {
-  // let sql = "SELECT * FROM trainer t natural join course co natural join user u WHERE CONCAT(CName, CourseID, Service) LIKE '? %'";
-  let sql = "SELECT * FROM tuser u";
-  connection.query(sql, (error, result) => {
-    //DO SOMETHING
-  });
-});
-
 app.post("/trainer_dee/search_filter", (req, res) => {
   let desiredFilters = req.body;
   let filteredOutItem = [];
-  console.log(desiredFilters);
+  // console.log(desiredFilters);
 
   let sql =
     "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo \
   FROM course c, user u, trainer t \
   where c.TrainerId = u.userID and u.userID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {
-    sql += " and c.service != ? ";
+    sql += " and c.service != ?";
     filteredOutItem.push(0);
   }
   if (req.body.serviceFilter["cardio"] == 0) {
-    sql += " and c.service != ? ";
+    sql += " and c.service != ?";
     filteredOutItem.push(1);
   }
   if (req.body.serviceFilter["weightTraining"] == 0) {
-    sql += " and c.service != ? ";
+    sql += " and c.service != ?";
     filteredOutItem.push(2);
   }
   if (req.body.genderFilter["male"] == 0) {
-    sql += " and u.Gender != ? ";
+    sql += " and u.Gender != ?";
     filteredOutItem.push("M");
   }
   if (req.body.genderFilter["female"] == 0) {
-    sql += " and u.Gender != ? ";
+    sql += " and u.Gender != ?";
     filteredOutItem.push("F");
   }
   if (req.body.genderFilter["others"] == 0) {
-    sql += " and u.Gender != ? ";
+    sql += " and u.Gender != ?";
     filteredOutItem.push("O");
   }
-
-  console.log(sql);
-  console.log(filteredOutItem);
+  sql += " and (c.cName like ? or c.courseDescription like ? or u.fname like ? or u.sname like ?)"
+  // console.log(sql);
+  for(i = 0; i < 4; i++){
+    filteredOutItem.push("%" + desiredFilters.searchKeyWords + "%")
+  }
 
   connection.query(sql, filteredOutItem, (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
-    //console.log(all);
+    // console.log(all);
   });
 });
 

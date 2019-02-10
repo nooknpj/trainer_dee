@@ -76,7 +76,7 @@ export class SearchBox extends Component {
       });
 
       const results = await response.json();
-      console.log(results);
+      // console.log(results);
 
       this.props.upDateSearchResults(results);
     } catch (error) {
@@ -140,12 +140,8 @@ export class SearchBox extends Component {
 
   //capture keyword change in searchBar
   onSearchBarChange = e => {
-    this.setState({ searchKeyWords: e.target.value });
-    console.log(e.target.value);
-    let tmp = {
-      keyword: e.target.value
-    };
-    console.log(tmp);
+    this.state.searchKeyWords = e.target.value;
+    this.fetchFilterSearch(e);
   };
 
   //Select suggest location keyword
