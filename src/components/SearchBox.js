@@ -213,21 +213,6 @@ export class SearchBox extends Component {
   };
   //-----------------------------------------------------END UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   render() {
-    var fixtures = [
-      {
-        label: "BTS หมอชิต",
-        location: { lat: 13.8022855, lng: 100.55383099999995 }
-      },
-      {
-        label: "สยามพารากอน",
-        location: { lat: 13.7461123, lng: 100.53410770000005 }
-      },
-      {
-        label: "Fitness First - CentralPlaza Grand Rama9",
-        location: { lat: 13.7593369, lng: 100.56665410000005 }
-      }
-    ];
-
     return (
       <div id="searchBox">
         <Form id="searchForm">
@@ -330,7 +315,7 @@ export class SearchBox extends Component {
             <Geosuggest
               ref={el => this._geoSuggest = el}
               placeholder="Location.."
-              fixtures={fixtures}
+              fixtures={exampleLocations}
               onSuggestSelect={this.onSuggestSelect}
               onSuggestNoResults={this.onSuggestNoResults}
               location={new google.maps.LatLng(1, 1)}
@@ -342,6 +327,21 @@ export class SearchBox extends Component {
     );
   }
 }
+
+const exampleLocations = [
+  {
+    label: "BTS หมอชิต",
+    location: { lat: 13.8022855, lng: 100.55383099999995 }
+  },
+  {
+    label: "สยามพารากอน",
+    location: { lat: 13.7461123, lng: 100.53410770000005 }
+  },
+  {
+    label: "Fitness First - CentralPlaza Grand Rama9",
+    location: { lat: 13.7593369, lng: 100.56665410000005 }
+  }
+];
 
 const mockUpResult = [
   {
