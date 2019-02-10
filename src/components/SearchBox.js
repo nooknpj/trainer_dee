@@ -3,6 +3,10 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import FormCheckInput from "react-bootstrap/FormCheckInput";
 import MyToggleButton from "../components/MyToggleButton";
 import "../css/searchBox.css";
+import Geosuggest from 'react-geosuggest';
+
+const google = window.google
+
 export class SearchBox extends Component {
   constructor() {
     super();
@@ -138,6 +142,11 @@ export class SearchBox extends Component {
     console.log(tmp);
   };
 
+  //Select suggest location keyword
+  onSuggestSelect(suggest) {
+    console.log(suggest);
+  }
+
   //-------------------------------------------------------UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   getServiceFilterStyle = e => {
     e.preventDefault();
@@ -164,6 +173,12 @@ export class SearchBox extends Component {
   };
   //-----------------------------------------------------END UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   render() {
+    var fixtures = [
+      { label: 'BTS หมอชิต', location: { lat: 13.8022855, lng: 100.55383099999995 } },
+      { label: 'สยามพารากอน', location: { lat: 13.7461123, lng: 100.53410770000005 } },
+      { label: 'Fitness First - CentralPlaza Grand Rama9', location: { lat: 13.7593369, lng: 100.56665410000005 } }
+    ];
+
     return (
       <div id="searchBox">
         <Form id="searchForm">
@@ -252,6 +267,24 @@ export class SearchBox extends Component {
               {" "}
               Others{" "}
             </Button>
+          </div>
+        </div>
+
+        <div className="filterContainer">
+          <div className="filterNameContainer">
+            <div className="filterName">
+              <a>Course Location</a>
+            </div>
+          </div>
+
+          <div className="geosuggest__input-wrapper">
+            <Geosuggest
+              ref={el => this._geoSuggest = el}
+              placeholder="Location.."
+              fixtures={fixtures}
+              onSuggestSelect={this.onSuggestSelect}
+              location={new google.maps.LatLng(53.558572, 9.9278215)}
+              radius="20" />
           </div>
         </div>
       </div>

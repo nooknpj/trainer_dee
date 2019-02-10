@@ -19,6 +19,26 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+// app.post("/trainer_dee/add_course", (req, res) => {
+// let sql = "INSERT INTO Course \
+// (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID ) \
+// values ("
+
+//   let sql = "INSERT INTO \
+//   Location(LocationID, LocateCourseID, LName, Station) \
+//   values (?, ?, ?, ?)"
+// });
+
+app.post("/trainer_dee/search_location", (req, res) => {
+  let sql = "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.sName,u.gender,u.telNo from trainer t, user u, location l, course c where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and l.lat <=  ? + 0.0090909 and l.lng > ? - 0.0090909 and l.lng <= ? + 0.0090909"
+  connection.query(sql, [], (error, result) =>{
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+  });
+});
+
 app.post("/trainer_dee/search_keyword", (req, res) => {
   // let sql = "SELECT * FROM trainer t natural join course co natural join user u WHERE CONCAT(CName, CourseID, Service) LIKE '? %'";
   let sql = "SELECT * FROM tuser u";
