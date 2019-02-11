@@ -90,9 +90,8 @@ CREATE TABLE User
             (LocateCourseID)
     REFERENCES Course
             (CourseID) 
-	ON
-            DELETE CASCADE ON
-            UPDATE CASCADE
+	ON DELETE CASCADE 
+    ON UPDATE CASCADE
     );
 
             CREATE TABLE Search
@@ -161,11 +160,17 @@ CREATE TABLE User
                 ('Mini Marathon Prep', '1', 2000, 15, 'https://static01.nyt.com/images/2017/10/17/science/11physed-marathon-photo/11physed-marathon-photo-articleLarge.jpg?quality=75&auto=webp&disable=upscale', 'I am an experienced marathon runner and I want you help you be like me!', '0000000002'),
                 ('Full Body Cardio', '1', 2500, 10, 'https://hips.hearstapps.com/womenshealth-production.s3.amazonaws.com/images/7685/best-cardio-for-fat-loss__medium_4x3.jpg', 'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!', 0000000004),
                 ('Intense Body Building', '2', 3000, 20, 'https://content.active.com/Assets/Active.com+Content+Site+Digital+Assets/Article+Image+Update/Fitness/Benefits+of+Weight+Training/Carousel.jpg', 'This course is only for people who have spectacularly muscular body. No Beginners!', 0000000002),
-                ('Weight 101', '2', 2000, 10, 'https://www.healthline.com/hlcmsresource/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'You want to build muscle but do not know how? Come here, take this awesome course!', 0000000002);
-
+                ('Weight 101', '2', 2000, 10, 'https://www.healthline.com/hlcmsresource/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'You want to build muscle but do not know how? Come here, take this awesome course!', 0000000002),
+				('Weight loss', '2', 10000, 20, 'https://www.fitnessment.com/Merte/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'Let loss weight and grain healthy', 0000000004);
             insert into location
                 (LocateCourseID, Lname, lat, lng)
             values
                 (1, 'Siam Paragon', 13.7461123, 100.53410770000005),
                 (2, 'Fitness First Central World', 13.7593369, 100.56665410000005),
-                (3, 'BTS หมอชิต', 13.8022855, 100.55383099999995);
+                (3, 'BTS หมอชิต', 13.8022855, 100.55383099999995),
+                (4, 'BTS สยาม', 13.745596421887042, 100.53408622741699),
+                (5, 'BTS สนามกีฬาแห่งชาติ' , 13.746492674829897,100.52908658981323),
+                (6, 'BTS ราชเทวี', 13.751911805599283,100.53155422210693),
+                (7, 'BTS พญาไท', 13.756934810946497,100.53378582000732),
+                (8, 'BTS ชิดลม', 13.744095711606409,100.5430555343628),
+                (9, 'MBK Center', 13.744470890077935,100.52990198135376);

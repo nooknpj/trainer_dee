@@ -14,10 +14,10 @@ CREATE TABLE User
     (20) NOT NULL,
     gender varchar
     (1) NOT NULL,
-
+    
     telNo varchar
     (10) ,
-
+    
 
     Address varchar
     (100),
@@ -93,18 +93,18 @@ CREATE TABLE Course
 
 
 
-        CREATE TABLE Authen
-        (
-            AuthenID varchar(13) ,
-            email varchar(25) ,
-            password varchar(25) ,
+    CREATE TABLE Authen
+    (
+    AuthenID varchar(13) ,
+    email varchar(25) ,
+    password varchar(25) ,
 
-            PRIMARY KEY(AuthenID,email , password) ,
+    PRIMARY KEY(AuthenID,email , password) ,
 
-            CONSTRAINT FK_Authen_User FOREIGN KEY(AuthenID)
+    CONSTRAINT FK_Authen_User FOREIGN KEY(AuthenID)
     REFERENCES User(userID) 
     ON DELETE CASCADE ON UPDATE CASCADE
-        );
+    );
 
 
 
