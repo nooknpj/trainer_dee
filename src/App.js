@@ -11,7 +11,8 @@ import TestCss from "./pages/TestCss";
 import PageNotFound from "./pages/PageNotFound";
 import ClientRegister from "./pages/ClientRegister";
 import TestSpace from "./pages/TestSpace";
-import MyAccount from "./pages/MyAccount"
+import MyAccount from "./pages/MyAccount";
+import AddCourse from "./pages/AddCourse";
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -41,6 +42,7 @@ class App extends Component {
               <Route path="/register" component={ClientRegister} />
               <Route path="/testSpace" component={TestSpace} />
               <Route path="/myAccount" component={MyAccount} />
+              <Route path="/addCourse" component={AddCourse} />
               <Route component={PageNotFound} />
             </Switch>
           </div>
