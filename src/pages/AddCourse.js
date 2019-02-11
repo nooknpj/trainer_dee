@@ -37,12 +37,40 @@ export class AddCourse extends Component {
     };
 
     onAddCourse = e => {
-        e.preventDefault();
-        console.log(this.state);
+        this.fetchInsertCourse(e)
     }
 
-    addCourse = () => {
-        console.log(this.state)
+    async fetchInsertCourse(e){
+        try {
+            const data = this.state;
+            switch (data.service) {
+                case "Yoga":
+                  data.service = "0";
+                  break;
+          
+                case "Cardio":
+                  data.service = "1";
+                  break;
+          
+                case "Weight Training":
+                  data.service = "2";
+                  break;
+          
+                default:
+                  data.service = "0";
+              }
+
+            console.log(JSON.stringify(data));
+            const response = await fetch("/trainer_dee/add_course", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(data)
+            });
+          } catch (error) {
+            console.log("Add course failed", error);
+          }
     }
 
     render() {
@@ -55,23 +83,68 @@ export class AddCourse extends Component {
                             <Form.Label>Course Name</Form.Label>
                             <Form.Control
                                 required
-                                type="text"
-                                title="coursename"
+                                type="courseName"
+                                title="courseName"
                                 placeholder="Enter course name"
                                 onChange={this.onFormChange}
                             />
                         </Form.Group>
+                        <div style={formInLineStyle}>
+                            <Form.Group style={inLineFormComponent}>
+                                <Form.Label>Service</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="service"
+                                    title="service"
+                                    as="select"
+                                    onChange={this.onFormChange}
+                                >
+                                    <option>Yoga</option>
+                                    <option>Cardio</option>
+                                    <option>Weight Training</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group style={inLineFormComponent}>
+                                <Form.Label>Price</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="price"
+                                    title="price"
+                                    placeholder="Price"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                            <Form.Group style={inLineFormComponent}>
+                                <Form.Label>Course Hour</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="courseHour"
+                                    title="courseHour"
+                                    placeholder="Course Hour"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                        </div>
                         <Form.Group style={shortFormStyle}>
-                            <Form.Label>Price</Form.Label>
+                            <Form.Label>Image URL</Form.Label>
                             <Form.Control
                                 required
-                                type="text"
-                                title="price"
-                                placeholder="Price"
+                                type="imageUrl"
+                                title="imageUrl"
+                                placeholder="Image URL"
                                 onChange={this.onFormChange}
                             />
                         </Form.Group>
-
+                        <Form.Group style={shortFormStyle}>
+                            <Form.Label>Course Description</Form.Label>
+                            <Form.Control
+                                required
+                                type="courseDescription"
+                                title="courseDescription"
+                                placeholder="Course Description"
+                                onChange={this.onFormChange}
+                            />
+                        </Form.Group>
                         <Form.Group>
                             <Form.Label>Course location: {this.state.address}</Form.Label>
                             <LocationPicker
@@ -85,10 +158,10 @@ export class AddCourse extends Component {
 
                         </Form.Group>
 
-
+                        <div style={{ display: "Block" }}>
+                            <Button variant="primary" size="small" type="submit">Submit</Button>
+                        </div>
                     </Form>
-
-                    <Button onClick={this.addCourse}>Add</Button>
                 </div>
             </div>
         );
@@ -109,6 +182,15 @@ const addCourseHeaderStyle = {
 const shortFormStyle = {
     width: "60%",
     maxWidth: "60%"
+};
+
+const formInLineStyle = {
+    display: "flex",
+    flexDirection: "row"
+};
+
+const inLineFormComponent = {
+    marginRight: "15px"
 };
 
 export default AddCourse;
