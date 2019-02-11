@@ -13,7 +13,7 @@ CREATE TABLE User
     (13) NOT NULL,
     FName varchar
     (20) NOT NULL,
-    SName varchar
+    LName varchar
     (20)  NOT NULL,
     Gender varchar
     (1)  NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE User
             );
 
             INSERT INTO User
-                (SSN , FName , SName , Gender , DateOfBirth, NickName , TelNo , Address)
+                (SSN , FName , LName , Gender , DateOfBirth, NickName , TelNo , Address)
             values
                 ('1103698745210', 'Yuki', 'Oberon', 'F', '1995-06-13', 'Mini', '0589665489' , '205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
                 ('5521368954697', 'Jiro', 'Talbot', 'M', '1998-4-10', 'Loki', '7856663214', '314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
