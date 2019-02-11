@@ -24,7 +24,14 @@ export class SearchCourses extends Component {
   render() {
     //console.log(this.state);
     return (
-      <div id="searchCoursesContainer">
+
+     <div>
+       {localStorage.getItem("isLoggedIn") == 0 ? (
+              // notlogin
+              <p>'you are not logged in'</p>
+            ) : (
+              //login
+              <div id="searchCoursesContainer">
         <div id="searchContainer">
           <SearchBox upDateSearchResults={this.upDateSearchResults} />
         </div>
@@ -36,6 +43,10 @@ export class SearchCourses extends Component {
           />
         </div>
       </div>
+            )}
+    </div>
+            
+      
     );
   }
 }
