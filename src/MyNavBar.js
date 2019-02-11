@@ -125,7 +125,7 @@ export class MyNavBar extends Component {
                 <a className="navLink" href="/register">
                   Register
                 </a>
-                <a onClick={this.onLoginClick} className="navLink" href="#">
+                <a onClick={this.onLoginClick} className="navLink" href="javascript:void(0);">
                   Login
                 </a>
               </Nav>
@@ -134,7 +134,7 @@ export class MyNavBar extends Component {
                 <a className="navLink" href="#">
                   {localStorage.getItem("fName")}
                 </a>
-                <a onClick={this.onLogoutClick} className="navLink" href="#">
+                <a onClick={this.onLogoutClick} className="navLink" href="javascript:void(0);">
                   Logout
                 </a>
               </Nav>
