@@ -30,63 +30,45 @@ export class MyNavBar extends Component {
   };
 
   onSubmitLoginClick = () => {
-    let clientID = this.fetchLoginAuthen(this.state);
+    let email = this.state.email;
+    let password = this.state.password;
+
+    // authen will call fetch to backend
+    let client = this.authen(email, password);
+    if (client === 0) {
+      console.log("failed");
+      this.setState({
+        showAuthenFailed: 1
+      });
+    } else {
+      localStorage.setItem("clientID", client.clientID);
+      localStorage.setItem("fName", client.fName);
+      localStorage.setItem("isLoggedIn", 1);
+      this.handleClose();
+    }
   };
 
-  async fetchLoginAuthen(e) {
-    try {
-      console.log(JSON.stringify(e));
-      const response = await fetch("/trainer_dee/login_authentication", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(e)
-      });
-
-      let status = response.status;
-      if (status == 400) {
-        this.setState({
-          showAuthenFailed: 1
-        });
-        return 0;
-      }
-      if (status == 200) {
-        let results = await response.json();
-        console.log("successful login");
-        console.log(results);
-        localStorage.setItem('clientID',results.AuthenID);
-        localStorage.setItem('isLoggedIn',1);
-        this.handleClose();
-        window.location.reload();
-        return results;
-      }
-    } catch (error) {
-      console.log("FetchLoginAuthen failed", error);
+  authen = (email, password) => {
+    //fetchBackend
+    //if successful return clientID,username,isTrainer
+    //else return false
+    let mockUpClient = {
+      clientID: "12345",
+      fName: "Panda"
+    };
+    //return mockUpClient;
+    //---test Area (mockup)---------------------------------
+    if (email == "abc" && password == "123") {
+      console.log(mockUpClient.fName);
+      return mockUpClient;
+    } else {
+      return 0;
     }
-  }
-
-  // authen = (email, password) => {
-  //   //fetchBackend
-  //   //if successful return clientID,username,isTrainer
-  //   //else return false
-  //   let mockUpClient = {
-  //     clientID: "12345",
-  //     fName: "Panda"
-  //   };
-  //   //return mockUpClient;
-  //   //---test Area (mockup)---------------------------------
-  //   if (email == "abc" && password == "123") {
-  //     console.log(mockUpClient.fName);
-  //     return mockUpClient;
-  //   } else {
-  //     return 0;
-  //   }
-  //   //------------------------------------------------------
-  // };
+    //------------------------------------------------------
+  };
 
   handleClose = () => {
-    this.setState({ showLogin: 0, showAuthenFailed: 0 });
+    this.setState({ showLogin: 0 });
   };
 
   onLogoutClick = () => {
