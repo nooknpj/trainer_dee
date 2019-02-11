@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+
+import MyNavBar from "./MyNavBar";
+import Footer from "./Footer";
+
 import Home from "./pages/Home";
 import SearchCourses from "./pages/SearchCourses";
 import TestCss from "./pages/TestCss";
 import PageNotFound from "./pages/PageNotFound";
-import MyNavBar from "./MyNavBar";
-import Footer from "./Footer";
 import ClientRegister from "./pages/ClientRegister";
 import TestSpace from "./pages/TestSpace";
+import MyAccount from "./pages/MyAccount"
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -37,6 +40,7 @@ class App extends Component {
               <Route path="/testCss" component={TestCss} />
               <Route path="/register" component={ClientRegister} />
               <Route path="/testSpace" component={TestSpace} />
+              <Route path="/myAccount" component={MyAccount} />
               <Route component={PageNotFound} />
             </Switch>
           </div>

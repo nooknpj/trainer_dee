@@ -30,7 +30,7 @@ export class MyNavBar extends Component {
   };
 
   onSubmitLoginClick = () => {
-    let clientID = this.fetchLoginAuthen(this.state);
+    let userID = this.fetchLoginAuthen(this.state);
   };
 
   async fetchLoginAuthen(e) {
@@ -55,7 +55,8 @@ export class MyNavBar extends Component {
         let results = await response.json();
         console.log("successful login");
         console.log(results);
-        localStorage.setItem('clientID',results.AuthenID);
+        console.log(results[0].AuthenID);
+        localStorage.setItem('userID',results[0].AuthenID);
         localStorage.setItem('isLoggedIn',1);
         this.handleClose();
         window.location.reload();
@@ -66,24 +67,7 @@ export class MyNavBar extends Component {
     }
   }
 
-  // authen = (email, password) => {
-  //   //fetchBackend
-  //   //if successful return clientID,username,isTrainer
-  //   //else return false
-  //   let mockUpClient = {
-  //     clientID: "12345",
-  //     fName: "Panda"
-  //   };
-  //   //return mockUpClient;
-  //   //---test Area (mockup)---------------------------------
-  //   if (email == "abc" && password == "123") {
-  //     console.log(mockUpClient.fName);
-  //     return mockUpClient;
-  //   } else {
-  //     return 0;
-  //   }
-  //   //------------------------------------------------------
-  // };
+ 
 
   handleClose = () => {
     this.setState({ showLogin: 0, showAuthenFailed: 0 });
@@ -98,6 +82,7 @@ export class MyNavBar extends Component {
     };
     localStorage.clear();
     localStorage.setItem("isLoggedIn", "0");
+    
     window.location = "/";
   };
 
@@ -131,8 +116,8 @@ export class MyNavBar extends Component {
               </Nav>
             ) : (
               <Nav class="nav navbar-nav ml-auto">
-                <a className="navLink" href="#">
-                  {localStorage.getItem("fName")}
+                <a className="navLink" href="/myAccount">
+                  Account
                 </a>
                 <a onClick={this.onLogoutClick} className="navLink" href="javascript:void(0);">
                   Logout
