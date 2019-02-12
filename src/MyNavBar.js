@@ -136,6 +136,7 @@ export class MyNavBar extends Component {
                 <a className="navLink" href="/register">
                   Register
                 </a>
+
                 <a
                   onClick={this.onLoginClick}
                   className="navLink"

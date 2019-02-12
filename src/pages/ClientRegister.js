@@ -91,6 +91,11 @@ export class ClientRegister extends Component {
           </Modal.Header>
           <Modal.Body>
             <p> You can now use your email and password to login.</p>
+            <p>
+              {" "}
+              You can upgrade your account into trainer account in your account
+              menu.
+            </p>
           </Modal.Body>
           <Modal.Footer>
             <a className="homeLink" href="/">

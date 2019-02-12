@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import SearchCourses from "./pages/SearchCourses";
 import TestCss from "./pages/TestCss";
 import PageNotFound from "./pages/PageNotFound";
+import Register from "./pages/Register";
 import ClientRegister from "./pages/ClientRegister";
 import TrainerRegister from "./pages/TrainerRegister";
 import TestSpace from "./pages/TestSpace";
@@ -40,7 +41,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/searchCourses" component={SearchCourses} />
               <Route path="/testCss" component={TestCss} />
-              <Route path="/register" component={ClientRegister} />
+              <Route path="/register" component={Register} />
+              <Route path="/clientRegister" component={ClientRegister} />
               <Route path="/trainerRegister" component={TrainerRegister} />
               <Route path="/testSpace" component={TestSpace} />
               <Route path="/myAccount" component={MyAccount} />
