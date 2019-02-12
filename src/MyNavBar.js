@@ -120,6 +120,15 @@ export class MyNavBar extends Component {
               <a className="navLink" href="/searchCourses">
                 Search Courses
               </a>
+
+              {localStorage.getItem("isLoggedIn") == 1 &&
+              localStorage.getItem("isTrainer") == 1 ? (
+                <a className="navLink" href="/addCourse">
+                  Add Course
+                </a>
+              ) : (
+                <div />
+              )}
             </Nav>
 
             {localStorage.getItem("isLoggedIn") == 0 ? (
