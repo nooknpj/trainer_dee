@@ -52,7 +52,7 @@ CREATE TABLE Course
         CourseDescription varchar
     (170),
         TrainerID varchar
-    (11),
+    (13),
 
         PRIMARY KEY
     (CourseID) ,
@@ -96,7 +96,7 @@ CREATE TABLE Course
         CREATE TABLE Search
         (
             Search_ClientID varchar(13) ,
-            Search_CourseID integer(10) ,
+            Search_CourseID integer(11) ,
 
             PRIMARY KEY (Search_ClientID,Search_CourseID),
 
