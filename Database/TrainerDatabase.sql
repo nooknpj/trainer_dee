@@ -154,7 +154,7 @@ CREATE TABLE Course
             ('Full Body Cardio', '1', 2500, 10, 'https://hips.hearstapps.com/womenshealth-production.s3.amazonaws.com/images/7685/best-cardio-for-fat-loss__medium_4x3.jpg', 'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!', '0000000004'),
             ('Intense Body Building', '2', 3000, 20, 'https://content.active.com/Assets/Active.com+Content+Site+Digital+Assets/Article+Image+Update/Fitness/Benefits+of+Weight+Training/Carousel.jpg', 'This course is only for people who have spectacularly muscular body. No Beginners!', '0000000002'),
             ('Weight 101', '2', 2000, 10, 'https://www.healthline.com/hlcmsresource/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'You want to build muscle but do not know how? Come here, take this awesome course!', '0000000002'),
-            ('Weight loss', '2', 10000, 20, 'https://www.fitnessment.com/Merte/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg', 'Let loss weight and grain healthy', '0000000004');
+            ('Weight loss', '2', 10000, 20, 'https://www.mensjournal.com/wp-content/uploads/mf/_main_liftlift.jpg?w=1200&h=1200&crop=1', 'Let loss weight and grain healthy', '0000000004');
         insert into location
             (LocateCourseID, Lname, lat, lng)
         values
