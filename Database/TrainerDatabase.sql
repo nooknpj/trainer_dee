@@ -132,7 +132,9 @@ CREATE TABLE Course
             ('0000000002', 'Jiro', 'Talbot', 'M', '7856663214', '314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo', 1),
             ('0000000003', 'Rina', 'Saltzman', 'F', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido', 1),
             ('0000000004', 'Kridtin', 'Chawalratikool', 'M', '0891111111', 'HOME', 1),
-            ('0000000005', 'Kongpobpisit', 'Termphrateep', 'M', '0891111112', 'PHome', 1);
+            ('0000000005', 'Kongpobpisit', 'Termphrateep', 'M', '0891111112', 'PHome', 1),
+            ('9999999999', 'JohnnyTheTrainer', 'TheTrainer', 'M', '0909123123', 'Johny lives in the mountain. my id is 9999999999', 1),
+            ('0000000000', 'JamesTheClient', 'TheClient', 'F', '0909123123', 'I am James the client.My id is 0000000000', 0);
 
         insert into trainer
             (TrainerID,SSN,TrainerDescription, Rating)
@@ -141,7 +143,8 @@ CREATE TABLE Course
             ('0000000002', '123', 'helloTrainer', 2.0),
             ('0000000003', '123', 'helloTrainer', 4.7),
             ('0000000004', '123', 'helloTrainer', 5.0),
-            ('0000000005', '123', 'helloTrainer', 3.2);
+            ('0000000005', '123', 'helloTrainer', 3.2),
+            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 5.0);
 
         INSERT INTO Course
             (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )
@@ -175,4 +178,7 @@ CREATE TABLE Course
             ('0000000002', 'DFivePLOP@yahoo.com', 'Oiskajqnd448'),
             ('0000000003', 'DZippyPLOP@yahoo.com', 'MksjqU293'),
             ('0000000004', 'DMellowPLOP@hotmail.com', 'PlsmqjUas123'),
-            ('0000000005', 'DDerangedPLOP@gmail.com', 'MUM222');
+            ('0000000005', 'DDerangedPLOP@gmail.com', 'MUM222'),
+            ('0000000000', 'client@gmail.com', 'client'),
+            ('9999999999', 'trainer@gmail.com', 'trainer');
+            
