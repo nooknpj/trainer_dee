@@ -55,11 +55,19 @@ export class MyNavBar extends Component {
         let results = await response.json();
         console.log("successful login");
         console.log(results);
-        console.log(results[0].AuthenID);
-        localStorage.setItem("clientID", results[0].AuthenID);
+        console.log(results[0].clientID);
+        console.log(results[0].fName);
+        console.log(results[0].isTrainer);
+        localStorage.setItem("clientID", results[0].clientID);
+        localStorage.setItem("fName", results[0].fName);
+        localStorage.setItem("isTrainer", results[0].isTrainer);
         localStorage.setItem("isLoggedIn", 1);
         this.handleClose();
-        window.location.reload();
+        console.log(localStorage.getItem("clientID"));
+        console.log(localStorage.getItem("fName"));
+        console.log(localStorage.getItem("isLoggedIn"));
+        console.log(localStorage.getItem("isTrainer"));
+        // window.location.reload();
         return results;
       }
     } catch (error) {
@@ -80,8 +88,19 @@ export class MyNavBar extends Component {
     };
     localStorage.clear();
     localStorage.setItem("isLoggedIn", "0");
+    localStorage.setItem("isTrainer", "0");
+    localStorage.setItem("clientID", "0");
+    localStorage.setItem("fName", "unassigned");
 
     window.location = "/";
+  };
+
+  getAccountType = () => {
+    if (localStorage.getItem("isTrainer") == 0) {
+      return "Client   ";
+    } else if (localStorage.getItem("isTrainer") == 1) {
+      return "Trainer  ";
+    } else return "";
   };
 
   render() {
@@ -119,7 +138,8 @@ export class MyNavBar extends Component {
             ) : (
               <Nav className="nav navbar-nav ml-auto">
                 <a className="navLink" href="/myAccount">
-                  Account
+                  {this.getAccountType()}
+                  {localStorage.getItem("fName")}
                 </a>
                 <a
                   onClick={this.onLogoutClick}
