@@ -32,17 +32,6 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
   });
 });
 
-app.post("/trainer_dee/view_profile", (req, res) => {
-  let sql = "select * from client cl where cl.clientId = ?";
-  connection.query(sql, [req.body.clientid], (error, result) => {
-    if (error) throw error;
-
-    let all = JSON.parse(JSON.stringify(result));
-    res.send(all);
-    // console.log(all);
-  });
-});
-
 app.post("/trainer_dee/edit_profile", (req, res) => {
   let sql =
     "UPDATE client \
@@ -53,14 +42,41 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
     [firstName, lastName, gender, telNo, address, clientID],
     (error, result) => {
       if (error) throw error;
+      // console.log(all);
+    }
+  );
+});
 
-      res.send("Edit successful");
+app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
+  let sql =
+    "update client \
+    set istrainer = 1 \
+    where clientid = ?; \
+    insert into trainer \
+    (trainerid, trainerdescription, ssn, certificate, rating) \
+    values (?, ?, ?, ?, ?);";
+  connection.query(
+    sql,
+    [clientID, clientID, trainerDesc, SSN, certificate, -1],
+    (error, result) => {
+      if (error) throw error;
       // console.log(all);
     }
   );
 });
 
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
+
+app.post("/trainer_dee/view_profile", (req, res) => {
+  let sql = "select * from client cl where cl.clientId = ?";
+  connection.query(sql, [req.body.clientid], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    // console.log(all);
+  });
+});
 
 app.post("/trainer_dee/add_course", (req, res) => {
   let sql =
