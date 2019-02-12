@@ -30,7 +30,7 @@ export class MyNavBar extends Component {
   };
 
   onSubmitLoginClick = () => {
-    let userID = this.fetchLoginAuthen(this.state);
+    let clientID = this.fetchLoginAuthen(this.state);
   };
 
   async fetchLoginAuthen(e) {
@@ -56,8 +56,8 @@ export class MyNavBar extends Component {
         console.log("successful login");
         console.log(results);
         console.log(results[0].AuthenID);
-        localStorage.setItem('userID',results[0].AuthenID);
-        localStorage.setItem('isLoggedIn',1);
+        localStorage.setItem("clientID", results[0].AuthenID);
+        localStorage.setItem("isLoggedIn", 1);
         this.handleClose();
         window.location.reload();
         return results;
@@ -66,8 +66,6 @@ export class MyNavBar extends Component {
       console.log("FetchLoginAuthen failed", error);
     }
   }
-
- 
 
   handleClose = () => {
     this.setState({ showLogin: 0, showAuthenFailed: 0 });
@@ -82,7 +80,7 @@ export class MyNavBar extends Component {
     };
     localStorage.clear();
     localStorage.setItem("isLoggedIn", "0");
-    
+
     window.location = "/";
   };
 
@@ -110,7 +108,11 @@ export class MyNavBar extends Component {
                 <a className="navLink" href="/register">
                   Register
                 </a>
-                <a onClick={this.onLoginClick} className="navLink" href="javascript:void(0);">
+                <a
+                  onClick={this.onLoginClick}
+                  className="navLink"
+                  href="javascript:void(0);"
+                >
                   Login
                 </a>
               </Nav>
@@ -119,7 +121,11 @@ export class MyNavBar extends Component {
                 <a className="navLink" href="/myAccount">
                   Account
                 </a>
-                <a onClick={this.onLogoutClick} className="navLink" href="javascript:void(0);">
+                <a
+                  onClick={this.onLogoutClick}
+                  className="navLink"
+                  href="javascript:void(0);"
+                >
                   Logout
                 </a>
               </Nav>
