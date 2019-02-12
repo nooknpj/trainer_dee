@@ -49,6 +49,8 @@ export class TrainerRegister extends Component {
     console.log(response);
   }
 
+  // fetchInsertRegisteredClient is the same function as in register as a client (check if email already exists in authen if not then add to client)
+  // but it will also call fetchInsertRegisteredTrainer(insert into trainer) if the previous was successful
   async fetchInsertRegisteredClient(e) {
     try {
       switch (e.gender) {
@@ -105,7 +107,10 @@ export class TrainerRegister extends Component {
             <Modal.Title>Register as Trainer Successful!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p> You can now use your email and password to login.</p>
+            <p>
+              {" "}
+              You can now use your email and password to login as a trainer.
+            </p>
           </Modal.Body>
           <Modal.Footer>
             <a className="homeLink" href="/">

@@ -90,7 +90,10 @@ export class ClientRegister extends Component {
             <Modal.Title>Register as Client Successful!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p> You can now use your email and password to login.</p>
+            <p>
+              {" "}
+              You can now use your email and password to login as a client.
+            </p>
             <p>
               {" "}
               You can upgrade your account into trainer account in your account
