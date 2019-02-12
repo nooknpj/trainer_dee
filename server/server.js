@@ -60,43 +60,34 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
   );
 });
 
+// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
+
 app.post("/trainer_dee/add_course", (req, res) => {
   let sql =
     "INSERT INTO Course \
 (CName, Service, Cost, CourseHour, ImageUrl, CourseDescription, TrainerID) \
 values (?, ?, ?, ?, ?, ?, ?)";
-  const courseID = -1;
   connection.query(
     sql,
-    [courseName, service, cost, courseHour, imgUrl, courseDesc, trainerID],
+    [req.body.courseName, req.body.service, req.body.price, req.body.courseHour, 
+      req.body.imageUrl, req.body.courseDescription, 0000000004], //DON'T FORGET TO ADD TRAINER ID FROM LOGGED IN USER
     (error, result) => {
       if (error) throw error;
-
-      res.send("Course added");
     }
   );
-  sql = "select max(c.courseid) from course c";
-  connection.query(sql, (error, result) => {
-    if (error) throw error;
-
-    courseID = JSON.parse(JSON.stringify(result));
-  });
   sql =
     "INSERT INTO \
-  Location(LocateCourseID, LName, Station, lat, lng) \
-  values (?, ?, ?, ?, ?)";
+    Location(LocateCourseID, LName, lat, lng) \
+    values ((select max(c.courseid) from course c), ?, ?, ?) ";
   connection.query(
     sql,
-    [courseID, locationName, station, lat, lng],
+    [req.body.address, req.body.position.lat, req.body.position.lng],
     (error, result) => {
       if (error) throw error;
-
-      res.send("Location added");
     }
   );
 });
 
-// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 app.post("/trainer_dee/search_location", (req, res) => {
   let sql =
     "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \

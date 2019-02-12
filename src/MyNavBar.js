@@ -106,7 +106,7 @@ export class MyNavBar extends Component {
             </Nav>
 
             {localStorage.getItem("isLoggedIn") == 0 ? (
-              <Nav class="nav navbar-nav ml-auto">
+              <Nav className="nav navbar-nav ml-auto">
                 <a className="navLink" href="/register">
                   Register
                 </a>
@@ -115,7 +115,7 @@ export class MyNavBar extends Component {
                 </a>
               </Nav>
             ) : (
-              <Nav class="nav navbar-nav ml-auto">
+              <Nav className="nav navbar-nav ml-auto">
                 <a className="navLink" href="/myAccount">
                   Account
                 </a>
