@@ -3,7 +3,7 @@ import { Form, Modal, Button, Alert } from "react-bootstrap";
 
 import "../css/clientRegister.css";
 const uuidv4 = require("uuid/v4");
-export class ClientRegister extends Component {
+export class TrainerRegister extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,7 +15,9 @@ export class ClientRegister extends Component {
       telNo: "",
       address: "",
       clientID: "",
-      isTrainer: 0,
+      isTrainer: 1,
+      ssn: "",
+      trainerDescription: "",
       showRegisterSuccessful: 0,
       showEmailAlreadyUsed: 0
     };
@@ -23,6 +25,7 @@ export class ClientRegister extends Component {
 
   onFormChange = e => {
     this.state[e.target.title] = e.target.value;
+    console.log(this.state);
   };
 
   onSubmitRegister = e => {
@@ -33,8 +36,18 @@ export class ClientRegister extends Component {
     this.state.clientID = uuidv4().slice(24, 36);
     this.state.email = this.state.email.toLocaleLowerCase();
     console.log(this.state);
-    this.fetchInsertRegisteredClient(this.state);
+    let status = this.fetchInsertRegisteredClient(this.state);
   };
+  async fetchInsertTrainer(e) {
+    const response = await fetch("/trainer_dee/insert_registeredTrainer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(e)
+    });
+    console.log(response);
+  }
 
   async fetchInsertRegisteredClient(e) {
     try {
@@ -68,13 +81,15 @@ export class ClientRegister extends Component {
         this.setState({
           showEmailAlreadyUsed: 1
         });
-        return;
+        return 450;
       }
       if (response.status == 200) {
+        this.fetchInsertTrainer(e);
         console.log("registerCompleted");
         this.setState({
           showRegisterSuccessful: 1
         });
+        return 200;
       } else {
         console.log("failed. couldn't register user");
       }
@@ -87,7 +102,7 @@ export class ClientRegister extends Component {
       <div className="registerBox">
         <Modal className="modalStyle" show={this.state.showRegisterSuccessful}>
           <Modal.Header>
-            <Modal.Title>Register as Client Successful!</Modal.Title>
+            <Modal.Title>Register as Trainer Successful!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p> You can now use your email and password to login.</p>
@@ -100,7 +115,7 @@ export class ClientRegister extends Component {
           </Modal.Footer>
         </Modal>
 
-        <p style={registerHeaderStyle}>Register as a Client</p>
+        <p style={registerHeaderStyle}>Register as a Trainer</p>
         <Form onSubmit={this.onSubmitRegister}>
           <Form.Group style={shortFormStyle}>
             <Form.Label>Email address</Form.Label>
@@ -167,6 +182,18 @@ export class ClientRegister extends Component {
           </div>
 
           <Form.Group style={shortFormStyle}>
+            <Form.Label>SSN</Form.Label>
+            <Form.Control
+              required
+              type="ssn"
+              title="ssn"
+              placeholder="Your Social Security Number (or CitizenID)"
+              maxLength="14"
+              onChange={this.onFormChange}
+            />
+          </Form.Group>
+
+          <Form.Group style={shortFormStyle}>
             <Form.Label>Telephone Number</Form.Label>
             <Form.Control
               required
@@ -182,12 +209,48 @@ export class ClientRegister extends Component {
             <Form.Label>Address</Form.Label>
             <Form.Control
               required
-              type="address"
+              type="text"
               title="address"
-              style={addressFormStyle}
               placeholder="1/23 Apple St. ,Bangkok, Thailand,10200"
               maxLength="110"
               onChange={this.onFormChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Trainer Description</Form.Label>
+            <Form.Control
+              required
+              type="textarea"
+              title="trainerDescription"
+              placeholder="Describe yourself."
+              maxLength="190"
+              onChange={this.onFormChange}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Profile Image Url</Form.Label>
+            <Form.Control
+              required
+              type="textarea"
+              title="trainerImg"
+              disabled
+              placeholder="url of your profile image. Use your real image for more creditability!"
+              maxLength="190"
+              //onChange={this.onFormChange}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Trainer Certificate (optional)</Form.Label>
+            <Form.Control
+              required
+              type="textarea"
+              title="trainerDescription"
+              disabled
+              placeholder="If you have any certificate relating to personal training, you can add it here for more creditability."
+              maxLength="190"
+              // onChange={this.onFormChange}
             />
           </Form.Group>
 
@@ -215,8 +278,6 @@ const registerHeaderStyle = {
   fontWeight: "bold"
 };
 
-const addressFormStyle = {};
-
 const shortFormStyle = {
   width: "60%",
   maxWidth: "60%"
@@ -230,4 +291,4 @@ const formInLineStyle = {
 const inLineFormComponent = {
   marginRight: "15px"
 };
-export default ClientRegister;
+export default TrainerRegister;

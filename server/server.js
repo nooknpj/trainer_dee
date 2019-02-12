@@ -231,7 +231,27 @@ app.post("/trainer_dee/insert_registeredClient", (req, res) => {
   });
 });
 
-console.log("stillhere");
+app.post("/trainer_dee/insert_registeredTrainer", (req, res) => {
+  let defaultRating = 0;
+  // imgUrl and certificate not implement yet
+  let sql =
+    "INSERT INTO trainer (trainerID,ssn,trainerDescription,rating) VALUE(?,?,?,?) ";
+  connection.query(
+    sql,
+    [
+      req.body["clientID"],
+      req.body["ssn"],
+      req.body["trainerDescription"],
+      defaultRating
+    ],
+    (error, result) => {
+      if (error) res.sendStatus(400);
+
+      console.log("added Trainer");
+      res.sendStatus(200);
+    }
+  );
+});
 
 // login authentication
 app.post("/trainer_dee/login_authentication", (req, res) => {

@@ -10,6 +10,7 @@ import SearchCourses from "./pages/SearchCourses";
 import TestCss from "./pages/TestCss";
 import PageNotFound from "./pages/PageNotFound";
 import ClientRegister from "./pages/ClientRegister";
+import TrainerRegister from "./pages/TrainerRegister";
 import TestSpace from "./pages/TestSpace";
 import MyAccount from "./pages/MyAccount";
 import AddCourse from "./pages/AddCourse";
@@ -40,6 +41,7 @@ class App extends Component {
               <Route path="/searchCourses" component={SearchCourses} />
               <Route path="/testCss" component={TestCss} />
               <Route path="/register" component={ClientRegister} />
+              <Route path="/trainerRegister" component={TrainerRegister} />
               <Route path="/testSpace" component={TestSpace} />
               <Route path="/myAccount" component={MyAccount} />
               <Route path="/addCourse" component={AddCourse} />
