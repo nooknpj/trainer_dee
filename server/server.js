@@ -33,8 +33,8 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
 });
 
 app.post("/trainer_dee/view_profile", (req, res) => {
-  let sql = "select * from user u where u.userid = ?";
-  connection.query(sql, [userID], (error, result) => {
+  let sql = "select * from client c where c.clientId = ?";
+  connection.query(sql, [clientID], (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
@@ -45,12 +45,12 @@ app.post("/trainer_dee/view_profile", (req, res) => {
 
 app.post("/trainer_dee/edit_profile", (req, res) => {
   let sql =
-    "UPDATE User \
+    "UPDATE client \
   SET FName = ?, LName = ?, Gender = ?, TelNo = ?, Address = ? \
-  WHERE userid = ?";
+  WHERE clientId = ?";
   connection.query(
     sql,
-    [firstName, lastName, gender, telNo, address, userID],
+    [firstName, lastName, gender, telNo, address, clientID],
     (error, result) => {
       if (error) throw error;
 
@@ -69,8 +69,15 @@ app.post("/trainer_dee/add_course", (req, res) => {
 values (?, ?, ?, ?, ?, ?, ?)";
   connection.query(
     sql,
-    [req.body.courseName, req.body.service, req.body.price, req.body.courseHour, 
-      req.body.imageUrl, req.body.courseDescription, 0000000004], //DON'T FORGET TO ADD TRAINER ID FROM LOGGED IN USER
+    [
+      req.body.courseName,
+      req.body.service,
+      req.body.price,
+      req.body.courseHour,
+      req.body.imageUrl,
+      req.body.courseDescription,
+      0000000004
+    ], //DON'T FORGET TO ADD TRAINER ID FROM LOGGED IN USER
     (error, result) => {
       if (error) throw error;
     }
@@ -91,8 +98,8 @@ values (?, ?, ?, ?, ?, ?, ?)";
 app.post("/trainer_dee/search_location", (req, res) => {
   let sql =
     "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
-  from trainer t, user u, location l, course c \
-  where l.locatecourseid = c.courseid and c.TrainerId = u.userID and u.userID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
+  from trainer t, client c, location l, course c \
+  where l.locatecourseid = c.courseid and c.TrainerId = c.clientID and c.clientID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
   connection.query(
     sql,
     [req.body.lat, req.body.lat, req.body.lng, req.body.lng],
@@ -113,8 +120,8 @@ app.post("/trainer_dee/search_filter", (req, res) => {
 
   let sql =
     "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
-  FROM course c, user u, trainer t \
-  where c.TrainerId = u.userID and u.userID=t.TrainerID";
+  FROM course c, client c, trainer t \
+  where c.TrainerId = c.clientID and c.clientIDID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {
     sql += " and c.service != ?";
     filteredOutItem.push(0);
@@ -160,12 +167,12 @@ app.post("/trainer_dee/search_filter", (req, res) => {
 app.post("/trainer_dee/insert_registeredClient", (req, res) => {
   // sql columns userID,FName,lName,Gender,Telno,isTrainer
   console.log("hello");
-  let sqlUser =
-    "INSERT INTO user (userID,FName,lName,gender,telNo,Address,isTrainer) VALUE(?,?,?,?,?,?,?)";
+  let sqlClient =
+    "INSERT INTO client (clientID,FName,lName,gender,telNo,Address,isTrainer) VALUE(?,?,?,?,?,?,?)";
   connection.query(
-    sqlUser,
+    sqlClient,
     [
-      req.body.userID,
+      req.body.clientID,
       req.body.fName,
       req.body.lName,
       req.body.gender,
@@ -182,7 +189,7 @@ app.post("/trainer_dee/insert_registeredClient", (req, res) => {
   let sqlAuthen = "INSERT INTO authen (AuthenID,email,password) VALUE(?,?,?)";
   connection.query(
     sqlAuthen,
-    [req.body.userID, req.body.email, req.body.password],
+    [req.body.clientID, req.body.email, req.body.password],
     error => {
       if (error) {
         res.sendStatus(400);

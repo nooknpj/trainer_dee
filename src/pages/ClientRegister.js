@@ -13,7 +13,7 @@ export class ClientRegister extends Component {
       gender: "Male",
       telNo: "",
       address: "",
-      userID: "",
+      clientID: "",
       isTrainer: 0
     };
   }
@@ -24,18 +24,18 @@ export class ClientRegister extends Component {
 
   onSubmitRegister = e => {
     e.preventDefault();
-    this.state.userID = uuidv4().slice(24, 36);
+    this.state.clientID = uuidv4().slice(24, 36);
     console.log(this.state);
 
     let data = (({
-      userID,
+      clientID,
       fName,
       lName,
       gender,
       telNo,
       address,
       isTrainer
-    }) => ({ userID, fName, lName, gender, telNo, address, isTrainer }))(
+    }) => ({ clientID, fName, lName, gender, telNo, address, isTrainer }))(
       this.state
     );
 
@@ -77,7 +77,7 @@ export class ClientRegister extends Component {
         default:
           e.gender = "o";
       }
-      
+
       console.log(JSON.stringify(e));
       const response = await fetch("/trainer_dee/insert_registeredClient", {
         method: "POST",
