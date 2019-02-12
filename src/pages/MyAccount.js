@@ -8,8 +8,13 @@ export class MyAccount extends Component {
   constructor() {
     super();
     this.state = {
-      FName: "HI",
-      Address: "SS"
+      Address: "MyAddress",
+        ClientID: "000000000000",
+        FName: "MyFirstName",
+        LName: "MyLastName",
+        Gender: "MyGender",
+        TelNo: "0000000000",
+        isTrainer: -1
     };
   }
 
