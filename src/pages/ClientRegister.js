@@ -40,19 +40,19 @@ export class ClientRegister extends Component {
     try {
       switch (e.gender) {
         case "Male":
-          e.gender = "m";
+          e.gender = "M";
           break;
 
         case "Female":
-          e.gender = "f";
+          e.gender = "F";
           break;
 
         case "Other":
-          e.gender = "o";
+          e.gender = "O";
           break;
 
         default:
-          e.gender = "o";
+          e.gender = "O";
       }
 
       console.log(JSON.stringify(e));
