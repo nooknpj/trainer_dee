@@ -34,7 +34,7 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
 
 app.post("/trainer_dee/view_profile", (req, res) => {
   let sql = "select * from client cl where cl.clientId = ?";
-  connection.query(sql, [clientID], (error, result) => {
+  connection.query(sql, [req.body.clientid], (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
