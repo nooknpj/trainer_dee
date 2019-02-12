@@ -33,7 +33,7 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
 });
 
 app.post("/trainer_dee/view_profile", (req, res) => {
-  let sql = "select * from client c where c.clientId = ?";
+  let sql = "select * from client cl where cl.clientId = ?";
   connection.query(sql, [clientID], (error, result) => {
     if (error) throw error;
 
@@ -97,9 +97,9 @@ values (?, ?, ?, ?, ?, ?, ?)";
 
 app.post("/trainer_dee/search_location", (req, res) => {
   let sql =
-    "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
-  from trainer t, client c, location l, course c \
-  where l.locatecourseid = c.courseid and c.TrainerId = c.clientID and c.clientID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
+    "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+  from trainer t, client cl, location l, course c \
+  where l.locatecourseid = c.courseid and c.TrainerId = cl.clientID and cl.clientID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
   connection.query(
     sql,
     [req.body.lat, req.body.lat, req.body.lng, req.body.lng],
@@ -119,9 +119,9 @@ app.post("/trainer_dee/search_filter", (req, res) => {
   // console.log(desiredFilters);
 
   let sql =
-    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,u.fName,u.lName,u.gender,u.telNo \
-  FROM course c, client c, trainer t \
-  where c.TrainerId = c.clientID and c.clientIDID=t.TrainerID";
+    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+  FROM course c, client cl, trainer t \
+  where c.TrainerId = cl.clientID and cl.clientID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {
     sql += " and c.service != ?";
     filteredOutItem.push(0);
@@ -135,19 +135,19 @@ app.post("/trainer_dee/search_filter", (req, res) => {
     filteredOutItem.push(2);
   }
   if (req.body.genderFilter["male"] == 0) {
-    sql += " and u.Gender != ?";
+    sql += " and cl.Gender != ?";
     filteredOutItem.push("M");
   }
   if (req.body.genderFilter["female"] == 0) {
-    sql += " and u.Gender != ?";
+    sql += " and cl.Gender != ?";
     filteredOutItem.push("F");
   }
   if (req.body.genderFilter["others"] == 0) {
-    sql += " and u.Gender != ?";
+    sql += " and cl.Gender != ?";
     filteredOutItem.push("O");
   }
   sql +=
-    " and (c.cName like ? or c.courseDescription like ? or u.fname like ? or u.lname like ?)";
+    " and (c.cName like ? or c.courseDescription like ? or cl.fname like ? or cl.lname like ?)";
   // console.log(sql);
   for (i = 0; i < 4; i++) {
     filteredOutItem.push("%" + desiredFilters.searchKeyWords + "%");
