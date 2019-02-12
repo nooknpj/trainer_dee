@@ -235,7 +235,8 @@ console.log("stillhere");
 
 // login authentication
 app.post("/trainer_dee/login_authentication", (req, res) => {
-  let sql = "SELECT * FROM authen WHERE email = ? && password = ?  ";
+  let sql =
+    "SELECT cl.clientID,cl.isTrainer,cl.fName FROM authen a,client cl WHERE a.authenID=cl.clientID && a.email = ? && a.password = ?   ";
   connection.query(
     sql,
     [req.body["email"], req.body["password"]],
@@ -247,7 +248,9 @@ app.post("/trainer_dee/login_authentication", (req, res) => {
         return;
       } else {
         let all = JSON.parse(JSON.stringify(result));
+        console.log(all);
         res.send(all);
+
         return;
       }
     }
