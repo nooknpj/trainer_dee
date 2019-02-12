@@ -24,11 +24,11 @@ CREATE TABLE User
     (10),
     Address varchar
     (100),
+    
     istrainer integer
     (1),
     
-    PRIMARY KEY
-    (userID)
+    PRIMARY KEY(userID)
  );
     CREATE TABLE Trainer
     (
@@ -88,58 +88,61 @@ CREATE TABLE User
 
         CONSTRAINT FK_Location_Course FOREIGN KEY
             (LocateCourseID)
-    REFERENCES Course
-            (CourseID) 
+    REFERENCES Course(CourseID) 
 	ON DELETE CASCADE 
     ON UPDATE CASCADE
     );
 
-            CREATE TABLE Search
-            (
-                Search_UserID integer(10) ,
-                Search_CourseID integer(10) ,
+CREATE TABLE Search
+(
+	Search_UserID integer(10) ,
+	Search_CourseID integer(10) ,
 
-                PRIMARY KEY (Search_UserID,Search_CourseID),
+	PRIMARY KEY (Search_UserID,Search_CourseID),
 
-                CONSTRAINT FK_Search_Course FOREIGN KEY(Search_CourseID)
+	CONSTRAINT FK_Search_Course FOREIGN KEY(Search_CourseID)
     REFERENCES Course(CourseID) ,
-                CONSTRAINT FK_Search_User FOREIGN KEY(Search_UserID)
+	CONSTRAINT FK_Search_User FOREIGN KEY(Search_UserID)
     REFERENCES User(UserID)
 
-            );
+);
 
-            CREATE TABLE Client
-            (
-                ClientID integer(10) ,
+CREATE TABLE Client
+(
+	ClientID integer(10) ,
 
-                PRIMARY KEY (ClientID) ,
+	PRIMARY KEY (ClientID) ,
 
-                CONSTRAINT FK_Client_User FOREIGN KEY(ClientID)
+	CONSTRAINT FK_Client_User FOREIGN KEY(ClientID)
     REFERENCES User(UserID) 
 	ON DELETE CASCADE ON UPDATE CASCADE
             );
 
-            CREATE TABLE Authen
-            (
-                AuthenID integer(10) ,
-                Username varchar(20) ,
-                UserPassword varchar(20) ,
+CREATE TABLE Authen
+(
+	AuthenID integer(10) ,
+	Username varchar(40) NOT NULL ,
+	UserPassword varchar(20) NOT NULL,
 
-                PRIMARY KEY(AuthenID,Username , UserPassword) ,
-
-                CONSTRAINT FK_Authen_User FOREIGN KEY(AuthenID)
-    REFERENCES User(userID) 
-    ON DELETE CASCADE ON UPDATE CASCADE
-            );
+	PRIMARY KEY(AuthenID,Username) ,
+                
+	
+                
+	CONSTRAINT FK_Authen_User FOREIGN KEY(AuthenID)
+	REFERENCES User(userID) 
+	ON DELETE CASCADE 
+    
+     
+);
 
             INSERT INTO User
-                (SSN , FName , LName , Gender , DateOfBirth, NickName , TelNo , Address)
+                (Email , SSN , FName , LName , Gender , DateOfBirth, NickName , TelNo , Address)
             values
-                ('1103698745210', 'Yuki', 'Oberon', 'F', '1995-06-13', 'Mini', '0589665489' , '205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
-                ('5521368954697', 'Jiro', 'Talbot', 'M', '1998-4-10', 'Loki', '7856663214', '314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
-                ('1245869852317', 'Rina', 'Saltzman', 'F', '1996-5-3', 'Rina', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido'),
-                ('1010101010101', 'Kridtin', 'Chawalratikool', 'M', '19971010', 'Kan', '0891111111', 'HOME'),
-                ('2020202020202', 'Kongpobpisit', 'Termphrateep', 'M', '19981202', 'Porsche', '0891111112', 'PHome');
+                ('DThinPLOP@hotmail.com','1103698745210','Yuki', 'Oberon', 'F', '1995-06-13', 'Mini', '0589665489' , '205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido') ,
+                ('DFivePLOP@yahoo.com','5521368954697', 'Jiro', 'Talbot', 'M', '1998-4-10', 'Loki', '7856663214', '314-1187, Kasumigaseki Kasumigasekibiru(1-kai), Chiyoda-ku, Tokyo'),
+                ('DZippyPLOP@yahoo.com','1245869852317', 'Rina', 'Saltzman', 'F', '1996-5-3', 'Rina', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido'),
+                ('DMellowPLOP@hotmail.com','1010101010101', 'Kridtin', 'Chawalratikool', 'M', '19971010', 'Kan', '0891111111', 'HOME'),
+                ('DDerangedPLOP@gmail.com','2020202020202', 'Kongpobpisit', 'Termphrateep', 'M', '19981202', 'Porsche', '0891111112', 'PHome');
 
             insert into trainer
                 (TrainerID, Rating)
@@ -174,3 +177,12 @@ CREATE TABLE User
                 (7, 'BTS พญาไท', 13.756934810946497,100.53378582000732),
                 (8, 'BTS ชิดลม', 13.744095711606409,100.5430555343628),
                 (9, 'MBK Center', 13.744470890077935,100.52990198135376);
+			
+			INSERT INTO Authen
+				(AuthenID , Username , UserPassword)
+			values
+				(1,'DThinPLOP@hotmail.com','x86akqidSAkd'),
+                (2,'DFivePLOP@yahoo.com','Oiskajqnd448'),
+                (3,'DZippyPLOP@yahoo.com','MksjqU293'),
+                (4,'DMellowPLOP@hotmail.com','PlsmqjUas123'),
+                (5,'DDerangedPLOP@gmail.com','MUM222');
