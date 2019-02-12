@@ -77,27 +77,7 @@ export class ClientRegister extends Component {
         default:
           e.gender = "o";
       }
-
-      // let data = (({
-      //   userID,
-      //   fName,
-      //   lName,
-      //   gender,
-      //   telNo,
-      //   address,
-      //   isTrainer
-      // }) => ({ userID, fName, lName, gender, telNo, address, isTrainer }))(e);
-      // console.log(data);
-
-      let MockUpData = {
-        userID: "123456789013",
-        fName: "hello",
-        lName: "kitty",
-        gender: "m",
-        telNo: "0808080808",
-        address: "home",
-        isTrainer: "0"
-      };
+      
       console.log(JSON.stringify(e));
       const response = await fetch("/trainer_dee/insert_registeredClient", {
         method: "POST",
@@ -108,8 +88,9 @@ export class ClientRegister extends Component {
       });
 
       const results = await response.json();
-      if (results == 200) {
+      if (results.response == 200) {
         console.log("registerCompleted");
+        window.location.href = "/";
       } else {
         console.log("failed. couldn't register user");
       }

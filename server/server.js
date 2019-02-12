@@ -184,7 +184,7 @@ app.post("/trainer_dee/insert_registeredClient", (req, res) => {
     ],
     error => {
       if (error) throw error;
-      // console.log(all);
+      res.sendStatus(400);
     }
   );
 
@@ -193,8 +193,9 @@ app.post("/trainer_dee/insert_registeredClient", (req, res) => {
     sqlAuthen,
     [req.body.userID, req.body.email, req.body.password],
     error => {
-      if (error) throw error;
-      // console.log(all);
+      if (error) {
+        res.sendStatus(400);
+      }
     }
   );
 });
