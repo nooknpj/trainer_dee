@@ -109,6 +109,7 @@ export class ClientRegister extends Component {
               type="email"
               title="email"
               placeholder="Enter email"
+              maxLength="40"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -119,6 +120,7 @@ export class ClientRegister extends Component {
               type="password"
               title="password"
               placeholder="Password"
+              maxLength="20"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -131,6 +133,7 @@ export class ClientRegister extends Component {
                 type="fName"
                 title="fName"
                 placeholder="First Name"
+                maxLength="20"
                 onChange={this.onFormChange}
               />
             </Form.Group>
@@ -142,6 +145,7 @@ export class ClientRegister extends Component {
                 type="lName"
                 title="lName"
                 placeholder="Last Name"
+                maxLength="20"
                 onChange={this.onFormChange}
               />
             </Form.Group>
@@ -169,6 +173,7 @@ export class ClientRegister extends Component {
               type="telNo"
               title="telNo"
               placeholder="081234321"
+              maxLength="10"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -181,6 +186,7 @@ export class ClientRegister extends Component {
               title="address"
               style={addressFormStyle}
               placeholder="1/23 Apple St. ,Bangkok, Thailand,10200"
+              maxLength="110"
               onChange={this.onFormChange}
             />
           </Form.Group>
