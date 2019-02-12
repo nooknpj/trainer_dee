@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Modal, Button, Alert } from "react-bootstrap";
+
 import "../css/clientRegister.css";
 const uuidv4 = require("uuid/v4");
 export class ClientRegister extends Component {
@@ -14,7 +15,9 @@ export class ClientRegister extends Component {
       telNo: "",
       address: "",
       clientID: "",
-      isTrainer: 0
+      isTrainer: 0,
+      showRegisterSuccessful: 0,
+      showEmailAlreadyUsed: 0
     };
   }
 
@@ -23,39 +26,13 @@ export class ClientRegister extends Component {
   };
 
   onSubmitRegister = e => {
+    this.setState({
+      showEmailAlreadyUsed: 0
+    });
     e.preventDefault();
     this.state.clientID = uuidv4().slice(24, 36);
+    this.state.email = this.state.email.toLocaleLowerCase();
     console.log(this.state);
-
-    let data = (({
-      clientID,
-      fName,
-      lName,
-      gender,
-      telNo,
-      address,
-      isTrainer
-    }) => ({ clientID, fName, lName, gender, telNo, address, isTrainer }))(
-      this.state
-    );
-
-    switch (data.gender) {
-      case "Male":
-        data.gender = "m";
-        break;
-
-      case "Female":
-        data.gender = "f";
-        break;
-
-      case "Other":
-        data.gender = "o";
-        break;
-
-      default:
-        data.gender = "o";
-    }
-    console.log(data);
     this.fetchInsertRegisteredClient(this.state);
   };
 
@@ -86,11 +63,18 @@ export class ClientRegister extends Component {
         },
         body: JSON.stringify(e)
       });
-
-      const results = await response.json();
-      if (results.response == 200) {
+      if (response.status == 450) {
+        console.log("EmailAlreadyUsed");
+        this.setState({
+          showEmailAlreadyUsed: 1
+        });
+        return;
+      }
+      if (response.status == 200) {
         console.log("registerCompleted");
-        window.location.href = "/";
+        this.setState({
+          showRegisterSuccessful: 1
+        });
       } else {
         console.log("failed. couldn't register user");
       }
@@ -101,6 +85,21 @@ export class ClientRegister extends Component {
   render() {
     return (
       <div className="registerBox">
+        <Modal className="modalStyle" show={this.state.showRegisterSuccessful}>
+          <Modal.Header>
+            <Modal.Title>Registration Successful!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p> You can now use your email and password to login.</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <a className="homeLink" href="/">
+              {" "}
+              Home{" "}
+            </a>
+          </Modal.Footer>
+        </Modal>
+
         <p style={registerHeaderStyle}>Register as a Client</p>
         <Form onSubmit={this.onSubmitRegister}>
           <Form.Group style={shortFormStyle}>
@@ -187,6 +186,9 @@ export class ClientRegister extends Component {
           </Form.Group>
 
           <div style={{ display: "Block" }}>
+            <Alert show={this.state.showEmailAlreadyUsed} variant="danger">
+              This email is already used. Please try other emails.
+            </Alert>
             <Button variant="primary" size="small" type="submit">
               Submit
             </Button>

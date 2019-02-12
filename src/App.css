@@ -88,3 +88,9 @@
   background-color: "red";
 }
 /*toggle button styling*/
+
+/*Modal*/
+.modalStyle {
+  min-width: 1000px;
+  height: 100%;
+}

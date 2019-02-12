@@ -9,3 +9,27 @@
   padding-right: 10px;
   border-radius: 10px;
 }
+
+.homeLink {
+  color: black;
+
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+  border: solid black 3px;
+}
+.homeLink:hover {
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #006cb0;
+  border-radius: 10px;
+  transition-duration: 0.3s;
+  border: solid black 3px;
+}

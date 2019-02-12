@@ -75,8 +75,7 @@ values (?, ?, ?, ?, ?, ?, ?)";
       req.body.price,
       req.body.courseHour,
       req.body.imageUrl,
-      req.body.courseDescription,
-      0000000004
+      req.body.courseDescription
     ], //DON'T FORGET TO ADD TRAINER ID FROM LOGGED IN USER
     (error, result) => {
       if (error) throw error;
@@ -167,36 +166,56 @@ app.post("/trainer_dee/search_filter", (req, res) => {
 app.post("/trainer_dee/insert_registeredClient", (req, res) => {
   // sql columns userID,FName,lName,Gender,Telno,isTrainer
   console.log("hello");
-  let sqlClient =
-    "INSERT INTO client (clientID,FName,lName,gender,telNo,Address,isTrainer) VALUE(?,?,?,?,?,?,?)";
-  connection.query(
-    sqlClient,
-    [
-      req.body.clientID,
-      req.body.fName,
-      req.body.lName,
-      req.body.gender,
-      req.body.telNo,
-      req.body.address,
-      req.body.isTrainer
-    ],
-    error => {
-      if (error) throw error;
-      res.sendStatus(400);
-    }
-  );
 
-  let sqlAuthen = "INSERT INTO authen (AuthenID,email,password) VALUE(?,?,?)";
-  connection.query(
-    sqlAuthen,
-    [req.body.clientID, req.body.email, req.body.password],
-    error => {
-      if (error) {
-        res.sendStatus(400);
-      }
+  let sql = "SELECT * FROM authen WHERE email = ? ";
+  connection.query(sql, req.body["email"], (error, result) => {
+    if (error) throw error;
+    if (result.length !== 0) {
+      res.sendStatus(450);
+      return;
     }
-  );
+
+    let sqlClient =
+      "INSERT INTO client (clientID,FName,lName,gender,telNo,Address,isTrainer) VALUE(?,?,?,?,?,?,?)";
+    connection.query(
+      sqlClient,
+      [
+        req.body.clientID,
+        req.body.fName,
+        req.body.lName,
+        req.body.gender,
+        req.body.telNo,
+        req.body.address,
+        req.body.isTrainer
+      ],
+      error => {
+        if (error) {
+          console.log("error at insert into client");
+          res.sendStatus(400);
+          return;
+        }
+      }
+    );
+
+    let sqlAuthen = "INSERT INTO authen (AuthenID,email,password) VALUE(?,?,?)";
+    connection.query(
+      sqlAuthen,
+      [req.body.clientID, req.body.email, req.body.password],
+      error => {
+        if (error) {
+          console.log("error at second error");
+          res.sendStatus(400);
+        }
+        console.log("backEndGoesHere");
+        // res.sendStatus(200);
+      }
+    );
+    console.log("backEndEndSuccessfully");
+    res.sendStatus(200);
+  });
 });
+
+console.log("stillhere");
 
 // login authentication
 app.post("/trainer_dee/login_authentication", (req, res) => {
