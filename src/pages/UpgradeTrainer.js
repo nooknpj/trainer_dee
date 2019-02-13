@@ -9,4 +9,12 @@ export class UpgradeTrainer extends Component {
 
     };
   }
+
+  render(){
+    return(
+        <p>UpgradetoTrainerPage</p>
+    )
 }
+}
+
+export default UpgradeTrainer;
