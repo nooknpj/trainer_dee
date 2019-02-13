@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form } from 'react-bootstrap';
 import "../css/editProfile.css";
-import {Redirect} from "react-router";
+import { Redirect } from "react-router";
 
 export class EditProfile extends Component {
 
@@ -26,21 +26,21 @@ export class EditProfile extends Component {
     try {
       data.clientID = localStorage.getItem("clientID");
       switch (data.gender) {
-          case "Male":
-            data.gender = "M";
-            break;
-    
-          case "Male":
-            data.gender = "F";
-            break;
-    
-          case "Other":
-            data.gender = "O";
-            break;
-    
-          default:
-            data.gender = "M";
-        }
+        case "Male":
+          data.gender = "M";
+          break;
+
+        case "Male":
+          data.gender = "F";
+          break;
+
+        case "Other":
+          data.gender = "O";
+          break;
+
+        default:
+          data.gender = "M";
+      }
 
       console.log(JSON.stringify(data));
       const response = await fetch("/trainer_dee/edit_profile", {
@@ -55,7 +55,7 @@ export class EditProfile extends Component {
     }
     localStorage.setItem("fName", data.firstName);
     // this.setState({ redirectToNewPage: true })
-    // this.props.router.push('/myAccount')
+    // this.props.history.push('/myAccount');
   }
 
   render() {
@@ -66,6 +66,7 @@ export class EditProfile extends Component {
     // }
     return (
       <div className="profileBox">
+        <p style={editProfileHeaderStyle}>Edit Profile</p>
         <span>My Client ID is </span>
         <span> {localStorage.getItem("clientID")} </span>
 
@@ -158,7 +159,7 @@ export class EditProfile extends Component {
   }
 }
 
-const addCourseHeaderStyle = {
+const editProfileHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",

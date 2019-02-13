@@ -9,12 +9,12 @@ export class MyAccount extends Component {
     super();
     this.state = {
       Address: "MyAddress",
-        ClientID: "000000000000",
-        FName: "MyFirstName",
-        LName: "MyLastName",
-        Gender: "MyGender",
-        TelNo: "0000000000",
-        isTrainer: -1
+      ClientID: "000000000000",
+      FName: "MyFirstName",
+      LName: "MyLastName",
+      Gender: "MyGender",
+      TelNo: "0000000000",
+      isTrainer: -1
     };
   }
 
@@ -84,6 +84,7 @@ export class MyAccount extends Component {
   render() {
     return (
       <div className="profileBox">
+        <p style={profileHeaderStyle}>My Account</p>
         {/* <span>My Client id is </span>
         <span> {localStorage.getItem("clientID")} </span> */}
 
@@ -128,5 +129,15 @@ export class MyAccount extends Component {
     );
   }
 }
+
+const profileHeaderStyle = {
+  color: "white",
+  fontSize: "30px",
+  backgroundColor: "#2460A7",
+  width: "40%",
+  textAlign: "center",
+  borderRadius: "10px",
+  fontWeight: "bold"
+};
 
 export default MyAccount;
