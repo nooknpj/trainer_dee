@@ -22,8 +22,8 @@ export class EditProfile extends Component {
   }
 
   async fetchSaveProfile(e) {
+    const data = this.state;
     try {
-      const data = this.state;
       data.clientID = localStorage.getItem("clientID");
       switch (data.gender) {
           case "Male":
@@ -53,6 +53,7 @@ export class EditProfile extends Component {
     } catch (error) {
       console.log("Edit profile failed", error);
     }
+    localStorage.setItem("fName", data.firstName);
     // this.setState({ redirectToNewPage: true })
     // this.props.router.push('/myAccount')
   }
