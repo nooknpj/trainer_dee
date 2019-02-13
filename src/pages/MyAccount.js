@@ -106,24 +106,24 @@ export class MyAccount extends Component {
           </div>
         </div>
 
-        <div className="infoLine" style={{ marginTop: "30px" }}>
-          <div style={{ marginRight: "20px" }}>
-            <a className="infoTitle">Email Address</a>
-          </div>
-          <div className="infoText" style={{ fontSize: "15px" }}>
-            <a> {this.state.Email}</a>
-          </div>
-        </div>
-
         <div id="courseItemInfo">
-          <div className="infoLine">
-            <div className="trainerInfoTitleContainer">
-              <a className="infoTitle">Name</a>
+          <div className="infoLine" style={{ marginTop: "30px" }}>
+            <div className="accountTitleContainer">
+              <a className="accountTitle">Email Address</a>
             </div>
-            <div className="trainerInfoContainer">
-              <div className="trainerName">
-                <a> {this.state.FName}</a>
-                <a> {this.state.LName} </a>
+            <div className="accountNameContainer">
+              <a> {this.state.Email}</a>
+            </div>
+          </div>
+
+          <div className="infoLine">
+            <div className="accountTitleContainer">
+              <a className="accountTitle">Name and Gender</a>
+            </div>
+            <div className="accountNameContainer">
+              <div>
+                <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
+                <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
               </div>
               <div style={this.getGenderStyle()}>
                 <a> {this.state.Gender}</a>
@@ -131,19 +131,19 @@ export class MyAccount extends Component {
             </div>
           </div>
 
+          <div className="infoLine">
+            <div className="accountTitleContainer">
+              <a className="infoTitle">Telephone Number</a>
+            </div>
+            <div className="accountNameContainer">
+              <a> {this.state.TelNo}</a>
+            </div>
+          </div>
+
           <div className="descriptionLine">
             <a className="descriptionTitle">Address</a>
             <div className="courseDescriptionBox">
               <a> {this.state.Address} </a>
-            </div>
-          </div>
-
-          <div className="infoLine">
-            <div className="infoTitleContainer">
-              <a className="infoTitle">Telephone Number</a>
-            </div>
-            <div className="infoText">
-              <a> {this.state.TelNo}</a>
             </div>
           </div>
 
