@@ -56,6 +56,22 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
   );
 });
 
+app.post("/trainer_dee/edit_trainer_profile", (req, res) => {
+  let sql =
+    "UPDATE trainer \
+  SET trainerDescription = ?, trainerImg = ? \
+  WHERE trainerId = ?";
+  console.log(req.body.trainerDescription);
+  connection.query(
+    sql,
+    [req.body.trainerDescription, req.body.trainerImg, req.body.clientID],
+    (error, result) => {
+      if (error) throw error;
+      // console.log(all);
+    }
+  );
+});
+
 app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
   let sql =
     "update client \

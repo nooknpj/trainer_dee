@@ -18,6 +18,9 @@ export class EditProfile extends Component {
 
   onSaveProfile = e => {
     this.fetchSaveProfile();
+    if (localStorage.getItem("isTrainer") == 1) {
+      this.fetchSaveTrainerProfile();
+    }
   };
 
   async fetchSaveProfile(e) {
@@ -53,6 +56,26 @@ export class EditProfile extends Component {
       console.log("Edit profile failed", error);
     }
     localStorage.setItem("fName", data.firstName);
+    // this.setState({ redirectToNewPage: true })
+    // this.props.history.push('/myAccount');
+  }
+  async fetchSaveTrainerProfile(e) {
+    const data = this.state;
+    try {
+      data.clientID = localStorage.getItem("clientID");
+
+      console.log(JSON.stringify(data));
+      const response = await fetch("/trainer_dee/edit_trainer_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.log("Edit profile failed", error);
+    }
+
     // this.setState({ redirectToNewPage: true })
     // this.props.history.push('/myAccount');
   }
