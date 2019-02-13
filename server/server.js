@@ -139,7 +139,8 @@ values (?, ?, ?, ?, ?, ?, ?)";
       req.body.price,
       req.body.courseHour,
       req.body.imageUrl,
-      req.body.courseDescription
+      req.body.courseDescription,
+      req.body.clientID
     ], //DON'T FORGET TO ADD TRAINER ID FROM LOGGED IN USER
     (error, result) => {
       if (error) throw error;
