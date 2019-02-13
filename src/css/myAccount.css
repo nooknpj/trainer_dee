@@ -46,3 +46,7 @@
   flex-direction: row;
   border: #21366e solid 2px;
 }
+
+.buttonContainer {
+  margin-top: 40px;
+}

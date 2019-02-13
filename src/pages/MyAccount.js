@@ -148,20 +148,16 @@ export class MyAccount extends Component {
           </div>
 
           {this.state.isTrainer == 0 ? (
-            <p>
-              {" "}
-              <div className="">
-                <Button href="/editProfile">Edit</Button>
-                <Button href="/upgrade">Upgrade</Button>
-              </div>
-            </p>
+            <div className="buttonContainer">
+              <Button href="/editProfile">Edit</Button>
+              <Button style={{ marginLeft: "20px" }} href="/upgrade">
+                Upgrade
+              </Button>
+            </div>
           ) : (
-            <p>
-              {" "}
-              <div className="">
-                <Button href="/editProfile">Edit</Button>
-              </div>
-            </p>
+            <div className="buttonContainer">
+              <Button href="/editProfile">Edit</Button>
+            </div>
           )}
         </div>
       </div>
