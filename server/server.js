@@ -32,6 +32,8 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
   });
 });
 
+// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
+
 app.post("/trainer_dee/edit_profile", (req, res) => {
   let sql =
     "UPDATE client \
@@ -39,14 +41,7 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
   WHERE clientId = ?";
   connection.query(
     sql,
-    [
-      req.body.firstName,
-      req.body.lastName,
-      req.body.gender,
-      req.body.address,
-      req.body.telNo,
-      req.body.clientID
-    ],
+    [req.body.firstName, req.body.lastName, req.body.gender, req.body.address, req.body.telNo, req.body.clientID],
     (error, result) => {
       if (error) throw error;
       // console.log(all);
@@ -58,21 +53,28 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
   let sql =
     "update client \
     set istrainer = 1 \
-    where clientid = ?; \
-    insert into trainer \
-    (trainerid, trainerdescription, ssn, certificate, rating) \
-    values (?, ?, ?, ?, ?);";
+    where clientid = ? \
+    ";
   connection.query(
     sql,
-    [clientID, clientID, trainerDesc, SSN, certificate, -1],
+    [req.body.clientID],
+    (error, result) => {
+      if (error) throw error;
+      // console.log(all);
+    }
+  );
+  sql = "insert into trainer \
+  (trainerid, trainerdescription, ssn, certificate, rating) \
+  values (?, ?, ?, ?, ?)"
+  connection.query(
+    sql,
+    [req.body.clientID, req.body.trainerDesc, req.body.ssn, req.body.certificate, 0],
     (error, result) => {
       if (error) throw error;
       // console.log(all);
     }
   );
 });
-
-// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/view_profile", (req, res) => {
   let sql =
