@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import "../css/myAccount.css";
 import "../css/courseBox.css";
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
 export class MyAccount extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -14,6 +13,7 @@ export class MyAccount extends Component {
       LName: "MyLastName",
       Gender: "MyGender",
       TelNo: "0000000000",
+      mail: "myemail@trainer-d.com",
       isTrainer: -1
     };
   }
@@ -25,7 +25,7 @@ export class MyAccount extends Component {
 
   async getProfile() {
     try {
-      const data = { clientid: localStorage.getItem("clientID") }
+      const data = { clientid: localStorage.getItem("clientID") };
       const response = await fetch("/trainer_dee/view_profile", {
         method: "POST",
         headers: {
@@ -42,7 +42,8 @@ export class MyAccount extends Component {
         LName: results[0].LName,
         Gender: results[0].Gender,
         TelNo: results[0].TelNo,
-        isTrainer: results[0].isTrainer
+        isTrainer: results[0].isTrainer,
+        Email: results[0].Email
       });
       console.log(this.state);
       if (this.state.isTrainer == 1) {
@@ -53,7 +54,6 @@ export class MyAccount extends Component {
         //   },
         //   body: JSON.stringify(data)
         // });
-
         // const results = await response.json();
       }
     } catch (error) {
@@ -81,12 +81,39 @@ export class MyAccount extends Component {
     return genderStyle;
   };
 
+  getAccountType = () => {
+    let isTrainer = this.state.isTrainer;
+    if (isTrainer == 0) {
+      return "Client Account";
+    } else if (isTrainer == 1) {
+      return "Trainer Account";
+    } else return "Something went wrong.";
+  };
+
   render() {
     return (
       <div className="profileBox">
         <p style={profileHeaderStyle}>My Account</p>
         {/* <span>My Client id is </span>
         <span> {localStorage.getItem("clientID")} </span> */}
+
+        <div className="infoLine">
+          <div className="infoTitleContainer">
+            <a className="infoTitle" style={accountTypeStyle}>
+              {" "}
+              {this.getAccountType()}
+            </a>
+          </div>
+        </div>
+
+        <div className="infoLine" style={{ marginTop: "30px" }}>
+          <div style={{ marginRight: "20px" }}>
+            <a className="infoTitle">Email Address</a>
+          </div>
+          <div className="infoText" style={{ fontSize: "15px" }}>
+            <a> {this.state.Email}</a>
+          </div>
+        </div>
 
         <div id="courseItemInfo">
           <div className="infoLine">
@@ -119,11 +146,23 @@ export class MyAccount extends Component {
               <a> {this.state.TelNo}</a>
             </div>
           </div>
-          <div className="">
-            <Button href="/editProfile">Edit</Button>
-            <Button href="/upgrade">Upgrade</Button>
-          </div>
 
+          {this.state.isTrainer == 0 ? (
+            <p>
+              {" "}
+              <div className="">
+                <Button href="/editProfile">Edit</Button>
+                <Button href="/upgrade">Upgrade</Button>
+              </div>
+            </p>
+          ) : (
+            <p>
+              {" "}
+              <div className="">
+                <Button href="/editProfile">Edit</Button>
+              </div>
+            </p>
+          )}
         </div>
       </div>
     );
@@ -138,6 +177,10 @@ const profileHeaderStyle = {
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold"
+};
+
+const accountTypeStyle = {
+  fontSize: "20px"
 };
 
 export default MyAccount;

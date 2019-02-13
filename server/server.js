@@ -39,7 +39,14 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
   WHERE clientId = ?";
   connection.query(
     sql,
-    [req.body.firstName, req.body.lastName, req.body.gender, req.body.address, req.body.telNo, req.body.clientID],
+    [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.gender,
+      req.body.address,
+      req.body.telNo,
+      req.body.clientID
+    ],
     (error, result) => {
       if (error) throw error;
       // console.log(all);
@@ -68,13 +75,14 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/view_profile", (req, res) => {
-  let sql = "select * from client cl where cl.clientId = ?";
+  let sql =
+    "select cl.ClientID,cl.FName,cl.LName,cl.Gender,cl.TelNo,cl.Address,cl.isTrainer,a.Email from client cl,authen a  where a.authenID=cl.clientID && cl.clientId = ?";
   connection.query(sql, [req.body.clientid], (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
-    // console.log(all);
+    console.log(all);
   });
 });
 

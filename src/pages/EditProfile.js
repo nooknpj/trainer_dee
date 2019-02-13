@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from "react-bootstrap";
 import "../css/editProfile.css";
 import { Redirect } from "react-router";
 
 export class EditProfile extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -19,7 +18,7 @@ export class EditProfile extends Component {
 
   onSaveProfile = e => {
     this.fetchSaveProfile();
-  }
+  };
 
   async fetchSaveProfile(e) {
     const data = this.state;
@@ -67,6 +66,7 @@ export class EditProfile extends Component {
     return (
       <div className="profileBox">
         <p style={editProfileHeaderStyle}>Edit Profile</p>
+
         <span>My Client ID is </span>
         <span> {localStorage.getItem("clientID")} </span>
 
@@ -150,12 +150,17 @@ export class EditProfile extends Component {
               </div>
             </div>
             <div style={{ display: "Block" }}>
-              <Button variant="primary" size="small" type="submit">Submit</Button>
+              <Button variant="primary" size="small" href="/myAccount">
+                Back
+              </Button>
+              <Button variant="primary" size="small" type="submit">
+                Submit
+              </Button>
             </div>
           </Form>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -171,7 +176,7 @@ const editProfileHeaderStyle = {
 
 const defaultFormStyle = {
   padding: "10px"
-}
+};
 
 const shortFormStyle = {
   width: "60%",
