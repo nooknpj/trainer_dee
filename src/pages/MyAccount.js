@@ -119,8 +119,8 @@ export class MyAccount extends Component {
             </div>
           </div>
           <div className="">
-            <Button href="/myAccount/edit">Edit</Button>
             <Button href="/myAccount/upgrade">Upgrade</Button>
+            <Button href="/editProfile">Edit</Button>
           </div>
 
         </div>

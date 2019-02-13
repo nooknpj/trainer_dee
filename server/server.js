@@ -35,11 +35,11 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
 app.post("/trainer_dee/edit_profile", (req, res) => {
   let sql =
     "UPDATE client \
-  SET FName = ?, LName = ?, Gender = ?, TelNo = ?, Address = ? \
+  SET FName = ?, LName = ?, Gender = ?, Address = ?, TelNo = ? \
   WHERE clientId = ?";
   connection.query(
     sql,
-    [firstName, lastName, gender, telNo, address, clientID],
+    [req.body.firstName, req.body.lastName, req.body.gender, req.body.address, req.body.telNo, req.body.clientID],
     (error, result) => {
       if (error) throw error;
       // console.log(all);
