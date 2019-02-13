@@ -15,6 +15,9 @@ export class UpgradeTrainer extends Component {
 
   onUpgrade = e => {
     this.fetchUpgrade();
+    e.preventDefault();
+    window.location = "/myAccount";
+    return false;
   };
 
   async fetchUpgrade(e) {

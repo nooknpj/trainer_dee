@@ -21,6 +21,8 @@ export class EditProfile extends Component {
     if (localStorage.getItem("isTrainer") == 1) {
       this.fetchSaveTrainerProfile();
     }
+    e.preventDefault();
+    window.location = "/myAccount";
   };
 
   async fetchSaveProfile(e) {
@@ -211,7 +213,12 @@ export class EditProfile extends Component {
             )}
 
             <div style={{ display: "Block", marginTop: "20px" }}>
-              <Button variant="primary" size="small" href="/myAccount">
+              <Button
+                variant="primary"
+                size="small"
+                href="/myAccount"
+                style={{ marginRight: "30px" }}
+              >
                 Back
               </Button>
               <Button variant="primary" size="small" type="submit">
