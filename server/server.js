@@ -84,7 +84,7 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
   });
   sql =
     "insert into trainer \
-  (trainerid, trainerdescription, ssn, certificate, rating) \
+  (trainerid, trainerdescription, ssn, trainerImg, rating) \
   values (?, ?, ?, ?, ?)";
   connection.query(
     sql,
@@ -92,7 +92,7 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
       req.body.clientID,
       req.body.trainerDesc,
       req.body.ssn,
-      req.body.certificate,
+      req.body.trainerImg,
       0
     ],
     (error, result) => {

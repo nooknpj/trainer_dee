@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form } from "react-bootstrap";
 import "../css/upgradeTrainer.css";
 
 export class UpgradeTrainer extends Component {
-
   constructor() {
     super();
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   onFormChange = e => {
@@ -18,13 +15,13 @@ export class UpgradeTrainer extends Component {
 
   onUpgrade = e => {
     this.fetchUpgrade();
-  }
+  };
 
   async fetchUpgrade(e) {
     const data = this.state;
     try {
       data.clientID = localStorage.getItem("clientID");
-    
+
       console.log(JSON.stringify(data));
       const response = await fetch("/trainer_dee/upgrade_to_trainer", {
         method: "POST",
@@ -37,7 +34,7 @@ export class UpgradeTrainer extends Component {
       console.log("Upgrade failed", error);
     }
     localStorage.setItem("isTrainer", 1);
-    
+
     // this.setState({ redirectToNewPage: true })
     // this.props.history.push('/myAccount');
   }
@@ -46,9 +43,24 @@ export class UpgradeTrainer extends Component {
     return (
       <div className="upgradeBox">
         <p style={upgradeTrainerHeaderStyle}>Upgrade to Trainer</p>
-        <span>My trainer status is </span>
-        <span> {localStorage.getItem("isTrainer")} </span>
-
+        {/* <span>My trainer status is </span>
+        <span> {localStorage.getItem("isTrainer")} </span> */}
+        <a className="infoTitle" style={{ color: "white" }}>
+          SSN
+        </a>
+        <div className="infoLine">
+          <div className="infoText">
+            <Form.Group style={defaultFormStyle}>
+              <Form.Control
+                required
+                type="ssn"
+                title="ssn"
+                placeholder="SSN"
+                onChange={this.onFormChange}
+              />
+            </Form.Group>
+          </div>
+        </div>
         <div id="upgradeInfo">
           <Form onSubmit={this.onUpgrade}>
             <div className="descriptionLine">
@@ -64,7 +76,19 @@ export class UpgradeTrainer extends Component {
                   />
                 </Form.Group>
               </div>
-              <a className="descriptionTitle">Certificate</a>
+              <a className="descriptionTitle">Trainer Image Url</a>
+              <div className="descriptionBox">
+                <Form.Group style={defaultFormStyle}>
+                  <Form.Control
+                    type="trainerImg"
+                    title="trainerImg"
+                    placeholder="Your profile image url."
+                    onChange={this.onFormChange}
+                  />
+                </Form.Group>
+              </div>
+
+              {/* <a className="descriptionTitle">Certificate</a>
               <div className="descriptionBox">
                 <Form.Group style={defaultFormStyle}>
                   <Form.Control
@@ -73,33 +97,27 @@ export class UpgradeTrainer extends Component {
                     placeholder="Certificate"
                     onChange={this.onFormChange}
                   />
-                </Form.Group>
-              </div>
+                </Form.Group> */}
+              {/* </div> */}
             </div>
 
-            <div className="infoLine">
-              <div className="">
-                <a className="infoTitle">SSN</a>
-              </div>
-              <div className="infoText">
-                <Form.Group style={defaultFormStyle}>
-                  <Form.Control
-                    required
-                    type="ssn"
-                    title="ssn"
-                    placeholder="SSN"
-                    onChange={this.onFormChange}
-                  />
-                </Form.Group>
-              </div>
-            </div>
-            <div style={{ display: "Block" }}>
-              <Button variant="primary" size="small" type="submit">Submit</Button>
+            <div style={{ display: "Block", marginTop: "20px" }}>
+              <Button
+                variant="primary"
+                size="small"
+                href="/myAccount"
+                style={{ marginRight: "10px" }}
+              >
+                Back
+              </Button>
+              <Button variant="primary" size="small" type="submit">
+                Submit
+              </Button>
             </div>
           </Form>
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -115,7 +133,7 @@ const upgradeTrainerHeaderStyle = {
 
 const defaultFormStyle = {
   padding: "10px"
-}
+};
 
 const shortFormStyle = {
   width: "60%",
