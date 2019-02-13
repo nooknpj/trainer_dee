@@ -67,15 +67,17 @@ export class EditProfile extends Component {
       <div className="profileBox">
         <p style={editProfileHeaderStyle}>Edit Profile</p>
 
-        <span>My Client ID is </span>
-        <span> {localStorage.getItem("clientID")} </span>
+        {/* <span>My Client ID is </span>
+        <span> {localStorage.getItem("clientID")} </span> */}
 
         <div id="profileInfo">
           <Form onSubmit={this.onSaveProfile}>
+            <div className="nameTitleContainer">
+              <a className="infoTitle" style={{ color: "white" }}>
+                Name and Gender
+              </a>
+            </div>
             <div className="infoLine">
-              <div className="nameTitleContainer">
-                <a className="infoTitle">Name</a>
-              </div>
               <div className="nameContainer">
                 <div className="userName">
                   <div style={formInLineStyle}>
@@ -133,23 +135,59 @@ export class EditProfile extends Component {
               </div>
             </div>
 
-            <div className="infoLine">
-              <div className="infoTitleContainer">
-                <a className="infoTitle">Telephone Number</a>
-              </div>
-              <div className="infoText">
+            <div className="descriptionLine">
+              <a className="descriptionTitle">Telephone Number</a>
+              <div className="addressBox">
                 <Form.Group style={defaultFormStyle}>
                   <Form.Control
                     required
                     type="telNo"
                     title="telNo"
-                    placeholder="Tel No."
+                    placeholder="Telephone number"
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
               </div>
             </div>
-            <div style={{ display: "Block" }}>
+
+            {localStorage.getItem("isTrainer") == 0 ? (
+              <div>
+                <div />
+              </div>
+            ) : (
+              <div>
+                <div className="descriptionLine">
+                  <a className="descriptionTitle">Trainer Image Url</a>
+                  <div className="addressBox">
+                    <Form.Group style={defaultFormStyle}>
+                      <Form.Control
+                        required
+                        type="trainerImg"
+                        title="trainerImg"
+                        placeholder="Your profile image url"
+                        onChange={this.onFormChange}
+                      />
+                    </Form.Group>
+                  </div>
+                </div>
+                <div className="descriptionLine">
+                  <a className="descriptionTitle">Trainer Description</a>
+                  <div className="addressBox">
+                    <Form.Group style={defaultFormStyle}>
+                      <Form.Control
+                        required
+                        type="trainerDescription"
+                        title="trainerDescription"
+                        placeholder="Your Trainer Description"
+                        onChange={this.onFormChange}
+                      />
+                    </Form.Group>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div style={{ display: "Block", marginTop: "20px" }}>
               <Button variant="primary" size="small" href="/myAccount">
                 Back
               </Button>

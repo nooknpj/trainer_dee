@@ -145,7 +145,7 @@ CREATE TABLE Course
             ('0000000003', '123', 'helloTrainer', 4.7, ''),
             ('0000000004', '123', 'helloTrainer', 5.0, ''),
             ('0000000005', '123', 'helloTrainer', 3.2, ''),
-            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 5.3, '');
+            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 4.3, '');
 
         INSERT INTO Course
             (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )
