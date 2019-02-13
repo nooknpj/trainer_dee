@@ -18,7 +18,8 @@ export class TrainerAccount extends Component {
       isTrainer: -1,
       Ssn: "defaultSSN",
       TrainerDescription: "defaultTrainerDescription",
-      Rating: "trainerDefaultRating"
+      Rating: "trainerDefaultRating",
+      TrainerImg: "defaultUrl"
     };
   }
 
@@ -81,7 +82,8 @@ export class TrainerAccount extends Component {
       this.setState({
         Ssn: results[0].Ssn,
         TrainerDescription: results[0].TrainerDescription,
-        Rating: results[0].Rating
+        Rating: results[0].Rating,
+        TrainerImg: results[0].TrainerImg
       });
       console.log(this.state);
     } catch (error) {
@@ -133,7 +135,8 @@ export class TrainerAccount extends Component {
             </a>
           </div>
         </div>
-        <img style={trainerImgStyle} src={starIcon} />
+
+        <img style={trainerImgStyle} src={this.state.TrainerImg} />
 
         <div id="courseItemInfo">
           <div className="infoLine" style={{ marginTop: "30px" }}>

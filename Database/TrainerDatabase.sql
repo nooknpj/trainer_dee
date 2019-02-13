@@ -32,6 +32,7 @@ CREATE TABLE Trainer
     (14) NOT NULL,
     Certificate varchar(256),
     Rating FLOAT(2,1),
+    trainerImg varchar(256),
 
     PRIMARY KEY(TrainerID),
     CONSTRAINT FK_Trainer_Client FOREIGN KEY(TrainerID) 
@@ -137,14 +138,14 @@ CREATE TABLE Course
             ('0000000000', 'JamesTheClient', 'TheClient', 'F', '0909123123', 'I am James the client.My id is 0000000000', 0);
 
         insert into trainer
-            (TrainerID,SSN,TrainerDescription, Rating)
+            (TrainerID,SSN,TrainerDescription, Rating,TrainerImg)
         values
-            ('0000000001', '123', 'helloTrainer', 3.5),
-            ('0000000002', '123', 'helloTrainer', 2.0),
-            ('0000000003', '123', 'helloTrainer', 4.7),
-            ('0000000004', '123', 'helloTrainer', 5.0),
-            ('0000000005', '123', 'helloTrainer', 3.2),
-            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 5.0);
+            ('0000000001', '123', 'helloTrainer', 3.5, ''),
+            ('0000000002', '123', 'helloTrainer', 2.0, ''),
+            ('0000000003', '123', 'helloTrainer', 4.7, ''),
+            ('0000000004', '123', 'helloTrainer', 5.0, ''),
+            ('0000000005', '123', 'helloTrainer', 3.2, ''),
+            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 5.3, '');
 
         INSERT INTO Course
             (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )

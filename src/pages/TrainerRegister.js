@@ -18,6 +18,7 @@ export class TrainerRegister extends Component {
       isTrainer: 1,
       ssn: "",
       trainerDescription: "",
+      trainerImg: "",
       showRegisterSuccessful: 0,
       showEmailAlreadyUsed: 0
     };
@@ -239,10 +240,9 @@ export class TrainerRegister extends Component {
               required
               type="textarea"
               title="trainerImg"
-              disabled
               placeholder="url of your profile image. Use your real image for more creditability!"
               maxLength="190"
-              //onChange={this.onFormChange}
+              onChange={this.onFormChange}
             />
           </Form.Group>
 

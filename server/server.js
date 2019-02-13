@@ -100,7 +100,7 @@ app.post("/trainer_dee/view_profile", (req, res) => {
 
 app.post("/trainer_dee/view_trainer_profile", (req, res) => {
   let sql =
-    "select t.Ssn,t.TrainerDescription,t.Rating from trainer t  where t.trainerID = ?";
+    "select t.Ssn,t.TrainerDescription,t.Rating,t.TrainerImg from trainer t  where t.trainerID = ?";
   connection.query(sql, [req.body.trainerID], (error, result) => {
     if (error) throw error;
 
@@ -267,13 +267,14 @@ app.post("/trainer_dee/insert_registeredTrainer", (req, res) => {
   let defaultRating = 0;
   // imgUrl and certificate not implement yet
   let sql =
-    "INSERT INTO trainer (trainerID,ssn,trainerDescription,rating) VALUE(?,?,?,?) ";
+    "INSERT INTO trainer (trainerID,ssn,trainerDescription,trainerImg,rating) VALUE(?,?,?,?,?) ";
   connection.query(
     sql,
     [
       req.body["clientID"],
       req.body["ssn"],
       req.body["trainerDescription"],
+      req.body["trainerImg"],
       defaultRating
     ],
     (error, result) => {
