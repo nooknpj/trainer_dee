@@ -93,7 +93,7 @@ export class ClientAccount extends Component {
   render() {
     return (
       <div className="profileBox">
-        <p style={profileHeaderStyle}>Client Page</p>
+        <p style={profileHeaderStyle}>My Account</p>
         {/* <span>My Client id is </span>
         <span> {localStorage.getItem("clientID")} </span> */}
 

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/myAccount.css";
 import "../css/courseBox.css";
+import starIcon from "../img/star.png";
 import { Button } from "react-bootstrap";
 
 export class TrainerAccount extends Component {
@@ -13,13 +14,17 @@ export class TrainerAccount extends Component {
       LName: "MyLastName",
       Gender: "MyGender",
       TelNo: "0000000000",
-      mail: "myemail@trainer-d.com",
-      isTrainer: -1
+      Email: "myemail@trainer-d.com",
+      isTrainer: -1,
+      Ssn: "defaultSSN",
+      TrainerDescription: "defaultTrainerDescription",
+      Rating: "trainerDefaultRating"
     };
   }
 
   componentDidMount() {
     this.getProfile();
+    this.getTrainerProfile();
     //this.getMockUpResult();
   }
 
@@ -61,6 +66,29 @@ export class TrainerAccount extends Component {
     }
   }
 
+  async getTrainerProfile() {
+    try {
+      const data = { trainerID: localStorage.getItem("clientID") };
+      const response = await fetch("/trainer_dee/view_trainer_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      this.setState({
+        Ssn: results[0].Ssn,
+        TrainerDescription: results[0].TrainerDescription,
+        Rating: results[0].Rating
+      });
+      console.log(this.state);
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
+  }
+
   getGenderStyle = () => {
     let genderStyle = {
       backgroundColor: "green",
@@ -93,7 +121,7 @@ export class TrainerAccount extends Component {
   render() {
     return (
       <div className="profileBox">
-        <p style={profileHeaderStyle}>Trianer page</p>
+        <p style={profileHeaderStyle}>Trainer page</p>
         {/* <span>My Client id is </span>
         <span> {localStorage.getItem("clientID")} </span> */}
 
@@ -105,6 +133,7 @@ export class TrainerAccount extends Component {
             </a>
           </div>
         </div>
+        <img style={trainerImgStyle} src={starIcon} />
 
         <div id="courseItemInfo">
           <div className="infoLine" style={{ marginTop: "30px" }}>
@@ -118,7 +147,7 @@ export class TrainerAccount extends Component {
 
           <div className="infoLine">
             <div className="accountTitleContainer">
-              <a className="accountTitle">Name and Gender</a>
+              <a className="accountTitle">Name Gender Rating</a>
             </div>
             <div className="accountNameContainer">
               <div>
@@ -128,6 +157,18 @@ export class TrainerAccount extends Component {
               <div style={this.getGenderStyle()}>
                 <a> {this.state.Gender}</a>
               </div>
+              <a style={ratingStyle}>Rating</a>
+              <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
+              <img style={starIconStyle} src={starIcon} />
+            </div>
+          </div>
+
+          <div className="infoLine">
+            <div className="accountTitleContainer">
+              <a className="infoTitle">SSN (or Citizen ID)</a>
+            </div>
+            <div className="accountNameContainer">
+              <a> {this.state.Ssn}</a>
             </div>
           </div>
 
@@ -140,6 +181,12 @@ export class TrainerAccount extends Component {
             </div>
           </div>
 
+          <div className="descriptionLine">
+            <a className="descriptionTitle">Trainer Description</a>
+            <div className="courseDescriptionBox">
+              <a> {this.state.TrainerDescription} </a>
+            </div>
+          </div>
           <div className="descriptionLine">
             <a className="descriptionTitle">Address</a>
             <div className="courseDescriptionBox">
@@ -178,5 +225,31 @@ const profileHeaderStyle = {
 const accountTypeStyle = {
   fontSize: "20px"
 };
+const starIconStyle = {
+  maxWidth: "20px",
+  maxHeight: "20px",
+  align: "center",
+  paddingTop: "1px",
+  paddingBottom: "3px",
+  marginLeft: "10px"
+};
 
+const ratingStyle = {
+  marginLeft: "10px",
+  paddingLeft: "3px",
+  paddingRight: "3px",
+  color: "white",
+  borderRadius: "5px",
+  backgroundColor: "#006cb0"
+};
+
+const trainerImgStyle = {
+  border: "3px solid black",
+  borderRadius: "3px",
+  maxWidth: "160px",
+  minWidth: "160px",
+  maxHeight: "160px",
+  minHeight: "160px",
+  marginTop: "10px"
+};
 export default TrainerAccount;
