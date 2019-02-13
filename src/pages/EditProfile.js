@@ -112,6 +112,7 @@ export class EditProfile extends Component {
                         required
                         type="firstName"
                         title="firstName"
+                        maxLength="20"
                         placeholder="Enter first name"
                         onChange={this.onFormChange}
                       />
@@ -121,6 +122,7 @@ export class EditProfile extends Component {
                           required
                           type="lastName"
                           title="lastName"
+                          maxLength="20"
                           placeholder="Enter last name"
                           onChange={this.onFormChange}
                         />
@@ -154,6 +156,7 @@ export class EditProfile extends Component {
                     type="address"
                     title="address"
                     placeholder="Address"
+                    maxLength="110"
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
@@ -168,6 +171,7 @@ export class EditProfile extends Component {
                     required
                     type="telNo"
                     title="telNo"
+                    maxLength="10"
                     placeholder="Telephone number"
                     onChange={this.onFormChange}
                   />
@@ -190,6 +194,7 @@ export class EditProfile extends Component {
                         type="trainerImg"
                         title="trainerImg"
                         placeholder="Your profile image url"
+                        maxLength="250"
                         onChange={this.onFormChange}
                       />
                     </Form.Group>
@@ -201,6 +206,7 @@ export class EditProfile extends Component {
                     <Form.Group style={defaultFormStyle}>
                       <Form.Control
                         required
+                        maxLength="190"
                         type="trainerDescription"
                         title="trainerDescription"
                         placeholder="Your Trainer Description"

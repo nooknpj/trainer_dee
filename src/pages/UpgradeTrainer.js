@@ -59,6 +59,7 @@ export class UpgradeTrainer extends Component {
                 type="ssn"
                 title="ssn"
                 placeholder="SSN"
+                maxLength="13"
                 onChange={this.onFormChange}
               />
             </Form.Group>
@@ -72,6 +73,7 @@ export class UpgradeTrainer extends Component {
                 <Form.Group style={defaultFormStyle}>
                   <Form.Control
                     required
+                    maxLength="190"
                     type="trainerDesc"
                     title="trainerDesc"
                     placeholder="Trainer Description"
@@ -83,6 +85,7 @@ export class UpgradeTrainer extends Component {
               <div className="descriptionBox">
                 <Form.Group style={defaultFormStyle}>
                   <Form.Control
+                    maxLength="250"
                     type="trainerImg"
                     title="trainerImg"
                     placeholder="Your profile image url."
