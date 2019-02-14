@@ -134,7 +134,8 @@ CREATE TABLE Course
             ('0000000003', 'Rina', 'Saltzman', 'F', '7895412305', '269-1022, Nunobeichi, Furano-shi, Hokkaido', 1),
             ('0000000004', 'Kridtin', 'Chawalratikool', 'M', '0891111111', 'HOME', 1),
             ('0000000005', 'Kongpobpisit', 'Termphrateep', 'M', '0891111112', 'PHome', 1),
-            ('9999999999', 'JohnnyTheTrainer', 'TheTrainer', 'M', '0909123123', 'Johny lives in the mountain. my id is 9999999999', 1),
+            ('9999999999', 'JohnnyTheTrainer', 'TheTrainer', 'M', '0909123123', '7/22 M.5, Soi Ta-led, Chaofa West Rd., T. Chalong
+A. Phuket 83130 Thailand', 1),
             ('0000000000', 'JamesTheClient', 'TheClient', 'F', '0909123123', 'I am James the client.My id is 0000000000', 0);
 
         insert into trainer
@@ -145,7 +146,7 @@ CREATE TABLE Course
             ('0000000003', '123', 'helloTrainer', 4.7, ''),
             ('0000000004', '123', 'helloTrainer', 5.0, ''),
             ('0000000005', '123', 'helloTrainer', 3.2, ''),
-            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description.', 4.3, '');
+            ('9999999999', '111111', 'I am johny the trainer and this is my trainer description. I have the power to change lives for the better. I help clients achieve their fitness and health goals through motivation and education.', 4.3, 'https://www.telegraph.co.uk/content/dam/men/2016/04/22/PD68583783_dtho201_2655530b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=450');
 
         INSERT INTO Course
             (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )

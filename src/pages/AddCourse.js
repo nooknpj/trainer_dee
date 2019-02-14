@@ -44,6 +44,8 @@ export class AddCourse extends Component {
 
   onAddCourse = e => {
     this.fetchInsertCourse(e);
+    e.preventDefault();
+    window.location = "/searchCourses";
   };
 
   async fetchInsertCourse(e) {
@@ -91,6 +93,7 @@ export class AddCourse extends Component {
                 required
                 type="courseName"
                 title="courseName"
+                maxLength="29"
                 placeholder="Enter course name"
                 onChange={this.onFormChange}
               />
@@ -116,6 +119,7 @@ export class AddCourse extends Component {
                   required
                   type="price"
                   title="price"
+                  maxLength="10"
                   placeholder="Price"
                   onChange={this.onFormChange}
                 />
@@ -126,6 +130,7 @@ export class AddCourse extends Component {
                   required
                   type="courseHour"
                   title="courseHour"
+                  maxLength="3"
                   placeholder="Course Hour"
                   onChange={this.onFormChange}
                 />
@@ -138,6 +143,7 @@ export class AddCourse extends Component {
                 type="imageUrl"
                 title="imageUrl"
                 placeholder="Image URL"
+                maxLength="1990"
                 onChange={this.onFormChange}
               />
             </Form.Group>
@@ -148,6 +154,7 @@ export class AddCourse extends Component {
                 type="courseDescription"
                 title="courseDescription"
                 placeholder="Course Description"
+                maxLength="165"
                 onChange={this.onFormChange}
               />
             </Form.Group>
