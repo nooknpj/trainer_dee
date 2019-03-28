@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express")
 const swaggerDocument = require("./swagger.json")
+const config = require('./config.js');
 //var isExist = false ;
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
@@ -14,8 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var connection = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "root",
+  user: config.database.user,
+  password: config.database.password,
   database: "trainer_dee",
   port: "3306",
   dateStrings: true
