@@ -21,7 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.json
 public/googleMapApi.js
 public/index.html
 public/index.html

@@ -1,0 +1,62 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Users Service",
+        "description": "Users Service"
+    },
+    "host": "35.185.187.64:6001",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "parameters": [],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/search": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in":"query"
+                    }
+                ],
+                "summary": "Get user by email",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "email": {
+            "type": "string"
+        },
+        "phoneNumber": {
+            "type": "string"
+        }
+    }
+}
