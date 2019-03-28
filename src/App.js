@@ -17,7 +17,6 @@ import MyAccount from "./pages/MyAccount";
 import AddCourse from "./pages/AddCourse";
 import { EditProfile } from "./pages/EditProfile";
 import { UpgradeTrainer } from "./pages/UpgradeTrainer";
-import SwaggerTest from "./pages/SwaggerTest";
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -52,8 +51,7 @@ class App extends Component {
               <Route path="/addCourse" component={AddCourse} />
               <Route path="/editProfile" component={EditProfile} />
               <Route path="/upgrade" component={UpgradeTrainer} />
-              <Route path="/swaggerTest" component={SwaggerTest}/>
-              {/* <Route component={PageNotFound} /> */}
+              <Route component={PageNotFound} />
             </Switch>
           </div>
 

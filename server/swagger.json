@@ -5,7 +5,7 @@
         "title": "Users Service",
         "description": "Users Service"
     },
-    "host": "35.185.187.64:6001",
+    "host": "localhost:5000",
     "basePath": "",
     "tags": [
         {
@@ -23,10 +23,21 @@
         "application/json"
     ],
     "paths": {
-        "/users": {
-            "get": {
-                "parameters": [],
-                "summary": "Get all users in system",
+        "/trainer_dee/view_profile": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "user",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "clientid": "string"
+                            }
+                        }
+                    }
+                ],
+                "summary": "View client profile",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -39,7 +50,7 @@
                 "parameters": [
                     {
                         "name": "email",
-                        "in":"query"
+                        "in": "query"
                     }
                 ],
                 "summary": "Get user by email",
@@ -56,6 +67,9 @@
             "type": "string"
         },
         "phoneNumber": {
+            "type": "string"
+        },
+        "clientid": {
             "type": "string"
         }
     }
