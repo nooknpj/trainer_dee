@@ -27,13 +27,10 @@
             "post": {
                 "parameters": [
                     {
-                        "in": "body",
                         "name": "user",
+                        "in": "body",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "clientid": "string"
-                            }
+                            "$ref":"#/definitions/clientInfo"
                         }
                     }
                 ],
@@ -45,15 +42,18 @@
                 }
             }
         },
-        "/search": {
-            "get": {
+        "/trainer_dee/view_trainer_profile": {
+            "post": {
                 "parameters": [
                     {
-                        "name": "email",
-                        "in": "query"
+                        "name": "user",
+                        "in": "body",
+                        "schema": {
+                            "$ref":"#/definitions/trainerInfo"
+                        }
                     }
                 ],
-                "summary": "Get user by email",
+                "summary": "View trainer profile",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -63,14 +63,23 @@
         }
     },
     "definitions": {
-        "email": {
-            "type": "string"
+        "clientInfo": {
+            "type": "object",
+            "properties": {
+                "clientID": {
+                    "type":"string",
+                    "example":"0000000000"
+                }
+            }
         },
-        "phoneNumber": {
-            "type": "string"
-        },
-        "clientid": {
-            "type": "string"
+        "trainerInfo": {
+            "type": "object",
+            "properties": {
+                "trainerID": {
+                    "type":"string",
+                    "example":"0000000000"
+                }
+            }
         }
     }
 }
