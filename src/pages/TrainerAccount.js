@@ -31,7 +31,7 @@ export class TrainerAccount extends Component {
 
   async getProfile() {
     try {
-      const data = { clientid: localStorage.getItem("clientID") };
+      const data = { clientID: localStorage.getItem("clientID") };
       const response = await fetch("/trainer_dee/view_profile", {
         method: "POST",
         headers: {

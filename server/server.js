@@ -110,7 +110,7 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
 app.post("/trainer_dee/view_profile", (req, res) => {
   let sql =
     "select cl.ClientID,cl.FName,cl.LName,cl.Gender,cl.TelNo,cl.Address,cl.isTrainer,a.Email from client cl,authen a  where a.authenID=cl.clientID && cl.clientId = ?";
-  connection.query(sql, [req.body.clientid], (error, result) => {
+  connection.query(sql, [req.body.clientID], (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
