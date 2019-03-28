@@ -27,10 +27,10 @@
             "post": {
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "ClientID",
                         "in": "body",
                         "schema": {
-                            "$ref":"#/definitions/clientInfo"
+                            "$ref": "#/definitions/clientInfo"
                         }
                     }
                 ],
@@ -46,14 +46,33 @@
             "post": {
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "TrainerID",
                         "in": "body",
                         "schema": {
-                            "$ref":"#/definitions/trainerInfo"
+                            "$ref": "#/definitions/trainerInfo"
                         }
                     }
                 ],
                 "summary": "View trainer profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/trainer_dee/edit_profile": {
+            "put": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/editProfileInfo"
+                        }
+                    }
+                ],
+                "summary": "Update profile",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -67,8 +86,8 @@
             "type": "object",
             "properties": {
                 "clientID": {
-                    "type":"string",
-                    "example":"0000000000"
+                    "type": "string",
+                    "example": "0000000000"
                 }
             }
         },
@@ -76,8 +95,37 @@
             "type": "object",
             "properties": {
                 "trainerID": {
-                    "type":"string",
-                    "example":"0000000000"
+                    "type": "string",
+                    "example": "0000000000"
+                }
+            }
+        },
+        "editProfileInfo": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "Calvin"
+                },
+                "gender": {
+                    "type": "string",
+                    "example": "M"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "205-1017, Ikanikeisaiganaibaai, Tsurui-mura Akan-gun, Hokkaido"
+                },
+                "telNo": {
+                    "type": "string",
+                    "example": "0589665489"
+                },
+                "clientID": {
+                    "type": "string",
+                    "example": "0000000000"
                 }
             }
         }
