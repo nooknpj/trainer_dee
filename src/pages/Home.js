@@ -6,55 +6,90 @@ export class Home extends Component {
     return (
       <div style={{ marginTop: "20px" }}>
         <h style={headerStyle}> Welcome to a healthier life</h>
-        <div style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <img src={firstImg} width="100%" height="20%" />
+
+        <div
+          style={{
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "30px",
+            backgroundColor: "#8C857B"
+          }}
+        >
+          <img
+            src={firstImg}
+            style={{
+              marginLeft: "20px",
+              minWidht: "40%",
+              maxWidth: "40%",
+              maxHeight: "500px",
+              borderRadius: "10px"
+            }}
+          />
+
+          <div>
+            <h style={headerStyle}>What is Trainer D?</h>
+            <p style={paragraphStyle}>
+              Trainer D is a platform for clients who want help from personal
+              fitness trainers and personal trainer to meet.{" "}
+            </p>
+            <p style={paragraphStyle}>
+              Trainer d helps clients search for training courses to help them
+              in the aspect that they need. Clients are able to search for
+              courses using keywords and filters to get the courses that best
+              match their desire!
+            </p>
+
+            <p style={paragraphStyle}>
+              Trainer d helps trainers reach more clients by providing a
+              platform to add their training courses. They can also provide
+              basic information about themselves and the courses so that they
+              can reach their targets!
+            </p>
+          </div>
         </div>
 
-        <h style={headerStyle}>What is Trainer D?</h>
-        <p style={paragraphStyle}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          eu convallis eros, at posuere nunc. Quisque a interdum libero,
-          placerat ultricies eros. Duis pharetra ligula ac dui facilisis
-          pharetra. Donec eu interdum mauris. Interdum et malesuada fames ac
-          ante ipsum primis in faucibus. Nulla ligula purus, facilisis lacinia
-          ex et, vestibulum efficitur ex. Donec malesuada vel metus at feugiat.
-          Sed et lorem vitae massa suscipit aliquam ac a orci. Fusce eget
-          convallis orci, quis dictum velit. Nunc ante nisi, iaculis non sodales
-          sed, fringilla a justo. Aenean pharetra, tortor at euismod euismod,
-          quam odio ultricies odio, at mollis lectus felis eget leo.
-          Pellentesque convallis sed felis ut pharetra. Morbi consectetur
-          interdum tincidunt. Duis et vulputate massa. Duis dictum nibh ac
-          tempor venenatis. Suspendisse convallis, enim et facilisis fermentum,
-          ante diam lobortis elit, vel dictum eros purus ut quam. Fusce enim
-          nunc, laoreet sit amet ex sed, facilisis venenatis est. Nunc gravida
-          elit at ipsum semper, non laoreet velit mollis. Nunc accumsan accumsan
-          urna, eu hendrerit lacus vestibulum sit amet. Vestibulum nunc lacus,
-          molestie nec magna et, placerat sollicitudin enim.
-        </p>
+        <div
+          style={{
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "30px",
+            backgroundColor: "#919D9D"
+          }}
+        >
+          <div>
+            <h style={headerStyle}>Why Trainer D?</h>
+            <p style={paragraphStyle}>
+              Lately, more and more people are trying to take a better care of
+              their health whether the goal is to lose weight, to get in shape
+              or just to achieve a healthier life. And one of the most important
+              factors that could help in achieving that is proper physical
+              exercise. Proper physical exercise requires attention in many
+              different aspects of our body, of which many people are not aware
+              of or they are doing it wrong. So, it’s a good idea to get help
+              from a personal trainer who could help and instruct a proper way
+              to exercise that can be adjusted for each individual. But for
+              people who don’t have a lot of connections with personal trainers,
+              it could be hard to find one for them. So, we decided to create a
+              match-maker platform where clients and trainers can contact each
+              other.
+            </p>
+          </div>
 
-        <div style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <img src={secondImg} width="100%" />
+          <img
+            src={secondImg}
+            style={{
+              marginRight: "20px",
+              minWidht: "40%",
+              maxWidth: "40%",
+              maxHeight: "500px",
+              borderRadius: "10px"
+            }}
+          />
         </div>
-        <h style={headerStyle}>Why Trainer D?</h>
-        <p style={paragraphStyle}>
-          Proin eu faucibus sem. Duis gravida dolor felis, eget tincidunt mi
-          porttitor ac. Cras in justo sollicitudin, cursus orci quis, interdum
-          est. In magna est, iaculis in placerat sed, mattis vitae magna. Mauris
-          auctor lorem et elit rhoncus hendrerit. Ut eget auctor dui.
-          Pellentesque pharetra fringilla tortor, at porta diam lacinia id.
-          Donec rhoncus ac ex quis condimentum. Aliquam ullamcorper lectus ac
-          lacus tempus, non commodo velit sollicitudin. Mauris scelerisque
-          consectetur viverra. Morbi rutrum ultricies nisi id vestibulum. Sed
-          maximus, ante quis tristique viverra, nulla libero varius velit, sed
-          bibendum ipsum nunc sed nunc. Sed in magna arcu. Duis felis massa,
-          imperdiet ut blandit ac, tempor et sem. Praesent eget fermentum nisi,
-          vitae eleifend sem. Cras non vehicula magna. Morbi euismod sit amet
-          velit vitae rhoncus. Quisque id vehicula mi, quis sollicitudin sapien.
-          Curabitur in lacus lacinia, viverra nulla et, ultricies ante. Cras
-          faucibus sit amet sapien sed venenatis. Proin consectetur sagittis
-          sollicitudin. Donec hendrerit dui in tincidunt molestie. Etiam rutrum
-          ut nibh id pretium.
-        </p>
       </div>
     );
   }
