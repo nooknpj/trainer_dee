@@ -60,7 +60,7 @@ export class CourseItem extends Component {
             <div className="trainerInfoContainer">
               <div className="trainerName">
                 <a> {this.props.fName}</a>
-                <a> {this.props.sName} </a>
+                <a> {this.props.lName} </a>
               </div>
               <div style={this.getGenderStyle()}>
                 <a> {this.props.gender}</a>

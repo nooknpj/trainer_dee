@@ -14,7 +14,7 @@ export class SearchResults extends Component {
         courseDescription={courseItem.courseDescription}
         cost={courseItem.cost}
         fName={courseItem.fName}
-        sName={courseItem.sName}
+        lName={courseItem.lName}
         courseHour={courseItem.courseHour}
         gender={courseItem.gender}
         imageUrl={courseItem.imageUrl}
