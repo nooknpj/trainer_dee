@@ -20,6 +20,60 @@ export class MyNavBar extends Component {
       password: "notAssigned"
     };
   }
+
+  // //-------------show current page -----------------------------------------------------------------
+
+  getIsHome = () => {
+    if (this.props.currentPage != "/") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
+  getIsSearchCourses = () => {
+    if (this.props.currentPage != "/searchCourses") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
+  getIsAddCourse = () => {
+    if (this.props.currentPage != "/addCourse") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
+  getIsMyAccount = () => {
+    if (this.props.currentPage != "/myAccount") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
+  getIsRegister = () => {
+    if (this.props.currentPage != "/register") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
+  //-------------show current page -----------------------------------------------------------------
   onLoginClick = () => {
     this.setState({ showLogin: 1 });
   };
@@ -67,6 +121,8 @@ export class MyNavBar extends Component {
         console.log(localStorage.getItem("fName"));
         console.log(localStorage.getItem("isLoggedIn"));
         console.log(localStorage.getItem("isTrainer"));
+        window.location = "/";
+
         // window.location.reload();
         return results;
       }
@@ -114,16 +170,24 @@ export class MyNavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <a className="navLink" href="/">
+              <a className="navLink" href="/" style={this.getIsHome()}>
                 Home
               </a>
-              <a className="navLink" href="/searchCourses">
+              <a
+                className="navLink"
+                href="/searchCourses"
+                style={this.getIsSearchCourses()}
+              >
                 Search Courses
               </a>
 
               {localStorage.getItem("isLoggedIn") == 1 &&
               localStorage.getItem("isTrainer") == 1 ? (
-                <a className="navLink" href="/addCourse">
+                <a
+                  className="navLink"
+                  href="/addCourse"
+                  style={this.getIsAddCourse()}
+                >
                   Add Course
                 </a>
               ) : (
@@ -133,7 +197,11 @@ export class MyNavBar extends Component {
 
             {localStorage.getItem("isLoggedIn") == 0 ? (
               <Nav className="nav navbar-nav ml-auto">
-                <a className="navLink" href="/register">
+                <a
+                  className="navLink"
+                  href="/register"
+                  style={this.getIsRegister()}
+                >
                   Register
                 </a>
 
@@ -147,7 +215,11 @@ export class MyNavBar extends Component {
               </Nav>
             ) : (
               <Nav className="nav navbar-nav ml-auto">
-                <a className="navLink" href="/myAccount">
+                <a
+                  className="navLink"
+                  href="/myAccount"
+                  style={this.getIsMyAccount()}
+                >
                   {this.getAccountType()}
                   {localStorage.getItem("fName")}
                 </a>

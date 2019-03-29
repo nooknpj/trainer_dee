@@ -1,9 +1,31 @@
+.nameTitleContainer {
+  width: 15%;
+  height: 15%;
+  min-width: 15%;
+  max-width: 15%;
+  margin-right: 5px;
+  background-color: #21366e;
+  border: #21366e solid 2px;
+  border-radius: 5px;
+  text-align: center;
+}
 #searchCoursesContainer {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  /* margin-top: 10px;
+  margin-bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px; */
+  background-color: #85b3d1;
+}
+
+.pageContainerDiv {
+  background-color: #85b3d1;
+
+  padding-top: 10px;
+  padding-bottom: 30px;
 }
 
 #searchContainer {

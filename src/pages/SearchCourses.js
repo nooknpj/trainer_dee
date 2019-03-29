@@ -12,6 +12,10 @@ export class SearchCourses extends Component {
     };
   }
 
+  componentDidMount() {
+    localStorage.setItem("currentPage", "searchCourses");
+  }
+
   // functions -> need to be passed via props to inner components
 
   // upDateSearchResults (parameters) then call backend
@@ -24,31 +28,43 @@ export class SearchCourses extends Component {
   render() {
     //console.log(this.state);
     return (
-
-     <div>
-       {localStorage.getItem("isLoggedIn") == 0 ? (
-              // notlogin
-              <p>'you are not logged in'</p>
-            ) : (
-              //login
+      <div className="pageContainerDiv">
+        {localStorage.getItem("isLoggedIn") == 0 ? (
+          // notlogin
+          <p>'you are not logged in'</p>
+        ) : (
+          //login
+          <div className="pageContainerDiv">
+            <p style={pageTitleStyle}> Search Courses</p>
+            <div id="searchCoursesContainer">
               <div id="searchCoursesContainer">
-        <div id="searchContainer">
-          <SearchBox upDateSearchResults={this.upDateSearchResults} />
-        </div>
+                <div id="searchContainer">
+                  <SearchBox upDateSearchResults={this.upDateSearchResults} />
+                </div>
 
-        <div id="resultsContainer">
-          <CoursesBox
-            searchResults={this.state.searchResults}
-            upDateSearchResults={this.upDateSearchResults}
-          />
-        </div>
+                <div id="resultsContainer">
+                  <CoursesBox
+                    searchResults={this.state.searchResults}
+                    upDateSearchResults={this.upDateSearchResults}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-            )}
-    </div>
-            
-      
     );
   }
 }
 
+const pageTitleStyle = {
+  color: "white",
+  fontSize: "30px",
+  backgroundColor: "#2460A7",
+  width: "20%",
+  textAlign: "center",
+  borderRadius: "10px",
+  fontWeight: "bold",
+  marginLeft: "50px"
+};
 export default SearchCourses;

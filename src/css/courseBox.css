@@ -13,3 +13,8 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+#coursesBox {
+  overflow-y: scroll;
+  max-height: 120vh;
+}

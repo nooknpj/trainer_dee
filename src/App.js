@@ -21,8 +21,20 @@ import { UpgradeTrainer } from "./pages/UpgradeTrainer";
 class App extends Component {
   // when login is successful -> set IsLogin to 1
   // set value of key 'client' into localStorage --> .setItem(string,string)
+  constructor() {
+    super();
+    // mockup courses from searchResults
+    this.state = {
+      currentPage: "/"
+    };
+  }
 
   componentDidMount() {
+    // console.log(window.location.href);
+    // console.log(window.location.pathname);
+    this.setState({
+      currentPage: window.location.pathname
+    });
     if (localStorage.getItem("isLoggedIn") != 1) {
       localStorage.clear();
       localStorage.setItem("isLoggedIn", 0);
@@ -34,6 +46,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <MyNavBar
+            currentPage={this.state.currentPage}
             updateLogin={this.updateLogin}
             updateLogout={this.updateLogout}
           />
