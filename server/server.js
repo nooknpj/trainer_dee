@@ -9,7 +9,7 @@ const swaggerDocument = require("./swagger.json")
 const config = require('./config.js');
 //var isExist = false ;
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/trainer_d_api', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -57,6 +57,7 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
+      res.end()
     }
   );
 });
@@ -73,6 +74,7 @@ app.post("/trainer_dee/edit_trainer_profile", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
+      res.end()
     }
   );
 });
@@ -103,6 +105,7 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
+      res.end()
     }
   );
 });
