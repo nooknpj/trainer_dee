@@ -218,7 +218,7 @@ export class EditProfile extends Component {
               </div>
             )}
 
-            <div style={{ display: "Block", marginTop: "20px" }}>
+            <div style={{ display: "flex", marginTop: "20px" }}>
               <Button
                 variant="primary"
                 size="small"
@@ -227,7 +227,12 @@ export class EditProfile extends Component {
               >
                 Back
               </Button>
-              <Button variant="primary" size="small" type="submit">
+              <Button
+                variant="primary"
+                size="small"
+                type="submit"
+                style={{ marginLeft: "auto" }}
+              >
                 Submit
               </Button>
             </div>

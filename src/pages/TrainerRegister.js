@@ -259,11 +259,16 @@ export class TrainerRegister extends Component {
             />
           </Form.Group>
 
-          <div style={{ display: "Block" }}>
+          <div style={{ display: "flex" }}>
             <Alert show={this.state.showEmailAlreadyUsed} variant="danger">
               This email is already used. Please try other emails.
             </Alert>
-            <Button variant="primary" size="small" type="submit">
+            <Button
+              variant="primary"
+              size="small"
+              type="submit"
+              style={{ marginLeft: "auto" }}
+            >
               Submit
             </Button>
           </div>

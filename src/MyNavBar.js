@@ -54,7 +54,14 @@ export class MyNavBar extends Component {
   };
 
   getIsMyAccount = () => {
-    if (this.props.currentPage != "/myAccount") return;
+    if (
+      !(
+        this.props.currentPage == "/myAccount" ||
+        this.props.currentPage == "/editProfile" ||
+        this.props.currentPage == "/upgrade"
+      )
+    )
+      return;
     let currentPageStyle = {
       backgroundColor: "white",
       color: "black",
