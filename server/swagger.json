@@ -2,15 +2,43 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "Users Service",
-        "description": "Users Service"
+        "title": "Trainer D API test",
+        "description": "Trainer D API test by Swagger"
     },
     "host": "localhost:5000",
     "basePath": "",
     "tags": [
         {
-            "name": "Users",
-            "description": "API for users in the system"
+            "name": "Registration",
+            "description": "API for users registration."
+        },
+        {
+            "name": "Account Management",
+            "description": "API for users account management."
+        },
+        {
+            "name": "Course Management",
+            "description": "API for users course management."
+        },
+        {
+            "name": "Search Course",
+            "description": "API for users search course."
+        },
+        {
+            "name": "Buy Course",
+            "description": "API for users buy course."
+        },
+        {
+            "name": "Payment",
+            "description": "API for users payment."
+        },
+        {
+            "name": "Session Reservation",
+            "description": "API for users reservation."
+        },
+        {
+            "name": "Rating",
+            "description": "API for users rating."
         }
     ],
     "schemes": [
@@ -25,6 +53,7 @@
     "paths": {
         "/trainer_dee/view_profile": {
             "post": {
+                "tags": ["Account Management"],
                 "parameters": [
                     {
                         "name": "ClientID",
@@ -44,6 +73,7 @@
         },
         "/trainer_dee/view_trainer_profile": {
             "post": {
+                "tags": ["Account Management"],
                 "parameters": [
                     {
                         "name": "TrainerID",
@@ -62,7 +92,8 @@
             }
         },
         "/trainer_dee/edit_profile": {
-            "put": {
+            "post": {
+                "tags": ["Account Management"],
                 "parameters": [
                     {
                         "name": "body",
@@ -73,6 +104,46 @@
                     }
                 ],
                 "summary": "Update profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/trainer_dee/edit_trainer_profile": {
+            "post": {
+                "tags": ["Account Management"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/editTrainerProfileInfo"
+                        }
+                    }
+                ],
+                "summary": "Update trainer profile",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/trainer_dee/upgrade_to_trainer": {
+            "post": {
+                "tags": ["Account Management"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/upgradeToTrainerInfo"
+                        }
+                    }
+                ],
+                "summary": "Upgrade to trainer",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -126,6 +197,44 @@
                 "clientID": {
                     "type": "string",
                     "example": "0000000000"
+                }
+            }
+        },
+        "editTrainerProfileInfo": {
+            "type": "object",
+            "properties": {
+                "trainerDescription": {
+                    "type": "string",
+                    "example": "Strongest person in the world."
+                },
+                "trainerImg": {
+                    "type": "string",
+                    "example": "www.google.com"
+                },
+                "clientID": {
+                    "type": "string",
+                    "example": "0000000000"
+                }
+            }
+        },
+        "upgradeToTrainerInfo": {
+            "type": "object",
+            "properties": {
+                "clientID": {
+                    "type": "string",
+                    "example": "0000000000"
+                },
+                "trainerDesc": {
+                    "type": "string",
+                    "example": "Strongest person in the world."
+                },
+                "ssn": {
+                    "type": "string",
+                    "example": "0000000000000"
+                },
+                "trainerImg": {
+                    "type": "string",
+                    "example": "www.google.com"
                 }
             }
         }
