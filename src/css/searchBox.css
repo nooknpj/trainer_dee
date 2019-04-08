@@ -28,8 +28,8 @@
   margin-top: 15px;
   background-color: white;
   border-radius: 10px;
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
 
   width: 100%;
 }
