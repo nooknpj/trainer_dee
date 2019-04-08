@@ -46,7 +46,7 @@ export class CoursesBox extends Component {
             onClick={this.onRadioButtonClick}
           >
             {" "}
-            Course Rating{" "}
+            Trainer Rating{" "}
           </Button>
 
           <Button
