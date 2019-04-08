@@ -84,7 +84,7 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="infoTitleContainer">
+            <div className="infoTitleContainerNew">
               <a className="infoTitle"> Course Duration</a>
             </div>
             <div className="infoText">
@@ -94,7 +94,7 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="infoTitleContainer">
+            <div className="infoTitleContainerNew">
               <a className="infoTitle"> Course Cost</a>
             </div>
 
