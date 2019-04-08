@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../css/Home.css";
 import firstImg from "../img/girl_training.jpg";
 import secondImg from "../img/training.jpg";
 export class Home extends Component {
@@ -19,13 +20,7 @@ export class Home extends Component {
         >
           <img
             src={firstImg}
-            style={{
-              marginLeft: "20px",
-              minWidht: "40%",
-              maxWidth: "40%",
-              maxHeight: "500px",
-              borderRadius: "10px"
-            }}
+            className="homeImage"
           />
 
           <div>
@@ -83,8 +78,8 @@ export class Home extends Component {
             src={secondImg}
             style={{
               marginRight: "20px",
-              minWidht: "40%",
               maxWidth: "40%",
+              height:"auto",
               maxHeight: "500px",
               borderRadius: "10px"
             }}

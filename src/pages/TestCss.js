@@ -1,24 +1,20 @@
 import React, { Component } from "react";
-import SearchBox from "../components/SearchBox";
-import CoursesBox from "../components/CoursesBox";
-import MyToggleButton from "../components/MyToggleButton";
-import LocationPicker from 'react-location-picker';
-import Geosuggest from 'react-geosuggest';
-import { Button } from 'react-bootstrap';
-
-const defaultPosition = {
-  lat: 13.736717,
-  lng: 100.523186
-};
-
-const google = window.google
+import ImageUploader from 'react-images-upload';
 
 export class TestCss extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {file: '',imagePreviewUrl: ''};
+    this.state = { pictures: [] };
+    this.onDrop = this.onDrop.bind(this);
   }
+
+  onDrop(picture) {
+    this.setState({
+        pictures: this.state.pictures.concat(picture),
+    });
+    console.log(this.state.pictures)
+}
 
   handleSubmit(e) {
     e.preventDefault();
@@ -46,12 +42,14 @@ export class TestCss extends Component {
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
+      console.log(imagePreviewUrl)
       $imagePreview = (<img src={imagePreviewUrl} />);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
     return (
+      
       <div className="previewComponent">
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input className="fileInput"
@@ -64,16 +62,17 @@ export class TestCss extends Component {
         <div className="imgPreview">
           {$imagePreview}
         </div>
+
+        <ImageUploader
+                withIcon={true}
+                buttonText='Choose images'
+                onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
       </div>
     )
   }
 }
-const searchContainerStyle = {
-  display: "flex",
-  flexDirection: "row"
-};
 
-const coursesBoxContainerStyle = {
-  backgroundColor: "white"
-};
 export default TestCss;

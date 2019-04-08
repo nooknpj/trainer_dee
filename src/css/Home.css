@@ -1,0 +1,6 @@
+.homeImage {
+    min-width: 25%;
+  min-height: 50%;
+  max-height: 500px;
+    border-radius: 10px;
+  }
