@@ -19,7 +19,8 @@ export class CourseItem extends Component {
       borderRadius: "5px",
       marginRight: "5px",
       marginLeft: "5px",
-      align: "center"
+      align: "center",
+      maxHeight: "30px"
     };
     if (this.props.gender == "M") {
       genderStyle["backgroundColor"] = "#0084D5";
