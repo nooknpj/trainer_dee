@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Modal, Button, Alert } from "react-bootstrap";
 
-import "../css/clientRegister.css";
+import "../css/register.css";
 const uuidv4 = require("uuid/v4");
 export class TrainerRegister extends Component {
   constructor() {
@@ -282,7 +282,8 @@ const registerHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "40%",
+  width: "20%",
+  minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold"
