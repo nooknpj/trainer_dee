@@ -100,7 +100,9 @@ export class TrainerAccount extends Component {
       borderRadius: "5px",
       marginRight: "5px",
       marginLeft: "5px",
-      align: "center"
+      align: "center",
+      maxHeight: "30px",
+      maxWidth: "30px"
     };
     if (this.state.Gender == "M") {
       genderStyle["backgroundColor"] = "#0084D5";
@@ -219,7 +221,8 @@ const profileHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "40%",
+  width: "20%",
+  minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold"

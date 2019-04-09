@@ -64,6 +64,6 @@ const pageTitleStyle = {
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold",
-  marginLeft: "50px"
+  marginLeft: "20px"
 };
 export default SearchCourses;

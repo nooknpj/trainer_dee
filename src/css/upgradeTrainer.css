@@ -1,7 +1,5 @@
 .upgradeBox {
-    width: 80%;
-    margin-top: 20px;
-    margin-left: 50px;
+    width: 100%;
     background-color: #85b3d1;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -10,20 +8,31 @@
     border-radius: 10px;
   }
 
+@media screen and (min-width: 768px){
+  .upgradeBox{
+    width: 80%;
+    margin-top: 20px;
+    margin-left: 50px;
+  }
+
   #upgradeInfo {
     width: 75%;
     max-width: 75%;
     min-width: 75%;
   }
 
-  .infoLine {
+  .upgradeInfoLine{
+    display: flex;
+  }
+}
+
+  .upgradeInfoLine {
     margin-top: 10px;
     color: white;
-    display: flex;
     flex-direction: row;
   }
 
-  .nameTitleContainer {
+  .upgradeNameTitleContainer {
     width: 15%;
     height: 15%;
     min-width: 15%;
@@ -52,30 +61,16 @@
     border: #21366e solid 2px;
   }
 
-  .infoText {
+  .upgradeInfoText {
     font-weight: bold;
     font-size: 20px;
     color: #21366e;
     background-color: white;
     border-radius: 10px;
-    width: 30%;
-    max-width: 30%;
+    /* width: 30%;
+    max-width: 30%; */
     text-align: center;
   
-    border: #21366e solid 2px;
-  }
-
-  .nameContainer {
-    width: 80%;
-    max-width: 80%;
-    font-weight: bold;
-    display: flex;
-    flex-direction: bold;
-    color: #21366e;
-    background-color: white;
-    border-radius: 5px;
-    margin-left: 5px;
-    margin-right: 10px;
     border: #21366e solid 2px;
   }
 
