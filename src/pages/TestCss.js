@@ -1,69 +1,78 @@
 import React, { Component } from "react";
-import SearchBox from "../components/SearchBox";
-import CoursesBox from "../components/CoursesBox";
-import MyToggleButton from "../components/MyToggleButton";
-import LocationPicker from 'react-location-picker';
-import Geosuggest from 'react-geosuggest';
-import {Button} from 'react-bootstrap';
-
-const defaultPosition = {
-  lat: 13.736717,
-  lng: 100.523186
-};
-
-const google = window.google
+import ImageUploader from 'react-images-upload';
 
 export class TestCss extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      address: "Bangkok",
-      position: {
-        lat: 13.736717,
-        lng: 100.523186
-      }
-    };
-
-    // Bind
-    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.state = { pictures: [] };
+    this.onDrop = this.onDrop.bind(this);
   }
 
-  handleLocationChange({ position, address }) {
-    this.setState({ position, address });
+  onDrop(picture) {
+    this.setState({
+        pictures: this.state.pictures.concat(picture),
+    });
+    console.log(this.state.pictures)
+}
+
+  handleSubmit(e) {
+    e.preventDefault();
+    // TODO: do something with -> this.state.file
+    console.log('handle uploading-', this.state.file);
   }
 
-  addCourse = () => {
-    console.log(this.state)
+  handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
   }
 
   render() {
+    let { imagePreviewUrl } = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      console.log(imagePreviewUrl)
+      $imagePreview = (<img src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
+
     return (
-      <div>
-        <h1>Add courses</h1>
-        <h2>{this.state.address}</h2>
-        <div>
-          <LocationPicker
-            containerElement={<div style={{ height: '100%' }} />}
-            mapElement={<div style={{ height: '400px' }} />}
-            defaultPosition={defaultPosition}
-            onChange={this.handleLocationChange}
-            radius={100}
-            zoom={18}
-          />
-          <Button onClick={this.addCourse}>Add</Button>
+      
+      <div className="previewComponent">
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <input className="fileInput"
+            type="file"
+            onChange={(e) => this.handleImageChange(e)} />
+          <button className="submitButton"
+            type="submit"
+            onClick={(e) => this.handleSubmit(e)}>Upload Image</button>
+        </form>
+        <div className="imgPreview">
+          {$imagePreview}
         </div>
+
+        <ImageUploader
+                withIcon={true}
+                buttonText='Choose images'
+                onChange={this.onDrop}
+                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                maxFileSize={5242880}
+            />
       </div>
-    );
+    )
   }
 }
-const searchContainerStyle = {
-  display: "flex",
-  flexDirection: "row"
-};
 
-const coursesBoxContainerStyle = {
-  backgroundColor: "white"
-};
 export default TestCss;

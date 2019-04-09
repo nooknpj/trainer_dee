@@ -62,6 +62,7 @@ const pageTitleStyle = {
   fontSize: "30px",
   backgroundColor: "#2460A7",
   width: "20%",
+  minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold",
