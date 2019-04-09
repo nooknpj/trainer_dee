@@ -8,6 +8,18 @@
     border-radius: 10px;
   }
 
+.selectedAddressText{
+  font-size: 15px;
+  font-weight: bold;
+  color: #21366e;
+  background-color: white;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border: #21366e solid 2px;
+  transition-duration: 350ms;
+}
+
 @media screen and (min-width: 768px){
   .addCourseBox{
     width: 80%;
