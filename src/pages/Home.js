@@ -9,19 +9,20 @@ export class Home extends Component {
         <h style={headerStyle}> Welcome to a healthier life</h>
 
         <div
-          style={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "30px",
-            backgroundColor: "#8C857B"
-          }}
+          id="homeItemContainer"
+        // style={{
+        //   paddingTop: "20px",
+        //   paddingBottom: "20px",
+        //   display: "flex",
+        //   flexDirection: "row",
+        //   marginTop: "30px",
+        //   backgroundColor: "#8C857B"
+        // }}
         >
-          <img
-            src={firstImg}
-            className="homeImage"
-          />
+          <div id="homeImageContainer">
+            <img src={firstImg} className="homeImage"/>
+          </div>
+
 
           <div>
             <h style={headerStyle}>What is Trainer D?</h>
@@ -30,7 +31,7 @@ export class Home extends Component {
               fitness trainers and personal trainer to meet.{" "}
             </p>
             <p style={paragraphStyle}>
-              Trainer d helps clients search for training courses to help them
+              Trainer D helps clients search for training courses to help them
               in the aspect that they need. Clients are able to search for
               courses using keywords and filters to get the courses that best
               match their desire!
@@ -46,14 +47,15 @@ export class Home extends Component {
         </div>
 
         <div
-          style={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            display: "flex",
-            flexDirection: "row",
-            marginTop: "30px",
-            backgroundColor: "#919D9D"
-          }}
+          id="homeItemContainer"
+          // style={{
+          //   paddingTop: "20px",
+          //   paddingBottom: "20px",
+          //   display: "flex",
+          //   flexDirection: "row",
+          //   marginTop: "30px",
+          //   backgroundColor: "#919D9D"
+          // }}
         >
           <div>
             <h style={headerStyle}>Why Trainer D?</h>
@@ -74,16 +76,19 @@ export class Home extends Component {
             </p>
           </div>
 
+          <div id="homeImageContainer">
           <img
+            className="homeImage"
             src={secondImg}
-            style={{
-              marginRight: "20px",
-              maxWidth: "40%",
-              height:"auto",
-              maxHeight: "500px",
-              borderRadius: "10px"
-            }}
+            // style={{
+            //   marginRight: "20px",
+            //   maxWidth: "40%",
+            //   height: "auto",
+            //   maxHeight: "500px",
+            //   borderRadius: "10px"
+            // }}
           />
+          </div>
         </div>
       </div>
     );
