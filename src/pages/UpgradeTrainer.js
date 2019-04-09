@@ -51,8 +51,8 @@ export class UpgradeTrainer extends Component {
         <a className="infoTitle" style={{ color: "white" }}>
           SSN
         </a>
-        <div className="infoLine">
-          <div className="infoText">
+        <div className="upgradeInfoLine">
+          <div className="upgradeInfoText">
             <Form.Group style={defaultFormStyle}>
               <Form.Control
                 required
@@ -136,7 +136,8 @@ const upgradeTrainerHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "40%",
+  width: "20%",
+  minWidth: "300px",
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold"

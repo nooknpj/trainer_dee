@@ -89,7 +89,7 @@ export class EditProfile extends Component {
     //   )
     // }
     return (
-      <div className="profileBox">
+      <div className="editProfileBox">
         <p style={editProfileHeaderStyle}>Edit Profile</p>
 
         {/* <span>My Client ID is </span>
@@ -247,7 +247,8 @@ const editProfileHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "40%",
+  width: "20%",
+  minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
   fontWeight: "bold"
