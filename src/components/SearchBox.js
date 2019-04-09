@@ -146,19 +146,19 @@ export class SearchBox extends Component {
 
   //Select suggest location keyword
   onSuggestSelect = suggest => {
-    if (typeof suggest !== 'undefined') {
+    if (typeof suggest !== "undefined") {
       console.log(suggest.location);
       this.setState({ searchLocation: suggest.location });
       this.fetchSearchLocation(suggest.location);
     } else {
       this.getDefaultSearchResults();
     }
-  }
+  };
 
   //Check if no location suggestion
   onSuggestNoResults(userInput) {
     //TO DO: SHOW NO SEARCH RESULT OR SHOW DEFAULT ITEM?
-    console.log('onSuggestNoResults for :' + userInput);
+    console.log("onSuggestNoResults for :" + userInput);
   }
 
   //-------------------------------------------------------UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
@@ -188,7 +188,7 @@ export class SearchBox extends Component {
   //-----------------------------------------------------END UPDATE TOGGLE BUTTON STYLE--------------------------------------------------
   render() {
     return (
-      <div id="searchBox">
+      <div className="searchContainer">
         <Form id="searchForm">
           <FormControl
             id="searchBar"
@@ -200,101 +200,100 @@ export class SearchBox extends Component {
           {/* <Button onClick={this.onSearchSubmit}>Submit</Button> */}
         </Form>
 
-        <div className="filterContainer">
-          <div className="filterNameContainer">
+        <div className="allFilterContainer">
+          <div className="filterContainer">
             <div className="filterName">
               <a>Service</a>
             </div>
-          </div>
 
-          <div className="filterChoicesContainer">
-            <Button
-              title="yoga"
-              value={1}
-              className="toggleButton btn btn-success btn-primary"
-              onClick={this.onServiceFilterClick}
-              type="serviceFilter"
-            >
-              Yoga
-            </Button>
+            <div className="filterChoicesContainer">
+              <Button
+                title="yoga"
+                value={1}
+                className="toggleButton btn btn-success btn-primary"
+                onClick={this.onServiceFilterClick}
+                type="serviceFilter"
+              >
+                Yoga
+              </Button>
 
-            <Button
-              title="cardio"
-              value={1}
-              className="toggleButton btn btn-success btn-primary"
-              onClick={this.onServiceFilterClick}
-            >
-              Cardio
-            </Button>
+              <Button
+                title="cardio"
+                value={1}
+                className="toggleButton btn btn-success btn-primary"
+                onClick={this.onServiceFilterClick}
+              >
+                Cardio
+              </Button>
 
-            <Button
-              title="weightTraining"
-              value={1}
-              className="toggleButton btn btn-success btn-primary"
-              onClick={this.onServiceFilterClick}
-            >
-              Weight Training
-            </Button>
-          </div>
-        </div>
-
-        <div className="filterContainer">
-          <div className="filterNameContainer">
-            <div className="filterName">
-              <a>Trainer's Gender</a>
+              <Button
+                title="weightTraining"
+                value={1}
+                className="toggleButton btn btn-success btn-primary"
+                onClick={this.onServiceFilterClick}
+              >
+                Weight Training
+              </Button>
             </div>
           </div>
 
-          <div className="filterChoicesContainer">
-            <Button
-              className="toggleButton btn btn-success btn-primary"
-              title="male"
-              value={1}
-              onClick={this.onGenderFilterClick}
-            >
-              {" "}
-              Male{" "}
-            </Button>
+          <div className="filterContainer">
+            <div className="filterNameContainer">
+              <div className="filterName" style={{ width: "70%" }}>
+                <a>Trainer's Gender</a>
+              </div>
+            </div>
 
-            <Button
-              className="toggleButton btn btn-success btn-primary"
-              title="female"
-              value={1}
-              onClick={this.onGenderFilterClick}
-            >
-              {" "}
-              Female{" "}
-            </Button>
+            <div className="filterChoicesContainer">
+              <Button
+                className="toggleButton btn btn-success btn-primary"
+                title="male"
+                value={1}
+                onClick={this.onGenderFilterClick}
+              >
+                {" "}
+                Male{" "}
+              </Button>
 
-            <Button
-              className="toggleButton btn btn-success btn-primary"
-              title="others"
-              value={1}
-              onClick={this.onGenderFilterClick}
-            >
-              {" "}
-              Others{" "}
-            </Button>
-          </div>
-        </div>
+              <Button
+                className="toggleButton btn btn-success btn-primary"
+                title="female"
+                value={1}
+                onClick={this.onGenderFilterClick}
+              >
+                {" "}
+                Female{" "}
+              </Button>
 
-        <div className="filterContainer">
-          <div className="filterNameContainer">
-            <div className="filterName">
-              <a>Course Location</a>
+              <Button
+                className="toggleButton btn btn-success btn-primary"
+                title="others"
+                value={1}
+                onClick={this.onGenderFilterClick}
+              >
+                {" "}
+                Others{" "}
+              </Button>
             </div>
           </div>
+          <div className="filterContainer">
+            <div className="filterNameContainer">
+              <div className="filterName" style={{ width: "70%" }}>
+                <a>Course Location</a>
+              </div>
+            </div>
 
-          <div className="geosuggest__input-wrapper">
-            <Geosuggest
-              ref={el => this._geoSuggest = el}
-              placeholder="Location.."
-              fixtures={exampleLocations}
-              onSuggestSelect={this.onSuggestSelect}
-              onSuggestNoResults={this.onSuggestNoResults}
-              location={new google.maps.LatLng(1, 1)}
-              radius="20"
-            />
+            <div className="geosuggest__input-wrapper">
+              <Geosuggest
+                ref={el => (this._geoSuggest = el)}
+                placeholder="Location.."
+                fixtures={exampleLocations}
+                onSuggestSelect={this.onSuggestSelect}
+                onSuggestNoResults={this.onSuggestNoResults}
+                location={new google.maps.LatLng(1, 1)}
+                radius="20"
+              />
+            </div>
           </div>
         </div>
       </div>

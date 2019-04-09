@@ -1,41 +1,59 @@
-#searchBox {
-  background-color: #0957c3;
-
-  width: 100%;
-  color: white;
-  border: solid white 5px;
-  border-radius: 10px;
-
-  margin-right: 20px;
-  padding: 15px 15px 8px 15px;
-}
 #searchForm {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-#searchBar {
+.searchContainer {
+  background-color: #21366e;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: -10px;
+  /* position: fixed; */
   width: 100%;
 }
+#searchBar {
+  width: 80%;
+  margin-left: 1em;
+}
 
+.allFilterContainer {
+  /* background-color: #21366e; */
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5em;
+  width: 100%;
+  flex-wrap: wrap;
+
+  background-color: #21366e;
+}
 .filterContainer {
   color: black;
   font-weight: bold;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  margin-top: 15px;
+  padding-top: 0.2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.5em;
+  /* max-width: 85%; */
+  /* padding-bottom: 5px; */
+  /* padding-left: 10px; */
+  /* margin-top: 10px; */
   background-color: white;
   border-radius: 10px;
+
+  height: auto;
   /* display: flex;
   flex-direction: row; */
 
-  width: 100%;
+  /* display: flex;
+  flex-direction: row; */
+
+  width: auto;
+  margin-left: 1em;
 }
 
 .filterNameContainer {
-  width: 35%;
+  width: 100%;
   min-width: 85px;
   margin-right: 5px;
 }
@@ -48,14 +66,14 @@
   border-radius: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 2px;
   color: white;
-  width: 100%;
+  width: 30%;
 }
 
 .filterChoices {
   margin-left: 5px;
-  margin-top: 5px;
+  margin-top: 2px;
   margin-right: 5px;
   background-color: red;
   position: absolute;
@@ -67,11 +85,12 @@
 
 /* Geosuggest */
 .geosuggest {
-  font-size: 18px;
+  font-size: 10px;
   font-size: 1rem;
   position: relative;
   width: 95%;
-  margin: 1em auto;
+  min-width: 260px;
+  margin: 0.5em auto;
   text-align: left;
 }
 .geosuggest__input {
@@ -80,9 +99,9 @@
   width: 100%;
   border: 2px solid transparent;
   box-shadow: 0 0 1px #3d464d;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   -webkit-transition: border 0.2s, box-shadow 0.2s;
-          transition: border 0.2s, box-shadow 0.2s;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 .geosuggest__suggests {
   position: absolute;
@@ -98,7 +117,7 @@
   list-style: none;
   z-index: 5;
   -webkit-transition: max-height 0.2s, border 0.2s;
-          transition: max-height 0.2s, border 0.2s;
+  transition: max-height 0.2s, border 0.2s;
 }
 .geosuggest__suggests--hidden {
   max-height: 0;
@@ -107,7 +126,7 @@
 }
 
 .geosuggest__item {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   color: #21366e;
   background-color: white;

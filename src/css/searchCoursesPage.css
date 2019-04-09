@@ -19,7 +19,7 @@
   padding-bottom: 20px; */
   background-color: #85b3d1;
 }
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   #searchCoursesContainer {
     display: flex;
   }
@@ -34,19 +34,18 @@
 
 #resultsContainer {
   background-color: #98dbce;
-  border: solid white 5px;
+  /* border: solid white 5px; */
   border-radius: 10px;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
   #searchContainer {
     margin-right: 10px;
-    width: 30%;
+    width: 100%;
   }
-  
+
   #resultsContainer {
-    width: 70%;
+    padding-left: 5em;
+    padding-right: 5em;
   }
 }
-
-

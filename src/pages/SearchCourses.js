@@ -34,21 +34,19 @@ export class SearchCourses extends Component {
           <p>'you are not logged in'</p>
         ) : (
           //login
-          <div className="pageContainerDiv">
-            <p style={pageTitleStyle}> Search Courses</p>
-            <div id="searchCoursesContainer">
-              <div id="searchCoursesContainer">
-                <div id="searchContainer">
-                  <SearchBox upDateSearchResults={this.upDateSearchResults} />
-                </div>
+          <div>
+            {/* <p style={pageTitleStyle}> Search Courses</p> */}
 
-                <div id="resultsContainer">
-                  <CoursesBox
-                    searchResults={this.state.searchResults}
-                    upDateSearchResults={this.upDateSearchResults}
-                  />
-                </div>
-              </div>
+            <div id="searchContainer">
+              <SearchBox upDateSearchResults={this.upDateSearchResults} />
+            </div>
+
+            <div>
+              {/* <div id="resultsContainer"> */}
+              <CoursesBox
+                searchResults={this.state.searchResults}
+                upDateSearchResults={this.upDateSearchResults}
+              />
             </div>
           </div>
         )}
