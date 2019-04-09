@@ -132,14 +132,15 @@ const sortBarTextStyle = {
   marginTop: "5px",
   marginBottom: "5px",
   fontWeight: "bold",
-  fontSize: "25px"
+  fontSize: "1.5em"
 };
 
 const radioButtonStyle = {
   marginLeft: "10px",
   marginRight: "10px",
   borderRadius: "10px",
-  fontWeight: "bold"
+  fontWeight: "bold",
+  marginTop: "0.2em"
 };
 
 export default CoursesBox;
