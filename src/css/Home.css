@@ -1,6 +1,30 @@
+#homeItemContainer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-direction: row;
+  margin-top: 30px;
+  background-color: #919D9D;
+}
+
+#homeImageContainer {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .homeImage {
-    min-width: 25%;
-  min-height: 50%;
-  max-height: 500px;
-    border-radius: 10px;
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+@media screen and (min-width: 768px){
+  #homeItemContainer {
+    display: flex;
   }
+
+  #homeImageContainer {
+    max-width: 40%;
+  }
+}
+

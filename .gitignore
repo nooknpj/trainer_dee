@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+/server/config.js
 /node_modules
 /.pnp
 .pnp.js
@@ -25,4 +26,4 @@ public/googleMapApi.js
 public/index.html
 public/index.html
 public/index.html
-server/config.js
+
