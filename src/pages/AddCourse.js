@@ -159,7 +159,7 @@ export class AddCourse extends Component {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Course location: {this.state.address}</Form.Label>
+              <Form.Label>Course location:</Form.Label><Form.Label className="selectedAddressText">{this.state.address}</Form.Label>
               <LocationPicker
                 containerElement={<div style={{ height: "100%" }} />}
                 mapElement={<div style={{ height: "400px" }} />}
