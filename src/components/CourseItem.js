@@ -88,9 +88,9 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <span className="infoTitle"> Course Cost</span>
-            <span> {this.props.cost}</span>
-            <span> Baht</span>
+            <p className="infoTitle"> Course Cost</p>
+            <p> {this.props.cost}</p>
+            <p> Baht</p>
           </div>
         </div>
       </div>

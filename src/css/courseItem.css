@@ -88,6 +88,10 @@
   flex-direction: row;
   font-size: 1.2em;
   width: auto;
+  background-color: red;
+  width: auto;
+  max-width: 50%;
+  text-align: center;
 }
 .infoTitle {
   background-color: #21366e;
@@ -97,7 +101,7 @@
   border-radius: 0.2em; */
   margin-right: 0.5em;
   min-width: 5em;
-  max-width: 15%;
+  max-width: 30%;
   border: #21366e solid 2px;
   color: white;
 }
