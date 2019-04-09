@@ -54,12 +54,9 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="trainerInfoTitleContainer">
-              <a className="infoTitle"> Trainer</a>
-            </div>
-
             <div className="trainerInfoContainer">
-              <div className="trainerName">
+              <div>
+                <span className="infoTitle"> Trainer</span>
                 <a> {this.props.fName}</a>
                 <a> {this.props.lName} </a>
               </div>
@@ -85,24 +82,15 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="infoTitleContainerNew">
-              <a className="infoTitle"> Course Duration</a>
-            </div>
-            <div className="infoText">
-              <a> {this.props.courseHour}</a>
-              <a> Hours</a>
-            </div>
+            <span className="infoTitle"> Course Duration</span>
+            <span> {this.props.courseHour}</span>
+            <span> Hours</span>
           </div>
 
           <div className="infoLine">
-            <div className="infoTitleContainerNew">
-              <a className="infoTitle"> Course Cost</a>
-            </div>
-
-            <div className="infoText">
-              <a> {this.props.cost}</a>
-              <a> Baht</a>
-            </div>
+            <span className="infoTitle"> Course Cost</span>
+            <span> {this.props.cost}</span>
+            <span> Baht</span>
           </div>
         </div>
       </div>
@@ -111,8 +99,8 @@ export class CourseItem extends Component {
 }
 
 const starIconStyle = {
-  maxWidth: "20px",
-  maxHeight: "20px",
+  maxWidth: "1em",
+  maxHeight: "1em",
   align: "center",
   paddingTop: "1px",
   paddingBottom: "3px"

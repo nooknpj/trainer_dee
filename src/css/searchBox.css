@@ -13,7 +13,7 @@
   width: 100%;
 }
 #searchBar {
-  width: 80%;
+  width: 90%;
   margin-left: 1em;
 }
 
@@ -22,8 +22,10 @@
   display: flex;
   flex-direction: row;
   margin-top: 0.5em;
-  width: 100%;
+  margin-left: 0.5em auto;
+  /* min-width: 500px; */
   flex-wrap: wrap;
+  width: 100%;
 
   background-color: #21366e;
 }
@@ -34,6 +36,8 @@
   padding-left: 0.5em;
   padding-right: 0.5em;
   margin-top: 0.5em;
+
+  max-width: 90%;
   /* max-width: 85%; */
   /* padding-bottom: 5px; */
   /* padding-left: 10px; */
@@ -54,7 +58,7 @@
 
 .filterNameContainer {
   width: 100%;
-  min-width: 85px;
+  /* min-width: 85px; */
   margin-right: 5px;
 }
 
