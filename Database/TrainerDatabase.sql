@@ -151,7 +151,7 @@ A. Phuket 83130 Thailand', 1),
         INSERT INTO Course
             (CName ,Service,Cost,CourseHour,ImageUrl , CourseDescription , TrainerID )
         values
-            ('Fit and Health', '1', 45000, 45, 'https://darebee.com/images/workouts/time-crunch-cardio-workout.jpg', 'This is cardio course focusing on improving your overall health. This course is recommended for everyone at every age.', '0000000003'),
+            ('Fit and Health', '1', 45000, 45, 'https://cdn.pixabay.com/photo/2016/11/11/03/50/sport-1815736_960_720.jpg', 'This is cardio course focusing on improving your overall health. This course is recommended for everyone at every age.', '0000000003'),
             ('YOGA FOR FUN 12', '0', 30000, 25, 'https://www.yogajournal.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_620/MTQ2MjI3ODcyMDE5OTgxOTIx/cow-face-with-eagle-arms-forhips.jpg', 'This is just a yoga for people who want to just lay around and have fun.', '0000000004') ,
             ('We love Fitness', '0', 40000, 25, 'https://images.pexels.com/photos/588561/pexels-photo-588561.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500', 'This course is designed to assess and improve physical fitness levels and encourage a healthy attitude toward lifelong fitness. ', '0000000005'),
             ('Yoga For Life', '0', 9, 99, 'https://cdn1.medicalnewstoday.com/content/images/articles/318/318774/a-woman-practicing-yoga-on-the-beach.jpg', 'yoga forever.', '0000000001'),
