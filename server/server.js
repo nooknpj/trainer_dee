@@ -191,7 +191,7 @@ app.post("/trainer_dee/search_filter", (req, res) => {
   // console.log(desiredFilters);
 
   let sql =
-    "SELECT c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+    "SELECT c.courseID,c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
   FROM course c, client cl, trainer t \
   where c.TrainerId = cl.clientID and cl.clientID=t.TrainerID";
   if (req.body.serviceFilter["yoga"] == 0) {

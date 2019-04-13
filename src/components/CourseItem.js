@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import starIcon from "../img/star.png";
 import "../css/courseItem.css";
+import {Link} from "react-router-dom"
 
 export class CourseItem extends Component {
   getService = () => {
@@ -43,10 +44,14 @@ export class CourseItem extends Component {
         <div id="courseItemInfo">
           <div id="courseHeaderContainer">
             <div id="courseTitleContainer">
-              <a href="/searchCourses" className="courseTitle">
+              {/* <a href={'/courseDesc:'+ this.props.cName} className="courseTitle">
                 {" "}
                 {this.props.cName}{" "}
-              </a>
+              </a> */}
+              <Link to={{ pathname: '/courseDesc:' + this.props.courseID, state:  this.props }} className="courseTitle">
+                {" "}
+                {this.props.cName}{" "}
+              </Link>
             </div>
             <div id="courseServiceContainer">
               <p className="courseService"> {this.getService()} </p>

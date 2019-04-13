@@ -9,6 +9,7 @@ export class SearchResults extends Component {
     // in searchResults( passed as props from state of SearchCoursesPage)
     return this.props.searchResults.map(courseItem => (
       <CourseItem
+        courseID={courseItem.courseID}
         cName={courseItem.cName}
         service={courseItem.service}
         courseDescription={courseItem.courseDescription}
