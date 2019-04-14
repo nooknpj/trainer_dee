@@ -18,6 +18,7 @@ import AddCourse from "./pages/AddCourse";
 import { EditProfile } from "./pages/EditProfile";
 import { UpgradeTrainer } from "./pages/UpgradeTrainer";
 import CourseDescription from "./pages/CourseDescription";
+import ReserveSession from "./pages/ReserveSession";
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -66,6 +67,7 @@ class App extends Component {
               <Route path="/editProfile" component={EditProfile} />
               <Route path="/upgrade" component={UpgradeTrainer} />
               <Route path="/courseDesc:courseID" component={CourseDescription}/>
+              <Route path="/reserveSession" component={ReserveSession}/>
               <Route component={PageNotFound} />
             </Switch>
           </div>

@@ -53,6 +53,16 @@ export class MyNavBar extends Component {
     return currentPageStyle;
   };
 
+  getIsReserveSession = () => {
+    if (this.props.currentPage != "/reserveSession") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
   getIsMyAccount = () => {
     if (
       !(
@@ -186,6 +196,9 @@ export class MyNavBar extends Component {
                 style={this.getIsSearchCourses()}
               >
                 Search Courses
+              </a>
+              <a className="navLink" href="/reserveSession" style={this.getIsReserveSession()}>
+                Reserve Session
               </a>
 
               {localStorage.getItem("isLoggedIn") == 1 &&
