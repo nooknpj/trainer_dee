@@ -65,7 +65,7 @@ class App extends Component {
               <Route path="/addCourse" component={AddCourse} />
               <Route path="/editProfile" component={EditProfile} />
               <Route path="/upgrade" component={UpgradeTrainer} />
-              <Route path="/courseDesc:cName" component={CourseDescription}/>
+              <Route path="/courseDesc:courseID" component={CourseDescription}/>
               <Route component={PageNotFound} />
             </Switch>
           </div>
