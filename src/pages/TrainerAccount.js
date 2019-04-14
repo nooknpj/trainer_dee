@@ -251,7 +251,6 @@ export class TrainerAccount extends Component {
               cost={courseItem.Cost}
               courseHour={courseItem.CourseHour}
               imageUrl={courseItem.ImageUrl}
-              rating={0}
             />
           ))}
         </div>
