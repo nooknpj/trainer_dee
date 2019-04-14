@@ -197,9 +197,14 @@ export class MyNavBar extends Component {
               >
                 Search Courses
               </a>
-              <a className="navLink" href="/reserveSession" style={this.getIsReserveSession()}>
+              {localStorage.getItem("isLoggedIn") == 1 ? (
+                <a className="navLink" href="/reserveSession" style={this.getIsReserveSession()}>
                 Reserve Session
-              </a>
+                </a>
+              ) : (
+                <div/>
+              )}
+              
 
               {localStorage.getItem("isLoggedIn") == 1 &&
               localStorage.getItem("isTrainer") == 1 ? (
