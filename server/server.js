@@ -39,6 +39,21 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
 
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
+app.post("/trainer_dee/get_course_description", (req, res) => {
+  let sql =
+    "SELECT c.courseID,c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+    FROM course c, client cl, trainer t , location l \
+    where c.TrainerID = cl.clientID and cl.clientID=t.TrainerID and l.locatecourseID = c.courseID and c.courseID = ?";
+  connection.query(sql, [req.body.courseID], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    console.log(all);
+  }
+  );
+});
+
 app.post("/trainer_dee/edit_profile", (req, res) => {
   let sql =
     "UPDATE client \
