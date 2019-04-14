@@ -26,9 +26,13 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
-app.post("/trainer_dee/view_added_course", (req, res) => {
+
+
+// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
+
+app.post("/trainer_dee/view_created_course", (req, res) => {
   let sql = "select * from course c where c.trainerid = ?";
-  connection.query(sql, [trainerID], (error, result) => {
+  connection.query(sql, [req.body.trainerID], (error, result) => {
     if (error) throw error;
 
     let all = JSON.parse(JSON.stringify(result));
@@ -36,8 +40,6 @@ app.post("/trainer_dee/view_added_course", (req, res) => {
     // console.log(all);
   });
 });
-
-// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/get_course_description", (req, res) => {
   let sql =

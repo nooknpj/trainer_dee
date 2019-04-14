@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import starIcon from "../img/star.png";
 import "../css/courseItem.css";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export class CourseItem extends Component {
   getService = () => {
@@ -48,7 +48,7 @@ export class CourseItem extends Component {
                 {" "}
                 {this.props.cName}{" "}
               </a> */}
-              <Link to={{ pathname: '/courseDesc:' + this.props.courseID, state: this.props.courseID}} className="courseTitle">
+              <Link to={{ pathname: '/courseDesc:' + this.props.courseID, state: this.props.courseID }} className="courseTitle">
                 {" "}
                 {this.props.cName}{" "}
               </Link>
@@ -59,24 +59,29 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <div className="trainerInfoContainer">
-              <div>
-                <span className="infoTitle"> Trainer</span>
-                <a> {this.props.fName}</a>
-                <a> {this.props.lName} </a>
-              </div>
-              <div style={this.getGenderStyle()}>
-                <a> {this.props.gender}</a>
-              </div>
+            {this.props.fName != undefined ? (
+              <div className="trainerInfoContainer">
+                <div>
+                  <span className="infoTitle"> Trainer</span>
+                  <a> {this.props.fName}</a>
+                  <a> {this.props.lName} </a>
+                </div>
+                <div style={this.getGenderStyle()}>
+                  <a> {this.props.gender}</a>
+                </div>
 
-              <div className="ratingContainer">
-                <a style={{ marginRight: "5px" }}>
-                  {" "}
-                  {this.props.rating.toFixed(1)}
-                </a>
-                <img style={starIconStyle} src={starIcon} />
+                <div className="ratingContainer">
+                  <a style={{ marginRight: "5px" }}>
+                    {" "}
+                    {this.props.rating.toFixed(1)}
+                  </a>
+                  <img style={starIconStyle} src={starIcon} />
+                </div>
               </div>
-            </div>
+            ) : (
+                <div />
+              )}
+
           </div>
 
           <div className="descriptionLine">
