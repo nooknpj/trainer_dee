@@ -40,7 +40,9 @@ export class MyAccount extends Component {
               {" "}
               {"Attended Course"}{" "}
             </a>
-            {this.state.attendedCourse.map(courseItem => (
+          </div>
+          {this.state.attendedCourse.length != 0 ? (
+            this.state.attendedCourse.map(courseItem => (
               <CourseItem
                 courseID={courseItem.courseID}
                 cName={courseItem.cName}
@@ -54,8 +56,10 @@ export class MyAccount extends Component {
                 imageUrl={courseItem.imageUrl}
                 rating={courseItem.rating}
               />
-            ))}
-          </div>
+            ))
+          ) : (
+              <h5>No attended course.</h5>
+            )}
         </div>
       </div>
     );

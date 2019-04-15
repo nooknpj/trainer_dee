@@ -238,17 +238,21 @@ export class TrainerAccount extends Component {
               {"Created Course"}{" "}
             </a>
           </div>
-          {this.state.createdCourse.map(courseItem => (
-            <CourseItem
-              courseID={courseItem.CourseID}
-              cName={courseItem.CName}
-              service={courseItem.Service}
-              courseDescription={courseItem.CourseDescription}
-              cost={courseItem.Cost}
-              courseHour={courseItem.CourseHour}
-              imageUrl={courseItem.ImageUrl}
-            />
-          ))}
+          {this.state.createdCourse.length != 0 ? (
+            this.state.createdCourse.map(courseItem => (
+              <CourseItem
+                courseID={courseItem.CourseID}
+                cName={courseItem.CName}
+                service={courseItem.Service}
+                courseDescription={courseItem.CourseDescription}
+                cost={courseItem.Cost}
+                courseHour={courseItem.CourseHour}
+                imageUrl={courseItem.ImageUrl}
+              />
+            ))
+          ) : (
+              <h5>No created course.</h5>
+            )}
         </div>
       </div >
     );
