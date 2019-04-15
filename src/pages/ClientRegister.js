@@ -222,7 +222,7 @@ const registerHeaderStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "20%",
+  width: "25%",
   minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
