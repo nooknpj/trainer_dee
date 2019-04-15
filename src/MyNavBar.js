@@ -100,6 +100,12 @@ export class MyNavBar extends Component {
     this.state[e.target.type] = e.target.value;
   };
 
+  handleKeyPress = (target) => {
+    if(target.charCode==13){
+      this.onSubmitLoginClick();
+    } 
+  }
+
   onSubmitLoginClick = () => {
     let clientID = this.fetchLoginAuthen(this.state);
   };
@@ -272,12 +278,14 @@ export class MyNavBar extends Component {
                 type="email"
                 placeholder="Email"
                 onChange={this.onFormChange}
+                onKeyPress={this.handleKeyPress}
               />
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
                 onChange={this.onFormChange}
+                onKeyPress={this.handleKeyPress}
               />
             </Form.Group>
           </Modal.Body>
