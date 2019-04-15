@@ -34,9 +34,9 @@ export class CourseDescription extends Component {
     async getCourseData() {
         try {
             let courseID = {};
-            if(this.props.location.state == undefined) {
+            if (this.props.location.state == undefined) {
                 courseID = { courseID: window.location.pathname.split('/')[2] };
-            } else{
+            } else {
                 courseID = { courseID: this.props.location.state };
             }
             const response = await fetch("/trainer_dee/get_course_description", {
@@ -48,30 +48,36 @@ export class CourseDescription extends Component {
             });
 
             const results = await response.json();
-            const result = results[0];
-            this.setState({
-                courseID: result.courseID,
-                cName: result.cName,
-                service: result.service,
-                courseHour: result.courseHour,
-                cost: result.cost,
-                imageUrl: result.imageUrl,
-                courseDescription: result.courseDescription,
-                locName: result.locName,
-                lat: result.lat,
-                lng: result.lng,
-                rating: result.rating,
-                fName: result.fName,
-                lName: result.lName,
-                gender: result.gender,
-                telNo: result.telNo
-            })
+            if (results.length != 0) {
+                const result = results[0];
+                this.setState({
+                    courseID: result.courseID,
+                    cName: result.cName,
+                    service: result.service,
+                    courseHour: result.courseHour,
+                    cost: result.cost,
+                    imageUrl: result.imageUrl,
+                    courseDescription: result.courseDescription,
+                    locName: result.locName,
+                    lat: result.lat,
+                    lng: result.lng,
+                    rating: result.rating,
+                    fName: result.fName,
+                    lName: result.lName,
+                    gender: result.gender,
+                    telNo: result.telNo
+                })
+            }
+
         } catch (error) {
             console.log("defaultFetchError : ", error);
         }
     }
 
     render() {
+        if (this.state.courseID == 0) {
+            return (<p>No course!</p>)
+        }
         return (
             <div className="addCourseBox">
                 <p style={courseDescHeaderStyle}>Course Description</p>
@@ -111,9 +117,6 @@ export class CourseDescription extends Component {
                     </div>
                 </div>
             </div>
-
-
-
         );
     }
 }
