@@ -33,8 +33,12 @@ export class CourseDescription extends Component {
 
     async getCourseData() {
         try {
-            const courseID = { courseID: this.props.location.state };
-            console.log(courseID)
+            let courseID = {};
+            if(this.props.location.state == undefined) {
+                courseID = { courseID: window.location.pathname.split('/')[2] };
+            } else{
+                courseID = { courseID: this.props.location.state };
+            }
             const response = await fetch("/trainer_dee/get_course_description", {
                 method: "POST",
                 headers: {

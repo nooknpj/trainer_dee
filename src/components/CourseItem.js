@@ -48,7 +48,7 @@ export class CourseItem extends Component {
                 {" "}
                 {this.props.cName}{" "}
               </a> */}
-              <Link to={{ pathname: '/courseDesc:' + this.props.courseID, state: this.props.courseID }} className="courseTitle">
+              <Link to={{ pathname: `/courseDesc/${this.props.courseID}`, state: this.props.courseID }} className="courseTitle">
                 {" "}
                 {this.props.cName}{" "}
               </Link>
