@@ -94,11 +94,7 @@ export class ClientAccount extends Component {
 
   render() {
     return (
-      <div className="profileBox">
-        <p style={profileHeaderStyle}>My Account</p>
-        {/* <span>My Client id is </span>
-        <span> {localStorage.getItem("clientID")} </span> */}
-
+      <div>
         <div className="infoLine">
           <div className="infoTitleContainer">
             <a className="infoTitle" style={accountTypeStyle}>
@@ -166,17 +162,6 @@ export class ClientAccount extends Component {
     );
   }
 }
-
-const profileHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 
 const accountTypeStyle = {
   fontSize: "20px"

@@ -74,6 +74,15 @@ export class CourseDescription extends Component {
         }
     }
 
+    async requestToBuy(){
+        //TODO: Insert request records in db
+        //TODO: Should go to payment screen?
+        //TODO: Send E-mail to trainer
+        alert("Request to buy successful")
+        console.log("TEST")
+        window.location = "/";
+    }
+
     render() {
         if (this.state.courseID == 0) {
             return (<p>No course!</p>)
@@ -111,8 +120,8 @@ export class CourseDescription extends Component {
                         zoom={18}
                     />
                     <div style={{ display: "Block" }}>
-                        <Button variant="primary" size="small" type="submit">
-                            Buy this course
+                        <Button variant="primary" size="small" type="submit" onClick={this.requestToBuy}>
+                            Request to buy this course
                         </Button>
                     </div>
                 </div>
