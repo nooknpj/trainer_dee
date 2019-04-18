@@ -47,17 +47,22 @@ app.post("/trainer_dee/buy_course", (req, res) => {
 });
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
-  let sql =
-    "SELECT * FROM transaction WHERE clientID=? AND courseID=? AND status !=? ";
+  let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
     (error, result) => {
       if (error) throw error;
+
       if (result.length !== 0) {
-        console.log("alreadyExist");
-        res.sendStatus(450);
-        return;
+        let createTransactionCondition =
+          result[0].status == "finished" || result[0].status == "rejected";
+
+        if (!createTransactionCondition) {
+          console.log("alreadyExist");
+          res.sendStatus(450);
+          return;
+        }
       }
 
       let sqlCreateTransaction =

@@ -133,15 +133,21 @@ export class CourseDescription extends Component {
 
       if (response.status == 450) {
         console.log("transactionExists");
-        alert("You currently have this courses.");
+        alert(
+          "Cannot send more buy requests. \nPlease check if your request is still waiting for the trainer to accept\nor your request is waiting for your payment \nor you currently have this course."
+        );
         return;
-      } else {
-        alert("Sent");
       }
     } catch (error) {}
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
+
+    alert(
+      "You successfully sent buy request to the trainer. Please wait 48 hours for trainer to accept your request."
+    );
+    window.location = "/";
+
     console.log("TEST");
     //window.location = "/";
   }
