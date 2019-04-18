@@ -3,7 +3,6 @@ import "../css/myAccount.css";
 import "../css/courseBox.css";
 import starIcon from "../img/star.png";
 import { Button } from "react-bootstrap";
-import CourseItem from "../components/CourseItem";
 
 export class TrainerAccount extends Component {
   constructor() {
@@ -20,15 +19,13 @@ export class TrainerAccount extends Component {
       Ssn: "defaultSSN",
       TrainerDescription: "defaultTrainerDescription",
       Rating: "trainerDefaultRating",
-      TrainerImg: "defaultUrl",
-      createdCourse: []
+      TrainerImg: "defaultUrl"
     };
   }
 
   componentDidMount() {
     this.getProfile();
     this.getTrainerProfile();
-    this.getCreatedCourse();
     //this.getMockUpResult();
   }
 
@@ -89,27 +86,6 @@ export class TrainerAccount extends Component {
         TrainerImg: results[0].TrainerImg
       });
       console.log(this.state);
-    } catch (error) {
-      console.log("defaultFetchError : ", error);
-    }
-  }
-
-  async getCreatedCourse() {
-    try {
-      const data = { trainerID: localStorage.getItem("clientID") };
-      const response = await fetch("/trainer_dee/view_created_course", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const results = await response.json();
-      this.setState({
-        createdCourse: results
-      })
-      console.log(this.state.createdCourse);
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
@@ -230,28 +206,6 @@ export class TrainerAccount extends Component {
               <div className="buttonContainer">
                 <Button href="/editProfile">Edit</Button>
               </div>
-            )}
-
-          <div id="courseTitleContainer">
-            <a href='' className="courseTitle">
-              {" "}
-              {"Created Course"}{" "}
-            </a>
-          </div>
-          {this.state.createdCourse.length != 0 ? (
-            this.state.createdCourse.map(courseItem => (
-              <CourseItem
-                courseID={courseItem.CourseID}
-                cName={courseItem.CName}
-                service={courseItem.Service}
-                courseDescription={courseItem.CourseDescription}
-                cost={courseItem.Cost}
-                courseHour={courseItem.CourseHour}
-                imageUrl={courseItem.ImageUrl}
-              />
-            ))
-          ) : (
-              <h5>No created course.</h5>
             )}
         </div>
       </div >

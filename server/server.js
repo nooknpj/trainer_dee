@@ -44,6 +44,18 @@ app.post("/trainer_dee/buy_course",(req,res)=>{
 
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
+app.post("/trainer_dee/get_courses_client", (req, res) => {
+  let sql = "select cl.fName, cl.lName, cl.telNo from client cl, transaction t \
+  where t.clientID = cl.clientID and t.courseID = ?";
+  connection.query(sql, [req.body.courseID], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    // console.log(all);
+  });
+});
+
 app.post("/trainer_dee/view_created_course", (req, res) => {
   let sql = "select * from course c where c.trainerid = ?";
   connection.query(sql, [req.body.trainerID], (error, result) => {

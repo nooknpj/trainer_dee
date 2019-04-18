@@ -53,6 +53,16 @@ export class MyNavBar extends Component {
     return currentPageStyle;
   };
 
+  getIsMyCourse = () => {
+    if (this.props.currentPage != "/myCourse") return;
+    let currentPageStyle = {
+      backgroundColor: "white",
+      color: "black",
+      borderRadius: "10px"
+    };
+    return currentPageStyle;
+  };
+
   getIsReserveSession = () => {
     if (this.props.currentPage != "/reserveSession") return;
     let currentPageStyle = {
@@ -101,9 +111,9 @@ export class MyNavBar extends Component {
   };
 
   handleKeyPress = (target) => {
-    if(target.charCode==13){
+    if (target.charCode == 13) {
       this.onSubmitLoginClick();
-    } 
+    }
   }
 
   onSubmitLoginClick = () => {
@@ -203,27 +213,31 @@ export class MyNavBar extends Component {
               >
                 Search Courses
               </a>
+
               {localStorage.getItem("isLoggedIn") == 1 ? (
-                <a className="navLink" href="/reserveSession" style={this.getIsReserveSession()}>
-                Reserve Session
+                <a className="navLink" href="/myCourse" style={this.getIsMyCourse()}>
+                  My Course
                 </a>
+
               ) : (
-                <div/>
-              )}
-              
+                  <div />
+                )}
+
+
+
 
               {localStorage.getItem("isLoggedIn") == 1 &&
-              localStorage.getItem("isTrainer") == 1 ? (
-                <a
-                  className="navLink"
-                  href="/addCourse"
-                  style={this.getIsAddCourse()}
-                >
-                  Add Course
+                localStorage.getItem("isTrainer") == 1 ? (
+                  <a
+                    className="navLink"
+                    href="/addCourse"
+                    style={this.getIsAddCourse()}
+                  >
+                    Add Course
                 </a>
-              ) : (
-                <div />
-              )}
+                ) : (
+                  <div />
+                )}
             </Nav>
 
             {localStorage.getItem("isLoggedIn") == 0 ? (
@@ -245,24 +259,24 @@ export class MyNavBar extends Component {
                 </a>
               </Nav>
             ) : (
-              <Nav className="nav navbar-nav ml-auto">
-                <a
-                  className="navLink"
-                  href="/myAccount"
-                  style={this.getIsMyAccount()}
-                >
-                  {this.getAccountType()}
-                  {localStorage.getItem("fName")}
+                <Nav className="nav navbar-nav ml-auto">
+                  <a
+                    className="navLink"
+                    href="/myAccount"
+                    style={this.getIsMyAccount()}
+                  >
+                    {this.getAccountType()}
+                    {localStorage.getItem("fName")}
+                  </a>
+                  <a
+                    onClick={this.onLogoutClick}
+                    className="navLink"
+                    href="javascript:void(0);"
+                  >
+                    Logout
                 </a>
-                <a
-                  onClick={this.onLogoutClick}
-                  className="navLink"
-                  href="javascript:void(0);"
-                >
-                  Logout
-                </a>
-              </Nav>
-            )}
+                </Nav>
+              )}
           </Navbar.Collapse>
         </Navbar>
 

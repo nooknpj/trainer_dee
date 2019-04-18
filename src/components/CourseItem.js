@@ -4,12 +4,46 @@ import "../css/courseItem.css";
 import { Link } from "react-router-dom"
 
 export class CourseItem extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      coursesClient: []
+    }
+  }
+
   getService = () => {
     let serviceCode = this.props.service;
     if (serviceCode == 0) return "Yoga";
     if (serviceCode == 1) return "Cardio";
     if (serviceCode == 2) return "WeightTraining";
   };
+
+  componentDidMount(){
+    this.getCoursesClient();
+  }
+
+  async getCoursesClient() {
+    try {
+        const data = { courseID: this.props.courseID };
+        const response = await fetch("/trainer_dee/get_courses_client", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const results = await response.json();
+        this.setState({
+          coursesClient: results
+        })
+        console.log(this.state.coursesClient);
+    } catch (error) {
+        console.log("defaultFetchError : ", error);
+    }
+}
 
   getGenderStyle = () => {
     let genderStyle = {
@@ -59,7 +93,7 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            {this.props.fName != undefined ? (
+            {window.location.pathname != "/myCourse" ? (
               <div className="trainerInfoContainer">
                 <div>
                   <span className="infoTitle"> Trainer</span>
@@ -102,6 +136,13 @@ export class CourseItem extends Component {
             <p> {this.props.cost}</p>
             <p> Baht</p>
           </div>
+          {window.location.pathname != "/myCourse" ?(
+            <div/>
+          ):(
+            this.state.coursesClient.map(courseClient =>(
+              <p>{courseClient.fName} {courseClient.lName} {courseClient.telNo}</p>
+            ))
+          )}
         </div>
       </div>
     );

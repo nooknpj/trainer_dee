@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ClientAccount from "./ClientAccount";
 import TrainerAccount from "./TrainerAccount";
-import CourseItem from "../components/CourseItem";
 
 export class MyAccount extends Component {
 
@@ -9,16 +8,7 @@ export class MyAccount extends Component {
     super(props);
 
     this.state = {
-      attendedCourse: []
     }
-  }
-
-  componentDidMount() {
-    this.getAttendedCourse();
-  }
-
-  async getAttendedCourse() {
-    //TODO: Query client's bought/request courses from db and insert into this.state.attendedCourse
   }
 
   render() {
@@ -34,31 +24,6 @@ export class MyAccount extends Component {
               <div>
                 <TrainerAccount />
               </div>
-            )}
-          <div id="courseTitleContainer">
-            <a href='' className="courseTitle">
-              {" "}
-              {"Attended Course"}{" "}
-            </a>
-          </div>
-          {this.state.attendedCourse.length != 0 ? (
-            this.state.attendedCourse.map(courseItem => (
-              <CourseItem
-                courseID={courseItem.courseID}
-                cName={courseItem.cName}
-                service={courseItem.service}
-                courseDescription={courseItem.courseDescription}
-                cost={courseItem.cost}
-                fName={courseItem.fName}
-                lName={courseItem.lName}
-                courseHour={courseItem.courseHour}
-                gender={courseItem.gender}
-                imageUrl={courseItem.imageUrl}
-                rating={courseItem.rating}
-              />
-            ))
-          ) : (
-              <h5>No attended course.</h5>
             )}
         </div>
       </div>
