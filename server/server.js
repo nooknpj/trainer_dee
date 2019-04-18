@@ -4,9 +4,10 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
-const swaggerUi = require("swagger-ui-express")
-const swaggerDocument = require("./swagger.json")
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 const config = require('./config.js');
+const mailsender = require('./mailsender.js');
 //var isExist = false ;
 
 app.use('/trainer_d_api', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
@@ -25,7 +26,20 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
-
+app.post("/trainer_dee/buy_course",(req,res)=>{
+  let sql = "INSERT INTO Transaction(clientID,courseID,status)\
+            values (?,?,?)"
+  let email = '';
+  connection.query(sql , [req.body.clientID,req.body.courseID,req.body.status],(error,result)=>{
+    if(error)throw error;
+    sql = "SELECT email FROM Authen WHERE AuthenID = ?";
+    connection.query(sql , [req.body.clientID],(error,result)=>{
+      email = JSON.parse(JSON.stringify(result));
+    });
+  });
+  mailsender.setReEmail(email);
+  mailsender.sendMail();
+});
 
 
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
@@ -35,7 +49,7 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
   connection.query(sql, [req.body.trainerID], (error, result) => {
     if (error) throw error;
 
-    let all = JSON.parse(JSON.stringify(result));
+    let all = JSON.parse(JSON.stringify(result));//change to string
     res.send(all);
     // console.log(all);
   });
