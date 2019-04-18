@@ -6,11 +6,11 @@ const port = process.env.PORT || 5000;
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-const config = require('./config.js');
-const mailsender = require('./mailsender.js');
+const config = require("./config.js");
+const mailsender = require("./mailsender.js");
 //var isExist = false ;
 
-app.use('/trainer_d_api', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use("/trainer_d_api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -26,26 +26,64 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
-app.post("/trainer_dee/buy_course",(req,res)=>{
-  let sql = "INSERT INTO Transaction(clientID,courseID,status)\
-            values (?,?,?)"
-  let email = '';
-  connection.query(sql , [req.body.clientID,req.body.courseID,req.body.status],(error,result)=>{
-    if(error)throw error;
-    sql = "SELECT email FROM Authen WHERE AuthenID = ?";
-    connection.query(sql , [req.body.clientID],(error,result)=>{
-      email = JSON.parse(JSON.stringify(result));
-    });
-  });
+app.post("/trainer_dee/buy_course", (req, res) => {
+  let sql =
+    "INSERT INTO Transaction(clientID,courseID,status)\
+            values (?,?,?)";
+  let email = "";
+  connection.query(
+    sql,
+    [req.body.clientID, req.body.courseID, req.body.status],
+    (error, result) => {
+      if (error) throw error;
+      sql = "SELECT email FROM Authen WHERE AuthenID = ?";
+      connection.query(sql, [req.body.clientID], (error, result) => {
+        email = JSON.parse(JSON.stringify(result));
+      });
+    }
+  );
   mailsender.setReEmail(email);
   mailsender.sendMail();
 });
 
+app.post("/trainer_dee/create_transaction", (req, res) => {
+  let sql =
+    "SELECT * FROM transaction WHERE clientID=? AND courseID=? AND status !=? ";
+  connection.query(
+    sql,
+    [req.body.clientID, req.body.courseID, "finished"],
+    (error, result) => {
+      if (error) throw error;
+      if (result.length !== 0) {
+        console.log("alreadyExist");
+        res.sendStatus(450);
+        return;
+      }
 
+      let sqlCreateTransaction =
+        "INSERT INTO transaction (clientID,courseID,status) VALUE(?,?,?)";
+      connection.query(
+        sqlCreateTransaction,
+        [req.body.clientID, req.body.courseID, req.body.status],
+        error => {
+          if (error) {
+            console.log("error at insert into client");
+            res.sendStatus(400);
+            return;
+          }
+        }
+      );
+
+      console.log("backEndEndSuccessfully");
+      res.sendStatus(200);
+    }
+  );
+});
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/get_courses_client", (req, res) => {
-  let sql = "select cl.fName, cl.lName, cl.telNo from client cl, transaction t \
+  let sql =
+    "select cl.fName, cl.lName, cl.telNo from client cl, transaction t \
   where t.clientID = cl.clientID and t.courseID = ?";
   connection.query(sql, [req.body.courseID], (error, result) => {
     if (error) throw error;
@@ -61,7 +99,7 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
   connection.query(sql, [req.body.trainerID], (error, result) => {
     if (error) throw error;
 
-    let all = JSON.parse(JSON.stringify(result));//change to string
+    let all = JSON.parse(JSON.stringify(result)); //change to string
     res.send(all);
     // console.log(all);
   });
@@ -78,8 +116,7 @@ app.post("/trainer_dee/get_course_description", (req, res) => {
     let all = JSON.parse(JSON.stringify(result));
     res.send(all);
     console.log(all);
-  }
-  );
+  });
 });
 
 app.post("/trainer_dee/edit_profile", (req, res) => {
@@ -100,7 +137,7 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
-      res.end()
+      res.end();
     }
   );
 });
@@ -117,7 +154,7 @@ app.post("/trainer_dee/edit_trainer_profile", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
-      res.end()
+      res.end();
     }
   );
 });
@@ -148,7 +185,7 @@ app.post("/trainer_dee/upgrade_to_trainer", (req, res) => {
     (error, result) => {
       if (error) throw error;
       // console.log(all);
-      res.end()
+      res.end();
     }
   );
 });

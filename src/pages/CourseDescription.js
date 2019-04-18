@@ -83,7 +83,7 @@ export class CourseDescription extends Component {
     this.requestToBuy(transactionData);
   };
 
-  async requestToBuy(e) {
+  async requestToBuy(transactionData) {
     //TODO: Insert request records in db
     //TODO: Should go to payment screen?
     //TODO: Send E-mail to trainer
@@ -120,22 +120,28 @@ export class CourseDescription extends Component {
     //----------------Create Transaction -----------------------------------------
     // console.log(this.state);
 
-    console.log(e);
+    console.log(transactionData);
     try {
-      //   const response = await fetch("/trainer_dee/create_transaction", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json"
-      //     },
-      //     body: JSON.stringify(e.transactionData)
-      //   });
-      //   const results = await response.json();
-    } catch (error) {
-      alert("Cannot Create Transaction");
-    }
+      const response = await fetch("/trainer_dee/create_transaction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(transactionData)
+      });
+      const results = await response.json();
+
+      if (response.status == 450) {
+        console.log("transactionExists");
+        alert("You currently have this courses.");
+        return;
+      } else {
+        alert("Sent");
+      }
+    } catch (error) {}
     //----------------------------------------------------------------------------
 
-    alert("Request to buy successful");
+    //alert("Request to buy successful");
     console.log("TEST");
     //window.location = "/";
   }
