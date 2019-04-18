@@ -212,7 +212,7 @@ create table Course
                     delete cascade on
                     update cascade
 );
-
+                    -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
                     create table Transaction
                     (
                         transactionID int
