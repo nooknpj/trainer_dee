@@ -26,28 +26,12 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
-app.post("/trainer_dee/buy_course", (req, res) => {
-  let sql =
-    "INSERT INTO Transaction(clientID,courseID,status)\
-            values (?,?,?)";
-  let email = "";
-  connection.query(
-    sql,
-    [req.body.clientID, req.body.courseID, req.body.status],
-    (error, result) => {
-      if (error) throw error;
-      sql = "SELECT email FROM Authen WHERE AuthenID = ?";
-      connection.query(sql, [req.body.clientID], (error, result) => {
-        email = JSON.parse(JSON.stringify(result));
-      });
-    }
-  );
-  mailsender.setReEmail(email);
-  mailsender.sendMail();
-});
+
+
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
+  let email = "";
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
@@ -70,20 +54,28 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
-        error => {
+        (error) => {
           if (error) {
             console.log("error at insert into client");
             res.sendStatus(400);
             return;
           }
-        }
-      );
-
+          sql = "SELECT email FROM Authen WHERE AuthenID = ?";
+          connection.query(sql, [req.body.clientID], (error, result) => {
+            if(error) {
+              console.log("error at select email from authen");
+            }
+            email = JSON.parse(JSON.stringify(result));
+          });
+      });
+      mailsender.setReEmail(email);
+      mailsender.sendMail(); 
       console.log("backEndEndSuccessfully");
       res.sendStatus(200);
     }
   );
 });
+app.post("/trainer_dee/acceptCourse")
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/get_courses_client", (req, res) => {
