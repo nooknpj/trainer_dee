@@ -28,28 +28,28 @@ export class SearchCourses extends Component {
   render() {
     //console.log(this.state);
     return (
-      <div className="pageContainerDiv">
+      <div className="profileBox">
         {localStorage.getItem("isLoggedIn") == 0 ? (
           // notlogin
           <p>'you are not logged in'</p>
         ) : (
-          //login
-          <div>
-            {/* <p style={pageTitleStyle}> Search Courses</p> */}
-
-            <div id="searchContainer">
-              <SearchBox upDateSearchResults={this.upDateSearchResults} />
-            </div>
-
+            //login
             <div>
-              {/* <div id="resultsContainer"> */}
-              <CoursesBox
-                searchResults={this.state.searchResults}
-                upDateSearchResults={this.upDateSearchResults}
-              />
+              <p style={pageTitleStyle}> Search Courses</p>
+
+              <div id="searchContainer">
+                <SearchBox upDateSearchResults={this.upDateSearchResults} />
+              </div>
+
+              <div>
+                {/* <div id="resultsContainer"> */}
+                <CoursesBox
+                  searchResults={this.state.searchResults}
+                  upDateSearchResults={this.upDateSearchResults}
+                />
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
@@ -59,11 +59,10 @@ const pageTitleStyle = {
   color: "white",
   fontSize: "30px",
   backgroundColor: "#2460A7",
-  width: "20%",
+  width: "25%",
   minWidth: "250px",
   textAlign: "center",
   borderRadius: "10px",
-  fontWeight: "bold",
-  marginLeft: "20px"
+  fontWeight: "bold"
 };
 export default SearchCourses;

@@ -6,6 +6,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   color: white;
+  border-radius: 10px;
 }
 
 @media screen and (min-width: 520px) {

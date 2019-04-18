@@ -19,6 +19,24 @@ export class MyCourse extends Component {
 
     async getAttendedCourse() {
         //TODO: Query client's bought/request courses from db and insert into this.state.attendedCourse
+        try {
+            const data = { clientID: localStorage.getItem("clientID") };
+            const response = await fetch("/trainer_dee/view_attended_course", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const results = await response.json();
+            this.setState({
+                attendedCourse: results
+            })
+            console.log(this.state.attendedCourse);
+        } catch (error) {
+            console.log("defaultFetchError : ", error);
+        }
     }
 
     async getCreatedCourse() {
@@ -51,27 +69,32 @@ export class MyCourse extends Component {
                     activeKey={this.state.key}
                     onSelect={key => this.setState({ key })}
                 >
+                {localStorage.getItem("isTrainer") == 1 ? (
                     <Tab style={tabStyle} eventKey="created" title="Created Course">
-                        <div className="profileBox">
-                            <p style={myCourseHeaderStyle}>Created Course</p>
-                            {this.state.createdCourse.length != 0 ? (
-                                this.state.createdCourse.map(courseItem => (
-                                    <CourseItem
-                                        courseID={courseItem.CourseID}
-                                        cName={courseItem.CName}
-                                        service={courseItem.Service}
-                                        courseDescription={courseItem.CourseDescription}
-                                        cost={courseItem.Cost}
-                                        courseHour={courseItem.CourseHour}
-                                        imageUrl={courseItem.ImageUrl}
-                                    />
-                                ))
-                            ) : (
-                                    <h5>No created course.</h5>
-                                )}
-                        </div>
+                    <div className="profileBox">
+                        <p style={myCourseHeaderStyle}>Created Course</p>
+                        {this.state.createdCourse.length != 0 ? (
+                            this.state.createdCourse.map(courseItem => (
+                                <CourseItem
+                                    courseID={courseItem.CourseID}
+                                    cName={courseItem.CName}
+                                    service={courseItem.Service}
+                                    courseDescription={courseItem.CourseDescription}
+                                    cost={courseItem.Cost}
+                                    courseHour={courseItem.CourseHour}
+                                    imageUrl={courseItem.ImageUrl}
+                                />
+                            ))
+                        ) : (
+                                <h5>No created course.</h5>
+                            )}
+                    </div>
 
-                    </Tab>
+                </Tab>
+                ):(
+                    <div/>
+                )}
+                    
                     <Tab eventKey="attended" title="Attended Course">
                         <div className="profileBox">
                             <p style={myCourseHeaderStyle}>Attended Course</p>
@@ -90,6 +113,8 @@ export class MyCourse extends Component {
                                         gender={courseItem.gender}
                                         imageUrl={courseItem.imageUrl}
                                         rating={courseItem.rating}
+                                        status={courseItem.status}
+                                        isAttendedPage={1}
                                     />
                                 ))
                             ) : (

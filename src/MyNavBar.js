@@ -214,18 +214,6 @@ export class MyNavBar extends Component {
                 Search Courses
               </a>
 
-              {localStorage.getItem("isLoggedIn") == 1 ? (
-                <a className="navLink" href="/myCourse" style={this.getIsMyCourse()}>
-                  My Course
-                </a>
-
-              ) : (
-                  <div />
-                )}
-
-
-
-
               {localStorage.getItem("isLoggedIn") == 1 &&
                 localStorage.getItem("isTrainer") == 1 ? (
                   <a
@@ -260,6 +248,15 @@ export class MyNavBar extends Component {
               </Nav>
             ) : (
                 <Nav className="nav navbar-nav ml-auto">
+                  {localStorage.getItem("isLoggedIn") == 1 ? (
+                    <a className="navLink" href="/myCourse" style={this.getIsMyCourse()}>
+                      My Course
+                  </a>
+
+                  ) : (
+                      <div />
+                    )}
+
                   <a
                     className="navLink"
                     href="/myAccount"
