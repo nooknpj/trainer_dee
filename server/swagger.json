@@ -150,6 +150,26 @@
                     }
                 }
             }
+        },
+        "/trainer_dee/buy_course":{
+            "post" : {
+                "tags" : ["Buy Course"],
+                "parameters" : [
+                    {
+                        "name" : "body",
+                        "in" : "body" ,
+                        "schema": {
+                            "$ref": "#/definitions/buyCourse"
+                        }
+                    }
+                ],
+                "summary" : "Upgrade to Transaction" ,
+                "response" : {
+                    "200" : {
+                        "description" : "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -235,6 +255,19 @@
                 "trainerImg": {
                     "type": "string",
                     "example": "www.google.com"
+                }
+            }
+        },
+        "buyCourseInfo" : {
+            "type" : "object" ,
+            "properties" : {
+                "clientID" : {
+                    "type" : "string" ,
+                    "example" : "0000000000"
+                },
+                "courseID" : {
+                    "type" : "int" ,
+                    "example" : "2" 
                 }
             }
         }
