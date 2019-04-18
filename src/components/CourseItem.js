@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import starIcon from "../img/star.png";
 import "../css/courseItem.css";
 import { Link } from "react-router-dom"
+import { Table } from "react-bootstrap";
 
 export class CourseItem extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -20,30 +21,30 @@ export class CourseItem extends Component {
     if (serviceCode == 2) return "WeightTraining";
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.getCoursesClient();
   }
 
   async getCoursesClient() {
     try {
-        const data = { courseID: this.props.courseID };
-        const response = await fetch("/trainer_dee/get_courses_client", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+      const data = { courseID: this.props.courseID };
+      const response = await fetch("/trainer_dee/get_courses_client", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
-        const results = await response.json();
-        this.setState({
-          coursesClient: results
-        })
-        console.log(this.state.coursesClient);
+      const results = await response.json();
+      this.setState({
+        coursesClient: results
+      })
+      console.log(this.state.coursesClient);
     } catch (error) {
-        console.log("defaultFetchError : ", error);
+      console.log("defaultFetchError : ", error);
     }
-}
+  }
 
   getGenderStyle = () => {
     let genderStyle = {
@@ -93,7 +94,7 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            {window.location.pathname != "/myCourse" ? (
+            {window.location.pathname != "/myCourse" || (window.location.pathname == "/myCourse" && this.props.isAttendedPage == 1) ? (
               <div className="trainerInfoContainer">
                 <div>
                   <span className="infoTitle"> Trainer</span>
@@ -136,13 +137,36 @@ export class CourseItem extends Component {
             <p> {this.props.cost}</p>
             <p> Baht</p>
           </div>
-          {window.location.pathname != "/myCourse" && this.props.isAttendedPage != 1 ?(
-            <div/>
-          ):(
-            this.state.coursesClient.map(courseClient =>(
-              <p>{courseClient.fName} {courseClient.lName} {courseClient.telNo}</p>
-            ))
-          )}
+          <div className="">
+            {window.location.pathname == "/myCourse" && this.props.isAttendedPage != 1 ? (
+              <div className="descriptionLine">
+                <a className="descriptionTitle">Attended Client</a>
+                <div className="courseDescriptionBox">
+                  <Table responsive hover>
+                    <thead>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Telephone No.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.coursesClient.map(courseClient => (
+                        <tr>
+                          <td>{courseClient.fName}</td>
+                          <td>{courseClient.lName}</td>
+                          <td>{courseClient.telNo}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
+              </div>
+
+            ) : (
+                <div />
+              )}
+          </div>
         </div>
       </div>
     );
