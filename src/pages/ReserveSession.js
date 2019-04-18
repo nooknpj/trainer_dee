@@ -17,8 +17,8 @@ class ReserveSession extends Component {
 
     render() {
         return (
-            <div className="addCourseBox">
-                <p style={reserveSessionHeaderStyle}>Reserve Session</p>
+            <div className="box">
+                <p className="pageHeader">Reserve Session</p>
 
                 <DropdownButton id="dropdown-basic-button" title="Select course">
                     <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
@@ -50,17 +50,5 @@ class ReserveSession extends Component {
         );
     }
 }
-
-const reserveSessionHeaderStyle = {
-    color: "white",
-    fontSize: "30px",
-    backgroundColor: "#2460A7",
-    width: "20%",
-    minWidth: "250px",
-    textAlign: "center",
-    borderRadius: "10px",
-    fontWeight: "bold",
-    // marginLeft: "50px"
-};
 
 export default ReserveSession;

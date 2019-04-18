@@ -44,8 +44,8 @@ export class UpgradeTrainer extends Component {
 
   render() {
     return (
-      <div className="upgradeBox">
-        <p style={upgradeTrainerHeaderStyle}>Upgrade to Trainer</p>
+      <div className="box">
+        <p className="pageHeader">Upgrade to Trainer</p>
         {/* <span>My trainer status is </span>
         <span> {localStorage.getItem("isTrainer")} </span> */}
         <a className="infoTitle" style={{ color: "white" }}>
@@ -131,17 +131,6 @@ export class UpgradeTrainer extends Component {
     );
   }
 }
-
-const upgradeTrainerHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "300px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 
 const defaultFormStyle = {
   padding: "10px"

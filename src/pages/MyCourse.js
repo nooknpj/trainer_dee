@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import ReserveSession from "./ReserveSession";
 import CourseItem from "../components/CourseItem";
+import "../css/component.css"
 
 export class MyCourse extends Component {
     constructor(props, context) {
@@ -71,8 +72,8 @@ export class MyCourse extends Component {
                 >
                 {localStorage.getItem("isTrainer") == 1 ? (
                     <Tab style={tabStyle} eventKey="created" title="Created Course">
-                    <div className="profileBox">
-                        <p style={myCourseHeaderStyle}>Created Course</p>
+                    <div className="box">
+                        <p className="pageHeader">Created Course</p>
                         {this.state.createdCourse.length != 0 ? (
                             this.state.createdCourse.map(courseItem => (
                                 <CourseItem
@@ -96,8 +97,8 @@ export class MyCourse extends Component {
                 )}
                     
                     <Tab eventKey="attended" title="Attended Course">
-                        <div className="profileBox">
-                            <p style={myCourseHeaderStyle}>Attended Course</p>
+                        <div className="box">
+                            <p className="pageHeader">Attended Course</p>
 
                             {this.state.attendedCourse.length != 0 ? (
                                 this.state.attendedCourse.map(courseItem => (
@@ -128,17 +129,6 @@ export class MyCourse extends Component {
         );
     }
 }
-
-const myCourseHeaderStyle = {
-    color: "white",
-    fontSize: "30px",
-    backgroundColor: "#2460A7",
-    width: "25%",
-    minWidth: "250px",
-    textAlign: "center",
-    borderRadius: "10px",
-    fontWeight: "bold"
-};
 
 const tabsContainerStyle = {
     fontSize: "15px",

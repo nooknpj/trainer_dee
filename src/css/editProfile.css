@@ -1,19 +1,4 @@
-.editProfileBox {
-  width: 100%;
-  background-color: #85b3d1;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 10px;
-  border-radius: 10px;
-}
-
 @media screen and (min-width: 768px){
-  .editProfileBox{
-    width: 80%;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
 
   #profileInfo {
     width: 75%;
