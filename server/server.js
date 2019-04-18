@@ -27,7 +27,7 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
-
+module.exports = {port};
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
@@ -65,11 +65,17 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             if(error) {
               console.log("error at select email from authen");
             }
-            email = JSON.parse(JSON.stringify(result));
+            email = JSON.parse(JSON.stringify(result)); // get email from Authen table
           });
       });
-      mailsender.setReEmail(email);
-      mailsender.sendMail(); 
+      mailsender.setReEmailInfo(email);
+      let emailInfos  = mailsender.sendMail(); 
+      sql = "INSERT INTO verifyEmail(verifyID,token) VALUES (?,?)"
+      connection.query(sql ,[req.body.clientID,emailInfos.token],(error)=>{
+        if(error){
+          console.log("error to insert into verifyEmail Table");
+        }
+      });
       console.log("backEndEndSuccessfully");
       res.sendStatus(200);
     }
