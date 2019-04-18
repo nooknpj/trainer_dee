@@ -20,7 +20,7 @@ var mailOption = {
     from : 'd.plop4@gmail.com',
     to : trainerEmail ,
     subject : 'New reserve request is Waiting!!',
-    text : 'D PLOP '
+    text : '[url=]Accept reserve[/url]<br>[url=]Cancel reserve[/url]' 
 };
 var sendMail = () =>{
     transporter.sendMail(mailOptions ,(error,info)=>{
