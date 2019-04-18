@@ -1,13 +1,3 @@
-.addCourseBox {
-    width: 100%;
-    background-color: #85b3d1;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 10px;
-    border-radius: 10px;
-  }
-
 .selectedAddressText{
   font-size: 15px;
   font-weight: bold;
@@ -18,12 +8,4 @@
   padding-left: 10px;
   border: #21366e solid 2px;
   transition-duration: 350ms;
-}
-
-@media screen and (min-width: 768px){
-  .addCourseBox{
-    width: 80%;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
 }

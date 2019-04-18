@@ -89,8 +89,8 @@ export class EditProfile extends Component {
     //   )
     // }
     return (
-      <div className="editProfileBox">
-        <p style={editProfileHeaderStyle}>Edit Profile</p>
+      <div className="box">
+        <p className="pageHeader">Edit Profile</p>
 
         {/* <span>My Client ID is </span>
         <span> {localStorage.getItem("clientID")} </span> */}
@@ -242,17 +242,6 @@ export class EditProfile extends Component {
     );
   }
 }
-
-const editProfileHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 
 const defaultFormStyle = {
   padding: "10px"

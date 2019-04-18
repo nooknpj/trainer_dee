@@ -28,14 +28,14 @@ export class SearchCourses extends Component {
   render() {
     //console.log(this.state);
     return (
-      <div className="profileBox">
+      <div className="box">
         {localStorage.getItem("isLoggedIn") == 0 ? (
           // notlogin
           <p>'you are not logged in'</p>
         ) : (
             //login
             <div>
-              <p style={pageTitleStyle}> Search Courses</p>
+              <p className="pageHeader"> Search Courses</p>
 
               <div id="searchContainer">
                 <SearchBox upDateSearchResults={this.upDateSearchResults} />
@@ -55,14 +55,4 @@ export class SearchCourses extends Component {
   }
 }
 
-const pageTitleStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "25%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 export default SearchCourses;

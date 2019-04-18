@@ -84,7 +84,7 @@ export class ClientRegister extends Component {
   }
   render() {
     return (
-      <div className="registerBox">
+      <div className="box">
         <Modal className="modalStyle" show={this.state.showRegisterSuccessful}>
           <Modal.Header>
             <Modal.Title>Register as Client Successful!</Modal.Title>
@@ -108,7 +108,7 @@ export class ClientRegister extends Component {
           </Modal.Footer>
         </Modal>
 
-        <p style={registerHeaderStyle}>Register as a Client</p>
+        <p className="pageHeader">Register as a Client</p>
         <Form onSubmit={this.onSubmitRegister}>
           <Form.Group style={shortFormStyle}>
             <Form.Label>Email address</Form.Label>
@@ -217,17 +217,6 @@ export class ClientRegister extends Component {
     );
   }
 }
-
-const registerHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "25%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 
 const addressFormStyle = {};
 

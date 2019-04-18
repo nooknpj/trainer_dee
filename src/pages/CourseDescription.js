@@ -157,8 +157,8 @@ export class CourseDescription extends Component {
       return <p>No course!</p>;
     }
     return (
-      <div className="addCourseBox">
-        <p style={courseDescHeaderStyle}>Course Description</p>
+      <div className="box">
+        <p className="pageHeader">Course Description</p>
         <div>
           <CourseItem
             courseID={this.state.courseID}
@@ -203,17 +203,5 @@ export class CourseDescription extends Component {
     );
   }
 }
-
-const courseDescHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-  // marginLeft: "50px"
-};
 
 export default CourseDescription;

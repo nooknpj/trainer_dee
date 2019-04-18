@@ -14,8 +14,8 @@ export class MyAccount extends Component {
   render() {
     return (
       <div>
-        <div className="profileBox">
-          <p style={profileHeaderStyle}>My Account</p>
+        <div className="box">
+          <p className="pageHeader">My Account</p>
           {localStorage.getItem("isTrainer") == 0 ? (
             <div>
               <ClientAccount />
@@ -30,16 +30,5 @@ export class MyAccount extends Component {
     );
   }
 }
-
-const profileHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold"
-};
 
 export default MyAccount;

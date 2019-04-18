@@ -83,8 +83,8 @@ export class AddCourse extends Component {
 
   render() {
     return (
-      <div className="addCourseBox">
-        <p style={addCourseHeaderStyle}>Add course</p>
+      <div className="box">
+        <p className="pageHeader">Add course</p>
         <div>
           <Form onSubmit={this.onAddCourse}>
             <Form.Group style={shortFormStyle}>
@@ -181,18 +181,6 @@ export class AddCourse extends Component {
     );
   }
 }
-
-const addCourseHeaderStyle = {
-  color: "white",
-  fontSize: "30px",
-  backgroundColor: "#2460A7",
-  width: "20%",
-  minWidth: "250px",
-  textAlign: "center",
-  borderRadius: "10px",
-  fontWeight: "bold",
-  // marginLeft: "50px"
-};
 
 const shortFormStyle = {
   width: "60%",
