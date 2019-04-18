@@ -19,6 +19,24 @@ export class MyCourse extends Component {
 
     async getAttendedCourse() {
         //TODO: Query client's bought/request courses from db and insert into this.state.attendedCourse
+        try {
+            const data = { clientID: localStorage.getItem("clientID") };
+            const response = await fetch("/trainer_dee/view_attended_course", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const results = await response.json();
+            this.setState({
+                attendedCourse: results
+            })
+            console.log(this.state.attendedCourse);
+        } catch (error) {
+            console.log("defaultFetchError : ", error);
+        }
     }
 
     async getCreatedCourse() {
@@ -95,6 +113,8 @@ export class MyCourse extends Component {
                                         gender={courseItem.gender}
                                         imageUrl={courseItem.imageUrl}
                                         rating={courseItem.rating}
+                                        status={courseItem.status}
+                                        isAttendedPage={1}
                                     />
                                 ))
                             ) : (

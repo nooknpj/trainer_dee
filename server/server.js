@@ -110,6 +110,20 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
   });
 });
 
+app.post("/trainer_dee/view_attended_course", (req, res) => {
+  let sql = "SELECT ts.clientID, c.courseID, c.cName, c.service, c.courseDescription, c.cost, cl.fName, cl.lName, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
+  FROM client cl,transaction ts,course c,trainer t \
+  WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID \
+  AND cl.clientID = ?;";
+  connection.query(sql, [req.body.clientID], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result)); //change to string
+    res.send(all);
+    // console.log(all);
+  });
+});
+
 app.post("/trainer_dee/get_course_description", (req, res) => {
   let sql =
     "SELECT c.courseID,c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \

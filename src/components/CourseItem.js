@@ -136,7 +136,7 @@ export class CourseItem extends Component {
             <p> {this.props.cost}</p>
             <p> Baht</p>
           </div>
-          {window.location.pathname != "/myCourse" ?(
+          {window.location.pathname != "/myCourse" && this.props.isAttendedPage != 1 ?(
             <div/>
           ):(
             this.state.coursesClient.map(courseClient =>(
