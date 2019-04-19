@@ -147,7 +147,7 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
 
 app.post("/trainer_dee/view_attended_course", (req, res) => {
   let sql =
-    "SELECT ts.clientID, t.trainerID,cltrainer.fName,cltrainer.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
+    "SELECT ts.clientID, t.trainerID,cltrainer.fName,cltrainer.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cltrainer.gender, c.imageUrl, t.rating, ts.status \
     FROM client cl,client cltrainer,transaction ts,course c,trainer t \
     WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID AND cltrainer.clientid = t.trainerid \
     AND cl.clientID = ?;";
