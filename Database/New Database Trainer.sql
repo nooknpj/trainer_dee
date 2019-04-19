@@ -140,7 +140,7 @@ create table ReserveCourse (
 -- );
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
-  transactionID varchar (25),
+  transactionID varchar (50),
   clientID varchar (13),
   courseID int,
   status varchar (20),
@@ -462,7 +462,7 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (clientID, courseID, status, token)
+  transaction (transactionID,clientID, courseID, status, token)
 values
   ('adddddd1','0000000000', '1', 'onGoing', '0'),
   ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),

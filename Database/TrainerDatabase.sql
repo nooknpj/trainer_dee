@@ -1,74 +1,159 @@
-DROP DATABASE IF EXISTS trainer_dee;
-CREATE DATABASE trainer_dee;
+drop database if exists trainer_dee;
+create database trainer_dee;
 use trainer_dee;
-CREATE TABLE Client (
+create table Client (
   ClientID varchar(13),
-  FName varchar (21) NOT NULL,
-  LName varchar (21) NOT NULL,
-  Gender varchar (2) NOT NULL,
-  TelNo varchar (11),
-  Address varchar (120),
-  isTrainer integer (1),
-  PRIMARY KEY(ClientID)
+  FName varchar(21) not null,
+  LName varchar(21) not null,
+  Gender varchar(2) not null,
+  TelNo varchar(12),
+  Address varchar(120),
+  isTrainer int(1),
+  primary key(ClientID)
 );
-CREATE TABLE Trainer (
+create table Trainer (
   TrainerID varchar(13),
-  trainerDescription varchar(200),
-  SSN varchar (14) NOT NULL,
+  SSN varchar(14) not null,
+  TrainerImg varchar(256),
+  trainerDescription varchar(256),
   Certificate varchar(256),
-  Rating FLOAT(2, 1),
-  trainerImg varchar(256),
-  PRIMARY KEY(TrainerID),
-  CONSTRAINT FK_Trainer_Client FOREIGN KEY(TrainerID) REFERENCES Client(ClientID) ON DELETE CASCADE ON UPDATE CASCADE
+  Rating float(2, 1),
+  primary key(TrainerID),
+  foreign key(TrainerID) references Client(ClientID) on delete cascade on update cascade
 );
-CREATE TABLE Course (
-  CourseID integer(11) auto_increment,
-  CName varchar (30) NOT NULL,
-  Service tinyint NOT NULL,
-  Cost integer,
+create table Course (
+  CourseID int auto_increment,
+  CName varchar (30) not null,
+  Service tinyint not null,
+  Cost int,
   CourseHour tinyint,
   ImageUrl varchar (2000),
-  CourseDescription varchar (170),
-  TrainerID varchar (13),
-  PRIMARY KEY (CourseID),
-  CONSTRAINT FK_Course_Trainer FOREIGN KEY (TrainerID) REFERENCES Trainer (TrainerID) ON
-    DELETE CASCADE ON
-    UPDATE CASCADE
+  CourseStatus enum ('show', 'hide'),
+  CourseDescription varchar (200),
+  trainerID varchar (13),
+  primary key (CourseID),
+  foreign key (trainerID) references client (clientID) on
+    delete cascade on
+    update cascade
 );
-CREATE TABLE Location (
-  LocationID integer(10) auto_increment,
-  LocateCourseID integer (10),
-  LName varchar (500) NOT NULL,
-  Station varchar (20),
-  lat FLOAT (9, 7),
-  lng Float (17, 14),
-  PRIMARY KEY (LocationID, LocateCourseID),
-  CONSTRAINT FK_Location_Course FOREIGN KEY (LocateCourseID) REFERENCES Course (CourseID) ON
-        DELETE CASCADE ON
-        UPDATE CASCADE
+create table Reservation (
+  ReservationID int auto_increment,
+  ApprovedTrainerID varchar (13),
+  primary key (ReservationID),
+  foreign key (ApprovedTrainerID) references Client (ClientID) on
+        delete cascade on
+        update cascade
 );
-CREATE TABLE Search (
-  Search_ClientID varchar(13),
-  Search_CourseID integer(11),
-  PRIMARY KEY (Search_ClientID, Search_CourseID),
-  CONSTRAINT FK_Search_Course FOREIGN KEY(Search_CourseID) REFERENCES Course(CourseID),
-  CONSTRAINT FK_Search_Client FOREIGN KEY(Search_ClientID) REFERENCES Client(ClientID)
-);
-CREATE TABLE Authen (
+create table Authen (
   AuthenID varchar(13),
-  email varchar(40) NOT NULL,
-  password varchar(20) NOT NULL,
-  PRIMARY KEY(AuthenID, email),
-  CONSTRAINT FK_Authen_ClientID FOREIGN KEY(AuthenID) REFERENCES Client(ClientID) ON DELETE CASCADE
+  email varchar(40) not null,
+  password varchar(20) not null,
+  primary key(AuthenID, email),
+  foreign key(AuthenID) references Client(ClientID) on delete cascade
 );
+create table TimeTable (
+  TimetableID varchar(13),
+  Date date,
+  Time time,
+  Status enum('full', 'free')
+);
+create table Location (
+  LocationID int(10) auto_increment,
+  LocateCourseID int (10),
+  LName varchar (500),
+  Station varchar (20),
+  lat float (9, 7),
+  lng float (17, 14),
+  primary key (LocationID, LocateCourseID),
+  foreign key (locateCourseID) references Course (CourseID) on
+            delete cascade on
+            update cascade
+);
+create table Search (
+  Search_ClientID varchar(13),
+  Search_CourseID int,
+  primary key(Search_ClientID, Search_CourseID),
+  foreign key(Search_ClientID) references Client(ClientID) on delete cascade on update cascade,
+  foreign key(Search_CourseID) references Course(CourseID) on delete cascade on update cascade
+);
+create table Contain (
+  TimeClientID varchar(13),
+  TimeCourseID int,
+  primary key(TimeClientID, TimeCourseID),
+  foreign key(TimeClientID) references Client(ClientID) on delete cascade on update cascade,
+  foreign key(TimeCourseID) references Course(CourseID) on delete cascade on update cascade
+);
+create table ReserveCourse (
+  ReservedClientID varchar(13),
+  ReservedCourseID int,
+  ReservedReservationID int,
+  CurrentTime time,
+  Duration time,
+  primary key(
+    ReservedClientID,
+    ReservedCourseID,
+    ReservedReservationID
+  ),
+  foreign key(ReservedClientID) references Client(ClientID) on delete cascade on update cascade,
+  foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
+  foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
+);
+-- create table Payment (
+--   PaymentID int auto_increment,
+--   PaymentRequestID int,
+--   Amount float,
+--   ExpiredDate date,
+--   CVV int (3),
+--   CardHolderName varchar (30),
+--   CardNumber varchar (20),
+--   primary key (PaymentID, PaymentRequestID),
+--   foreign key (PaymentRequestID) references Request (RequestID) on
+--                     delete cascade on
+--                     update cascade
+-- );
+------------------------------------------------------------------------------------------------
+-- create table Explore (
+--   ExpClientID varchar(13),
+--   ExpCourseID int,
+--   primary key(ExpClientID, ExpCourseID),
+--   foreign key(ExpClientID) references Client(ClientID) on delete cascade on update cascade,
+--   foreign key(ExpCourseID) references Course(CourseID) on delete cascade on update cascade
+-- );
+-- create table Request (
+--   RequestID int auto_increment,
+--   TrainerAcceptingID varchar (13),
+--   primary key (RequestID, TrainerAcceptingID),
+--   foreign key (TrainerAcceptingID) references Client (ClientID) on
+--                 delete cascade on
+--                 update cascade
+-- );
+-- create table SendToBuy (
+--   ClientSendingID varchar(13),
+--   CourseSentID int,
+--   TrainerSentID varchar(13),
+--   isAccept boolean default false,
+--   isCanceled boolean default false,
+--   primary key(ClientSendingID, CourseSentID, TrainerSentID),
+--   foreign key(ClientSendingID) references Client(ClientID) on delete cascade on update cascade,
+--   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
+--   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
+-- );
+-- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
-  transactionID int auto_increment,
+  transactionID varchar (50),
   clientID varchar (13),
   courseID int,
   status varchar (20),
+  token varchar(20),
   primary key (transactionID),
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
+);
+create table verifyEmail (
+  verifyID varchar (13),
+  token varchar(5),
+  primary key(verifyID, token),
+  foreign key (verifyID) references Client(clientID) on delete cascade
 );
 INSERT INTO
   Client (
@@ -169,18 +254,18 @@ values
   ('0000000004', '123', 'helloTrainer', 5.0, ''),
   ('0000000005', '123', 'helloTrainer', 3.2, ''),
   (
-    '5555555555',
-    '99123',
-    'trainer with an actual email',
-    5,
-    ''
-  ),
-  (
     '9999999999',
     '111111',
     'I am johny the trainer and this is my trainer description. I have the power to change lives for the better. I help clients achieve their fitness and health goals through motivation and education.',
     4.3,
     'https://www.telegraph.co.uk/content/dam/men/2016/04/22/PD68583783_dtho201_2655530b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=450'
+  ),
+  (
+    '5555555555',
+    '0911515',
+    'i am a trainer with an actual email',
+    '9.9',
+    ''
   );
 INSERT INTO
   Course (
@@ -377,12 +462,9 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (clientID, courseID, status)
+  transaction (transactionID,clientID, courseID, status, token)
 values
-  ('0000000000', '1', 'onGoing'),
-  ('0000000000', '2', 'toBeAccepted'),
-  ('0000000003', '1', 'toBePaid'),
-  ('0000000002', '3', 'rejected'),
-  ('0000000003', '6', 'onGoing'),
-  ('0000000004', '6', 'onGoing'),
-  ('0000000004', '9', 'onGoing');
+  ('adddddd1','0000000000', '1', 'onGoing', '0'),
+  ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
+  ('adddddd3','0000000001', '1', 'toBePaid', '0'),
+  ('adddddd4','0000000002', '3', 'rejected', '0');

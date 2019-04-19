@@ -1,20 +1,23 @@
 // node mailer require
 const nodemailer = require("nodemailer");
-const crypto = require("crypto");
+//const crypto = require("crypto");
 const server = require("./server");
+
 //
 
-let emailInfo = {
+var emailInfo = {
   trainerEmail: "",
   token: "",
   transactionID : ""
 };
 
-var setReEmailInfo = email => {
-  console.log("line 13 of mailsender", email);
+var setReEmailInfo = (email,transactionID,token) => {
+  //console.log("line 15 of mailsender", email,transactionID, token);
   emailInfo.trainerEmail = email;
-  emailInfo.token = crypto.randomBytes(10).toString("hex");
+  emailInfo.transactionID = transactionID;
+  emailInfo.token = token;
   mailOptions["to"] = email;
+  console.log("line 20 of mailsender", email,transactionID, token);
 };
 
 var transporter = nodemailer.createTransport({
@@ -32,15 +35,22 @@ var mailOptions = {
   subject: "New reserve request is Waiting!!",
   text: `[url=http://localhost:${server.port}/trainer_dee/acceptBuyCourse/${emailInfo.token}/]Accept reserve[/url]<br>\
     [url=http://localhost:${server.port}/cancelBuyCourse/${emailInfo.token}]Cancel reserve[/url]`
+    
 };
 var sendMail = () => {
-  transporter.sendMail(mailOptions, error => {
+console.log('sendMail line 41',emailInfo,mailOptions)
+  transporter.sendMail(mailOptions, (error) => {
     if (error) {
       console.log(`Fail to send Email`);
-    } else {
-      console.log(`Send email to ${trainerEmail} Success`);
-      return emailInfo;
+      return;
     }
+    
+    console.log(emailInfo,mailOptions);
+    return emailInfo;
+    //  else {
+    //   console.log(`Send email to ${trainerEmail} Success`);
+    //   return emailInfo;
+    // }
   });
 };
 

@@ -35,10 +35,10 @@ app.post(`/trainer_dee/acceptBuyCourse/:token`)
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
   console.log(req.body);
-  let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
+  let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?;";
   let email = "";
-  let tranID = crypto.randomBytes(8).toString("hex");
-
+  const tranID = crypto.randomBytes(5).toString("hex");
+  
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
@@ -57,12 +57,14 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
       }
 
       let sqlCreateTransaction =
-        `INSERT INTO transaction (clientID,courseID,status) VALUE(${tranID},?,?,?,'0')`;
+        `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${tranID}',?,?,?,'0');`;
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
         error => {
           if (error) {
+            console.log(tranID);
+            
             console.log("error at insert into client");
             res.sendStatus(400);
             return;
@@ -73,13 +75,18 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
               console.log("error at select email from authen");
               return;
             }
-            email = JSON.stringify(result[0].email); // get email from Authen table
+
+            const token = crypto.randomBytes(10).toString("hex");
+
+            email = result[0].email; // get email from Authen table
             console.log("line71", email);
             console.log(email);
-            mailsender.setReEmailInfo(email);
+            mailsender.setReEmailInfo(email,tranID,token);
             const emailInfo = mailsender.sendMail();
+            
+            console.log(emailInfo);
             sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
-            AND transactionID = ${tranID} AND status = 'toBeAccepted'`;
+            AND transactionID = '${tranID}' AND status = 'toBeAccepted'`;
               
               connection.query(sql ,[emailInfo.token,req.body.clientID,req.body.courseID],(error)=>{
                   if(error) console.log("error to update token");
@@ -87,9 +94,8 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             });
         });
       //console.log("backEndEndSuccessfully");
-      res.sendStatus(200);
-    }
-  );
+      //res.sendStatus(200);
+    });
 });
 app.post("/trainer_dee/acceptCourse");
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
