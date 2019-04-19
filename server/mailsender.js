@@ -4,46 +4,47 @@ const crypto = require("crypto");
 //const server = require("./server");
 //
 
+let emailInfo = {
+  trainerEmail: "",
+  token: ""
+};
 
-let emailInfo  =  {
-        trainerEmail : '',
-        token : ''
-    }
-
-
-var setReEmailInfo = (email)=>{
-    emailInfo.trainerEmail = email;
-    emailInfo.token = crypto.randomBytes(10).toString('hex');
+var setReEmailInfo = email => {
+  console.log("line 13 of mailsender", email);
+  emailInfo.trainerEmail = email;
+  emailInfo.token = crypto.randomBytes(10).toString("hex");
+  mailOptions["to"] = "trainer.dplop4@gmail.com";
 };
 
 var transporter = nodemailer.createTransport({
-    service: 'gmail' ,
-    port : 340 ,
-    auth : {
-        user : 'd.plop4@gmail.com',
-        pass : '5931003221k'
-    }
+  service: "gmail",
+  port: 340,
+  auth: {
+    user: "d.plop4@gmail.com",
+    pass: "5931003221k"
+  }
 });
 
 var mailOptions = {
-    from : 'd.plop4@gmail.com',
-    to : emailInfo.trainerEmail ,
-    subject : 'New reserve request is Waiting!!',
-    text : `[url=http://localhost/acceptBuyCourse/${emailInfo.token}]Accept reserve[/url]<br>\
-    [url=http://localhost/cancelBuyCourse/${emailInfo.token}]Cancel reserve[/url]` 
+  from: "d.plop4@gmail.com",
+  to: "d.plop4@gmail.com",
+  subject: "New reserve request is Waiting!!",
+  text: `[url=http://localhost/acceptBuyCourse/${
+    emailInfo.token
+  }]Accept reserve[/url]<br>\
+    [url=http://localhost/cancelBuyCourse/${
+      emailInfo.token
+    }]Cancel reserve[/url]`
 };
-var sendMail = () =>{
-    transporter.sendMail(mailOptions ,(error)=>{
-        if(error) {
-          console.log(`Fail to send Email`);  
-        } 
-        else {
-            console.log(`Send email to ${trainerEmail} Success`);
-            return emailInfo;
-        }
-    });
-    
-}
+var sendMail = () => {
+  transporter.sendMail(mailOptions, error => {
+    if (error) {
+      console.log(`Fail to send Email`);
+    } else {
+      console.log(`Send email to ${trainerEmail} Success`);
+      return emailInfo;
+    }
+  });
+};
 
-
-module.exports = {setReEmailInfo , sendMail}; 
+module.exports = { setReEmailInfo, sendMail };

@@ -27,7 +27,7 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
-module.exports = {port};
+module.exports = { port };
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
@@ -54,7 +54,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
-        (error) => {
+        error => {
           if (error) {
             console.log("error at insert into client");
             res.sendStatus(400);
@@ -62,26 +62,31 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
           }
           sql = "SELECT email FROM Authen WHERE AuthenID = ?";
           connection.query(sql, [req.body.clientID], (error, result) => {
-            if(error) {
+            if (error) {
               console.log("error at select email from authen");
+              return;
             }
             email = JSON.stringify(result[0].email); // get email from Authen table
+            console.log("line71", email);
+            console.log(email);
+            mailsender.setReEmailInfo(email);
+            let emailInfo = mailsender.sendMail();
           });
-      });
-      mailsender.setReEmailInfo(email);
-      let emailInfo  = mailsender.sendMail(); 
-      sql = "INSERT INTO verifyEmail(verifyID,token) VALUES (?,?)"
-      connection.query(sql ,[req.body.clientID,emailInfo.token],(error)=>{
-        if(error){
-          console.log("error to insert into verifyEmail Table");
         }
-      });
+      );
+
+      // sql = "INSERT INTO verifyEmail(verifyID,token) VALUES (?,?)"
+      // connection.query(sql ,[req.body.clientID,emailInfo.token],(error)=>{
+      //   if(error){
+      //     console.log("error to insert into verifyEmail Table");
+      //   }
+      // });
       console.log("backEndEndSuccessfully");
       res.sendStatus(200);
     }
   );
 });
-app.post("/trainer_dee/acceptCourse")
+app.post("/trainer_dee/acceptCourse");
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
 app.post("/trainer_dee/get_courses_client", (req, res) => {
@@ -109,24 +114,27 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
 });
 
 app.post("/trainer_dee/view_attended_course", (req, res) => {
-  let sql = "SELECT ts.clientID, t.trainerID, cl.fName, cl.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
+  let sql =
+    "SELECT ts.clientID, t.trainerID, cl.fName, cl.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
   FROM client cl,transaction ts,course c,trainer t \
   WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID \
   AND cl.clientID = ?;";
   connection.query(sql, [req.body.clientID], (error, result) => {
     if (error) throw error;
-    let sql2 = "select cl.fName, cl.lName from trainer t, client cl \
+    let sql2 =
+      "select cl.fName, cl.lName from trainer t, client cl \
     where t.trainerID = cl.clientID and t.trainerID = ?";
     let all = JSON.parse(JSON.stringify(result)); //change to string
-    connection.query(sql2, all[0].trainerID, (error2, result2) => { //query again to get trainer name, not client name
+    connection.query(sql2, all[0].trainerID, (error2, result2) => {
+      //query again to get trainer name, not client name
       if (error) throw error;
       // console.log(result2);
       let all2 = JSON.parse(JSON.stringify(result2));
       all[0].fName = all2[0].fName;
-      all[0].lName = all2[0].lName; 
+      all[0].lName = all2[0].lName;
       res.send(all);
-    })
-    
+    });
+
     // console.log(all);
   });
 });
