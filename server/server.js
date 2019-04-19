@@ -30,6 +30,7 @@ connection.connect();
 module.exports = { port };
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
+  console.log(req.body);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
   let email = "";
   connection.query(
@@ -61,7 +62,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             return;
           }
           sql = "SELECT email FROM Authen WHERE AuthenID = ?";
-          connection.query(sql, [req.body.clientID], (error, result) => {
+          connection.query(sql, [req.body.trainerID], (error, result) => {
             if (error) {
               console.log("error at select email from authen");
               return;

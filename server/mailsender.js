@@ -13,7 +13,7 @@ var setReEmailInfo = email => {
   console.log("line 13 of mailsender", email);
   emailInfo.trainerEmail = email;
   emailInfo.token = crypto.randomBytes(10).toString("hex");
-  mailOptions["to"] = "trainer.dplop4@gmail.com";
+  mailOptions["to"] = email;
 };
 
 var transporter = nodemailer.createTransport({

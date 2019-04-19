@@ -80,6 +80,7 @@ export class CourseDescription extends Component {
     let transactionData = {};
     transactionData["clientID"] = localStorage.getItem("clientID");
     transactionData["courseID"] = this.state.courseID;
+    transactionData["trainerID"] = this.state.trainerID;
     transactionData["status"] = "toBeAccepted";
 
     this.requestToBuy(transactionData);
@@ -137,7 +138,7 @@ export class CourseDescription extends Component {
         );
         return;
       }
-    } catch (error) { }
+    } catch (error) {}
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
@@ -196,20 +197,20 @@ export class CourseDescription extends Component {
                 href="/editCourse"
               >
                 Edit course
-            </Button>
+              </Button>
             ) : (
-                <Button
-                  variant="primary"
-                  size="small"
-                  type="submit"
-                  onClick={this.onRequestToBuyClick}
-                >
-                  Request to buy this course
-            </Button>
-              )}
+              <Button
+                variant="primary"
+                size="small"
+                type="submit"
+                onClick={this.onRequestToBuyClick}
+              >
+                Request to buy this course
+              </Button>
+            )}
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }
