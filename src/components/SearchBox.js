@@ -278,7 +278,10 @@ export class SearchBox extends Component {
           </div>
           <div className="locationFilterContainer">
             <div className="filterNameContainer">
-              <div className="filterName" style={{ width: "80%" }}>
+              <div
+                className="filterName"
+                style={{ width: "40%", minWidth: "300px" }}
+              >
                 <a>Course Location</a>
               </div>
             </div>
