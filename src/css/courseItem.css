@@ -84,49 +84,66 @@
   margin-top: 10px;
   /* background-color: white; */
   color: #21366e;
-  display: flex;
+  display: inline-block;
   flex-direction: row;
   font-size: 1.2em;
   width: auto;
-  background-color: red;
+  /* background-color: red; */
   width: auto;
-  max-width: 50%;
+  /* max-width: 70%; */
   text-align: center;
 }
 .infoTitle {
+  /* width: 100%; */
   background-color: #21366e;
   font-weight: bold;
   /* padding-left: 0.2em;
   padding-right: 0.2em;
   border-radius: 0.2em; */
   margin-right: 0.5em;
-  min-width: 5em;
-  max-width: 30%;
+  /* min-width: 5em; */
+  max-width: 60%;
+  /* display: flex; */
   border: #21366e solid 2px;
   color: white;
+  
 }
 
-.trainerInfoTitleContainer {
-  /* width: 15%;
-  min-width: 15%;
-  max-width: 15%;
-  margin-right: 5px;
-  background-color: #21366e;
-  border: #21366e solid 2px;
-  border-radius: 5px;
-  text-align: center; */
-  /* background-color: blue; */
-}
-.trainerInfoContainer {
-  width: 80%;
-  max-width: 80%;
+.infoContainer{
+  width: 50%;
+  /* max-width: 80%; */
   font-weight: bold;
   display: flex;
   flex-direction: bold;
   color: #21366e;
   background-color: white;
   border-radius: 5px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
+  /* text-align: center; */
+  border: #21366e solid 2px;
+}
+
+.trainerInfoTitleContainer {
+    /* width: 15%;
+    min-width: 15%;
+    max-width: 15%;
+    margin-right: 5px;
+    background-color: #21366e;
+    border: #21366e solid 2px;
+    border-radius: 5px;
+    text-align: center; */
+  background-color: blue;
+}
+.trainerInfoContainer {
+  width: auto;
+  /* max-width: 80%; */
+  font-weight: bold;
+  display: flex;
+  flex-direction: bold;
+  color: #21366e;
+  background-color: white;
+  border-radius: 5px;
+  /* margin-left: 5px; */
   border: #21366e solid 2px;
 }
 

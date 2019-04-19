@@ -127,22 +127,28 @@ export class CourseItem extends Component {
           </div>
 
           <div className="infoLine">
-            <span className="infoTitle"> Course Duration</span>
-            <span> {this.props.courseHour}</span>
-            <span> Hours</span>
+            <div className="infoContainer">
+              <span className="infoTitle"> Course Duration</span>
+              <span> {this.props.courseHour}</span>
+              <span> Hours</span>
+            </div>
+
           </div>
 
           <div className="infoLine">
-            <p className="infoTitle"> Course Cost</p>
-            <p> {this.props.cost}</p>
-            <p> Baht</p>
+            <div className="infoContainer">
+              <span className="infoTitle"> Course Cost</span>
+              <span> {this.props.cost}</span>
+              <span> Baht</span>
+            </div>
+
           </div>
           <div className="">
             {window.location.pathname == "/myCourse" && this.props.isAttendedPage != 1 ? (
               <div className="descriptionLine">
                 <a className="descriptionTitle">Attended Client</a>
                 <div className="courseDescriptionBox">
-                  <Table responsive hover>
+                  <Table responsive hover size="sm">
                     <thead>
                       <tr>
                         <th>First Name</th>
