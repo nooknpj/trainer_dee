@@ -102,15 +102,12 @@ export class CourseDescription extends Component {
     });
     let results = await response.json();
 
-    let clientToTrainer = {};
+    transactionData["clientFName"] = results[0].FName;
+    transactionData["clientLName"] = results[0].LName;
+    transactionData["clientTelno"] = results[0].TelNo;
+    transactionData["clientGender"] = results[0].Gender;
+    transactionData["clientEmail"] = results[0].Email;
 
-    clientToTrainer["fname"] = results[0].FName;
-    clientToTrainer["lname"] = results[0].LName;
-    clientToTrainer["telno"] = results[0].TelNo;
-    clientToTrainer["gender"] = results[0].Gender;
-    clientToTrainer["email"] = results[0].Email;
-
-    console.log(clientToTrainer);
     //----------------------------------------------------------------------------
 
     //----------------Send Email to Trainer --------------------------------------

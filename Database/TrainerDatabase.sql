@@ -144,6 +144,15 @@ A. Phuket 83130 Thailand',
     '0909123123',
     'I am James the client.My id is 0000000000',
     0
+  ),
+  (
+    '5555555555',
+    'DPLOP4_Trainer',
+    'Trainer',
+    'M',
+    '0909',
+    '83130 Thailand',
+    1
   );
 insert into
   trainer (
@@ -159,6 +168,13 @@ values
   ('0000000003', '123', 'helloTrainer', 4.7, ''),
   ('0000000004', '123', 'helloTrainer', 5.0, ''),
   ('0000000005', '123', 'helloTrainer', 3.2, ''),
+  (
+    '5555555555',
+    '99123',
+    'trainer with an actual email',
+    5,
+    ''
+  ),
   (
     '9999999999',
     '111111',
@@ -257,6 +273,15 @@ values
     'https://www.mensjournal.com/wp-content/uploads/mf/_main_liftlift.jpg?w=1200&h=1200&crop=1',
     'Let loss weight and grain healthy',
     '0000000004'
+  ),
+  (
+    'CourseWithEmail',
+    '1',
+    500,
+    10,
+    'https://www.lifewire.com/thmb/mkR7ed8DYBalvSwazvJ-E-qA9FU=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/gmail-unsend-599318fd68e1a200111244db.png',
+    'This course is for email sender testing.',
+    '5555555555'
   );
 insert into
   location (LocateCourseID, Lname, lat, lng)
@@ -309,6 +334,12 @@ values
     'MBK Center',
     13.744470890077935,
     100.52990198135376
+  ),
+  (
+    10,
+    'MBK Center',
+    13.744470890077935,
+    100.52990198135376
   );
 INSERT INTO
   Authen (AuthenID, email, password)
@@ -339,8 +370,12 @@ values
     'MUM222'
   ),
   ('0000000000', 'client@gmail.com', 'client'),
-  ('9999999999', 'trainer@gmail.com', 'trainer');
-  
+  ('9999999999', 'trainer@gmail.com', 'trainer'),
+  (
+    '5555555555',
+    'trainer.dplop4@gmail.com',
+    'dplop4trainer'
+  );
 INSERT INTO
   transaction (clientID, courseID, status)
 values
