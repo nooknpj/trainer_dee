@@ -13,7 +13,7 @@ let emailInfo  =  {
 
 var setReEmailInfo = (email)=>{
     emailInfo.trainerEmail = email;
-    emailInfo.token = crypto.randomBytes(5).toString('hex');
+    emailInfo.token = crypto.randomBytes(10).toString('hex');
 };
 
 var transporter = nodemailer.createTransport({
@@ -29,7 +29,8 @@ var mailOptions = {
     from : 'd.plop4@gmail.com',
     to : emailInfo.trainerEmail ,
     subject : 'New reserve request is Waiting!!',
-    text : '[url=]Accept reserve[/url]<br>[url=]Cancel reserve[/url]' ,
+    text : `[url=http://localhost/acceptBuyCourse/${emailInfo.token}/]Accept reserve[/url]<br>\
+    [url=http://localhost/cancelBuyCourse/]Cancel reserve[/url]` ,
 };
 var sendMail = () =>{
     transporter.sendMail(mailOptions ,(error)=>{
