@@ -133,7 +133,7 @@ app.post("/trainer_dee/view_attended_course", (req, res) => {
 
 app.post("/trainer_dee/get_course_description", (req, res) => {
   let sql =
-    "SELECT c.courseID,c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+    "SELECT c.courseID, c.trainerID, c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
     FROM course c, client cl, trainer t , location l \
     where c.TrainerID = cl.clientID and cl.clientID=t.TrainerID and l.locatecourseID = c.courseID and c.courseID = ?";
   connection.query(sql, [req.body.courseID], (error, result) => {

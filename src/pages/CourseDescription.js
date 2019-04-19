@@ -9,6 +9,7 @@ export class CourseDescription extends Component {
 
     this.state = {
       courseID: 0,
+      trainerID: "0000000000",
       cName: "courseName",
       service: 0,
       courseHour: 0,
@@ -53,6 +54,7 @@ export class CourseDescription extends Component {
 
         this.setState({
           courseID: result.courseID,
+          trainerID: result.trainerID,
           cName: result.cName,
           service: result.service,
           courseHour: result.courseHour,
@@ -135,7 +137,7 @@ export class CourseDescription extends Component {
         );
         return;
       }
-    } catch (error) {}
+    } catch (error) { }
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
@@ -186,17 +188,28 @@ export class CourseDescription extends Component {
             zoom={18}
           />
           <div style={{ display: "Block" }}>
-            <Button
-              variant="primary"
-              size="small"
-              type="submit"
-              onClick={this.onRequestToBuyClick}
-            >
-              Request to buy this course
+            {this.state.trainerID == localStorage.getItem("clientID") ? (
+              <Button
+                variant="primary"
+                size="small"
+                type="submit"
+                href="/editCourse"
+              >
+                Edit course
             </Button>
+            ) : (
+                <Button
+                  variant="primary"
+                  size="small"
+                  type="submit"
+                  onClick={this.onRequestToBuyClick}
+                >
+                  Request to buy this course
+            </Button>
+              )}
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
