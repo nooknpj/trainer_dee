@@ -65,7 +65,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             if(error) {
               console.log("error at select email from authen");
             }
-            email = JSON.parse(JSON.stringify(result)); // get email from Authen table
+            email = JSON.stringify(result[0].email); // get email from Authen table
           });
       });
       mailsender.setReEmailInfo(email);
