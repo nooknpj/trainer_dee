@@ -140,10 +140,11 @@ create table ReserveCourse (
 -- );
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
-  transactionID int auto_increment,
+  transactionID varchar (25),
   clientID varchar (13),
   courseID int,
   status varchar (20),
+  token varchar(20),
   primary key (transactionID),
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
@@ -461,9 +462,9 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (clientID, courseID, status)
+  transaction (clientID, courseID, status, token)
 values
-  ('0000000000', '1', 'onGoing'),
-  ('0000000000', '2', 'toBeAccepted'),
-  ('0000000001', '1', 'toBePaid'),
-  ('0000000002', '3', 'rejected');
+  ('adddddd1','0000000000', '1', 'onGoing', '0'),
+  ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
+  ('adddddd3','0000000001', '1', 'toBePaid', '0'),
+  ('adddddd4','0000000002', '3', 'rejected', '0');

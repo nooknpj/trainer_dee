@@ -1,12 +1,13 @@
 // node mailer require
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
-//const server = require("./server");
+const server = require("./server");
 //
 
 let emailInfo = {
   trainerEmail: "",
-  token: ""
+  token: "",
+  transactionID : ""
 };
 
 var setReEmailInfo = email => {
@@ -29,8 +30,8 @@ var mailOptions = {
   from: "d.plop4@gmail.com",
   to: "d.plop4@gmail.com",
   subject: "New reserve request is Waiting!!",
-  text: `[url=http://localhost/acceptBuyCourse/${emailInfo.token}]Accept reserve[/url]<br>\
-    [url=http://localhost/cancelBuyCourse/${emailInfo.token}]Cancel reserve[/url]`
+  text: `[url=http://localhost:${server.port}/trainer_dee/acceptBuyCourse/${emailInfo.token}/]Accept reserve[/url]<br>\
+    [url=http://localhost:${server.port}/cancelBuyCourse/${emailInfo.token}]Cancel reserve[/url]`
 };
 var sendMail = () => {
   transporter.sendMail(mailOptions, error => {
