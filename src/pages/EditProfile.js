@@ -7,8 +7,80 @@ export class EditProfile extends Component {
   constructor() {
     super();
     this.state = {
-      // redirectToNewPage: false
+      Address: "MyAddress",
+      ClientID: "000000000000",
+      FName: "MyFirstName",
+      LName: "MyLastName",
+      Gender: "MyGender",
+      TelNo: "0000000000",
+      mail: "myemail@trainer-d.com",
+      isTrainer: -1,
+      Ssn: "",
+      TrainerDescription: "",
+      Rating: "",
+      TrainerImg: ""
     };
+  }
+
+  componentDidMount() {
+    this.getProfile();
+  }
+
+  async getProfile() {
+    try {
+      const data = { clientID: localStorage.getItem("clientID") };
+      const response = await fetch("/trainer_dee/view_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      this.setState({
+        Address: results[0].Address,
+        ClientID: results[0].ClientID,
+        FName: results[0].FName,
+        LName: results[0].LName,
+        Gender: results[0].Gender,
+        TelNo: results[0].TelNo,
+        isTrainer: results[0].isTrainer,
+        Email: results[0].Email
+      });
+      console.log(this.state);
+      if (this.state.isTrainer == 1) {
+        this.getTrainerProfile();
+      }
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
+
+    console.log(this.state);
+  }
+
+  async getTrainerProfile() {
+    try {
+      const data = { trainerID: localStorage.getItem("clientID") };
+      const response = await fetch("/trainer_dee/view_trainer_profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const results = await response.json();
+      this.setState({
+        Ssn: results[0].Ssn,
+        TrainerDescription: results[0].TrainerDescription,
+        Rating: results[0].Rating,
+        TrainerImg: results[0].TrainerImg
+      });
+      console.log(this.state);
+    } catch (error) {
+      console.log("defaultFetchError : ", error);
+    }
   }
 
   onFormChange = e => {
@@ -113,7 +185,7 @@ export class EditProfile extends Component {
                         type="firstName"
                         title="firstName"
                         maxLength="20"
-                        placeholder="Enter first name"
+                        placeholder={this.state.FName}
                         onChange={this.onFormChange}
                       />
                       <Form.Group style={inLineFormComponent}>
@@ -123,7 +195,7 @@ export class EditProfile extends Component {
                           type="lastName"
                           title="lastName"
                           maxLength="20"
-                          placeholder="Enter last name"
+                          placeholder={this.state.LName}
                           onChange={this.onFormChange}
                         />
                       </Form.Group>
@@ -136,10 +208,11 @@ export class EditProfile extends Component {
                         title="gender"
                         as="select"
                         onChange={this.onFormChange}
+                        value={this.state.Gender}
                       >
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
                       </Form.Control>
                     </Form.Group>
                   </div>
@@ -155,7 +228,7 @@ export class EditProfile extends Component {
                     required
                     type="address"
                     title="address"
-                    placeholder="Address"
+                    placeholder={this.state.Address}
                     maxLength="110"
                     onChange={this.onFormChange}
                   />
@@ -172,7 +245,7 @@ export class EditProfile extends Component {
                     type="telNo"
                     title="telNo"
                     maxLength="10"
-                    placeholder="Telephone number"
+                    placeholder={this.state.TelNo}
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
@@ -193,7 +266,7 @@ export class EditProfile extends Component {
                         required
                         type="trainerImg"
                         title="trainerImg"
-                        placeholder="Your profile image url"
+                        placeholder={this.state.TrainerImg}
                         maxLength="250"
                         onChange={this.onFormChange}
                       />
@@ -209,7 +282,7 @@ export class EditProfile extends Component {
                         maxLength="190"
                         type="trainerDescription"
                         title="trainerDescription"
-                        placeholder="Your Trainer Description"
+                        placeholder={this.state.TrainerDescription}
                         onChange={this.onFormChange}
                       />
                     </Form.Group>
