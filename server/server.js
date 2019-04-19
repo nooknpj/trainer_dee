@@ -157,16 +157,19 @@ app.post("/trainer_dee/view_attended_course", (req, res) => {
       "select cl.fName, cl.lName from trainer t, client cl \
     where t.trainerID = cl.clientID and t.trainerID = ?";
     let all = JSON.parse(JSON.stringify(result)); //change to string
-    connection.query(sql2, all[0].trainerID, (error2, result2) => {
-      //query again to get trainer name, not client name
-      if (error) throw error;
-      // console.log(result2);
-      let all2 = JSON.parse(JSON.stringify(result2));
-      all[0].fName = all2[0].fName;
-      all[0].lName = all2[0].lName;
+    if(all.length == 0){
       res.send(all);
-    });
-
+    } else{
+      connection.query(sql2, all[0].trainerID, (error2, result2) => {
+        //query again to get trainer name, not client name
+        if (error) throw error;
+        // console.log(result2);
+        let all2 = JSON.parse(JSON.stringify(result2));
+        all[0].fName = all2[0].fName;
+        all[0].lName = all2[0].lName;
+        res.send(all);
+      });
+    }
     // console.log(all);
   });
 });
