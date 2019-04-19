@@ -8,6 +8,8 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 const config = require("./config.js");
 const mailsender = require("./mailsender.js");
+const crypto = require("crypto");
+
 //var isExist = false ;
 
 app.use("/trainer_d_api", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -29,12 +31,14 @@ connection.connect();
 
 module.exports = { port };
 
-app.post("/trainer_dee/")
+app.post(`/trainer_dee/acceptBuyCourse/:token`)
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
   console.log(req.body);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
   let email = "";
+  let tranID = crypto.randomBytes(8).toString("hex");
+
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
@@ -53,7 +57,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
       }
 
       let sqlCreateTransaction =
-        "INSERT INTO transaction (clientID,courseID,status) VALUE(?,?,?)";
+        `INSERT INTO transaction (clientID,courseID,status) VALUE(${tranID},?,?,?,'0')`;
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
@@ -73,18 +77,16 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             console.log("line71", email);
             console.log(email);
             mailsender.setReEmailInfo(email);
-            mailsender.sendMail();
-          });
-        }
-      );
-
-      // sql = "INSERT INTO verifyEmail(verifyID,token) VALUES (?,?)"
-      // connection.query(sql ,[req.body.clientID,emailInfo.token],(error)=>{
-      //   if(error){
-      //     console.log("error to insert into verifyEmail Table");
-      //   }
-      // });
-      console.log("backEndEndSuccessfully");
+            const emailInfo = mailsender.sendMail();
+            sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
+            AND transactionID = ${tranID} AND status = 'toBeAccepted'`;
+              
+              connection.query(sql ,[emailInfo.token,req.body.clientID,req.body.courseID],(error)=>{
+                  if(error) console.log("error to update token");
+              });
+            });
+        });
+      //console.log("backEndEndSuccessfully");
       res.sendStatus(200);
     }
   );
