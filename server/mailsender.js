@@ -1,7 +1,7 @@
 // node mailer require
 const nodemailer = require("nodemailer");
-const cryto = require("crypto");
-const server = require("./server");
+const crypto = require("crypto");
+//const server = require("./server");
 //
 
 
@@ -27,7 +27,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
     from : 'd.plop4@gmail.com',
-    to : emailInfo.trainerEmail ,
+    to : trainerEmail ,
     subject : 'New reserve request is Waiting!!',
     text : '[url=]Accept reserve[/url]<br>[url=]Cancel reserve[/url]' ,
 };
@@ -45,4 +45,4 @@ var sendMail = () =>{
 }
 
 
-module.exports = {setReEmailInfo , sendMail}; 
+module.exports = {setReEmail , sendMail}; 
