@@ -27,7 +27,7 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
     from : 'd.plop4@gmail.com',
-    to : trainerEmail ,
+    to : emailInfo.trainerEmail ,
     subject : 'New reserve request is Waiting!!',
     text : '[url=]Accept reserve[/url]<br>[url=]Cancel reserve[/url]' ,
 };
@@ -45,4 +45,4 @@ var sendMail = () =>{
 }
 
 
-module.exports = {setReEmail , sendMail}; 
+module.exports = {setReEmailInfo , sendMail}; 
