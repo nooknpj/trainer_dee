@@ -467,4 +467,9 @@ values
   ('adddddd1','0000000000', '1', 'onGoing', '0'),
   ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
   ('adddddd3','0000000001', '1', 'toBePaid', '0'),
-  ('adddddd4','0000000002', '3', 'rejected', '0');
+  ('adddddd4','0000000002', '3', 'rejected', '0'),
+  ('adddddd5', '0000000003', '1', 'toBePaid', '0'),
+  ('adddddd6', '0000000002', '3', 'rejected', '0'),
+  ('adddddd7', '0000000003', '6', 'onGoing', '0'),
+  ('adddddd8', '0000000004', '4', 'onGoing', '0'),
+  ('adddddd9', '0000000004', '5', 'onGoing', '0'); 
