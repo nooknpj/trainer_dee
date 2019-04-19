@@ -20,6 +20,22 @@
   }
 }
 
+/* for small screen */
+@media screen and (max-width: 900px) {
+  .infoContainer {
+    min-width: 95%;
+    font-size: 1em;
+  }
+}
+
+/* for big screen */
+@media screen and (max-width: 900px) {
+  .infoContainer {
+    min-width: 95%;
+    font-size: 1em;
+  }
+}
+
 .courseImg {
   border-radius: 10px;
   border: 5px solid #21366e;
@@ -106,10 +122,9 @@
   /* display: flex; */
   border: #21366e solid 2px;
   color: white;
-  
 }
 
-.infoContainer{
+.infoContainer {
   width: 50%;
   /* max-width: 80%; */
   font-weight: bold;
@@ -124,7 +139,7 @@
 }
 
 .trainerInfoTitleContainer {
-    /* width: 15%;
+  /* width: 15%;
     min-width: 15%;
     max-width: 15%;
     margin-right: 5px;

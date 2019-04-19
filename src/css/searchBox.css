@@ -160,3 +160,37 @@
 .geosuggest__item__matched-text {
   font-weight: bold;
 }
+
+@media screen and (min-width: 670px) {
+  .geosuggest__input {
+    min-width: 500px;
+  }
+  .locationFilterContainer {
+    min-width: 550px;
+  }
+}
+
+.locationFilterContainer {
+  color: black;
+  font-weight: bold;
+  padding-top: 0.2em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.5em;
+
+  max-width: 90%;
+
+  background-color: white;
+  border-radius: 10px;
+
+  height: auto;
+
+  width: auto;
+  margin-left: 1em;
+}
+
+.filterNameContainer {
+  width: 100%;
+  /* min-width: 85px; */
+  margin-right: 5px;
+}
