@@ -147,29 +147,14 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
 
 app.post("/trainer_dee/view_attended_course", (req, res) => {
   let sql =
-    "SELECT ts.clientID, t.trainerID, cl.fName, cl.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
-  FROM client cl,transaction ts,course c,trainer t \
-  WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID \
-  AND cl.clientID = ?;";
+    "SELECT ts.clientID, t.trainerID,cltrainer.fName,cltrainer.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cl.gender, c.imageUrl, t.rating, ts.status \
+    FROM client cl,client cltrainer,transaction ts,course c,trainer t \
+    WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID AND cltrainer.clientid = t.trainerid \
+    AND cl.clientID = ?;";
   connection.query(sql, [req.body.clientID], (error, result) => {
     if (error) throw error;
-    let sql2 =
-      "select cl.fName, cl.lName from trainer t, client cl \
-    where t.trainerID = cl.clientID and t.trainerID = ?";
     let all = JSON.parse(JSON.stringify(result)); //change to string
-    if(all.length == 0){
-      res.send(all);
-    } else{
-      connection.query(sql2, all[0].trainerID, (error2, result2) => {
-        //query again to get trainer name, not client name
-        if (error) throw error;
-        // console.log(result2);
-        let all2 = JSON.parse(JSON.stringify(result2));
-        all[0].fName = all2[0].fName;
-        all[0].lName = all2[0].lName;
-        res.send(all);
-      });
-    }
+    res.send(all);
     // console.log(all);
   });
 });
