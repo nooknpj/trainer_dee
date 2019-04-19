@@ -98,20 +98,19 @@ create table ReserveCourse (
   foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
   foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
 );
-
-create table Payment (
-  PaymentID int auto_increment,
-  PaymentRequestID int,
-  Amount float,
-  ExpiredDate date,
-  CVV int (3),
-  CardHolderName varchar (30),
-  CardNumber varchar (20),
-  primary key (PaymentID, PaymentRequestID),
-  foreign key (PaymentRequestID) references Request (RequestID) on
-                    delete cascade on
-                    update cascade
-);
+-- create table Payment (
+--   PaymentID int auto_increment,
+--   PaymentRequestID int,
+--   Amount float,
+--   ExpiredDate date,
+--   CVV int (3),
+--   CardHolderName varchar (30),
+--   CardNumber varchar (20),
+--   primary key (PaymentID, PaymentRequestID),
+--   foreign key (PaymentRequestID) references Request (RequestID) on
+--                     delete cascade on
+--                     update cascade
+-- );
 ------------------------------------------------------------------------------------------------
 -- create table Explore (
 --   ExpClientID varchar(13),
@@ -139,7 +138,6 @@ create table Payment (
 --   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
 --   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
 -- );
----------------------------------------------------------------------
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
   transactionID int auto_increment,
@@ -150,14 +148,12 @@ create table Transaction (
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
 );
-
 create table verifyEmail (
   verifyID varchar (13),
-  token varchar(5)
-  primary key(verifyID,token),
+  token varchar(5),
+  primary key(verifyID, token),
   foreign key (verifyID) references Client(clientID) on delete cascade
 );
-
 INSERT INTO
   Client (
     ClientID,
@@ -232,6 +228,15 @@ A. Phuket 83130 Thailand',
     '0909123123',
     'I am James the client.My id is 0000000000',
     0
+  ),
+  (
+    '5555555555',
+    'DPLOP4_Trainer',
+    'Trainer',
+    'M',
+    '0909',
+    '83130 Thailand',
+    1
   );
 insert into
   trainer (
@@ -253,6 +258,13 @@ values
     'I am johny the trainer and this is my trainer description. I have the power to change lives for the better. I help clients achieve their fitness and health goals through motivation and education.',
     4.3,
     'https://www.telegraph.co.uk/content/dam/men/2016/04/22/PD68583783_dtho201_2655530b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=450'
+  ),
+  (
+    '5555555555',
+    '0911515',
+    'i am a trainer with an actual email',
+    '9.9',
+    ''
   );
 INSERT INTO
   Course (
@@ -345,6 +357,15 @@ values
     'https://www.mensjournal.com/wp-content/uploads/mf/_main_liftlift.jpg?w=1200&h=1200&crop=1',
     'Let loss weight and grain healthy',
     '0000000004'
+  ),
+  (
+    'CourseWithEmail',
+    '1',
+    500,
+    10,
+    'https://www.lifewire.com/thmb/mkR7ed8DYBalvSwazvJ-E-qA9FU=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/gmail-unsend-599318fd68e1a200111244db.png',
+    'This course is for email sender testing.',
+    '5555555555'
   );
 insert into
   location (LocateCourseID, Lname, lat, lng)
@@ -397,6 +418,12 @@ values
     'MBK Center',
     13.744470890077935,
     100.52990198135376
+  ),
+  (
+    10,
+    'MBK Center',
+    13.744470890077935,
+    100.52990198135376
   );
 INSERT INTO
   Authen (AuthenID, email, password)
@@ -427,7 +454,12 @@ values
     'MUM222'
   ),
   ('0000000000', 'client@gmail.com', 'client'),
-  ('9999999999', 'trainer@gmail.com', 'trainer');
+  ('9999999999', 'trainer@gmail.com', 'trainer'),
+  (
+    '5555555555',
+    'trainer.dplop4@gmail.com',
+    'dplop4trainer'
+  );
 INSERT INTO
   transaction (clientID, courseID, status)
 values
