@@ -146,17 +146,13 @@ create table Transaction (
   clientID varchar (13),
   courseID int,
   status varchar (20),
+  token varchar (11),
   primary key (transactionID),
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
 );
 
-create table verifyEmail (
-  verifyID varchar (13),
-  token varchar(5)
-  primary key(verifyID,token),
-  foreign key (verifyID) references Client(clientID) on delete cascade
-);
+
 
 INSERT INTO
   Client (
