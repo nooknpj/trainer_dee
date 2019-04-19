@@ -100,6 +100,27 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 app.post("/trainer_dee/acceptCourse");
 // ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
 
+app.post("/trainer_dee/edit_course", (req, res) => {
+  let sql =
+    "UPDATE course \
+  SET cName = ?, courseDescription = ?, imageUrl = ? \
+  WHERE courseID = ?";
+  connection.query(
+    sql,
+    [
+      req.body.courseName,
+      req.body.courseDesc,
+      req.body.imageUrl,
+      req.body.courseID
+    ],
+    (error, result) => {
+      if (error) throw error;
+      // console.log(all);
+      res.end();
+    }
+  );
+});
+
 app.post("/trainer_dee/get_courses_client", (req, res) => {
   let sql =
     "select cl.fName, cl.lName, cl.telNo from client cl, transaction t \
