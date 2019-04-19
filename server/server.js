@@ -29,6 +29,8 @@ connection.connect();
 
 module.exports = { port };
 
+app.post("/trainer_dee/")
+
 app.post("/trainer_dee/create_transaction", (req, res) => {
   console.log(req.body);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?";
@@ -71,7 +73,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             console.log("line71", email);
             console.log(email);
             mailsender.setReEmailInfo(email);
-            let emailInfo = mailsender.sendMail();
+            mailsender.sendMail();
           });
         }
       );
