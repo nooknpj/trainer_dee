@@ -143,6 +143,16 @@ export class CourseItem extends Component {
             </div>
 
           </div>
+          {window.location.pathname == "/myCourse" && this.props.isAttendedPage == 1 ? (
+            <div className="infoLine">
+              <div className="infoContainer">
+                <span className="infoTitle">Status</span>
+                <span> {this.props.status}</span>
+              </div>
+            </div>
+          ) : (
+              <div />
+            )}
           <div className="">
             {window.location.pathname == "/myCourse" && this.props.isAttendedPage != 1 ? (
               <div className="descriptionLine">
