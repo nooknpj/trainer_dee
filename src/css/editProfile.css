@@ -1,5 +1,4 @@
-@media screen and (min-width: 768px){
-
+@media screen and (min-width: 768px) {
   #profileInfo {
     width: 75%;
     max-width: 75%;
@@ -98,4 +97,5 @@
   color: #21366e;
   margin-left: 5px;
   background-color: white;
+  flex-wrap: wrap;
 }
