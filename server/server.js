@@ -69,9 +69,9 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
           });
       });
       mailsender.setReEmailInfo(email);
-      let emailInfos  = mailsender.sendMail(); 
+      let emailInfo  = mailsender.sendMail(); 
       sql = "INSERT INTO verifyEmail(verifyID,token) VALUES (?,?)"
-      connection.query(sql ,[req.body.clientID,emailInfos.token],(error)=>{
+      connection.query(sql ,[req.body.clientID,emailInfo.token],(error)=>{
         if(error){
           console.log("error to insert into verifyEmail Table");
         }
