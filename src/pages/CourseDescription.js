@@ -140,7 +140,7 @@ export class CourseDescription extends Component {
         );
         return;
       }
-    } catch (error) {}
+    } catch (error) { }
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
@@ -177,13 +177,19 @@ export class CourseDescription extends Component {
             rating={this.state.rating}
             courseStatus={this.state.courseStatus}
           />
-          <div className="infoLine">
-            <span className="infoTitle">Telephone Number</span>
-            <span> {this.state.telNo}</span>
+          <div className="descriptionLine">
+            <span className="descriptionTitle">Telephone Number</span>
+            <div className="courseDescriptionBox">
+              <span> {this.state.telNo}</span>
+            </div>
+
           </div>
-          <div className="infoLine">
-            <span className="infoTitle">Course Location</span>
-            <span> {this.state.locName}</span>
+          <div className="descriptionLine">
+            <span className="descriptionTitle">Course Location</span>
+            <div className="courseDescriptionBox">
+              <span> {this.state.locName}</span>
+            </div>
+
           </div>
           <LocationPicker
             containerElement={<div style={{ height: "100%" }} />}
@@ -203,15 +209,15 @@ export class CourseDescription extends Component {
                 Edit course
               </Button>
             ) : (
-              <Button
-                variant="primary"
-                size="small"
-                type="submit"
-                onClick={this.onRequestToBuyClick}
-              >
-                Request to buy this course
+                <Button
+                  variant="primary"
+                  size="small"
+                  type="submit"
+                  onClick={this.onRequestToBuyClick}
+                >
+                  Request to buy this course
               </Button>
-            )}
+              )}
           </div>
         </div>
       </div>
