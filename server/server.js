@@ -29,12 +29,14 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
-module.exports = { port };
+
 
 app.post(`/trainer_dee/acceptBuyCourse/:token`)
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
-  console.log(req.body);
+ // console.log(req.body);
+  console.log('--------------------------------------------------');
+  //console.log('server port is >>> ',port);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?;";
   let email = "";
   const tranID = crypto.randomBytes(5).toString("hex");
@@ -80,11 +82,11 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 
             email = result[0].email; // get email from Authen table
             console.log("line71", email);
-            console.log(email);
+        
             mailsender.setReEmailInfo(email,tranID,token);
-            const emailInfo = mailsender.sendMail();
+            const emailInfo = mailsender.sendingMail();
             
-            console.log(emailInfo);
+            console.log('server line 87',emailInfo);
             sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
             AND transactionID = '${tranID}' AND status = 'toBeAccepted'`;
               

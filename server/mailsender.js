@@ -1,13 +1,13 @@
 // node mailer require
 const nodemailer = require("nodemailer");
 //const crypto = require("crypto");
-const server = require("./server");
+const port = 5000 || process.env.PORT;
 
 //
 
-var emailInfo = {
+emailInfo = {
   trainerEmail: "",
-  token: "",
+  token : "",
   transactionID : ""
 };
 
@@ -17,41 +17,86 @@ var setReEmailInfo = (email,transactionID,token) => {
   emailInfo.transactionID = transactionID;
   emailInfo.token = token;
   mailOptions["to"] = email;
-  console.log("line 20 of mailsender", email,transactionID, token);
+  mailOptions["text"] = `[url=http://localhost:${port}/trainer_dee/acceptBuyCourse/${token}/]Accept reserve[/url]<br>\
+  [url=http://localhost:${port}/cancelBuyCourse/${token}]Cancel reserve[/url]`
+  console.log("line 20 of mailsender",mailOptions);
+  
 };
-
+// try------------------------------
 var transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 340,
-  auth: {
-    user: "d.plop4@gmail.com",
-    pass: "5931003221k"
+  host : "smtp.ethereal.email",
+  port : 587 ,
+  secure : false ,
+  auth : {
+    user : "d.plop4@gmail.com",
+    pass : "5931003221k"
   }
-});
-
+})
 var mailOptions = {
   from: "d.plop4@gmail.com",
-  to: "d.plop4@gmail.com",
+  to: "",
   subject: "New reserve request is Waiting!!",
-  text: `[url=http://localhost:${server.port}/trainer_dee/acceptBuyCourse/${emailInfo.token}/]Accept reserve[/url]<br>\
-    [url=http://localhost:${server.port}/cancelBuyCourse/${emailInfo.token}]Cancel reserve[/url]`
+  text: ""
+}
+
+  var sendingMail = () => {
+    // console.log('mailserver sendmail line 42 port is >>>>',port);
+   console.log('sendMail line 41',emailInfo.token,mailOptions);
+   
+     transporter.sendMail(mailOptions, error => {
+       console.log('sendMail line 44',emailInfo,mailOptions);
+       if (error) {
+         console.log(`Fail to send Email`);
+         //return;
+       } 
+       
+       console.log('sentMail line 48',emailInfo,mailOptions);
+       return emailInfo;
+       //  else {
+       //   console.log(`Send email to ${trainerEmail} Success`);
+       //   return emailInfo;
+       // }
+     });
+   }; 
+
+//end try ------------------------------
+// var mailOptions = {
+//   from: "d.plop4@gmail.com",
+//   to: "",
+//   subject: "New reserve request is Waiting!!",
+//   text: ""
     
-};
-var sendMail = () => {
-console.log('sendMail line 41',emailInfo,mailOptions)
-  transporter.sendMail(mailOptions, (error) => {
+// };
+
+// var transporter = nodemailer.createTransport({
+//   service: "Gmail",
+//   secure : false,
+//   debug : true,
+//   auth: {
+//     user: "d.plop4@gmail.com",
+//     pass: "5931003221k"
+//   }
+// });
+
+
+// var sendMail = () => {
+//  // console.log('mailserver sendmail line 42 port is >>>>',port);
+// console.log('sendMail line 41',emailInfo.token,mailOptions);
+
+  transporter.sendMail(mailOptions, (error,res) => {
+    console.log('sendMail line 44',emailInfo,mailOptions);
     if (error) {
+      console.dir(error)
       console.log(`Fail to send Email`);
-      return;
-    }
-    
-    console.log(emailInfo,mailOptions);
+      //return;
+    } else {
+    console.dir(res);
+    console.log('sentMail line 48',emailInfo,mailOptions);
     return emailInfo;
     //  else {
     //   console.log(`Send email to ${trainerEmail} Success`);
     //   return emailInfo;
-    // }
+    }
   });
-};
 
-module.exports = { setReEmailInfo, sendMail };
+module.exports = { setReEmailInfo, sendingMail };
