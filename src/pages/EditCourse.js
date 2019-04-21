@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import "../css/editCourse.css";
+import Switch from "react-switch";
 
 export class EditCourse extends Component {
     constructor() {
         super();
         this.state = {
-
+            courseStatus: false
         };
+        this.handleToggleChange = this.handleToggleChange.bind(this);
+    }
+
+    componentDidMount(){
+        this.onLoadCourseVisibility();
+    }
+
+    onLoadCourseVisibility(){
+        this.fetchLoadCourseVisibility();
     }
 
     onFormChange = e => {
@@ -21,9 +31,38 @@ export class EditCourse extends Component {
         window.location = document.referrer;
     }
 
-    async fetchSaveCourse() {
-        const data = this.state;
+    handleToggleChange(checked) {
+        this.setState({ courseStatus: checked });
+      }
+
+      async fetchLoadCourseVisibility(){
         try {
+            const data = this.state;
+            data.courseID = document.referrer.split("/")[4]
+            console.log(data)
+            
+            const response = await fetch("/trainer_dee/get_course_visibility", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const results = await response.json();
+            console.log(results)
+            this.setState({
+                courseStatus: results[0].courseStatus == 1 ? true:false
+            })
+            console.log(this.state.courseStatus)
+        } catch (error) {
+            console.log("Fetch course visibility failed", error);
+        }
+    }
+
+    async fetchSaveCourse() {
+        try {
+            const data = this.state;
             data.courseID = document.referrer.split("/")[4]
             console.log(data.courseID)
             
@@ -77,6 +116,8 @@ export class EditCourse extends Component {
                             onChange={this.onFormChange}
                         />
                     </Form.Group>
+                    <Form.Label>Show/Hide Course</Form.Label>
+                    <Switch onChange={this.handleToggleChange} checked={this.state.courseStatus} />
                     <div style={{ display: "flex", marginTop: "20px" }}>
                         <Button
                             variant="primary"

@@ -16,6 +16,7 @@ export class CourseDescription extends Component {
       cost: 0,
       imageUrl: "",
       CourseDescription: "CourseDescription",
+      courseStatus: "0",
       lName: "locationName",
       lat: 13.736717,
       lng: 100.523186,
@@ -61,6 +62,7 @@ export class CourseDescription extends Component {
           cost: result.cost,
           imageUrl: result.imageUrl,
           courseDescription: result.courseDescription,
+          courseStatus: result.courseStatus,
           locName: result.locName,
           lat: result.lat,
           lng: result.lng,
@@ -162,6 +164,7 @@ export class CourseDescription extends Component {
         <div>
           <CourseItem
             courseID={this.state.courseID}
+            trainerID={this.state.trainerID}
             cName={this.state.cName}
             service={this.state.service}
             courseDescription={this.state.courseDescription}
@@ -172,6 +175,7 @@ export class CourseDescription extends Component {
             gender={this.state.gender}
             imageUrl={this.state.imageUrl}
             rating={this.state.rating}
+            courseStatus={this.state.courseStatus}
           />
           <div className="infoLine">
             <span className="infoTitle">Telephone Number</span>

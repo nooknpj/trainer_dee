@@ -153,6 +153,16 @@ export class CourseItem extends Component {
           ) : (
               <div />
             )}
+          {(window.location.pathname.includes("/courseDesc") && this.props.trainerID == localStorage.getItem("clientID")) || (window.location.pathname == "/myCourse" && this.props.isAttendedPage != 1) ? (
+            <div className="infoLine">
+              <div className="infoContainer">
+                <span className="infoTitle">Course Status</span>
+                <span> {this.props.courseStatus == 1? "Show":"Hide"}</span>
+              </div>
+            </div>
+          ) : (
+              <div />
+            )}
           <div className="">
             {window.location.pathname == "/myCourse" && this.props.isAttendedPage != 1 ? (
               <div className="descriptionLine">

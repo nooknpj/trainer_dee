@@ -84,6 +84,7 @@ export class MyCourse extends Component {
                                     cost={courseItem.Cost}
                                     courseHour={courseItem.CourseHour}
                                     imageUrl={courseItem.ImageUrl}
+                                    courseStatus={courseItem.CourseStatus}
                                 />
                             ))
                         ) : (

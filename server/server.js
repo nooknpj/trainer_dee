@@ -149,13 +149,24 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
       //res.sendStatus(200);
     });
 });
-app.post("/trainer_dee/acceptCourse");
-// ------------------------------------------------------- ALREADY DONE -------------------------------------------------------
+
+app.post("/trainer_dee/get_course_visibility", (req, res) => {
+  let sql =
+    "select c.courseStatus from course c \
+  where c.courseID = ?";
+  connection.query(sql, [req.body.courseID], (error, result) => {
+    if (error) throw error;
+
+    let all = JSON.parse(JSON.stringify(result));
+    res.send(all);
+    // console.log(all);
+  });
+});
 
 app.post("/trainer_dee/edit_course", (req, res) => {
   let sql =
     "UPDATE course \
-  SET cName = ?, courseDescription = ?, imageUrl = ? \
+  SET cName = ?, courseDescription = ?, imageUrl = ?, courseStatus = ? \
   WHERE courseID = ?";
   connection.query(
     sql,
@@ -163,6 +174,7 @@ app.post("/trainer_dee/edit_course", (req, res) => {
       req.body.courseName,
       req.body.courseDesc,
       req.body.imageUrl,
+      req.body.courseStatus,
       req.body.courseID
     ],
     (error, result) => {
@@ -193,7 +205,7 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
 
     let all = JSON.parse(JSON.stringify(result)); //change to string
     res.send(all);
-    // console.log(all);
+    console.log(all);
   });
 });
 
@@ -213,7 +225,7 @@ app.post("/trainer_dee/view_attended_course", (req, res) => {
 
 app.post("/trainer_dee/get_course_description", (req, res) => {
   let sql =
-    "SELECT c.courseID, c.trainerID, c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+    "SELECT c.courseID, c.trainerID, c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription, c.courseStatus,l.lname as locName,l.lat,l.lng,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
     FROM course c, client cl, trainer t , location l \
     where c.TrainerID = cl.clientID and cl.clientID=t.TrainerID and l.locatecourseID = c.courseID and c.courseID = ?";
   connection.query(sql, [req.body.courseID], (error, result) => {
@@ -323,8 +335,8 @@ app.post("/trainer_dee/view_trainer_profile", (req, res) => {
 app.post("/trainer_dee/add_course", (req, res) => {
   let sql =
     "INSERT INTO Course \
-(CName, Service, Cost, CourseHour, ImageUrl, CourseDescription, TrainerID) \
-values (?, ?, ?, ?, ?, ?, ?)";
+(CName, Service, Cost, CourseHour, ImageUrl, CourseDescription, TrainerID, courseStatus) \
+values (?, ?, ?, ?, ?, ?, ?, 1)";
   connection.query(
     sql,
     [
@@ -379,7 +391,7 @@ app.post("/trainer_dee/search_filter", (req, res) => {
   let sql =
     "SELECT c.courseID,c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
   FROM course c, client cl, trainer t \
-  where c.TrainerId = cl.clientID and cl.clientID=t.TrainerID";
+  where c.TrainerId = cl.clientID and cl.clientID=t.TrainerID and c.courseStatus = 1";
   if (req.body.serviceFilter["yoga"] == 0) {
     sql += " and c.service != ?";
     filteredOutItem.push(0);

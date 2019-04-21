@@ -28,7 +28,7 @@ create table Course (
   Cost int,
   CourseHour tinyint,
   ImageUrl varchar (2000),
-  CourseStatus enum ('show', 'hide'),
+  CourseStatus boolean not null,
   CourseDescription varchar (200),
   trainerID varchar (13),
   primary key (CourseID),
@@ -231,7 +231,8 @@ INSERT INTO
     CourseHour,
     ImageUrl,
     CourseDescription,
-    TrainerID
+    TrainerID,
+    courseStatus
   )
 values
   (
@@ -241,7 +242,8 @@ values
     45,
     'https://cdn.pixabay.com/photo/2016/11/11/03/50/sport-1815736_960_720.jpg',
     'This is cardio course focusing on improving your overall health. This course is recommended for everyone at every age.',
-    '0000000003'
+    '0000000003',
+    true
   ),
   (
     'YOGA FOR FUN 12',
@@ -250,7 +252,8 @@ values
     25,
     'https://www.yogajournal.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cg_faces:center%2Cq_auto:good%2Cw_620/MTQ2MjI3ODcyMDE5OTgxOTIx/cow-face-with-eagle-arms-forhips.jpg',
     'This is just a yoga for people who want to just lay around and have fun.',
-    '0000000004'
+    '0000000004',
+    true
   ),
   (
     'We love Fitness',
@@ -259,7 +262,8 @@ values
     25,
     'https://images.pexels.com/photos/588561/pexels-photo-588561.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     'This course is designed to assess and improve physical fitness levels and encourage a healthy attitude toward lifelong fitness. ',
-    '0000000005'
+    '0000000005',
+    true
   ),
   (
     'Yoga For Life',
@@ -268,7 +272,8 @@ values
     99,
     'https://cdn1.medicalnewstoday.com/content/images/articles/318/318774/a-woman-practicing-yoga-on-the-beach.jpg',
     'yoga forever.',
-    '0000000001'
+    '0000000001',
+    true
   ),
   (
     'Mini Marathon Prep',
@@ -277,7 +282,8 @@ values
     15,
     'https://static01.nyt.com/images/2017/10/17/science/11physed-marathon-photo/11physed-marathon-photo-articleLarge.jpg?quality=75&auto=webp&disable=upscale',
     'I am an experienced marathon runner and I want you help you be like me!',
-    '0000000002'
+    '0000000002',
+    true
   ),
   (
     'Full Body Cardio',
@@ -286,7 +292,8 @@ values
     10,
     'https://hips.hearstapps.com/womenshealth-production.s3.amazonaws.com/images/7685/best-cardio-for-fat-loss__medium_4x3.jpg',
     'GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!GOGOGOGOGO CARDIO!',
-    '0000000004'
+    '0000000004',
+    true
   ),
   (
     'Intense Body Building',
@@ -295,7 +302,8 @@ values
     20,
     'https://content.active.com/Assets/Active.com+Content+Site+Digital+Assets/Article+Image+Update/Fitness/Benefits+of+Weight+Training/Carousel.jpg',
     'This course is only for people who have spectacularly muscular body. No Beginners!',
-    '0000000002'
+    '0000000002',
+    true
   ),
   (
     'Weight 101',
@@ -304,7 +312,8 @@ values
     10,
     'https://www.healthline.com/hlcmsresource/images/topic_centers/1267-Muscle-build-732x549-thumbnail.jpg',
     'You want to build muscle but do not know how? Come here, take this awesome course!',
-    '0000000002'
+    '0000000002',
+    true
   ),
   (
     'Weight loss',
@@ -313,7 +322,8 @@ values
     20,
     'https://www.mensjournal.com/wp-content/uploads/mf/_main_liftlift.jpg?w=1200&h=1200&crop=1',
     'Let loss weight and grain healthy',
-    '0000000004'
+    '0000000004',
+    true
   ),
   (
     'CourseWithEmail',
@@ -322,7 +332,8 @@ values
     10,
     'https://www.lifewire.com/thmb/mkR7ed8DYBalvSwazvJ-E-qA9FU=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/gmail-unsend-599318fd68e1a200111244db.png',
     'This course is for email sender testing.',
-    '5555555555'
+    '5555555555',
+    true
   );
 insert into
   location (LocateCourseID, Lname, lat, lng)
@@ -423,7 +434,12 @@ values
   ('adddddd1','0000000000', '1', 'onGoing', '0'),
   ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
   ('adddddd3','0000000001', '1', 'toBePaid', '0'),
-  ('adddddd4','0000000002', '3', 'rejected', '0');
+  ('adddddd4','0000000002', '3', 'rejected', '0'),
+  ('adddddd5', '0000000003', '1', 'toBePaid', '0'),
+  ('adddddd6', '0000000002', '3', 'rejected', '0'),
+  ('adddddd7', '0000000003', '6', 'onGoing', '0'),
+  ('adddddd8', '0000000004', '4', 'onGoing', '0'),
+  ('adddddd9', '0000000004', '5', 'onGoing', '0'); 
 
 
   -- create table Payment (
