@@ -31,6 +31,14 @@ connection.connect();
 
 
 
+app.post("/trainer_dee/paymentComfiem",(req,res)=>{
+  let sql = "UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;" ;
+  connection.query(sql,[req.body.transactionID],(error)=>{
+    if(error) console.log('error to update payment status!');
+    else res.sendStatus(200);
+  })
+});
+
 app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
   let transID = req.params.transactionID ;
   let token = req.params.token ;
@@ -58,13 +66,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
       mailsender.sendingMail();
     });
     });
-    
-    
-
-  });
- 
-  
-
+    });
 });
 
 app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token",(req,res)=>{
