@@ -98,46 +98,7 @@ create table ReserveCourse (
   foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
   foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
 );
--- create table Payment (
---   PaymentID int auto_increment,
---   PaymentRequestID int,
---   Amount float,
---   ExpiredDate date,
---   CVV int (3),
---   CardHolderName varchar (30),
---   CardNumber varchar (20),
---   primary key (PaymentID, PaymentRequestID),
---   foreign key (PaymentRequestID) references Request (RequestID) on
---                     delete cascade on
---                     update cascade
--- );
-------------------------------------------------------------------------------------------------
--- create table Explore (
---   ExpClientID varchar(13),
---   ExpCourseID int,
---   primary key(ExpClientID, ExpCourseID),
---   foreign key(ExpClientID) references Client(ClientID) on delete cascade on update cascade,
---   foreign key(ExpCourseID) references Course(CourseID) on delete cascade on update cascade
--- );
--- create table Request (
---   RequestID int auto_increment,
---   TrainerAcceptingID varchar (13),
---   primary key (RequestID, TrainerAcceptingID),
---   foreign key (TrainerAcceptingID) references Client (ClientID) on
---                 delete cascade on
---                 update cascade
--- );
--- create table SendToBuy (
---   ClientSendingID varchar(13),
---   CourseSentID int,
---   TrainerSentID varchar(13),
---   isAccept boolean default false,
---   isCanceled boolean default false,
---   primary key(ClientSendingID, CourseSentID, TrainerSentID),
---   foreign key(ClientSendingID) references Client(ClientID) on delete cascade on update cascade,
---   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
---   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
--- );
+
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
   transactionID varchar (50),
@@ -149,12 +110,7 @@ create table Transaction (
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
 );
-create table verifyEmail (
-  verifyID varchar (13),
-  token varchar(5),
-  primary key(verifyID, token),
-  foreign key (verifyID) references Client(clientID) on delete cascade
-);
+
 INSERT INTO
   Client (
     ClientID,
@@ -468,3 +424,45 @@ values
   ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
   ('adddddd3','0000000001', '1', 'toBePaid', '0'),
   ('adddddd4','0000000002', '3', 'rejected', '0');
+
+
+  -- create table Payment (
+--   PaymentID int auto_increment,
+--   PaymentRequestID int,
+--   Amount float,
+--   ExpiredDate date,
+--   CVV int (3),
+--   CardHolderName varchar (30),
+--   CardNumber varchar (20),
+--   primary key (PaymentID, PaymentRequestID),
+--   foreign key (PaymentRequestID) references Request (RequestID) on
+--                     delete cascade on
+--                     update cascade
+-- );
+-- ------------------------------------------------------------------------------------------------
+-- create table Explore (
+--   ExpClientID varchar(13),
+--   ExpCourseID int,
+--   primary key(ExpClientID, ExpCourseID),
+--   foreign key(ExpClientID) references Client(ClientID) on delete cascade on update cascade,
+--   foreign key(ExpCourseID) references Course(CourseID) on delete cascade on update cascade
+-- );
+-- create table Request (
+--   RequestID int auto_increment,
+--   TrainerAcceptingID varchar (13),
+--   primary key (RequestID, TrainerAcceptingID),
+--   foreign key (TrainerAcceptingID) references Client (ClientID) on
+--                 delete cascade on
+--                 update cascade
+-- );
+-- create table SendToBuy (
+--   ClientSendingID varchar(13),
+--   CourseSentID int,
+--   TrainerSentID varchar(13),
+--   isAccept boolean default false,
+--   isCanceled boolean default false,
+--   primary key(ClientSendingID, CourseSentID, TrainerSentID),
+--   foreign key(ClientSendingID) references Client(ClientID) on delete cascade on update cascade,
+--   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
+--   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
+-- );

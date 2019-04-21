@@ -17,8 +17,8 @@ var setReEmailInfo = (email,transactionID,token) => {
   emailInfo.transactionID = transactionID;
   emailInfo.token = token;
   mailOptions["to"] = email;
-  mailOptions["html"] = `<a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${token}/>Accept reserve</a><br>\
-  <a href=http://localhost:${port}/cancelBuyCourse/${token}>Cancel reserve</a>`
+  mailOptions["html"] = `<a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>Accept reserve</a><br>\
+  <a href=http://localhost:${port}/cancelBuyCourse/${transactionID}/${token}>Cancel reserve</a>`
   console.log("line 20 of mailsender",mailOptions);
   
 };

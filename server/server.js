@@ -31,7 +31,37 @@ connection.connect();
 
 
 
-app.post(`/trainer_dee/acceptBuyCourse/:token`)
+app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
+  let transID = req.params.transactionID ;
+  let token = req.params.token ;
+  
+  sql = "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
+  connection.query(sql,[transID,token],error=>{
+    if(error) {
+      console.log('error acceptBuyCourse in server.js at line 41');
+    }else {
+      console.log('acceptCourse Successful');
+      res.sendStatus(200);
+    }
+  });
+  
+  
+
+});
+
+app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token",(req,res)=>{
+  let transID = req.params.transactionID;
+  let token = req.params.token;
+  sql = "UPDATE TransactionID SET token ='0' AND status = 'rejected' WHERE transactionID = ? AND token = ?";
+  connection.query(sql,[transID,token],error=>{
+    if(error){
+      console.log('error in cancelBuyCourse  at line 56')
+    }else {
+      console.log('cancelCourse Successful');
+      res.sendStatus(200);
+    }
+  }); 
+});
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
  // console.log(req.body);
