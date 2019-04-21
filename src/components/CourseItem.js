@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import starIcon from "../img/star.png";
 import "../css/courseItem.css";
 import { Link } from "react-router-dom"
-import { Table } from "react-bootstrap";
+import { Table, Button, Form, Modal } from "react-bootstrap";
+
 
 export class CourseItem extends Component {
 
@@ -10,7 +11,9 @@ export class CourseItem extends Component {
     super(props);
 
     this.state = {
-      coursesClient: []
+      coursesClient: [],
+      showRate: 0,
+      rating: 0.0
     }
   }
 
@@ -24,6 +27,49 @@ export class CourseItem extends Component {
   componentDidMount() {
     this.getCoursesClient();
   }
+
+  onFormChange = e => {
+    this.setState({
+      rating: parseInt(e.target.value)
+    })
+  };
+
+  handleKeyPress = (target) => {
+    if (target.charCode == 13) {
+      this.onSubmitRateClick();
+    }
+  }
+
+  onRateClick = () => {
+    this.setState({ showRate: 1 });
+  }
+
+  onSubmitRateClick = () => {
+    this.fetchUpdateRating();
+  }
+
+  async fetchUpdateRating() {
+    try {
+      const data = {rating: (this.state.rating+this.props.rating)/2, trainerID: this.props.trainerID};
+
+      const response = await fetch("/trainer_dee/update_rating", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      this.setState({ showRate: 0 });
+      window.location = "/myCourse"
+    } catch (error) {
+      console.log("Update rating failed", error);
+    }
+  }
+
+  onRateSuccess = () => {
+    this.setState({ showRate: 0 });
+
+  };
 
   async getCoursesClient() {
     try {
@@ -144,12 +190,27 @@ export class CourseItem extends Component {
 
           </div>
           {window.location.pathname == "/myCourse" && this.props.isAttendedPage == 1 ? (
-            <div className="infoLine">
-              <div className="infoContainer">
-                <span className="infoTitle">Status</span>
-                <span> {this.props.status}</span>
+            <div>
+              <div className="infoLine">
+                <div className="infoContainer">
+                  <span className="infoTitle">Status</span>
+                  <span> {this.props.status}</span>
+                </div>
+              </div>
+              <div style={{ display: "flex", marginTop: "20px" }}>
+                <Button
+                  variant="primary"
+                  size="small"
+                  type="submit"
+                  style={{ marginLeft: "auto", marginRight: "15px" }}
+                  href="javascript:void(0);"
+                  onClick={this.onRateClick}
+                >
+                  Rate
+                        </Button>
               </div>
             </div>
+
           ) : (
               <div />
             )}
@@ -157,7 +218,7 @@ export class CourseItem extends Component {
             <div className="infoLine">
               <div className="infoContainer">
                 <span className="infoTitle">Course Status</span>
-                <span> {this.props.courseStatus == 1? "Show":"Hide"}</span>
+                <span> {this.props.courseStatus == 1 ? "Show" : "Hide"}</span>
               </div>
             </div>
           ) : (
@@ -194,6 +255,30 @@ export class CourseItem extends Component {
               )}
           </div>
         </div>
+
+        <Modal show={this.state.showRate} onHide={this.onRateSuccess}>
+          <Modal.Header closeButton>
+            <Modal.Title>Rate Trainer {this.props.fName} {this.props.lName}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Label>Rating</Form.Label>
+            <Form.Control
+              type="rating"
+              placeholder="Rating"
+              onChange={this.onFormChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.onSubmitRateClick}
+            >
+              Rate
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }

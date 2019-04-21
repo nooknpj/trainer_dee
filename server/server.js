@@ -150,6 +150,17 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
     });
 });
 
+app.post("/trainer_dee/update_rating", (req, res) => {
+  let sql ="UPDATE trainer SET rating = ? WHERE trainerID = ?";
+    console.log(req.body)
+  connection.query(sql, [req.body.rating, req.body.trainerID], (error, result) => {
+      if (error) throw error;
+      // console.log(all);
+      res.end();
+    }
+  );
+});
+
 app.post("/trainer_dee/get_course_visibility", (req, res) => {
   let sql =
     "select c.courseStatus from course c \

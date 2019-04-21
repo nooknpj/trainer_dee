@@ -105,6 +105,7 @@ export class MyCourse extends Component {
                                 this.state.attendedCourse.map(courseItem => (
                                     <CourseItem
                                         courseID={courseItem.courseID}
+                                        trainerID={courseItem.trainerID}
                                         cName={courseItem.cName}
                                         service={courseItem.service}
                                         courseDescription={courseItem.courseDescription}
