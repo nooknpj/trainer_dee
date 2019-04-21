@@ -34,8 +34,7 @@ connection.connect();
 app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
   let transID = req.params.transactionID ;
   let token = req.params.token ;
-  
-  sql = "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
+  let sql = "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
   connection.query(sql,[transID,token],error=>{
     if(error) {
       console.log('error acceptBuyCourse in server.js at line 41');
@@ -43,8 +42,27 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
       console.log('acceptCourse Successful');
       res.sendStatus(200);
     }
+    sql = "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
+    connection.query(sql,[transID],(error,result)=>{
+      if(error) console.log('error in server line 48');
+      else {
+        const clientEmail = result[0].email;
+      }
+      sql = "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
+      connection.query(sql1,[transID],(error,result)=>{
+        if(error) console.log('error in server line 54');
+        else {
+          const courseName = result[0].CName;
+        }
+      mailsender.setComfirmReEmailInfo(clientEmail,courseName);
+      mailsender.sendingMail();
+    });
+    });
+    
+    
+
   });
-  
+ 
   
 
 });
@@ -69,8 +87,8 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
   //console.log('server port is >>> ',port);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?;";
   let email = "";
-  const tranID = crypto.randomBytes(5).toString("hex");
   
+  // check if exist 
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
@@ -87,7 +105,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
           return;
         }
       }
-
+      const tranID = crypto.randomBytes(13).toString("hex"); // unique
       let sqlCreateTransaction =
         `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${tranID}',?,?,?,'0');`;
       connection.query(
