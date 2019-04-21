@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import starIcon from "../img/star.png";
 import "../css/courseItem.css";
 import { Link } from "react-router-dom"
-import { Table, Button, Form, Modal } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
+import { withStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/lab/Slider';
 
 
 export class CourseItem extends Component {
@@ -13,7 +15,7 @@ export class CourseItem extends Component {
     this.state = {
       coursesClient: [],
       showRate: 0,
-      rating: 0.0
+      rating: 2.5
     }
   }
 
@@ -28,17 +30,9 @@ export class CourseItem extends Component {
     this.getCoursesClient();
   }
 
-  onFormChange = e => {
-    this.setState({
-      rating: parseFloat(e.target.value)
-    })
+  handleChange = (event, value) => {
+    this.setState({ rating: Math.round( value * 10 ) / 10 });
   };
-
-  handleKeyPress = (target) => {
-    if (target.charCode == 13) {
-      this.onSubmitRateClick();
-    }
-  }
 
   onRateClick = () => {
     this.setState({ showRate: 1 });
@@ -50,7 +44,7 @@ export class CourseItem extends Component {
 
   async fetchUpdateRating() {
     try {
-      const data = {rating: (this.state.rating+(this.props.rating*this.props.rateCount))/parseFloat((this.props.rateCount+1)), trainerID: this.props.trainerID, rateCount: this.props.rateCount+1};
+      const data = { rating: (this.state.rating + (this.props.rating * this.props.rateCount)) / parseFloat((this.props.rateCount + 1)), trainerID: this.props.trainerID, rateCount: this.props.rateCount + 1 };
       const response = await fetch("/trainer_dee/update_rating", {
         method: "POST",
         headers: {
@@ -198,21 +192,21 @@ export class CourseItem extends Component {
               </div>
               {this.props.status == "finished" ? (
                 <div style={{ display: "flex", marginTop: "20px" }}>
-                <Button
-                  variant="primary"
-                  size="small"
-                  type="submit"
-                  style={{ marginLeft: "auto", marginRight: "15px" }}
-                  href="javascript:void(0);"
-                  onClick={this.onRateClick}
-                >
-                  Rate
+                  <Button
+                    variant="primary"
+                    size="small"
+                    type="submit"
+                    style={{ marginLeft: "auto", marginRight: "15px" }}
+                    href="javascript:void(0);"
+                    onClick={this.onRateClick}
+                  >
+                    Rate
                 </Button>
-              </div>
-              ):(
-                <div/>
-              )}
-              
+                </div>
+              ) : (
+                  <div />
+                )}
+
             </div>
 
           ) : (
@@ -265,12 +259,14 @@ export class CourseItem extends Component {
             <Modal.Title>Rate Trainer {this.props.fName} {this.props.lName}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form.Label>Rating</Form.Label>
-            <Form.Control
-              type="rating"
-              placeholder="Rating"
-              onChange={this.onFormChange}
-              onKeyPress={this.handleKeyPress}
+            <p>Rating: {this.state.rating}</p>
+
+            <Slider
+              value={this.state.rating}
+              min={0.0}
+              max={5.0}
+              step={0.1}
+              onChange={this.handleChange}
             />
           </Modal.Body>
           <Modal.Footer>
@@ -295,6 +291,15 @@ const starIconStyle = {
   paddingTop: "1px",
   paddingBottom: "3px"
 };
+
+const styles = {
+  root: {
+    width: 300,
+  },
+  slider: {
+    padding: '22px 0px',
+  },
+};
 //CourseItemProps;
 // CourseID={courseItem.CourseID}
 // CName={courseItem.CName}
@@ -305,4 +310,4 @@ const starIconStyle = {
 // CourseHour={courseItem.CourseHour}
 // ImageUrl={courseItem.Image}
 
-export default CourseItem;
+export default withStyles(styles)(CourseItem);

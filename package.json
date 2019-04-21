@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/lab": "^3.0.0-alpha.30",
     "bootstrap": "^4.2.1",
     "crypto": "^1.0.1",
     "express": "^4.16.4",
