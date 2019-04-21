@@ -84,13 +84,13 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             console.log("line71", email);
         
             mailsender.setReEmailInfo(email,tranID,token);
-            const emailInfo = mailsender.sendingMail();
+             mailsender.sendingMail();
             
             console.log('server line 87',emailInfo);
             sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
             AND transactionID = '${tranID}' AND status = 'toBeAccepted'`;
               
-              connection.query(sql ,[emailInfo.token,req.body.clientID,req.body.courseID],(error)=>{
+              connection.query(sql ,[token,req.body.clientID,req.body.courseID],(error)=>{
                   if(error) console.log("error to update token");
               });
             });
