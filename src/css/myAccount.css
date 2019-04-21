@@ -9,7 +9,7 @@
 }
 
 .accountTitleContainer {
-  width: 25%;
+  /* width: 25%; */
 }
 
 .accountTitle {
@@ -20,6 +20,7 @@
   border-radius: 5px;
   border: #21366e solid 2px;
 }
+
 .accountNameContainer {
   font-weight: bold;
   font-size: 16px;
@@ -34,9 +35,33 @@
   border: #21366e solid 2px;
 }
 
-@media screen and (min-width: 768px){
+.trainerImage {
+  border: 3px solid black;
+  border-radius: 3px;
+  max-width: 160px;
+  min-width: 160px;
+  max-height: 160px;
+  min-height: 160px;
+  margin-top: 10px;
+}
+
+;
+@media screen and (min-width: 768px) {
   .accountNameContainer {
     display: flex;
+  }
+  #accountInfo {
+    width: 75%;
+    max-width: 75%;
+    min-width: 75%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .trainerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

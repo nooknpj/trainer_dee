@@ -96,7 +96,7 @@ export class ClientAccount extends Component {
     return (
       <div>
         <div className="infoLine">
-          <div className="infoTitleContainer">
+          <div className="accountTitleContainer">
             <a className="infoTitle" style={accountTypeStyle}>
               {" "}
               {this.getAccountType()}
@@ -104,7 +104,7 @@ export class ClientAccount extends Component {
           </div>
         </div>
 
-        <div id="courseItemInfo">
+        <div id="accountInfo">
           <div className="infoLine" style={{ marginTop: "30px" }}>
             <div className="accountTitleContainer">
               <a className="accountTitle">Email Address</a>

@@ -126,7 +126,7 @@ export class TrainerAccount extends Component {
     return (
       <div>
         <div className="infoLine">
-          <div className="infoTitleContainer">
+          <div className="accountTitleContainer">
             <a className="infoTitle" style={accountTypeStyle}>
               {" "}
               {this.getAccountType()}
@@ -134,9 +134,9 @@ export class TrainerAccount extends Component {
           </div>
         </div>
 
-        <img style={trainerImgStyle} src={this.state.TrainerImg} />
+        <img className="trainerImage" src={this.state.TrainerImg} />
 
-        <div id="courseItemInfo">
+        <div id="accountInfo">
           <div className="infoLine" style={{ marginTop: "30px" }}>
             <div className="accountTitleContainer">
               <a className="accountTitle">Email Address</a>
@@ -234,13 +234,4 @@ const ratingStyle = {
   backgroundColor: "#006cb0"
 };
 
-const trainerImgStyle = {
-  border: "3px solid black",
-  borderRadius: "3px",
-  maxWidth: "160px",
-  minWidth: "160px",
-  maxHeight: "160px",
-  minHeight: "160px",
-  marginTop: "10px"
-};
 export default TrainerAccount;
