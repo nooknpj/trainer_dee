@@ -116,6 +116,7 @@ export class MyCourse extends Component {
                                         gender={courseItem.gender}
                                         imageUrl={courseItem.imageUrl}
                                         rating={courseItem.rating}
+                                        rateCount={courseItem.rateCount}
                                         status={courseItem.status}
                                         isAttendedPage={1}
                                     />

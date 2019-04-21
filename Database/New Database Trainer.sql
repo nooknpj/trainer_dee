@@ -17,7 +17,8 @@ create table Trainer (
   TrainerImg varchar(256),
   trainerDescription varchar(256),
   Certificate varchar(256),
-  Rating float(2, 1),
+  Rating float(2, 1) not null,
+  rateCount int not null,
   primary key(TrainerID),
   foreign key(TrainerID) references Client(ClientID) on delete cascade on update cascade
 );
@@ -201,27 +202,30 @@ insert into
     SSN,
     TrainerDescription,
     Rating,
-    TrainerImg
+    TrainerImg,
+    rateCount
   )
 values
-  ('0000000001', '123', 'helloTrainer', 3.5, ''),
-  ('0000000002', '123', 'helloTrainer', 2.0, ''),
-  ('0000000003', '123', 'helloTrainer', 4.7, ''),
-  ('0000000004', '123', 'helloTrainer', 5.0, ''),
-  ('0000000005', '123', 'helloTrainer', 3.2, ''),
+  ('0000000001', '123', 'helloTrainer', 0.0, '', 0),
+  ('0000000002', '123', 'helloTrainer', 2.0, '', 3),
+  ('0000000003', '123', 'helloTrainer', 4.7, '', 4),
+  ('0000000004', '123', 'helloTrainer', 5.0, '', 1),
+  ('0000000005', '123', 'helloTrainer', 3.2, '', 2),
   (
     '9999999999',
     '111111',
     'I am johny the trainer and this is my trainer description. I have the power to change lives for the better. I help clients achieve their fitness and health goals through motivation and education.',
     4.3,
-    'https://www.telegraph.co.uk/content/dam/men/2016/04/22/PD68583783_dtho201_2655530b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=450'
+    'https://www.telegraph.co.uk/content/dam/men/2016/04/22/PD68583783_dtho201_2655530b_trans_NvBQzQNjv4BqpJliwavx4coWFCaEkEsb3kvxIt-lGGWCWqwLa_RXJU8.jpg?imwidth=450',
+    5
   ),
   (
     '5555555555',
     '0911515',
     'i am a trainer with an actual email',
-    '9.9',
-    ''
+    '3.9',
+    '',
+    6
   );
 INSERT INTO
   Course (
@@ -438,8 +442,8 @@ values
   ('adddddd5', '0000000003', '1', 'toBePaid', '0'),
   ('adddddd6', '0000000002', '3', 'rejected', '0'),
   ('adddddd7', '0000000003', '6', 'onGoing', '0'),
-  ('adddddd8', '0000000004', '4', 'onGoing', '0'),
-  ('adddddd9', '0000000004', '5', 'onGoing', '0'); 
+  ('adddddd8', '0000000004', '4', 'finished', '0'),
+  ('adddddd9', '0000000004', '5', 'finished', '0'); 
 
 
   -- create table Payment (

@@ -30,7 +30,7 @@ export class CourseItem extends Component {
 
   onFormChange = e => {
     this.setState({
-      rating: parseInt(e.target.value)
+      rating: parseFloat(e.target.value)
     })
   };
 
@@ -50,8 +50,7 @@ export class CourseItem extends Component {
 
   async fetchUpdateRating() {
     try {
-      const data = {rating: (this.state.rating+this.props.rating)/2, trainerID: this.props.trainerID};
-
+      const data = {rating: (this.state.rating+(this.props.rating*this.props.rateCount))/parseFloat((this.props.rateCount+1)), trainerID: this.props.trainerID, rateCount: this.props.rateCount+1};
       const response = await fetch("/trainer_dee/update_rating", {
         method: "POST",
         headers: {
@@ -189,7 +188,7 @@ export class CourseItem extends Component {
             </div>
 
           </div>
-          {window.location.pathname == "/myCourse" && this.props.isAttendedPage == 1 ? (
+          {(window.location.pathname == "/myCourse" && this.props.isAttendedPage == 1) ? (
             <div>
               <div className="infoLine">
                 <div className="infoContainer">
@@ -197,7 +196,8 @@ export class CourseItem extends Component {
                   <span> {this.props.status}</span>
                 </div>
               </div>
-              <div style={{ display: "flex", marginTop: "20px" }}>
+              {this.props.status == "finished" ? (
+                <div style={{ display: "flex", marginTop: "20px" }}>
                 <Button
                   variant="primary"
                   size="small"
@@ -207,8 +207,12 @@ export class CourseItem extends Component {
                   onClick={this.onRateClick}
                 >
                   Rate
-                        </Button>
+                </Button>
               </div>
+              ):(
+                <div/>
+              )}
+              
             </div>
 
           ) : (
