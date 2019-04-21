@@ -133,7 +133,7 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
             email = result[0].email; // get email from Authen table
             console.log("line71", email);
         
-            mailsender.setReEmailInfo(email,tranID,token);
+            mailsender.setAcceptReEmailInfo(email,tranID,token);
              mailsender.sendingMail();
             
             console.log('server line 87',emailInfo);
