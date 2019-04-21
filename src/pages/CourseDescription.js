@@ -188,16 +188,17 @@ export class CourseDescription extends Component {
             <span className="descriptionTitle">Course Location</span>
             <div className="courseDescriptionBox">
               <span> {this.state.locName}</span>
+              <LocationPicker
+                containerElement={<div style={{ height: "100%" }} />}
+                mapElement={<div style={{ height: "400px" }} />}
+                defaultPosition={{ lat: this.state.lat, lng: this.state.lng }}
+                radius={-1}
+                zoom={18}
+              />
             </div>
 
           </div>
-          <LocationPicker
-            containerElement={<div style={{ height: "100%" }} />}
-            mapElement={<div style={{ height: "400px" }} />}
-            defaultPosition={{ lat: this.state.lat, lng: this.state.lng }}
-            radius={-1}
-            zoom={18}
-          />
+
           <div style={{ display: "Block" }}>
             {this.state.trainerID == localStorage.getItem("clientID") ? (
               <Button
