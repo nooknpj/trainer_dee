@@ -44,7 +44,7 @@ export class CourseItem extends Component {
 
   async fetchUpdateRating() {
     try {
-      const data = { rating: (this.state.rating + (this.props.rating * this.props.rateCount)) / parseFloat((this.props.rateCount + 1)), trainerID: this.props.trainerID, rateCount: this.props.rateCount + 1 };
+      const data = { clientID: localStorage.getItem("clientID"), courseID: this.props.courseID, rating: (this.state.rating + (this.props.rating * this.props.rateCount)) / parseFloat((this.props.rateCount + 1)), trainerID: this.props.trainerID, rateCount: this.props.rateCount + 1 };
       const response = await fetch("/trainer_dee/update_rating", {
         method: "POST",
         headers: {

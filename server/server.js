@@ -156,9 +156,15 @@ app.post("/trainer_dee/update_rating", (req, res) => {
   connection.query(sql, [req.body.rating, req.body.rateCount, req.body.trainerID], (error, result) => {
       if (error) throw error;
       // console.log(all);
-      res.end();
     }
   );
+  sql = "UPDATE transaction SET status = 'rated' WHERE clientID = ? and courseID = ?"
+  connection.query(sql, [req.body.clientID, req.body.courseID], (error, result) => {
+    if (error) throw error;
+    // console.log(all);
+    res.end()
+  }
+);
 });
 
 app.post("/trainer_dee/get_course_visibility", (req, res) => {
