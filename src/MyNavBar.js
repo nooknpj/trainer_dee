@@ -195,7 +195,7 @@ export class MyNavBar extends Component {
   render() {
     return (
       <div>
-        <Navbar id="myNavBar" expand="md" collapseOnSelect>
+        <Navbar id="myNavBar" expand="xl" collapseOnSelect>
           <NavbarBrand id="navBrand" href="/">
             {" "}
             Trainer D
