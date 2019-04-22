@@ -78,7 +78,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
           else {
             courseName = result[0].CName;
           }
-          mailsender.setComfirmReEmailInfo(clientEmail, courseName);
+          mailsender.setComfirmReEmailInfo(emailInfo);
           mailsender.sendingMail();
         });
       });

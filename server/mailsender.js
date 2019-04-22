@@ -59,10 +59,33 @@ var setAcceptReEmailInfo = emailInfo => {
   console.log("line 20 of mailsender", mailOptions);
 };
 
-var setComfirmReEmailInfo = (clientEmail, courseName) => {
-  mailOptions["to"] = clientEmail;
-  mailOptions["subject"] = `Your request to buy ${courseName} is Comfirm!`;
-  mailOptions["text"] = `annouce your request to buy course is comfirm!`;
+var setComfirmReEmailInfo = emailInfo => {
+  let mailContent = `<p > Your request to buy course "${
+    emailInfo.cName
+  }" has been accepted. </p>
+  <p>Transaction ID: ${emailInfo.transactionID}</p>
+                    <hr>
+                    <p> Course Name: ${emailInfo.cName} </p> 
+                    <p> Course Service: ${emailInfo.service}  </p>
+                    <p> Course Cost: ${emailInfo.courseCost} Baht </p>
+                    <p> Course Duration: ${emailInfo.courseHour} Hours </p>
+                    <hr>
+                    
+                    <p> Client Name: ${emailInfo.trainerFName} ${
+    emailInfo.trainerLName
+  } </p> 
+                    <p> Client TelNo: ${emailInfo.trainerTelno}  </p>
+                    <p> Client Email: ${emailInfo.trainerEmail}  </p>
+                    <hr>
+                    <p> Please pay for the course within 48 hours.</p>`;
+  mailOptions["to"] = emailInfo.clientEmail;
+  mailOptions["subject"] = `Your request to buy ${email.cName} is accepted!`;
+  mailOptions["text"] = ``;
+  mailOptions["html"] = ` 
+  <body>
+  ${mailContent}
+  <a href=http://localhost:3000/myCourse>
+  View My Course</a><br>`;
 };
 
 var mailOptions = {
