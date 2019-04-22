@@ -30,8 +30,12 @@ connection.connect();
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
 app.post("/trainer_dee/confirmPayment", (req, res) => {
-  let sql =
-    "UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;";
+  let transactionID ;
+  let sql = "select trainer.FName , trainer.LName , c.cost , c.Service ,c.courseHour  \
+  from client cl , client trainer , course c , transaction trans where trans.clientID = cl.clientID \
+  and trans.courseID = c.courseID and c.courseID = '1' and cl.clientID = '0000000001' and \
+  trans.status = 'toBePaid' and  c.trainerID = trainer.clientID ;";
+  sql ="UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;";
   connection.query(sql, [req.body.transactionID], error => {
     if (error) console.log("error to update payment status!");
     else res.sendStatus(200);
@@ -48,7 +52,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     if (error) throw error;
     if (result.length == 0) {
       console.log("invalid");
-      res.sendStatus(450);
+      res.send("invalid token");
       return;
     }
 
@@ -96,7 +100,7 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
     if (error) throw error;
     if (result.length == 0) {
       console.log("invalid");
-      res.sendStatus(450);
+      res.send("invalid token");
       return;
     }
     let sql =
@@ -132,26 +136,14 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
   // check if exist
   connection.query(
     sql,
-    [req.body.clientID, req.body.courseID],
+    [req.body.clientID, req.body.courseID, "finished"],
     (error, result) => {
-      console.log("check if exists result = ", result);
       if (error) throw error;
 
-      let createTransactionCondition = true;
       if (result.length !== 0) {
-        for (i = 0; i < result.length; i++) {
-          console.log("result: ", i, " ", result[i]);
-          if (
-            result[i].status == "toBePaid" ||
-            result[i].status == "toBeAccepted" ||
-            result[i].status == "onGoing"
-          ) {
-            createTransactionCondition = false;
-            break;
-          }
-        }
+        let createTransactionCondition =
+          result[0].status == "finished" || result[0].status == "rejected";
 
-        console.log("condittion = ", createTransactionCondition);
         if (!createTransactionCondition) {
           console.log("alreadyExist");
           res.sendStatus(450);
