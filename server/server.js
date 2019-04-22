@@ -42,41 +42,45 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
   console.log("enter accpet buy request");
   let transactionID = req.params.transactionID;
   let token = req.params.token;
-  console.log(
-    "-----------------------------------------------------------------"
-  );
-  console.log("transactionID:", transactionID, "    Token:", token);
-  console.log(
-    "-----------------------------------------------------------------"
-  );
-  let sql =
-    "UPDATE Transaction SET token = '0' ,status = 'toBePaid' WHERE transactionID = ? AND token = ?";
-
-  connection.query(sql, [transactionID, token], error => {
-    if (error) {
-      throw error;
-      console.log("error acceptBuyCourse in server.js at line 41");
-    } else {
-      console.log("acceptCourse Successful");
-      res.sendStatus(200);
+  let verifyToken =
+    "SELECT * FROM transaction WHERE transactionID = ? AND token = ?";
+  connection.query(verifyToken, [transactionID, token], (error, result) => {
+    if (error) throw error;
+    if (result.length == 0) {
+      console.log("invalid");
+      res.send("invalid token");
+      return;
     }
-    sql =
-      "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
-    connection.query(sql, [transactionID], (error, result) => {
-      console.log("line65", result);
-      if (error) console.log("error in server line 48");
-      else {
-        clientEmail = result[0].email;
+
+    let sql =
+      "UPDATE Transaction SET token = '0' ,status = 'toBePaid' WHERE transactionID = ? AND token = ?";
+
+    connection.query(sql, [transactionID, token], error => {
+      if (error) {
+        throw error;
+        console.log("error acceptBuyCourse in server.js at line 41");
+      } else {
+        console.log("acceptCourse Successful");
+        res.sendStatus(200);
       }
       sql =
-        "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
+        "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
       connection.query(sql, [transactionID], (error, result) => {
-        if (error) console.log("error in server line 54");
+        console.log("line65", result);
+        if (error) console.log("error in server line 48");
         else {
-          courseName = result[0].CName;
+          clientEmail = result[0].email;
         }
-        mailsender.setComfirmReEmailInfo(clientEmail, courseName);
-        mailsender.sendingMail();
+        sql =
+          "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
+        connection.query(sql, [transactionID], (error, result) => {
+          if (error) console.log("error in server line 54");
+          else {
+            courseName = result[0].CName;
+          }
+          mailsender.setComfirmReEmailInfo(clientEmail, courseName);
+          mailsender.sendingMail();
+        });
       });
     });
   });
@@ -85,25 +89,28 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
 app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
   let transactionID = req.params.transactionID;
   let token = req.params.token;
-  console.log(
-    "-----------------------------------------------------------------"
-  );
-  console.log("transactionID:", transactionID, "    Token:", token);
-  console.log(
-    "-----------------------------------------------------------------"
-  );
 
-  let sql =
-    "UPDATE Transaction SET token = '0',status = 'rejected' WHERE transactionID = ? AND token = ?";
-
-  connection.query(sql, [transactionID, token], error => {
-    if (error) {
-      throw error;
-      //console.log("error in cancelBuyCourse  at line 56");
-    } else {
-      console.log("cancelCourse Successful");
-      res.sendStatus(200);
+  let verifyToken =
+    "SELECT * FROM transaction WHERE transactionID = ? AND token = ?";
+  connection.query(verifyToken, [transactionID, token], (error, result) => {
+    if (error) throw error;
+    if (result.length == 0) {
+      console.log("invalid");
+      res.send("invalid token");
+      return;
     }
+    let sql =
+      "UPDATE Transaction SET token = '0',status = 'rejected' WHERE transactionID = ? AND token = ?";
+
+    connection.query(sql, [transactionID, token], error => {
+      if (error) {
+        throw error;
+        //console.log("error in cancelBuyCourse  at line 56");
+      } else {
+        console.log("cancelCourse Successful");
+        res.sendStatus(200);
+      }
+    });
   });
 });
 
