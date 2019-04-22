@@ -15,9 +15,6 @@ export class ResponseRequest extends Component {
 
     componentDidMount() {
         this.acceptRequest();
-        setTimeout(function() { //Start the timer
-            this.setState({redirect: true}) //After 5 second, set render to true
-        }.bind(this), 5000)
     }
 
     async acceptRequest() {
@@ -27,7 +24,13 @@ export class ResponseRequest extends Component {
         let token = url[3];
         const response = await fetch(`/trainer_dee/${responseRequest}/${transactionID}/${token}`);
         if(response.status == 450){
-            this.state.isInvalid = 1;
+            this.setState({
+                isInvalid: 1
+            });
+        } else{
+            setTimeout(function() { //Start the timer
+                this.setState({redirect: true}) //After 5 second, set render to true
+            }.bind(this), 5000)
         }
     }
 
