@@ -50,7 +50,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     "-----------------------------------------------------------------"
   );
   let sql =
-    "UPDATE Transaction SET status = 'toBePaid',token = '0' WHERE transactionID = ? AND token = ?";
+    "UPDATE Transaction SET token = '0' ,status = 'toBePaid' WHERE transactionID = ? AND token = ?";
 
   connection.query(sql, [transactionID, token], error => {
     if (error) {
@@ -98,7 +98,8 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
 
   connection.query(sql, [transactionID, token], error => {
     if (error) {
-      console.log("error in cancelBuyCourse  at line 56");
+      throw error;
+      //console.log("error in cancelBuyCourse  at line 56");
     } else {
       console.log("cancelCourse Successful");
       res.sendStatus(200);

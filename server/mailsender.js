@@ -53,7 +53,7 @@ var setAcceptReEmailInfo = emailInfo => {
   <a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>
   Accept Buy Request</a><br>\
   
-  <a href=http://localhost:${port}/cancelBuyCourse/${transactionID}/${token}>Cancel Buy Request</a>
+  <a href=http://localhost:${port}/trainer_dee/cancelBuyCourse/${transactionID}/${token}>Cancel Buy Request</a>
   </body>`;
   console.log("line 20 of mailsender", mailOptions);
 };
@@ -84,23 +84,23 @@ var transporter = nodemailer.createTransport({
 
 var sendingMail = () => {
   // console.log('mailserver sendmail line 42 port is >>>>',port);
-  console.log("sendMail line 41", mailOptions);
+  // console.log("sendMail line 41", mailOptions);
 
   transporter.sendMail(mailOptions, (error, res) => {
-    console.log("sendMail line 44", mailOptions);
+    // console.log("sendMail line 44", mailOptions);
     if (error) {
-      console.log(
-        "-------------------error massage line 52 ----------------------"
-      );
-      console.dir(error);
-      console.log(`Fail to send Email`);
-      //return;
+      // console.log(
+      //   "-------------------error massage line 52 ----------------------"
+      // );
+      // console.dir(error);
+      // console.log(`Fail to send Email`);
+      // //return;
     } else {
-      console.log(
-        "---------------successful sending line 57------------------"
-      );
-      console.dir(res);
-      console.log("sentMail line 59", mailOptions);
+      // console.log(
+      //   "---------------successful sending line 57------------------"
+      // );
+      // console.dir(res);
+      // console.log("sentMail line 59", mailOptions);
     }
   });
 };
