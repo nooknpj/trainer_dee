@@ -97,6 +97,37 @@ var setComfirmReEmailInfo = emailInfo => {
   View My Course</a><br>`;
 };
 
+var setRejected = emailInfo => {
+  let mailContent = `<p > Sorry, your request to buy course "${
+    emailInfo.cName
+  }" has been rejected. </p>
+  <p>Transaction ID: ${emailInfo.transactionID}</p>
+                    <hr>
+                    <p> Course Name: ${emailInfo.cName} </p> 
+                    <p> Course Service: ${getService(emailInfo.service)}  </p>
+                    <p> Course Cost: ${emailInfo.courseCost} Baht </p>
+                    <p> Course Duration: ${emailInfo.courseHour} Hours </p>
+                    <hr>
+                    
+                    <p> Trainer Name: ${emailInfo.trainerFName} ${
+    emailInfo.trainerLName
+  } </p> 
+                    <p> Trainer TelNo: ${emailInfo.trainerTelno}  </p>
+                    <p> Trainer Email: ${emailInfo.trainerEmail}  </p>
+                    <hr>
+              `;
+  mailOptions["to"] = emailInfo.clientEmail;
+  mailOptions["subject"] = `Sorry,your request to buy ${
+    emailInfo.cName
+  } is rejected. Transaction ID: ${emailInfo.transactionID}`;
+  mailOptions["text"] = ``;
+  mailOptions["html"] = ` 
+  <body>
+  ${mailContent}
+  <a href=http://localhost:3000/searchCourse>
+  Look for other courses</a><br>`;
+};
+
 var mailOptions = {
   from: "d.plop4@gmail.com",
   to: "",
@@ -138,4 +169,9 @@ var sendingMail = () => {
   });
 };
 
-module.exports = { setAcceptReEmailInfo, sendingMail, setComfirmReEmailInfo };
+module.exports = {
+  setAcceptReEmailInfo,
+  sendingMail,
+  setComfirmReEmailInfo,
+  setRejected
+};

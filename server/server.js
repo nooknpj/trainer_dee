@@ -147,6 +147,17 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
       res.send("invalid token");
       return;
     }
+
+    clientEmailSql =
+      "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
+    connection.query(clientEmailSql, [transactionID], (error, result) => {
+      console.log("line65", result);
+      if (error) console.log("error in server line 48");
+      else {
+        clientEmail = result[0].email;
+      }
+    });
+
     let sql =
       "UPDATE Transaction SET token = '0',status = 'rejected' WHERE transactionID = ? AND token = ?";
 
@@ -156,6 +167,30 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
         //console.log("error in cancelBuyCourse  at line 56");
       } else {
         console.log("cancelCourse Successful");
+        let getEmailInfoSql =
+          "SELECT c.cName,c.service,c.cost,c.courseHour,cl.fName,cl.lName,cl.telno,au.email from client cl,course c,transaction ts,authen au where\
+        cl.clientID = c.trainerID and ts.courseID = c.courseID and au.authenID = cl.clientID and ts.transactionID=?;";
+        connection.query(getEmailInfoSql, [transactionID], (error, result) => {
+          if (error) console.log("error in server line 54");
+          else {
+          }
+          console.log(result[0]);
+          let emailInfo = {
+            transactionID: transactionID,
+            clientEmail: clientEmail,
+            cName: result[0].cName,
+            service: result[0].service,
+            courseCost: result[0].cost,
+            courseHour: result[0].courseHour,
+            trainerFName: result[0].fName,
+            trainerLName: result[0].lName,
+            trainerTelno: result[0].telno,
+            trainerEmail: result[0].email
+          };
+
+          mailsender.setRejected(emailInfo);
+          mailsender.sendingMail();
+        });
         res.sendStatus(200);
       }
     });
