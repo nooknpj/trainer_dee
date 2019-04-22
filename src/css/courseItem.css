@@ -1,3 +1,8 @@
+.courseItemLink:hover {
+  all: none;
+  text-decoration: none;
+  background-color: red;
+}
 #courseItem {
   border: solid white 5px;
   border-radius: 10px;
@@ -10,10 +15,27 @@
   flex-direction: row;
   font-size: 1em;
   background-color: #ffc845;
+  transition-duration: 300ms;
   /* min-height: 300px;
     max-height: 300px; */
 }
 
+#courseItem:hover {
+  border: solid #21366e 5px;
+  border-radius: 10px;
+  color: #21366e;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-direction: row;
+  font-size: 1em;
+  background-color: #ffc845;
+  transition-duration: 300ms;
+  /* min-height: 300px;
+    max-height: 300px; */
+}
 @media screen and (min-width: 500px) {
   #courseItem {
     display: flex;
