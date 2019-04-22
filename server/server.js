@@ -55,14 +55,14 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     connection.query(sql, [transID], (error, result) => {
       if (error) console.log("error in server line 48");
       else {
-        const clientEmail = result[0].email;
+        clientEmail = result[0].email;
       }
       sql =
         "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
       connection.query(sql1, [transID], (error, result) => {
         if (error) console.log("error in server line 54");
         else {
-          const courseName = result[0].CName;
+          courseName = result[0].CName;
         }
         mailsender.setComfirmReEmailInfo(clientEmail, courseName);
         mailsender.sendingMail();
