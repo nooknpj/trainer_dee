@@ -11,17 +11,28 @@ const port = 5000 || process.env.PORT;
 //   transactionID : ""
 // };
 
-var setAcceptReEmailInfo = (email, transactionID, token) => {
+var setAcceptReEmailInfo = emailInfo => {
   //console.log("line 15 of mailsender", email,transactionID, token);
   // emailInfo.trainerEmail = email;
   // emailInfo.transactionID = transactionID;
   // emailInfo.token = token;
+  let email = emailInfo.email;
+  let transactionID = emailInfo.transactionID;
+  let token = emailInfo.transactionID;
+
+  let mailSubject = `Your course "${emailInfo.cName}" has a new buy request.`;
+  let mailContent = `Course Name: ${emailInfo.cName} \n
+                     Course Service: ${emailInfo.service} \n 
+                     Course Cost: ${emailInfo.courseCost} Baht \n 
+                     Course Duration: ${emailInfo.courseHour} Hours \n `;
+  console.log(emailInfo);
   mailOptions["to"] = email;
-  mailOptions["subject"] = `A Client want to buy your course2!`;
-  mailOptions["text"] = ``;
-  mailOptions[
-    "html"
-  ] = `<a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>
+  // mailOptions["subject"] = `A Client want to buy your course2!`;
+  mailOptions["subject"] = mailSubject;
+
+  mailOptions["text"] = "texttttttttttttttttttttttttt";
+  mailOptions["html"] = `<p> ${mailContent}</p>
+  <a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>
   Accept reserve</a><br>\
   
   <a href=http://localhost:${port}/cancelBuyCourse/${transactionID}/${token}>Cancel reserve</a>`;

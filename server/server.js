@@ -59,7 +59,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
       }
       sql =
         "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
-      connection.query(sql1, [transID], (error, result) => {
+      connection.query(sql, [transID], (error, result) => {
         if (error) console.log("error in server line 54");
         else {
           courseName = result[0].CName;
@@ -87,12 +87,20 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
 });
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
-  // console.log(req.body);
+  console.log("--------------------------------------------------");
+  console.log(req.body);
   console.log("--------------------------------------------------");
   //console.log('server port is >>> ',port);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?;";
   let email = "";
-
+  var cName = req.body.cName;
+  var service = req.body.service;
+  var courseHour = req.body.courseHour;
+  var courseCost = req.body.cost;
+  var clientFName = req.body.clientFName;
+  var clientLName = req.body.clientLName;
+  var clientTelno = req.body.clientTelno;
+  var clientEmail = req.body.clientEmail;
   // check if exist
   connection.query(
     sql,
@@ -110,14 +118,14 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
           return;
         }
       }
-      const tranID = crypto.randomBytes(13).toString("hex"); // unique
-      let sqlCreateTransaction = `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${tranID}',?,?,?,'0');`;
+      const transactionID = crypto.randomBytes(13).toString("hex"); // unique
+      let sqlCreateTransaction = `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${transactionID}',?,?,?,'0');`;
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
         error => {
           if (error) {
-            console.log(tranID);
+            console.log(transactionID);
 
             console.log("error at insert into client");
             res.sendStatus(400);
@@ -134,13 +142,26 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 
             email = result[0].email; // get email from Authen table
             console.log("line71", email);
-
-            mailsender.setAcceptReEmailInfo(email, tranID, token);
+            let emailInfo = {
+              email: email,
+              transactionID: transactionID,
+              token: token,
+              clientFName: clientFName,
+              clientLName: clientLName,
+              clientTelno: clientTelno,
+              clientEmail: clientEmail,
+              cName: cName,
+              courseHour: courseHour,
+              courseCost: courseCost,
+              service: service
+            };
+            mailsender.setAcceptReEmailInfo(emailInfo);
+            // mailsender.setAcceptReEmailInfo(email, tranID, token);
             mailsender.sendingMail();
 
             //console.log('server line 87',emailInfo);
             sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
-            AND transactionID = '${tranID}' AND status = 'toBeAccepted'`;
+            AND transactionID = '${transactionID}' AND status = 'toBeAccepted'`;
 
             connection.query(
               sql,

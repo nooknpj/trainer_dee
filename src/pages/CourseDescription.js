@@ -83,6 +83,10 @@ export class CourseDescription extends Component {
     transactionData["clientID"] = localStorage.getItem("clientID");
     transactionData["courseID"] = this.state.courseID;
     transactionData["trainerID"] = this.state.trainerID;
+    transactionData["cName"] = this.state.cName;
+    transactionData["service"] = this.state.service;
+    transactionData["courseHour"] = this.state.courseHour;
+    transactionData["cost"] = this.state.cost;
     transactionData["status"] = "toBeAccepted";
 
     this.requestToBuy(transactionData);
@@ -140,7 +144,7 @@ export class CourseDescription extends Component {
         );
         return;
       }
-    } catch (error) { }
+    } catch (error) {}
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
@@ -148,7 +152,7 @@ export class CourseDescription extends Component {
     alert(
       "You successfully sent buy request to the trainer. Please wait 48 hours for trainer to accept your request."
     );
-    window.location = "/";
+    window.location = "/myCourse";
 
     console.log("TEST");
     //window.location = "/";
@@ -182,7 +186,6 @@ export class CourseDescription extends Component {
             <div className="courseDescriptionBox">
               <span> {this.state.telNo}</span>
             </div>
-
           </div>
           <div className="descriptionLine">
             <span className="descriptionTitle">Course Location</span>
@@ -196,7 +199,6 @@ export class CourseDescription extends Component {
                 zoom={18}
               />
             </div>
-
           </div>
 
           <div style={{ display: "Block" }}>
@@ -210,15 +212,15 @@ export class CourseDescription extends Component {
                 Edit course
               </Button>
             ) : (
-                <Button
-                  variant="primary"
-                  size="small"
-                  type="submit"
-                  onClick={this.onRequestToBuyClick}
-                >
-                  Request to buy this course
+              <Button
+                variant="primary"
+                size="small"
+                type="submit"
+                onClick={this.onRequestToBuyClick}
+              >
+                Request to buy this course
               </Button>
-              )}
+            )}
           </div>
         </div>
       </div>
