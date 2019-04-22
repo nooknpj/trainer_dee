@@ -28,6 +28,11 @@ export class CourseItem extends Component {
     this.getCoursesClient();
   }
 
+  onPayClick = () => {
+    sessionStorage.setItem("courseID", this.props.courseID);
+    window.location = "/payment"
+  }
+
   handleChange = (event, value) => {
     this.setState({ rating: Math.round(value * 10) / 10 });
   };
@@ -208,6 +213,21 @@ export class CourseItem extends Component {
                     <span> {this.props.status}</span>
                   </div>
                 </div>
+                {this.props.status == "toBePaid" ? (
+                  <div style={{ display: "flex", marginTop: "20px" }}>
+                    <Button
+                      variant="primary"
+                      size="small"
+                      type="submit"
+                      style={{ marginLeft: "auto", marginRight: "15px" }}
+                      onClick={this.onPayClick}
+                    >
+                      Pay
+                    </Button>
+                  </div>
+                ) : (
+                  <div />
+                )}
                 {this.props.status == "finished" ? (
                   <div style={{ display: "flex", marginTop: "20px" }}>
                     <Button
