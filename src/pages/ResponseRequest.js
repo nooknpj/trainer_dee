@@ -8,7 +8,8 @@ export class ResponseRequest extends Component {
         super(props, context);
 
         this.state = {
-            redirect: false
+            redirect: false,
+            isInvalid: 0
         };
     }
 
@@ -24,17 +25,24 @@ export class ResponseRequest extends Component {
         let responseRequest = url[1];
         let transactionID = url[2];
         let token = url[3];
-        await fetch(`/trainer_dee/${responseRequest}/${transactionID}/${token}`);
+        const response = await fetch(`/trainer_dee/${responseRequest}/${transactionID}/${token}`);
+        if(response.status == 450){
+            this.state.isInvalid = 1;
+        }
     }
 
     render() {
         return (
             <div className="box">
-                {this.state.redirect ? (
+            {this.state.isInvalid ?(
+                <p>Invalid token!</p>
+            ):(
+                this.state.redirect ? (
                     window.location = "/"
                 ):(
-                    <p>{url[1]}! Website will redirect to Home in 5 seconds.</p>
-                )}
+                    <p>Website will redirect to Home in 5 seconds if {url[1]} is finished.</p>
+                )
+            )}
             </div>
         );
     }
