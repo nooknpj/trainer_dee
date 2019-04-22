@@ -71,15 +71,17 @@ var setComfirmReEmailInfo = emailInfo => {
                     <p> Course Duration: ${emailInfo.courseHour} Hours </p>
                     <hr>
                     
-                    <p> Client Name: ${emailInfo.trainerFName} ${
+                    <p> Trainer Name: ${emailInfo.trainerFName} ${
     emailInfo.trainerLName
   } </p> 
-                    <p> Client TelNo: ${emailInfo.trainerTelno}  </p>
-                    <p> Client Email: ${emailInfo.trainerEmail}  </p>
+                    <p> Trainer TelNo: ${emailInfo.trainerTelno}  </p>
+                    <p> Trainer Email: ${emailInfo.trainerEmail}  </p>
                     <hr>
                     <p> Please pay for the course within 48 hours.</p>`;
   mailOptions["to"] = emailInfo.clientEmail;
-  mailOptions["subject"] = `Your request to buy ${email.cName} is accepted!`;
+  mailOptions["subject"] = `Your request to buy ${
+    emailInfo.cName
+  } is accepted!`;
   mailOptions["text"] = ``;
   mailOptions["html"] = ` 
   <body>
