@@ -11,6 +11,13 @@ const port = 5000 || process.env.PORT;
 //   transactionID : ""
 // };
 
+var getService = service => {
+  if (service == 0) return "Yoga";
+  if (service == 1) return "Cardio";
+  if (service == 2) return "WeightTraining";
+  else return "others";
+};
+
 var setAcceptReEmailInfo = emailInfo => {
   //console.log("line 15 of mailsender", email,transactionID, token);
   // emailInfo.trainerEmail = email;
@@ -66,7 +73,7 @@ var setComfirmReEmailInfo = emailInfo => {
   <p>Transaction ID: ${emailInfo.transactionID}</p>
                     <hr>
                     <p> Course Name: ${emailInfo.cName} </p> 
-                    <p> Course Service: ${emailInfo.service}  </p>
+                    <p> Course Service: ${getService(emailInfo.service)}  </p>
                     <p> Course Cost: ${emailInfo.courseCost} Baht </p>
                     <p> Course Duration: ${emailInfo.courseHour} Hours </p>
                     <hr>
@@ -81,7 +88,7 @@ var setComfirmReEmailInfo = emailInfo => {
   mailOptions["to"] = emailInfo.clientEmail;
   mailOptions["subject"] = `Your request to buy ${
     emailInfo.cName
-  } is accepted!`;
+  } is accepted! Transaction ID: ${emailInfo.transactionID}`;
   mailOptions["text"] = ``;
   mailOptions["html"] = ` 
   <body>

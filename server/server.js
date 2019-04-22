@@ -30,44 +30,47 @@ connection.connect();
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
 app.post("/trainer_dee/confirmPayment", (req, res) => {
-  
-  let sql = "select trainer.FName , trainer.LName , c.cost , c.Service ,c.courseHour  \
+  let sql =
+    "select trainer.FName , trainer.LName , c.cost , c.Service ,c.courseHour  \
   from client cl , client trainer , course c , transaction trans where trans.clientID = cl.clientID \
   and trans.courseID = c.courseID and c.courseID = ? and cl.clientID = ? and \
   trans.status = 'toBePaid' and  c.trainerID = trainer.clientID ;";
-  connection.query(sql , [req.body.courseID,req.body.clientID],(error,result)=>{
-    if(error) {
-      res.sendStatus(400);
-      console.dir(error); 
-    }
-    else {
-      console.log('get paymentSuccess');
-      console.dir(result);
-      let service ;
-        if (result[0].service == 0) service =  "Yoga";
-        else if (result[0].service == 1) service =  "Cardio";
-        else if (result[0].service == 2) service = "WeightTraining";
-        
-       paymentInfo = {
-          trainerFName : result[0].FName,
-          trainerLName : result[0].LName,
-          courseCost : result[0].cost,
-          service : service,
-          courseHour : result[0].courseHour
-      }
-      res.send(paymentInfo);
-    }
-    sql ="UPDATE Transaction SET status = 'onGoing' WHERE courseID =? AND clientID = ? AND status = 'toBePaids' ;";
-    connection.query(sql, [req.body.transactionID], error => {
+  connection.query(
+    sql,
+    [req.body.courseID, req.body.clientID],
+    (error, result) => {
       if (error) {
         res.sendStatus(400);
-        console.log("error to update payment status!");}
-      else {
-        res.sendStatus(200);
+        console.dir(error);
+      } else {
+        console.log("get paymentSuccess");
+        console.dir(result);
+        let service;
+        if (result[0].service == 0) service = "Yoga";
+        else if (result[0].service == 1) service = "Cardio";
+        else if (result[0].service == 2) service = "WeightTraining";
+
+        paymentInfo = {
+          trainerFName: result[0].FName,
+          trainerLName: result[0].LName,
+          courseCost: result[0].cost,
+          service: service,
+          courseHour: result[0].courseHour
+        };
+        res.send(paymentInfo);
       }
-    });
-  });
- 
+      sql =
+        "UPDATE Transaction SET status = 'onGoing' WHERE courseID =? AND clientID = ? AND status = 'toBePaids' ;";
+      connection.query(sql, [req.body.transactionID], error => {
+        if (error) {
+          res.sendStatus(400);
+          console.log("error to update payment status!");
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    }
+  );
 });
 
 app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
@@ -112,6 +115,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
           }
           console.log(result[0]);
           let emailInfo = {
+            transactionID: transactionID,
             clientEmail: clientEmail,
             cName: result[0].cName,
             service: result[0].service,
