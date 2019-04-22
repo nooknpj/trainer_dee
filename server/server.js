@@ -29,68 +29,71 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
-
-
-app.post("/trainer_dee/paymentComfiem",(req,res)=>{
-  let sql = "UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;" ;
-  connection.query(sql,[req.body.transactionID],(error)=>{
-    if(error) console.log('error to update payment status!');
+app.post("/trainer_dee/confirmPayment", (req, res) => {
+  let sql =
+    "UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;";
+  connection.query(sql, [req.body.transactionID], error => {
+    if (error) console.log("error to update payment status!");
     else res.sendStatus(200);
-  })
+  });
 });
 
-app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token",(req,res)=>{
-  let transID = req.params.transactionID ;
-  let token = req.params.token ;
-  let sql = "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
-  connection.query(sql,[transID,token],error=>{
-    if(error) {
-      console.log('error acceptBuyCourse in server.js at line 41');
-    }else {
-      console.log('acceptCourse Successful');
+app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
+  let transID = req.params.transactionID;
+  let token = req.params.token;
+  let sql =
+    "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
+  connection.query(sql, [transID, token], error => {
+    if (error) {
+      console.log("error acceptBuyCourse in server.js at line 41");
+    } else {
+      console.log("acceptCourse Successful");
       res.sendStatus(200);
     }
-    sql = "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
-    connection.query(sql,[transID],(error,result)=>{
-      if(error) console.log('error in server line 48');
+    sql =
+      "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
+    connection.query(sql, [transID], (error, result) => {
+      if (error) console.log("error in server line 48");
       else {
         const clientEmail = result[0].email;
       }
-      sql = "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
-      connection.query(sql1,[transID],(error,result)=>{
-        if(error) console.log('error in server line 54');
+      sql =
+        "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
+      connection.query(sql1, [transID], (error, result) => {
+        if (error) console.log("error in server line 54");
         else {
           const courseName = result[0].CName;
         }
-      mailsender.setComfirmReEmailInfo(clientEmail,courseName);
-      mailsender.sendingMail();
+        mailsender.setComfirmReEmailInfo(clientEmail, courseName);
+        mailsender.sendingMail();
+      });
     });
-    });
-    });
+  });
 });
 
-app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token",(req,res)=>{
+app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
   let transID = req.params.transactionID;
   let token = req.params.token;
-  sql = "UPDATE TransactionID SET token ='0' AND status = 'rejected' WHERE transactionID = ? AND token = ?";
-  connection.query(sql,[transID,token],error=>{
-    if(error){
-      console.log('error in cancelBuyCourse  at line 56')
-    }else {
-      console.log('cancelCourse Successful');
+  sql =
+    "UPDATE TransactionID SET token ='0' AND status = 'rejected' WHERE transactionID = ? AND token = ?";
+  connection.query(sql, [transID, token], error => {
+    if (error) {
+      console.log("error in cancelBuyCourse  at line 56");
+    } else {
+      console.log("cancelCourse Successful");
       res.sendStatus(200);
     }
-  }); 
+  });
 });
 
 app.post("/trainer_dee/create_transaction", (req, res) => {
- // console.log(req.body);
-  console.log('--------------------------------------------------');
+  // console.log(req.body);
+  console.log("--------------------------------------------------");
   //console.log('server port is >>> ',port);
   let sql = "SELECT * FROM transaction WHERE clientID=? AND courseID=?;";
   let email = "";
-  
-  // check if exist 
+
+  // check if exist
   connection.query(
     sql,
     [req.body.clientID, req.body.courseID, "finished"],
@@ -108,15 +111,14 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
         }
       }
       const tranID = crypto.randomBytes(13).toString("hex"); // unique
-      let sqlCreateTransaction =
-        `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${tranID}',?,?,?,'0');`;
+      let sqlCreateTransaction = `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${tranID}',?,?,?,'0');`;
       connection.query(
         sqlCreateTransaction,
         [req.body.clientID, req.body.courseID, req.body.status],
         error => {
           if (error) {
             console.log(tranID);
-            
+
             console.log("error at insert into client");
             res.sendStatus(400);
             return;
@@ -132,44 +134,56 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 
             email = result[0].email; // get email from Authen table
             console.log("line71", email);
-        
-            mailsender.setAcceptReEmailInfo(email,tranID,token);
-             mailsender.sendingMail();
-            
-            console.log('server line 87',emailInfo);
+
+            mailsender.setAcceptReEmailInfo(email, tranID, token);
+            mailsender.sendingMail();
+
+            //console.log('server line 87',emailInfo);
             sql = `UPDATE transaction SET token = ? WHERE clientID = ? AND courseID = ? \
             AND transactionID = '${tranID}' AND status = 'toBeAccepted'`;
-              
-              connection.query(sql ,[token,req.body.clientID,req.body.courseID],(error)=>{
-                  if(error) console.log("error to update token");
-              });
-            });
-        });
+
+            connection.query(
+              sql,
+              [token, req.body.clientID, req.body.courseID],
+              error => {
+                if (error) console.log("error to update token");
+              }
+            );
+          });
+        }
+      );
       //console.log("backEndEndSuccessfully");
-      //res.sendStatus(200);
-    });
+      res.sendStatus(200);
+    }
+  );
 });
 
 app.post("/trainer_dee/update_rating", (req, res) => {
-  let sql ="UPDATE trainer SET rating = ?, rateCount = ? WHERE trainerID = ?";
-    console.log(req.body)
-  connection.query(sql, [req.body.rating, req.body.rateCount, req.body.trainerID], (error, result) => {
+  let sql = "UPDATE trainer SET rating = ?, rateCount = ? WHERE trainerID = ?";
+  console.log(req.body);
+  connection.query(
+    sql,
+    [req.body.rating, req.body.rateCount, req.body.trainerID],
+    (error, result) => {
       if (error) throw error;
       // console.log(all);
     }
   );
-  sql = "UPDATE transaction SET status = 'rated' WHERE clientID = ? and courseID = ?"
-  connection.query(sql, [req.body.clientID, req.body.courseID], (error, result) => {
-    if (error) throw error;
-    // console.log(all);
-    res.end()
-  }
-);
+  sql =
+    "UPDATE transaction SET status = 'rated' WHERE clientID = ? and courseID = ?";
+  connection.query(
+    sql,
+    [req.body.clientID, req.body.courseID],
+    (error, result) => {
+      if (error) throw error;
+      // console.log(all);
+      res.end();
+    }
+  );
 });
 
 app.post("/trainer_dee/get_course_visibility", (req, res) => {
-  let sql =
-    "select c.courseStatus from course c \
+  let sql = "select c.courseStatus from course c \
   where c.courseID = ?";
   connection.query(sql, [req.body.courseID], (error, result) => {
     if (error) throw error;
