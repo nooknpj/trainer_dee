@@ -142,17 +142,16 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
         for (i = 0; i < result.length; i++) {
           console.log("result: ", i, " ", result[i]);
           if (
-            result[i].status == "finished" ||
-            result[i].status == "rejected"
+            result[i].status == "toBePaid" ||
+            result[i].status == "toBeAccepted" ||
+            result[i].status == "onGoing"
           ) {
             createTransactionCondition = false;
             break;
           }
         }
 
-        // let createTransactionCondition =
-        //   result[0].status == "finished" || result[0].status == "rejected";
-
+        console.log("condittion = ", createTransactionCondition);
         if (!createTransactionCondition) {
           console.log("alreadyExist");
           res.sendStatus(450);
