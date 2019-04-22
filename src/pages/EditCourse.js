@@ -7,18 +7,53 @@ export class EditCourse extends Component {
     constructor() {
         super();
         this.state = {
+            courseID: 0,
+            trainerID: "0000000000",
+            cName: "courseName",
+            imageUrl: "",
+            CourseDescription: "CourseDescription",
             courseStatus: false
         };
         this.handleToggleChange = this.handleToggleChange.bind(this);
     }
 
-    componentDidMount(){
-        this.onLoadCourseVisibility();
+    componentDidMount() {
+        this.getCourseData();
     }
 
-    onLoadCourseVisibility(){
-        this.fetchLoadCourseVisibility();
-    }
+    async getCourseData() {
+        try {
+          let courseID = {};
+          if (this.props.location.state == undefined) {
+            courseID = { courseID: document.referrer.split("/")[4] };
+          } else {
+            courseID = { courseID: this.props.location.state };
+          }
+          const response = await fetch("/trainer_dee/get_course_description", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(courseID)
+          });
+    
+          const results = await response.json();
+          if (results.length != 0) {
+            const result = results[0]; 
+            
+            this.setState({
+              courseID: result.courseID,
+              trainerID: result.trainerID,
+              cName: result.cName,
+              imageUrl: result.imageUrl,
+              courseDescription: result.courseDescription,
+              courseStatus: result.courseStatus
+            });
+          }
+        } catch (error) {
+          console.log("defaultFetchError : ", error);
+        }
+      }
 
     onFormChange = e => {
         this.state[e.target.title] = e.target.value;
@@ -33,39 +68,39 @@ export class EditCourse extends Component {
 
     handleToggleChange(checked) {
         this.setState({ courseStatus: checked });
-      }
-
-      async fetchLoadCourseVisibility(){
-        try {
-            const data = this.state;
-            data.courseID = document.referrer.split("/")[4]
-            console.log(data)
-            
-            const response = await fetch("/trainer_dee/get_course_visibility", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            const results = await response.json();
-            console.log(results)
-            this.setState({
-                courseStatus: results[0].courseStatus == 1 ? true:false
-            })
-            console.log(this.state.courseStatus)
-        } catch (error) {
-            console.log("Fetch course visibility failed", error);
-        }
     }
+
+    // async fetchLoadCourseVisibility() {
+    //     try {
+    //         const data = this.state;
+    //         data.courseID = document.referrer.split("/")[4]
+    //         console.log(data)
+
+    //         const response = await fetch("/trainer_dee/get_course_visibility", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify(data)
+    //         });
+
+    //         const results = await response.json();
+    //         console.log(results)
+    //         this.setState({
+    //             courseStatus: results[0].courseStatus == 1 ? true : false
+    //         })
+    //         console.log(this.state.courseStatus)
+    //     } catch (error) {
+    //         console.log("Fetch course visibility failed", error);
+    //     }
+    // }
 
     async fetchSaveCourse() {
         try {
             const data = this.state;
             data.courseID = document.referrer.split("/")[4]
             console.log(data.courseID)
-            
+
             const response = await fetch("/trainer_dee/edit_course", {
                 method: "POST",
                 headers: {
@@ -90,9 +125,11 @@ export class EditCourse extends Component {
                             type="courseName"
                             title="courseName"
                             maxLength="30"
+                            defaultValue={this.state.cName}
                             placeholder="Enter course name"
                             onChange={this.onFormChange}
                         />
+                        {console.log(this.state.cName)}
                         <Form.Group>
                             <Form.Label>Course Description</Form.Label>
                             <Form.Control
@@ -100,6 +137,7 @@ export class EditCourse extends Component {
                                 type="courseDesc"
                                 title="courseDesc"
                                 maxLength="170"
+                                defaultValue={this.state.courseDescription}
                                 placeholder="Enter course description"
                                 onChange={this.onFormChange}
                             />
@@ -112,6 +150,7 @@ export class EditCourse extends Component {
                             type="imageUrl"
                             title="imageUrl"
                             maxLength="170"
+                            defaultValue={this.state.imageUrl}
                             placeholder="Enter course description"
                             onChange={this.onFormChange}
                         />
