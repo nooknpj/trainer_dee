@@ -46,7 +46,8 @@ export class EditProfile extends Component {
         Gender: results[0].Gender,
         TelNo: results[0].TelNo,
         isTrainer: results[0].isTrainer,
-        Email: results[0].Email
+        Email: results[0].Email,
+        TrainerImg: results[0].TrainerImg
       });
       console.log(this.state);
       if (this.state.isTrainer == 1) {
@@ -185,7 +186,8 @@ export class EditProfile extends Component {
                         type="firstName"
                         title="firstName"
                         maxLength="20"
-                        placeholder={this.state.FName}
+                        defaultValue={this.state.FName}
+                        placeholder="First Name"
                         onChange={this.onFormChange}
                       />
                       <Form.Group style={inLineFormComponent}>
@@ -195,7 +197,8 @@ export class EditProfile extends Component {
                           type="lastName"
                           title="lastName"
                           maxLength="20"
-                          placeholder={this.state.LName}
+                          defaultValue={this.state.LName}
+                          placeholder="Last Name"
                           onChange={this.onFormChange}
                         />
                       </Form.Group>
@@ -208,7 +211,7 @@ export class EditProfile extends Component {
                         title="gender"
                         as="select"
                         onChange={this.onFormChange}
-                        value={this.state.Gender}
+                        defaultValue={this.state.Gender}
                       >
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -228,7 +231,8 @@ export class EditProfile extends Component {
                     required
                     type="address"
                     title="address"
-                    placeholder={this.state.Address}
+                    defaultValue={this.state.Address}
+                    placeholder="Address"
                     maxLength="110"
                     onChange={this.onFormChange}
                   />
@@ -245,7 +249,8 @@ export class EditProfile extends Component {
                     type="telNo"
                     title="telNo"
                     maxLength="10"
-                    placeholder={this.state.TelNo}
+                    defaultValue={this.state.TelNo}
+                    placeholder="Telephone No."
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
@@ -266,7 +271,8 @@ export class EditProfile extends Component {
                         required
                         type="trainerImg"
                         title="trainerImg"
-                        placeholder={this.state.TrainerImg}
+                        placeholder="Image URL"
+                        defaultValue={this.state.TrainerImg}
                         maxLength="250"
                         onChange={this.onFormChange}
                       />
@@ -282,7 +288,8 @@ export class EditProfile extends Component {
                         maxLength="190"
                         type="trainerDescription"
                         title="trainerDescription"
-                        placeholder={this.state.TrainerDescription}
+                        defaultValue={this.state.TrainerDescription}
+                        placeholder="Description"
                         onChange={this.onFormChange}
                       />
                     </Form.Group>
