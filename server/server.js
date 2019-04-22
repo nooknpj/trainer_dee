@@ -39,11 +39,12 @@ app.post("/trainer_dee/confirmPayment", (req, res) => {
 });
 
 app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
-  let transID = req.params.transactionID;
+  console.log("enter accpet buy request");
+  let transactionID = req.params.transactionID;
   let token = req.params.token;
   let sql =
     "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
-  connection.query(sql, [transID, token], error => {
+  connection.query(sql, [transactionID, token], error => {
     if (error) {
       console.log("error acceptBuyCourse in server.js at line 41");
     } else {
@@ -52,14 +53,14 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     }
     sql =
       "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
-    connection.query(sql, [transID], (error, result) => {
+    connection.query(sql, [transactionID], (error, result) => {
       if (error) console.log("error in server line 48");
       else {
         clientEmail = result[0].email;
       }
       sql =
         "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
-      connection.query(sql, [transID], (error, result) => {
+      connection.query(sql, [transactionID], (error, result) => {
         if (error) console.log("error in server line 54");
         else {
           courseName = result[0].CName;
