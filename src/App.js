@@ -21,6 +21,7 @@ import CourseDescription from "./pages/CourseDescription";
 import ReserveSession from "./pages/ReserveSession";
 import MyCourse from "./pages/MyCourse";
 import { EditCourse } from "./pages/EditCourse";
+import ResponseRequest from "./pages/ResponseRequest";
 
 class App extends Component {
   // when login is successful -> set IsLogin to 1
@@ -71,6 +72,8 @@ class App extends Component {
               <Route path={`/courseDesc/:courseID`} component={CourseDescription}/>
               <Route path="/myCourse" component={MyCourse}/>
               <Route path="/editCourse" component={EditCourse}/>
+              <Route path="/acceptBuyCourse/:transactionID/:token" component={ResponseRequest}/>
+              <Route path="/cancelBuyCourse/:transactionID/:token" component={ResponseRequest}/>
               <Route component={PageNotFound} />
             </Switch>
           </div>
