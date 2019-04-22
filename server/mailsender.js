@@ -20,12 +20,13 @@ var setAcceptReEmailInfo = emailInfo => {
   let transactionID = emailInfo.transactionID;
   let token = emailInfo.token;
 
-  let mailSubject = `Your course "${emailInfo.cName}" has a new buy request.`;
+  let mailSubject = `Your course "${
+    emailInfo.cName
+  }" has a new buy request. Transaction ID: ${transactionID}.`;
   let mailContent = ` 
   
-  <h  style="color: red"> Your course "${
-    emailInfo.cName
-  }" has a new buy request. </h>
+  <p > Your course "${emailInfo.cName}" has a new buy request. </p>
+  <p>Transaction ID: ${transactionID}</p>
                     <hr>
                     <p> Course Name: ${emailInfo.cName} </p> 
                     <p> Course Service: ${emailInfo.service}  </p>
@@ -46,7 +47,7 @@ var setAcceptReEmailInfo = emailInfo => {
   // mailOptions["subject"] = `A Client want to buy your course2!`;
   mailOptions["subject"] = mailSubject;
 
-  mailOptions["text"] = "";
+  mailOptions["text"] = `transactionID: ${transactionID}`;
   mailOptions["html"] = ` 
   <body>
   ${mailContent}

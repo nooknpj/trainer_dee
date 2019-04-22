@@ -99,7 +99,6 @@ create table ReserveCourse (
   foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
   foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
 );
-
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
   transactionID varchar (50),
@@ -111,7 +110,6 @@ create table Transaction (
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
 );
-
 INSERT INTO
   Client (
     ClientID,
@@ -425,7 +423,11 @@ values
     'DDerangedPLOP@gmail.com',
     'MUM222'
   ),
-  ('0000000000', 'client@gmail.com', 'client'),
+  (
+    '0000000000',
+    'client.dplop4@gmail.com',
+    'client'
+  ),
   ('9999999999', 'trainer@gmail.com', 'trainer'),
   (
     '5555555555',
@@ -433,56 +435,60 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (transactionID,clientID, courseID, status, token)
+  transaction (transactionID, clientID, courseID, status, token)
 values
-  ('adddddd1','0000000000', '1', 'onGoing', '0'),
-  ('adddddd2','0000000000', '2', 'toBeAccepted', '0'),
-  ('adddddd3','0000000001', '1', 'toBePaid', '0'),
-  ('adddddd4','0000000002', '3', 'rejected', '0'),
+  ('adddddd1', '0000000000', '1', 'onGoing', '0'),
+  (
+    'adddddd2',
+    '0000000000',
+    '2',
+    'toBeAccepted',
+    '0'
+  ),
+  ('adddddd3', '0000000001', '1', 'toBePaid', '0'),
+  ('adddddd4', '0000000002', '3', 'rejected', '0'),
   ('adddddd5', '0000000003', '1', 'toBePaid', '0'),
   ('adddddd6', '0000000002', '3', 'rejected', '0'),
   ('adddddd7', '0000000003', '6', 'onGoing', '0'),
   ('adddddd8', '0000000004', '4', 'finished', '0'),
-  ('adddddd9', '0000000004', '5', 'finished', '0'); 
-
-
-  -- create table Payment (
---   PaymentID int auto_increment,
---   PaymentRequestID int,
---   Amount float,
---   ExpiredDate date,
---   CVV int (3),
---   CardHolderName varchar (30),
---   CardNumber varchar (20),
---   primary key (PaymentID, PaymentRequestID),
---   foreign key (PaymentRequestID) references Request (RequestID) on
---                     delete cascade on
---                     update cascade
--- );
--- ------------------------------------------------------------------------------------------------
--- create table Explore (
---   ExpClientID varchar(13),
---   ExpCourseID int,
---   primary key(ExpClientID, ExpCourseID),
---   foreign key(ExpClientID) references Client(ClientID) on delete cascade on update cascade,
---   foreign key(ExpCourseID) references Course(CourseID) on delete cascade on update cascade
--- );
--- create table Request (
---   RequestID int auto_increment,
---   TrainerAcceptingID varchar (13),
---   primary key (RequestID, TrainerAcceptingID),
---   foreign key (TrainerAcceptingID) references Client (ClientID) on
---                 delete cascade on
---                 update cascade
--- );
--- create table SendToBuy (
---   ClientSendingID varchar(13),
---   CourseSentID int,
---   TrainerSentID varchar(13),
---   isAccept boolean default false,
---   isCanceled boolean default false,
---   primary key(ClientSendingID, CourseSentID, TrainerSentID),
---   foreign key(ClientSendingID) references Client(ClientID) on delete cascade on update cascade,
---   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
---   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
--- );
+  ('adddddd9', '0000000004', '5', 'finished', '0');
+-- create table Payment (
+  --   PaymentID int auto_increment,
+  --   PaymentRequestID int,
+  --   Amount float,
+  --   ExpiredDate date,
+  --   CVV int (3),
+  --   CardHolderName varchar (30),
+  --   CardNumber varchar (20),
+  --   primary key (PaymentID, PaymentRequestID),
+  --   foreign key (PaymentRequestID) references Request (RequestID) on
+  --                     delete cascade on
+  --                     update cascade
+  -- );
+  -- ------------------------------------------------------------------------------------------------
+  -- create table Explore (
+  --   ExpClientID varchar(13),
+  --   ExpCourseID int,
+  --   primary key(ExpClientID, ExpCourseID),
+  --   foreign key(ExpClientID) references Client(ClientID) on delete cascade on update cascade,
+  --   foreign key(ExpCourseID) references Course(CourseID) on delete cascade on update cascade
+  -- );
+  -- create table Request (
+  --   RequestID int auto_increment,
+  --   TrainerAcceptingID varchar (13),
+  --   primary key (RequestID, TrainerAcceptingID),
+  --   foreign key (TrainerAcceptingID) references Client (ClientID) on
+  --                 delete cascade on
+  --                 update cascade
+  -- );
+  -- create table SendToBuy (
+  --   ClientSendingID varchar(13),
+  --   CourseSentID int,
+  --   TrainerSentID varchar(13),
+  --   isAccept boolean default false,
+  --   isCanceled boolean default false,
+  --   primary key(ClientSendingID, CourseSentID, TrainerSentID),
+  --   foreign key(ClientSendingID) references Client(ClientID) on delete cascade on update cascade,
+  --   foreign key(CourseSentID) references Course(CourseID) on delete cascade on update cascade,
+  --   foreign key(TrainerSentID) references Trainer(TrainerID) on delete cascade on update cascade
+  -- );
