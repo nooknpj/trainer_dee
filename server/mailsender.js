@@ -50,10 +50,10 @@ var setAcceptReEmailInfo = emailInfo => {
   mailOptions["html"] = ` 
   <body>
   ${mailContent}
-  <a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>
+  <a href=http://localhost:3000/acceptBuyCourse/${transactionID}/${token}/>
   Accept Buy Request</a><br>\
   
-  <a href=http://localhost:${port}/trainer_dee/cancelBuyCourse/${transactionID}/${token}>Cancel Buy Request</a>
+  <a href=http://localhost:3000/cancelBuyCourse/${transactionID}/${token}>Cancel Buy Request</a>
   </body>`;
   console.log("line 20 of mailsender", mailOptions);
 };
