@@ -42,10 +42,19 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
   console.log("enter accpet buy request");
   let transactionID = req.params.transactionID;
   let token = req.params.token;
+  console.log(
+    "-----------------------------------------------------------------"
+  );
+  console.log("transactionID:", transactionID, "    Token:", token);
+  console.log(
+    "-----------------------------------------------------------------"
+  );
   let sql =
-    "UPDATE Transaction SET token = '0' AND status = 'toBePaid' WHERE transactionID = ? AND token = ?";
+    "UPDATE Transaction SET status = 'toBePaid',token = '0' WHERE transactionID = ? AND token = ?";
+
   connection.query(sql, [transactionID, token], error => {
     if (error) {
+      throw error;
       console.log("error acceptBuyCourse in server.js at line 41");
     } else {
       console.log("acceptCourse Successful");
@@ -54,6 +63,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     sql =
       "SELECT email FROM authen WHERE AuthenID = (SELECT clientID FROM Transaction WHERE transactionID = ?);";
     connection.query(sql, [transactionID], (error, result) => {
+      console.log("line65", result);
       if (error) console.log("error in server line 48");
       else {
         clientEmail = result[0].email;
@@ -73,11 +83,20 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
 });
 
 app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
-  let transID = req.params.transactionID;
+  let transactionID = req.params.transactionID;
   let token = req.params.token;
-  sql =
-    "UPDATE TransactionID SET token ='0' AND status = 'rejected' WHERE transactionID = ? AND token = ?";
-  connection.query(sql, [transID, token], error => {
+  console.log(
+    "-----------------------------------------------------------------"
+  );
+  console.log("transactionID:", transactionID, "    Token:", token);
+  console.log(
+    "-----------------------------------------------------------------"
+  );
+
+  let sql =
+    "UPDATE Transaction SET token = '0',status = 'rejected' WHERE transactionID = ? AND token = ?";
+
+  connection.query(sql, [transactionID, token], error => {
     if (error) {
       console.log("error in cancelBuyCourse  at line 56");
     } else {

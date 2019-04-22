@@ -18,7 +18,7 @@ var setAcceptReEmailInfo = emailInfo => {
   // emailInfo.token = token;
   let email = emailInfo.email;
   let transactionID = emailInfo.transactionID;
-  let token = emailInfo.transactionID;
+  let token = emailInfo.token;
 
   let mailSubject = `Your course "${emailInfo.cName}" has a new buy request.`;
   let mailContent = ` 
