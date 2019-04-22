@@ -48,7 +48,7 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
     if (error) throw error;
     if (result.length == 0) {
       console.log("invalid");
-      res.send("invalid token");
+      res.sendStatus(450);
       return;
     }
 
@@ -96,7 +96,7 @@ app.get("/trainer_dee/cancelBuyCourse/:transactionID/:token", (req, res) => {
     if (error) throw error;
     if (result.length == 0) {
       console.log("invalid");
-      res.send("invalid token");
+      res.sendStatus(450);
       return;
     }
     let sql =
