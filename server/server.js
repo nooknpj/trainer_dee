@@ -49,11 +49,11 @@ app.post("/trainer_dee/confirmPayment", (req, res) => {
         else if (result[0].service == 2) service = "WeightTraining";
         
        paymentInfo = {
-          trainerFName = result[0].FName,
-          trainerLName = result[0].LName,
-          courseCost = result[0].cost,
-          service = service,
-          courseHour = result[0].courseHour
+          trainerFName : result[0].FName,
+          trainerLName : result[0].LName,
+          courseCost : result[0].cost,
+          service : service,
+          courseHour : result[0].courseHour
       }
       res.send(paymentInfo);
     }
