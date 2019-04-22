@@ -132,13 +132,26 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
   // check if exist
   connection.query(
     sql,
-    [req.body.clientID, req.body.courseID, "finished"],
+    [req.body.clientID, req.body.courseID],
     (error, result) => {
+      console.log("check if exists result = ", result);
       if (error) throw error;
 
+      let createTransactionCondition = true;
       if (result.length !== 0) {
-        let createTransactionCondition =
-          result[0].status == "finished" || result[0].status == "rejected";
+        for (i = 0; i < result.length; i++) {
+          console.log("result: ", i, " ", result[i]);
+          if (
+            result[i].status == "finished" ||
+            result[i].status == "rejected"
+          ) {
+            createTransactionCondition = false;
+            break;
+          }
+        }
+
+        // let createTransactionCondition =
+        //   result[0].status == "finished" || result[0].status == "rejected";
 
         if (!createTransactionCondition) {
           console.log("alreadyExist");
