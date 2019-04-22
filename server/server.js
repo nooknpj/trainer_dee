@@ -30,12 +30,13 @@ connection.connect();
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 
 app.post("/trainer_dee/confirmPayment", (req, res) => {
-  let transactionID ;
-  let sql = "select trainer.FName , trainer.LName , c.cost , c.Service ,c.courseHour  \
+  let transactionID;
+  let sql =
+    "select trainer.FName , trainer.LName , c.cost , c.Service ,c.courseHour  \
   from client cl , client trainer , course c , transaction trans where trans.clientID = cl.clientID \
   and trans.courseID = c.courseID and c.courseID = '1' and cl.clientID = '0000000001' and \
   trans.status = 'toBePaid' and  c.trainerID = trainer.clientID ;";
-  sql ="UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;";
+  sql = "UPDATE Transaction SET status = 'onGoing' WHERE transactionID = ? ;";
   connection.query(sql, [req.body.transactionID], error => {
     if (error) console.log("error to update payment status!");
     else res.sendStatus(200);
@@ -76,12 +77,24 @@ app.get("/trainer_dee/acceptBuyCourse/:transactionID/:token", (req, res) => {
           clientEmail = result[0].email;
         }
         sql =
-          "SELECT CName FROM Transaction natural JOIN Course WHERE transactionID = ?;";
+          "SELECT c.cName,c.service,c.cost,c.courseHour,cl.fName,cl.lName,cl.telno,au.email from client cl,course c,transaction ts,authen au where\
+          cl.clientID = c.trainerID and ts.courseID = c.courseID and au.authenID = cl.clientID and ts.transactionID=?;";
         connection.query(sql, [transactionID], (error, result) => {
           if (error) console.log("error in server line 54");
           else {
-            courseName = result[0].CName;
           }
+          console.log(result[0]);
+          let emailInfo = {
+            clientEmail: clientEmail,
+            cName: result[0].cName,
+            service: result[0].service,
+            courseCost: result[0].cost,
+            courseHour: result[0].courseHour,
+            trainerFName: result[0].fName,
+            trainerLName: result[0].lName,
+            trainerTelno: result[0].telno,
+            trainerEmail: result[0].email
+          };
           mailsender.setComfirmReEmailInfo(emailInfo);
           mailsender.sendingMail();
         });
