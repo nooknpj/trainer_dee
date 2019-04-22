@@ -78,13 +78,20 @@ export class CourseDescription extends Component {
     }
   }
 
+  getService = service => {
+    if (service == 0) return "Yoga";
+    if (service == 1) return "Cardio";
+    if (service == 2) return "WeightTraining";
+    else return "others";
+  };
+
   onRequestToBuyClick = e => {
     let transactionData = {};
     transactionData["clientID"] = localStorage.getItem("clientID");
     transactionData["courseID"] = this.state.courseID;
     transactionData["trainerID"] = this.state.trainerID;
     transactionData["cName"] = this.state.cName;
-    transactionData["service"] = this.state.service;
+    transactionData["service"] = this.getService(this.state.service);
     transactionData["courseHour"] = this.state.courseHour;
     transactionData["cost"] = this.state.cost;
     transactionData["status"] = "toBeAccepted";

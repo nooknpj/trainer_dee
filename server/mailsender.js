@@ -21,21 +21,40 @@ var setAcceptReEmailInfo = emailInfo => {
   let token = emailInfo.transactionID;
 
   let mailSubject = `Your course "${emailInfo.cName}" has a new buy request.`;
-  let mailContent = `Course Name: ${emailInfo.cName} \n
-                     Course Service: ${emailInfo.service} \n 
-                     Course Cost: ${emailInfo.courseCost} Baht \n 
-                     Course Duration: ${emailInfo.courseHour} Hours \n `;
+  let mailContent = ` 
+  
+  <h  style="color: red"> Your course "${
+    emailInfo.cName
+  }" has a new buy request. </h>
+                    <hr>
+                    <p> Course Name: ${emailInfo.cName} </p> 
+                    <p> Course Service: ${emailInfo.service}  </p>
+                    <p> Course Cost: ${emailInfo.courseCost} Baht </p>
+                    <p> Course Duration: ${emailInfo.courseHour} Hours </p>
+                    <hr>
+                    
+                    <p> Client Name: ${emailInfo.clientFName} ${
+    emailInfo.clientLName
+  } </p> 
+                    <p> Client TelNo: ${emailInfo.clientTelno}  </p>
+                    <p> Client Email: ${emailInfo.clientEmail}  </p>
+                    <hr>
+                    <p> Please accept or cancel buy request within 48 hours.</p>
+                     `;
   console.log(emailInfo);
   mailOptions["to"] = email;
   // mailOptions["subject"] = `A Client want to buy your course2!`;
   mailOptions["subject"] = mailSubject;
 
-  mailOptions["text"] = "texttttttttttttttttttttttttt";
-  mailOptions["html"] = `<p> ${mailContent}</p>
+  mailOptions["text"] = "";
+  mailOptions["html"] = ` 
+  <body>
+  ${mailContent}
   <a href=http://localhost:${port}/trainer_dee/acceptBuyCourse/${transactionID}/${token}/>
-  Accept reserve</a><br>\
+  Accept Buy Request</a><br>\
   
-  <a href=http://localhost:${port}/cancelBuyCourse/${transactionID}/${token}>Cancel reserve</a>`;
+  <a href=http://localhost:${port}/cancelBuyCourse/${transactionID}/${token}>Cancel Buy Request</a>
+  </body>`;
   console.log("line 20 of mailsender", mailOptions);
 };
 
