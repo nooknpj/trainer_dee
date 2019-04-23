@@ -30,15 +30,16 @@ export class CourseItem extends Component {
 
   onPayClick = () => {
     sessionStorage.setItem("courseID", this.props.courseID);
-    window.location = "/payment"
-  }
+    window.location = "/payment";
+  };
 
   handleChange = (event, value) => {
     this.setState({ rating: Math.round(value * 10) / 10 });
   };
 
-  onRateClick = () => {
+  onRateClick = e => {
     this.setState({ showRate: 1 });
+    e.stopPropagation();
   };
 
   onSubmitRateClick = () => {
