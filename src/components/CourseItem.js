@@ -35,6 +35,7 @@ export class CourseItem extends Component {
 
   handleChange = (event, value) => {
     this.setState({ rating: Math.round(value * 10) / 10 });
+    event.stopPropagation();
   };
 
   onRateClick = e => {
@@ -119,210 +120,218 @@ export class CourseItem extends Component {
 
   render() {
     return (
-      <Link
-        to={{
-          pathname: `/courseDesc/${this.props.courseID}`,
-          state: this.props.courseID
-        }}
-        className="courseItemLink"
-      >
-        <div id="courseItem">
-          <div id="courseImgContainer">
-            <img className="courseImg" src={this.props.imageUrl} width="100%" />
+      <div>
+        <Link
+          to={{
+            pathname: `/courseDesc/${this.props.courseID}`,
+            state: this.props.courseID
+          }}
+          className="courseItemLink"
+        >
+          <div id="courseItem">
+            <div id="courseImgContainer">
+              <img
+                className="courseImg"
+                src={this.props.imageUrl}
+                width="100%"
+              />
 
-            {/* <p> {this.props.imageUrl} </p> */}
-          </div>
+              {/* <p> {this.props.imageUrl} </p> */}
+            </div>
 
-          <div id="courseItemInfo">
-            <div id="courseHeaderContainer">
-              <div id="courseTitleContainer">
-                {/* <a href={'/courseDesc:'+ this.props.cName} className="courseTitle">
+            <div id="courseItemInfo">
+              <div id="courseHeaderContainer">
+                <div id="courseTitleContainer">
+                  {/* <a href={'/courseDesc:'+ this.props.cName} className="courseTitle">
                 {" "}
                 {this.props.cName}{" "}
               </a> */}
-                <Link
-                  to={{
-                    pathname: `/courseDesc/${this.props.courseID}`,
-                    state: this.props.courseID
-                  }}
-                  className="courseTitle"
-                >
-                  {" "}
-                  {this.props.cName}{" "}
-                </Link>
-              </div>
-              <div id="courseServiceContainer">
-                <p className="courseService"> {this.getService()} </p>
-              </div>
-            </div>
-
-            <div className="infoLine">
-              {window.location.pathname != "/myCourse" ||
-              (window.location.pathname == "/myCourse" &&
-                this.props.isAttendedPage == 1) ? (
-                <div className="trainerInfoContainer">
-                  <div>
-                    <span className="infoTitle"> Trainer</span>
-                    <a> {this.props.fName}</a>
-                    <a> {this.props.lName} </a>
-                  </div>
-                  <div style={this.getGenderStyle()}>
-                    <a> {this.props.gender}</a>
-                  </div>
-
-                  <div className="ratingContainer">
-                    <a style={{ marginRight: "5px" }}>
-                      {" "}
-                      {this.props.rating.toFixed(1)}
-                    </a>
-                    <img style={starIconStyle} src={starIcon} />
-                  </div>
+                  <Link
+                    to={{
+                      pathname: `/courseDesc/${this.props.courseID}`,
+                      state: this.props.courseID
+                    }}
+                    className="courseTitle"
+                  >
+                    {" "}
+                    {this.props.cName}{" "}
+                  </Link>
                 </div>
-              ) : (
-                <div />
-              )}
-            </div>
-
-            <div className="descriptionLine">
-              <a className="descriptionTitle"> Course Description</a>
-              <div className="courseDescriptionBox">
-                <a> {this.props.courseDescription} </a>
-              </div>
-            </div>
-
-            <div className="infoLine">
-              <div className="infoContainer">
-                <span className="infoTitle"> Course Duration</span>
-                <span> {this.props.courseHour}</span>
-                <span> Hours</span>
-              </div>
-            </div>
-
-            <div className="infoLine">
-              <div className="infoContainer">
-                <span className="infoTitle"> Course Cost</span>
-                <span> {this.props.cost}</span>
-                <span> Baht</span>
-              </div>
-            </div>
-            {window.location.pathname == "/myCourse" &&
-            this.props.isAttendedPage == 1 ? (
-              <div>
-                <div className="infoLine">
-                  <div className="infoContainer">
-                    <span className="infoTitle">Status</span>
-                    <span> {this.props.status}</span>
-                  </div>
+                <div id="courseServiceContainer">
+                  <p className="courseService"> {this.getService()} </p>
                 </div>
-                {this.props.status == "toBePaid" ? (
-                  <div style={{ display: "flex", marginTop: "20px" }}>
-                    <Button
-                      variant="primary"
-                      size="small"
-                      type="submit"
-                      style={{ marginLeft: "auto", marginRight: "15px" }}
-                      onClick={this.onPayClick}
-                    >
-                      Pay
-                    </Button>
-                  </div>
-                ) : (
-                  <div />
-                )}
-                {this.props.status == "finished" ? (
-                  <div style={{ display: "flex", marginTop: "20px" }}>
-                    <Button
-                      variant="primary"
-                      size="small"
-                      type="submit"
-                      style={{ marginLeft: "auto", marginRight: "15px" }}
-                      href="javascript:void(0);"
-                      onClick={this.onRateClick}
-                    >
-                      Rate
-                    </Button>
+              </div>
+
+              <div className="infoLine">
+                {window.location.pathname != "/myCourse" ||
+                (window.location.pathname == "/myCourse" &&
+                  this.props.isAttendedPage == 1) ? (
+                  <div className="trainerInfoContainer">
+                    <div>
+                      <span className="infoTitle"> Trainer</span>
+                      <a> {this.props.fName}</a>
+                      <a> {this.props.lName} </a>
+                    </div>
+                    <div style={this.getGenderStyle()}>
+                      <a> {this.props.gender}</a>
+                    </div>
+
+                    <div className="ratingContainer">
+                      <a style={{ marginRight: "5px" }}>
+                        {" "}
+                        {this.props.rating.toFixed(1)}
+                      </a>
+                      <img style={starIconStyle} src={starIcon} />
+                    </div>
                   </div>
                 ) : (
                   <div />
                 )}
               </div>
-            ) : (
-              <div />
-            )}
-            {(window.location.pathname.includes("/courseDesc") &&
-              this.props.trainerID == localStorage.getItem("clientID")) ||
-            (window.location.pathname == "/myCourse" &&
-              this.props.isAttendedPage != 1) ? (
+
+              <div className="descriptionLine">
+                <a className="descriptionTitle"> Course Description</a>
+                <div className="courseDescriptionBox">
+                  <a> {this.props.courseDescription} </a>
+                </div>
+              </div>
+
               <div className="infoLine">
                 <div className="infoContainer">
-                  <span className="infoTitle">Course Status</span>
-                  <span> {this.props.courseStatus == 1 ? "Show" : "Hide"}</span>
+                  <span className="infoTitle"> Course Duration</span>
+                  <span> {this.props.courseHour}</span>
+                  <span> Hours</span>
                 </div>
               </div>
-            ) : (
-              <div />
-            )}
-            <div className="">
+
+              <div className="infoLine">
+                <div className="infoContainer">
+                  <span className="infoTitle"> Course Cost</span>
+                  <span> {this.props.cost}</span>
+                  <span> Baht</span>
+                </div>
+              </div>
               {window.location.pathname == "/myCourse" &&
-              this.props.isAttendedPage != 1 ? (
-                <div className="descriptionLine">
-                  <a className="descriptionTitle">Attended Client</a>
-                  <div className="courseDescriptionBox">
-                    <Table responsive hover size="sm">
-                      <thead>
-                        <tr>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Telephone No.</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.state.coursesClient.map(courseClient => (
-                          <tr>
-                            <td>{courseClient.fName}</td>
-                            <td>{courseClient.lName}</td>
-                            <td>{courseClient.telNo}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </Table>
+              this.props.isAttendedPage == 1 ? (
+                <div>
+                  <div className="infoLine">
+                    <div className="infoContainer">
+                      <span className="infoTitle">Status</span>
+                      <span> {this.props.status}</span>
+                    </div>
+                  </div>
+                  {this.props.status == "toBePaid" ? (
+                    <div style={{ display: "flex", marginTop: "20px" }}>
+                      <Button
+                        variant="primary"
+                        size="small"
+                        type="submit"
+                        style={{ marginLeft: "auto", marginRight: "15px" }}
+                        onClick={this.onPayClick}
+                      >
+                        Pay
+                      </Button>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                  {this.props.status == "finished" ? (
+                    <div style={{ display: "flex", marginTop: "20px" }}>
+                      <Button
+                        variant="primary"
+                        size="small"
+                        type="submit"
+                        style={{ marginLeft: "auto", marginRight: "15px" }}
+                        href="javascript:void(0);"
+                        onClick={this.onRateClick}
+                      >
+                        Rate
+                      </Button>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                </div>
+              ) : (
+                <div />
+              )}
+              {(window.location.pathname.includes("/courseDesc") &&
+                this.props.trainerID == localStorage.getItem("clientID")) ||
+              (window.location.pathname == "/myCourse" &&
+                this.props.isAttendedPage != 1) ? (
+                <div className="infoLine">
+                  <div className="infoContainer">
+                    <span className="infoTitle">Course Status</span>
+                    <span>
+                      {" "}
+                      {this.props.courseStatus == 1 ? "Show" : "Hide"}
+                    </span>
                   </div>
                 </div>
               ) : (
                 <div />
               )}
+              <div className="">
+                {window.location.pathname == "/myCourse" &&
+                this.props.isAttendedPage != 1 ? (
+                  <div className="descriptionLine">
+                    <a className="descriptionTitle">Attended Client</a>
+                    <div className="courseDescriptionBox">
+                      <Table responsive hover size="sm">
+                        <thead>
+                          <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Telephone No.</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.coursesClient.map(courseClient => (
+                            <tr>
+                              <td>{courseClient.fName}</td>
+                              <td>{courseClient.lName}</td>
+                              <td>{courseClient.telNo}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </div>
+                  </div>
+                ) : (
+                  <div />
+                )}
+              </div>
             </div>
           </div>
+        </Link>
+        <Modal show={this.state.showRate} onHide={this.onRateSuccess}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              Rate Trainer {this.props.fName} {this.props.lName}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Rating: {this.state.rating}</p>
 
-          <Modal show={this.state.showRate} onHide={this.onRateSuccess}>
-            <Modal.Header closeButton>
-              <Modal.Title>
-                Rate Trainer {this.props.fName} {this.props.lName}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Rating: {this.state.rating}</p>
-
-              <Slider
-                value={this.state.rating}
-                min={0.0}
-                max={5.0}
-                step={0.1}
-                onChange={this.handleChange}
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                variant="primary"
-                type="submit"
-                onClick={this.onSubmitRateClick}
-              >
-                Rate
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      </Link>
+            <Slider
+              value={this.state.rating}
+              min={0.0}
+              max={5.0}
+              step={0.1}
+              onChange={this.handleChange}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              type="submit"
+              onClick={this.onSubmitRateClick}
+            >
+              Rate
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }
