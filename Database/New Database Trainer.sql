@@ -37,14 +37,14 @@ create table Course (
     delete cascade on
     update cascade
 );
-create table Reservation (
-  ReservationID int auto_increment,
-  ApprovedTrainerID varchar (13),
-  primary key (ReservationID),
-  foreign key (ApprovedTrainerID) references Client (ClientID) on
-        delete cascade on
-        update cascade
-);
+-- create table Reservation (
+--   ReservationID int auto_increment,
+--   ApprovedTrainerID varchar (13),
+--   primary key (ReservationID),
+--   foreign key (ApprovedTrainerID) references Client (ClientID) on
+--         delete cascade on
+--         update cascade
+-- );
 create table Authen (
   AuthenID varchar(13),
   email varchar(40) not null,
@@ -53,10 +53,14 @@ create table Authen (
   foreign key(AuthenID) references Client(ClientID) on delete cascade
 );
 create table TimeTable (
-  TimetableID varchar(13),
+  clientID varchar(13),
   Date date,
-  Time time,
-  Status enum('full', 'free')
+  startTime int(2),
+  Status varchar(20),
+  primary key (clientID, date, startTime),
+  foreign key (clientID) references Client (clientID) on
+            delete cascade on
+            update cascade
 );
 create table Location (
   LocationID int(10) auto_increment,
@@ -84,21 +88,21 @@ create table Contain (
   foreign key(TimeClientID) references Client(ClientID) on delete cascade on update cascade,
   foreign key(TimeCourseID) references Course(CourseID) on delete cascade on update cascade
 );
-create table ReserveCourse (
-  ReservedClientID varchar(13),
-  ReservedCourseID int,
-  ReservedReservationID int,
-  CurrentTime time,
-  Duration time,
-  primary key(
-    ReservedClientID,
-    ReservedCourseID,
-    ReservedReservationID
-  ),
-  foreign key(ReservedClientID) references Client(ClientID) on delete cascade on update cascade,
-  foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
-  foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
-);
+-- create table ReserveCourse (
+--   ReservedClientID varchar(13),
+--   ReservedCourseID int,
+--   ReservedReservationID int,
+--   CurrentTime time,
+--   Duration time,
+--   primary key(
+--     ReservedClientID,
+--     ReservedCourseID,
+--     ReservedReservationID
+--   ),
+--   foreign key(ReservedClientID) references Client(ClientID) on delete cascade on update cascade,
+--   foreign key(ReservedCourseID) references Course(CourseID) on delete cascade on update cascade,
+--   foreign key(ReservedReservationID) references Reservation(ReservationID) on delete cascade on update cascade
+-- );
 -- transaction Status = {toBeAccepted,rejected,toBePaid,onGoing,finished}
 create table Transaction (
   transactionID varchar (50),
@@ -109,6 +113,17 @@ create table Transaction (
   primary key (transactionID),
   foreign key (clientID) references Client (clientID),
   foreign key (courseID) references Course (courseID)
+);
+create table ReserveSession (
+  transactionID varchar (50),
+  sessionNo int(5),
+  startTime int(2),
+  duration int(5),
+  status varchar(20),
+  primary key (transactionID, sessionNo),
+  foreign key (transactionID) references Transaction (transactionID) on
+        delete cascade on
+        update cascade
 );
 INSERT INTO
   Client (
