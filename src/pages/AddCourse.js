@@ -93,7 +93,7 @@ export class AddCourse extends Component {
                 required
                 type="courseName"
                 title="courseName"
-                maxLength="29"
+                maxLength="30"
                 placeholder="Enter course name"
                 onChange={this.onFormChange}
               />
@@ -143,7 +143,7 @@ export class AddCourse extends Component {
                 type="imageUrl"
                 title="imageUrl"
                 placeholder="Image URL"
-                maxLength="1990"
+                maxLength="2000"
                 onChange={this.onFormChange}
               />
             </Form.Group>
@@ -154,7 +154,7 @@ export class AddCourse extends Component {
                 type="courseDescription"
                 title="courseDescription"
                 placeholder="Course Description"
-                maxLength="165"
+                maxLength="200"
                 onChange={this.onFormChange}
               />
             </Form.Group>

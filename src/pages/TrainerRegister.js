@@ -194,7 +194,7 @@ export class TrainerRegister extends Component {
               type="ssn"
               title="ssn"
               placeholder="Your Social Security Number (or CitizenID)"
-              maxLength="14"
+              maxLength="13"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -218,7 +218,7 @@ export class TrainerRegister extends Component {
               type="text"
               title="address"
               placeholder="1/23 Apple St. ,Bangkok, Thailand,10200"
-              maxLength="110"
+              maxLength="120"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -229,7 +229,7 @@ export class TrainerRegister extends Component {
               type="textarea"
               title="trainerDescription"
               placeholder="Describe yourself."
-              maxLength="190"
+              maxLength="200"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -241,7 +241,7 @@ export class TrainerRegister extends Component {
               type="textarea"
               title="trainerImg"
               placeholder="url of your profile image. Use your real image for more creditability!"
-              maxLength="190"
+              maxLength="2000"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -254,7 +254,7 @@ export class TrainerRegister extends Component {
               title="trainerDescription"
               disabled
               placeholder="If you have any certificate relating to personal training, you can add it here for more creditability."
-              maxLength="190"
+              maxLength="256"
               // onChange={this.onFormChange}
             />
           </Form.Group>

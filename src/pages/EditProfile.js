@@ -216,7 +216,7 @@ export class EditProfile extends Component {
               title="Address"
               defaultValue={this.state.Address}
               placeholder="Address"
-              maxLength="110"
+              maxLength="120"
               onChange={this.onFormChange}
             />
           </Form.Group>
@@ -248,7 +248,7 @@ export class EditProfile extends Component {
                     title="TrainerImg"
                     placeholder="Image URL"
                     defaultValue={this.state.TrainerImg}
-                    maxLength="250"
+                    maxLength="2000"
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
@@ -256,7 +256,7 @@ export class EditProfile extends Component {
                   <Form.Label>Trainer Description</Form.Label>
                   <Form.Control
                     required
-                    maxLength="190"
+                    maxLength="200"
                     type="TrainerDescription"
                     title="TrainerDescription"
                     defaultValue={this.state.TrainerDescription}

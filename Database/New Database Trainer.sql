@@ -14,8 +14,8 @@ create table Client (
 create table Trainer (
   TrainerID varchar(13),
   SSN varchar(14) not null,
-  TrainerImg varchar(256),
-  trainerDescription varchar(256),
+  TrainerImg varchar(2000),
+  trainerDescription varchar(200),
   Certificate varchar(256),
   Rating float(2, 1) not null,
   rateCount int not null,

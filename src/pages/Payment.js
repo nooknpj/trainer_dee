@@ -138,7 +138,6 @@ export class Payment extends Component {
                                     required
                                     type="month"
                                     title="month"
-                                    maxLength="2"
                                     placeholder="Enter expire date"
                                     onChange={this.onFormChange}
                                 />

@@ -118,7 +118,7 @@ export class EditCourse extends Component {
                             required
                             type="courseDescription"
                             title="courseDescription"
-                            maxLength="170"
+                            maxLength="200"
                             defaultValue={this.state.courseDescription}
                             placeholder="Enter course description"
                             onChange={this.onFormChange}
@@ -130,7 +130,7 @@ export class EditCourse extends Component {
                             required
                             type="imageUrl"
                             title="imageUrl"
-                            maxLength="170"
+                            maxLength="2000"
                             defaultValue={this.state.imageUrl}
                             placeholder="Enter course description"
                             onChange={this.onFormChange}

@@ -194,7 +194,7 @@ export class ClientRegister extends Component {
               title="address"
               style={addressFormStyle}
               placeholder="1/23 Apple St. ,Bangkok, Thailand,10200"
-              maxLength="110"
+              maxLength="120"
               onChange={this.onFormChange}
             />
           </Form.Group>
