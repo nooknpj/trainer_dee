@@ -55,20 +55,17 @@ create table Authen (
 -- date yyyy-mm-dd
 create table TimeTable (
   tableClientID varchar(13),
-  Date date,
+  -- Date date,
   startTime timestamp,
   endTime timestamp,
   tableStatus varchar(20),
-  primary key (clientID, date, startTime),
-  foreign key (clientID) references Client (clientID) on
+  primary key (tableClientID, startTime),
+  foreign key (tableClientID) references Client (clientID) on
             delete cascade on
             update cascade
 );
-insert into TimeTable(tableClientID , Date , startTime,endTime , tableStatus) 
-value 
-('0000000000', '2018-05-01' , '2019-01-01 10:00:00' , '2019-01-01 12:00:00' , 'reserved'),
-(),
-()
+insert into TimeTable(tableClientID , startTime,endTime , tableStatus) 
+value  ('0000000000' , '2019-01-01 10:00:00' , '2019-01-01 12:00:00' , 'reserved');
 create table Location (
   LocationID int(10) auto_increment,
   LocateCourseID int (10),

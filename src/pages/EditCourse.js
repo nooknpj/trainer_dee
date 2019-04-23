@@ -21,6 +21,7 @@ export class EditCourse extends Component {
 
     componentDidMount() {
         this.getCourseData();
+        this.getTrainerTimeTable();
     }
 
     async getCourseData() {
@@ -57,6 +58,41 @@ export class EditCourse extends Component {
         }
     }
 
+    async getTrainerTimeTable(){
+        // try {
+        //     let data = {clientID: localStorage.getItem("clientID")}
+        //     const response = await fetch("/trainer_dee/get_trainer_timetable", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(data)
+        //     });
+
+        //     const results = await response.json();
+        //     if (results.length != 0) {
+        //         let timestamp = [];
+        //         let dateTime = [];
+        //         for(let i = 0; i < results.length; i++){
+        //             timestamp.push(results[i].startTime);
+        //             timestamp.push(results[i].endTime);
+        //             let duration = (results[i].endTime - results[i].startTime)/3600
+        //             for(let j = 1; j < duration; j++){
+        //                 timestamp.push(results[i].startTime + 3600*j);
+        //             }
+        //         }
+        //         for(let i = 0; i < timestamp.length; i++){
+        //             dateTime.push(new Date(timestamp[i]));
+        //         }
+        //         this.setState({
+        //             schedule: dateTime
+        //         });
+        //     }
+        // } catch (error) {
+        //     console.log("defaultFetchError : ", error);
+        // }
+    }
+
     onFormChange = e => {
         this.state[e.target.title] = e.target.value;
         console.log(this.state);
@@ -64,6 +100,7 @@ export class EditCourse extends Component {
 
     onSaveCourse = e => {
         this.fetchSaveCourse();
+        this.fetchSaveTimeTable();
         e.preventDefault();
         window.location = document.referrer;
     }
@@ -82,6 +119,35 @@ export class EditCourse extends Component {
           {selected ? '✅' : '☐'}
         </div>
       )
+
+    async fetchSaveTimeTable(){
+        try {
+            this.state.schedule.sort();
+            let dateTime = [this.state.schedule[0], this.state.schedule[this.state.schedule.length - 1]]; // contains startTime and endTime
+            let timestamp = [];
+            for(let i = 1; i < this.state.schedule.length; i++){
+                if(this.state.schedule[i] - this.state.schedule[i-1] > 3600000){
+                    dateTime.push(this.state.schedule[i-1]);
+                    dateTime.push(this.state.schedule[i]);
+                }
+            }
+            for(let i =0; i < dateTime.length; i++){
+                timestamp.push(dateTime[i].toJSON().slice(0, 19).replace('T', ' '));
+            }
+            timestamp.sort();
+            const data = {clientID: localStorage.getItem("clientID"), timestamp: timestamp};
+
+            const response = await fetch("/trainer_dee/set_trainer_timetable", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+        } catch (error) {
+            console.log("Edit timetable failed", error);
+        }
+    }
 
     async fetchSaveCourse() {
         try {
@@ -154,7 +220,7 @@ export class EditCourse extends Component {
                                     onChange={this.handleScheduleChange}
                                     numDays={8}
                                     minTime={0}
-                                    maxTime={23.59}
+                                    maxTime={23}
                                     dateFormat="ddd M/D"
                                     renderDateCell={this.renderCustomDateCell}
                                 />

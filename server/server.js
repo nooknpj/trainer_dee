@@ -306,6 +306,21 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 //   });
 // });
 
+app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
+  let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID != 'a';";
+  connection.query(sql, (error, result) => {
+    if (error) throw error;
+  });
+  sql ="INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
+  console.log(req.body);
+  for(let i = 1; i < req.body.timestamp.length; i+=2){
+    connection.query(sql, [req.body.clientID, req.body.timestamp[i-1], req.body.timestamp[i]], (error, result) => {
+      if (error) throw error;
+    });
+  }
+  res.end();
+});
+
 app.post("/trainer_dee/update_rating", (req, res) => {
   let sql = "UPDATE trainer SET rating = ?, rateCount = ? WHERE trainerID = ?";
   console.log(req.body);
