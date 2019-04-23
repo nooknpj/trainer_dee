@@ -64,6 +64,11 @@ create table TimeTable (
             delete cascade on
             update cascade
 );
+insert into TimeTable(tableClientID , Date , startTime,endTime , tableStatus) 
+value 
+('0000000000', '2018-05-01' , '2019-01-01 10:00:00' , '2019-01-01 12:00:00' , 'reserved'),
+(),
+()
 create table Location (
   LocationID int(10) auto_increment,
   LocateCourseID int (10),
