@@ -77,6 +77,12 @@ export class EditCourse extends Component {
         console.log(this.state)
     }
 
+    renderCustomDateCell = (time, selected, innerRef) => (
+        <div style={{ textAlign: 'center' }} ref={innerRef}>
+          {selected ? '✅' : '☐'}
+        </div>
+      )
+
     async fetchSaveCourse() {
         try {
             const data = this.state;
@@ -149,6 +155,8 @@ export class EditCourse extends Component {
                                     numDays={8}
                                     minTime={0}
                                     maxTime={23.59}
+                                    dateFormat="ddd M/D"
+                                    renderDateCell={this.renderCustomDateCell}
                                 />
                             </div>
                         </div>
