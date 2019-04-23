@@ -83,58 +83,70 @@ export class Payment extends Component {
                 {console.log(sessionStorage.getItem("courseID"))}
                 <p className="pageHeader">Payment</p>
                 <Form onSubmit={this.onPay} className="payInfoArea">
-                    <p>{this.state.cName}, price = {this.state.cost}</p>
+                    <p>Course name: {this.state.cName}<br></br>Price: {this.state.cost} Baht</p>
                     <Form.Group>
-                        <Form.Group>
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control
-                                required
-                                type="fName"
-                                title="fName"
-                                maxLength="30"
-                                placeholder="Enter first name"
-                                onChange={this.onFormChange}
-                            />
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control
-                                required
-                                type="lName"
-                                title="lName"
-                                maxLength="30"
-                                placeholder="Enter last name"
-                                onChange={this.onFormChange}
-                            />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Credit Card Number</Form.Label>
-                            <Form.Control
-                                required
-                                type="creditCardNo"
-                                title="creditCardNo"
-                                maxLength="16"
-                                placeholder="Enter credit card number"
-                                onChange={this.onFormChange}
-                            />
-                            <Form.Label>CVV</Form.Label>
-                            <Form.Control
-                                required
-                                type="cvv"
-                                title="cvv"
-                                maxLength="3"
-                                placeholder="Enter CVV"
-                                onChange={this.onFormChange}
-                            />
-                            <Form.Label>Expire date</Form.Label>
-                            <Form.Control
-                                required
-                                type="month"
-                                title="month"
-                                maxLength="2"
-                                placeholder="Enter expire date"
-                                onChange={this.onFormChange}
-                            />
-                        </Form.Group>
+                        <div style={creditCardInLine}>
+                            <Form.Group style={creditCardNameInLineComponent}>
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="fName"
+                                    title="fName"
+                                    maxLength="30"
+                                    placeholder="Enter first name"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                            <Form.Group style={creditCardNameInLineComponent}>
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="lName"
+                                    title="lName"
+                                    maxLength="30"
+                                    placeholder="Enter last name"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                        </div>
+                        <div style={creditCardInLine}>
+                            <Form.Group style={creditCardPropsInLineComponent}>
+                                <Form.Label>Credit Card Number</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="creditCardNo"
+                                    title="creditCardNo"
+                                    maxLength="16"
+                                    placeholder="Enter credit card number"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                            <Form.Group style={creditCardSmallPropsInLineComponent}>
+                                <Form.Label>CVV</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="cvv"
+                                    title="cvv"
+                                    maxLength="3"
+                                    placeholder="CVV"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                            <Form.Group style={creditCardPropsInLineComponent}>
+                                <Form.Label>Expire date</Form.Label>
+                                <Form.Control
+                                    required
+                                    type="month"
+                                    title="month"
+                                    maxLength="2"
+                                    placeholder="Enter expire date"
+                                    onChange={this.onFormChange}
+                                />
+                            </Form.Group>
+                        </div>
                     </Form.Group>
+
+
 
                     <div style={{ display: "flex", marginTop: "20px" }}>
                         <Button
@@ -160,5 +172,23 @@ export class Payment extends Component {
         );
     }
 }
+
+const creditCardInLine = {
+    display: "flex",
+    flexDirection: "row"
+};
+
+const creditCardNameInLineComponent = {
+    marginRight: "15px"
+};
+
+const creditCardPropsInLineComponent = {
+    marginRight: "15px"
+};
+
+const creditCardSmallPropsInLineComponent = {
+    marginRight: "15px",
+    width: "100px"
+};
 
 export default Payment;

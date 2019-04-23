@@ -111,19 +111,18 @@ export class EditCourse extends Component {
                             placeholder="Enter course name"
                             onChange={this.onFormChange}
                         />
-                        {console.log(this.state.cName)}
-                        <Form.Group>
-                            <Form.Label>Course Description</Form.Label>
-                            <Form.Control
-                                required
-                                type="courseDescription"
-                                title="courseDescription"
-                                maxLength="170"
-                                defaultValue={this.state.courseDescription}
-                                placeholder="Enter course description"
-                                onChange={this.onFormChange}
-                            />
-                        </Form.Group>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Course Description</Form.Label>
+                        <Form.Control
+                            required
+                            type="courseDescription"
+                            title="courseDescription"
+                            maxLength="170"
+                            defaultValue={this.state.courseDescription}
+                            placeholder="Enter course description"
+                            onChange={this.onFormChange}
+                        />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Image URL</Form.Label>

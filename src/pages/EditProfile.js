@@ -7,18 +7,18 @@ export class EditProfile extends Component {
   constructor() {
     super();
     this.state = {
-      Address: "MyAddress",
-      ClientID: "000000000000",
-      FName: "MyFirstName",
-      LName: "MyLastName",
-      Gender: "MyGender",
-      TelNo: "0000000000",
-      mail: "myemail@trainer-d.com",
+      // Address: "MyAddress",
+      // ClientID: "000000000000",
+      // FName: "MyFirstName",
+      // LName: "MyLastName",
+      // Gender: "MyGender",
+      // TelNo: "0000000000",
+      // mail: "myemail@trainer-d.com",
       isTrainer: -1,
-      Ssn: "",
-      TrainerDescription: "",
-      Rating: "",
-      TrainerImg: ""
+      // Ssn: "",
+      // TrainerDescription: "",
+      // Rating: "",
+      // TrainerImg: ""
     };
   }
 
@@ -165,159 +165,127 @@ export class EditProfile extends Component {
       <div className="box">
         <p className="pageHeader">Edit Profile</p>
 
-        {/* <span>My Client ID is </span>
-        <span> {localStorage.getItem("clientID")} </span> */}
+        <Form onSubmit={this.onSaveProfile}>
+          <div style={formInLineStyle}>
+            <Form.Group style={inLineFormComponent}>
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                required
+                type="FName"
+                title="FName"
+                maxLength="20"
+                defaultValue={this.state.FName}
+                placeholder="First Name"
+                onChange={this.onFormChange}
+              />
+            </Form.Group>
+            <Form.Group style={inLineFormComponent}>
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                required
+                type="LName"
+                title="LName"
+                maxLength="20"
+                defaultValue={this.state.LName}
+                placeholder="Last Name"
+                onChange={this.onFormChange}
+              />
+            </Form.Group>
+            <Form.Group style={inLineFormComponent}>
+              <Form.Label>Gender</Form.Label>
+              <Form.Control
+                required
+                type="Gender"
+                title="Gender"
+                as="select"
+                onChange={this.onFormChange}
+                defaultValue={this.state.Gender}
+              >
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+              </Form.Control>
+            </Form.Group>
+          </div>
 
-        <div id="profileInfo">
-          <Form onSubmit={this.onSaveProfile}>
-            <div className="nameTitleContainer">
-              <a className="infoTitle" style={{ color: "white" }}>
-                Name and Gender
-              </a>
-            </div>
-            <div className="infoLine">
-              <div className="nameContainer">
-                <div className="userName">
-                  <div style={formInLineStyle}>
-                    <Form.Group style={inLineFormComponent}>
-                      <Form.Label>First name</Form.Label>
-                      <Form.Control
-                        required
-                        type="firstName"
-                        title="firstName"
-                        maxLength="20"
-                        defaultValue={this.state.FName}
-                        placeholder="First Name"
-                        onChange={this.onFormChange}
-                      />
-                      <Form.Group style={inLineFormComponent}>
-                        <Form.Label>Last name</Form.Label>
-                        <Form.Control
-                          required
-                          type="lastName"
-                          title="lastName"
-                          maxLength="20"
-                          defaultValue={this.state.LName}
-                          placeholder="Last Name"
-                          onChange={this.onFormChange}
-                        />
-                      </Form.Group>
-                    </Form.Group>
-                    <Form.Group style={inLineFormComponent}>
-                      <Form.Label>Gender</Form.Label>
-                      <Form.Control
-                        required
-                        type="gender"
-                        title="gender"
-                        as="select"
-                        onChange={this.onFormChange}
-                        defaultValue={this.state.Gender}
-                      >
-                        <option value="M">Male</option>
-                        <option value="F">Female</option>
-                        <option value="O">Other</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <Form.Group style={shortFormStyle}>
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              required
+              type="Address"
+              title="Address"
+              defaultValue={this.state.Address}
+              placeholder="Address"
+              maxLength="110"
+              onChange={this.onFormChange}
+            />
+          </Form.Group>
 
-            <div className="descriptionLine">
-              <a className="descriptionTitle">Address</a>
-              <div className="addressBox">
-                <Form.Group style={defaultFormStyle}>
+          <Form.Group style={shortFormStyle}>
+            <Form.Label>Telephone Number</Form.Label>
+            <Form.Control
+              required
+              type="TelNo"
+              title="TelNo"
+              maxLength="10"
+              defaultValue={this.state.TelNo}
+              placeholder="Telephone No."
+              onChange={this.onFormChange}
+            />
+          </Form.Group>
+
+          {localStorage.getItem("isTrainer") == 0 ? (
+            <div>
+              <div />
+            </div>
+          ) : (
+              <div>
+                <Form.Group style={shortFormStyle}>
+                  <Form.Label>Trainer Image Url</Form.Label>
                   <Form.Control
                     required
-                    type="address"
-                    title="address"
-                    defaultValue={this.state.Address}
-                    placeholder="Address"
-                    maxLength="110"
+                    type="TrainerImg"
+                    title="TrainerImg"
+                    placeholder="Image URL"
+                    defaultValue={this.state.TrainerImg}
+                    maxLength="250"
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
-              </div>
-            </div>
-
-            <div className="descriptionLine">
-              <a className="descriptionTitle">Telephone Number</a>
-              <div className="addressBox">
-                <Form.Group style={defaultFormStyle}>
+                <Form.Group style={shortFormStyle}>
+                  <Form.Label>Trainer Description</Form.Label>
                   <Form.Control
                     required
-                    type="telNo"
-                    title="telNo"
-                    maxLength="10"
-                    defaultValue={this.state.TelNo}
-                    placeholder="Telephone No."
+                    maxLength="190"
+                    type="TrainerDescription"
+                    title="TrainerDescription"
+                    defaultValue={this.state.TrainerDescription}
+                    placeholder="Description"
                     onChange={this.onFormChange}
                   />
                 </Form.Group>
-              </div>
-            </div>
-
-            {localStorage.getItem("isTrainer") == 0 ? (
-              <div>
-                <div />
-              </div>
-            ) : (
-              <div>
-                <div className="descriptionLine">
-                  <a className="descriptionTitle">Trainer Image Url</a>
-                  <div className="addressBox">
-                    <Form.Group style={defaultFormStyle}>
-                      <Form.Control
-                        required
-                        type="trainerImg"
-                        title="trainerImg"
-                        placeholder="Image URL"
-                        defaultValue={this.state.TrainerImg}
-                        maxLength="250"
-                        onChange={this.onFormChange}
-                      />
-                    </Form.Group>
-                  </div>
-                </div>
-                <div className="descriptionLine">
-                  <a className="descriptionTitle">Trainer Description</a>
-                  <div className="addressBox">
-                    <Form.Group style={defaultFormStyle}>
-                      <Form.Control
-                        required
-                        maxLength="190"
-                        type="trainerDescription"
-                        title="trainerDescription"
-                        defaultValue={this.state.TrainerDescription}
-                        placeholder="Description"
-                        onChange={this.onFormChange}
-                      />
-                    </Form.Group>
-                  </div>
-                </div>
               </div>
             )}
 
-            <div style={{ display: "flex", marginTop: "20px" }}>
-              <Button
-                variant="primary"
-                size="small"
-                href="/myAccount"
-                style={{ marginRight: "30px" }}
-              >
-                Back
+          <div style={{ display: "flex", marginTop: "20px" }}>
+            <Button
+              variant="primary"
+              size="small"
+              href="/myAccount"
+              style={{ marginRight: "30px" }}
+            >
+              Back
               </Button>
-              <Button
-                variant="primary"
-                size="small"
-                type="submit"
-                style={{ marginLeft: "auto" }}
-              >
-                Submit
+            <Button
+              variant="primary"
+              size="small"
+              type="submit"
+              style={{ marginLeft: "auto" }}
+            >
+              Submit
               </Button>
-            </div>
-          </Form>
-        </div>
+          </div>
+        </Form>
       </div>
     );
   }
