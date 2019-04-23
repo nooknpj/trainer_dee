@@ -57,11 +57,11 @@ app.post("/trainer_dee/confirmPayment", (req, res) => {
           service: service,
           courseHour: result[0].courseHour
         };
-        res.send(paymentInfo);
+        // res.send(paymentInfo);
       }
       sql =
-        "UPDATE Transaction SET status = 'onGoing' WHERE courseID =? AND clientID = ? AND status = 'toBePaids' ;";
-      connection.query(sql, [req.body.transactionID], error => {
+        "UPDATE Transaction SET status = 'onGoing' WHERE courseID =? AND clientID = ? AND status = 'toBePaid' ;";
+      connection.query(sql, [req.body.courseID, req.body.clientID], error => {
         if (error) {
           res.sendStatus(400);
           console.log("error to update payment status!");
