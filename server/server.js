@@ -290,6 +290,19 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
   );
 });
 
+// app.post("/trainer_dee/get_ongoing_course", (req, res) => {
+//   let sql =
+//     "select c.courseID, c.cName from course c, transaction ts \
+//     where c.courseID = ts.courseID and ts.clientID = ? and ts.status = 'onGoing'";
+//   connection.query(sql, [req.body.clientID], (error, result) => {
+//     if (error) throw error;
+
+//     let all = JSON.parse(JSON.stringify(result));
+//     res.send(all);
+//     // console.log(all);
+//   });
+// });
+
 app.post("/trainer_dee/update_rating", (req, res) => {
   let sql = "UPDATE trainer SET rating = ?, rateCount = ? WHERE trainerID = ?";
   console.log(req.body);
@@ -362,7 +375,7 @@ app.post("/trainer_dee/view_created_course", (req, res) => {
 
 app.post("/trainer_dee/view_attended_course", (req, res) => {
   let sql =
-    "SELECT ts.clientID, t.trainerID,cltrainer.fName,cltrainer.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cltrainer.gender, c.imageUrl, t.rating, t.rateCount, ts.status \
+    "SELECT ts.clientID, t.trainerID, ts.transactionID, cltrainer.fName,cltrainer.lName, c.courseID, c.cName, c.service, c.courseDescription, c.cost, c.courseHour, cltrainer.gender, c.imageUrl, t.rating, t.rateCount, ts.status \
     FROM client cl,client cltrainer,transaction ts,course c,trainer t \
     WHERE ts.clientID = cl.clientID AND ts.courseID = c.courseID AND c.trainerID = t.trainerID AND cltrainer.clientid = t.trainerid \
     AND cl.clientID = ?;";

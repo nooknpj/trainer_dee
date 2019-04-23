@@ -33,6 +33,11 @@ export class CourseItem extends Component {
     window.location = "/payment";
   };
 
+  onReserveClick = () => {
+    sessionStorage.setItem("transactionID", this.props.transactionID);
+    window.location = "/reserveSession";
+  };
+
   handleChange = (event, value) => {
     this.setState({ rating: Math.round(value * 10) / 10 });
     event.stopPropagation();
@@ -230,6 +235,21 @@ export class CourseItem extends Component {
                         onClick={this.onPayClick}
                       >
                         Pay
+                      </Button>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
+                  {this.props.status == "onGoing" ? (
+                    <div style={{ display: "flex", marginTop: "20px" }}>
+                      <Button
+                        variant="primary"
+                        size="small"
+                        type="submit"
+                        style={{ marginLeft: "auto", marginRight: "15px" }}
+                        onClick={this.onReserveClick}
+                      >
+                        Reserve
                       </Button>
                     </div>
                   ) : (

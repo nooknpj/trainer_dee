@@ -106,6 +106,7 @@ export class MyCourse extends Component {
                                     <CourseItem
                                         courseID={courseItem.courseID}
                                         trainerID={courseItem.trainerID}
+                                        transactionID={courseItem.transactionID}
                                         cName={courseItem.cName}
                                         service={courseItem.service}
                                         courseDescription={courseItem.courseDescription}
@@ -125,11 +126,6 @@ export class MyCourse extends Component {
                                     <h5>No attended course.</h5>
                                 )}
                         </div>
-                        {this.state.attendedCourse.length != 0 ?(
-                            <ReserveSession />
-                        ):(
-                            <div/>
-                        )}
                     </Tab>
                 </Tabs>
             </div>

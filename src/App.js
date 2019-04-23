@@ -76,6 +76,7 @@ class App extends Component {
               <Route path="/acceptBuyCourse/:transactionID/:token" component={ResponseRequest}/>
               <Route path="/cancelBuyCourse/:transactionID/:token" component={ResponseRequest}/>
               <Route path="/payment" component={Payment}/>
+              <Route path="/reserveSession" component={ReserveSession}/>
               <Route component={PageNotFound} />
             </Switch>
           </div>
