@@ -334,8 +334,8 @@ app.post("/trainer_dee/edit_course", (req, res) => {
   connection.query(
     sql,
     [
-      req.body.courseName,
-      req.body.courseDesc,
+      req.body.cName,
+      req.body.courseDescription,
       req.body.imageUrl,
       req.body.courseStatus,
       req.body.courseID

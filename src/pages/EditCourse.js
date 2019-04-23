@@ -9,7 +9,7 @@ export class EditCourse extends Component {
         this.state = {
             courseID: 0,
             trainerID: "0000000000",
-            cName: "courseName",
+            // cName: "courseName",
             imageUrl: "",
             CourseDescription: "CourseDescription",
             courseStatus: false
@@ -122,8 +122,8 @@ export class EditCourse extends Component {
                         <Form.Label>Course Name</Form.Label>
                         <Form.Control
                             required
-                            type="courseName"
-                            title="courseName"
+                            type="cName"
+                            title="cName"
                             maxLength="30"
                             defaultValue={this.state.cName}
                             placeholder="Enter course name"
@@ -134,8 +134,8 @@ export class EditCourse extends Component {
                             <Form.Label>Course Description</Form.Label>
                             <Form.Control
                                 required
-                                type="courseDesc"
-                                title="courseDesc"
+                                type="courseDescription"
+                                title="courseDescription"
                                 maxLength="170"
                                 defaultValue={this.state.courseDescription}
                                 placeholder="Enter course description"
