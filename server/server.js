@@ -28,6 +28,9 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
+app.post("/trainer_dee/getTable",(req,res)=>{
+  let sql  = "SELECT ";
+});
 
 app.post("/trainer_dee/confirmPayment", (req, res) => {
   let sql =

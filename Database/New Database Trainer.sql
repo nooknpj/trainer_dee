@@ -52,6 +52,7 @@ create table Authen (
   primary key(AuthenID, email),
   foreign key(AuthenID) references Client(ClientID) on delete cascade
 );
+-- date yyyy-mm-dd
 create table TimeTable (
   tableClientID varchar(13),
   Date date,
