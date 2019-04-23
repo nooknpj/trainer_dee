@@ -55,7 +55,8 @@ create table Authen (
 create table TimeTable (
   tableClientID varchar(13),
   Date date,
-  startTime int(2),
+  startTime timestamp,
+  endTime timestamp,
   tableStatus varchar(20),
   primary key (clientID, date, startTime),
   foreign key (clientID) references Client (clientID) on
