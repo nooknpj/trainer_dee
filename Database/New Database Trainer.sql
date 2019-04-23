@@ -53,10 +53,10 @@ create table Authen (
   foreign key(AuthenID) references Client(ClientID) on delete cascade
 );
 create table TimeTable (
-  clientID varchar(13),
+  tableClientID varchar(13),
   Date date,
   startTime int(2),
-  Status varchar(20),
+  tableStatus varchar(20),
   primary key (clientID, date, startTime),
   foreign key (clientID) references Client (clientID) on
             delete cascade on
