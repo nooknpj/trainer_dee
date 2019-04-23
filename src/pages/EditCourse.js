@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import "../css/editCourse.css";
 import Switch from "react-switch";
+import ScheduleSelector from "react-schedule-selector";
 
 export class EditCourse extends Component {
     constructor() {
@@ -12,7 +13,8 @@ export class EditCourse extends Component {
             // cName: "courseName",
             imageUrl: "",
             CourseDescription: "CourseDescription",
-            courseStatus: false
+            courseStatus: false,
+            schedule: []
         };
         this.handleToggleChange = this.handleToggleChange.bind(this);
     }
@@ -23,37 +25,37 @@ export class EditCourse extends Component {
 
     async getCourseData() {
         try {
-          let courseID = {};
-          if (this.props.location.state == undefined) {
-            courseID = { courseID: document.referrer.split("/")[4] };
-          } else {
-            courseID = { courseID: this.props.location.state };
-          }
-          const response = await fetch("/trainer_dee/get_course_description", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(courseID)
-          });
-    
-          const results = await response.json();
-          if (results.length != 0) {
-            const result = results[0]; 
-            
-            this.setState({
-              courseID: result.courseID,
-              trainerID: result.trainerID,
-              cName: result.cName,
-              imageUrl: result.imageUrl,
-              courseDescription: result.courseDescription,
-              courseStatus: result.courseStatus
+            let courseID = {};
+            if (this.props.location.state == undefined) {
+                courseID = { courseID: document.referrer.split("/")[4] };
+            } else {
+                courseID = { courseID: this.props.location.state };
+            }
+            const response = await fetch("/trainer_dee/get_course_description", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(courseID)
             });
-          }
+
+            const results = await response.json();
+            if (results.length != 0) {
+                const result = results[0];
+
+                this.setState({
+                    courseID: result.courseID,
+                    trainerID: result.trainerID,
+                    cName: result.cName,
+                    imageUrl: result.imageUrl,
+                    courseDescription: result.courseDescription,
+                    courseStatus: result.courseStatus
+                });
+            }
         } catch (error) {
-          console.log("defaultFetchError : ", error);
+            console.log("defaultFetchError : ", error);
         }
-      }
+    }
 
     onFormChange = e => {
         this.state[e.target.title] = e.target.value;
@@ -70,30 +72,10 @@ export class EditCourse extends Component {
         this.setState({ courseStatus: checked });
     }
 
-    // async fetchLoadCourseVisibility() {
-    //     try {
-    //         const data = this.state;
-    //         data.courseID = document.referrer.split("/")[4]
-    //         console.log(data)
-
-    //         const response = await fetch("/trainer_dee/get_course_visibility", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify(data)
-    //         });
-
-    //         const results = await response.json();
-    //         console.log(results)
-    //         this.setState({
-    //             courseStatus: results[0].courseStatus == 1 ? true : false
-    //         })
-    //         console.log(this.state.courseStatus)
-    //     } catch (error) {
-    //         console.log("Fetch course visibility failed", error);
-    //     }
-    // }
+    handleScheduleChange = newSchedule => {
+        this.setState({ schedule: newSchedule })
+        console.log(this.state)
+    }
 
     async fetchSaveCourse() {
         try {
@@ -157,6 +139,22 @@ export class EditCourse extends Component {
                     </Form.Group>
                     <Form.Label>Show/Hide Course</Form.Label>
                     <Switch onChange={this.handleToggleChange} checked={this.state.courseStatus} />
+
+                    <div className="descriptionLine">
+                        <a className="descriptionTitle">Select range of time</a>
+                        <div className="courseDescriptionBox">
+                            <div>
+                                <ScheduleSelector
+                                    selection={this.state.schedule}
+                                    onChange={this.handleScheduleChange}
+                                    numDays={8}
+                                    minTime={0}
+                                    maxTime={23.59}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
                     <div style={{ display: "flex", marginTop: "20px" }}>
                         <Button
                             variant="primary"

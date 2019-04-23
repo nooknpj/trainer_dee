@@ -125,7 +125,11 @@ export class MyCourse extends Component {
                                     <h5>No attended course.</h5>
                                 )}
                         </div>
-                        <ReserveSession />
+                        {this.state.attendedCourse.length != 0 ?(
+                            <ReserveSession />
+                        ):(
+                            <div/>
+                        )}
                     </Tab>
                 </Tabs>
             </div>

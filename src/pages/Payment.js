@@ -130,7 +130,7 @@ export class Payment extends Component {
                                 type="month"
                                 title="month"
                                 maxLength="2"
-                                placeholder="Enter month"
+                                placeholder="Enter expire date"
                                 onChange={this.onFormChange}
                             />
                         </Form.Group>

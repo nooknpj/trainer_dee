@@ -314,18 +314,6 @@ app.post("/trainer_dee/update_rating", (req, res) => {
   );
 });
 
-app.post("/trainer_dee/get_course_visibility", (req, res) => {
-  let sql = "select c.courseStatus from course c \
-  where c.courseID = ?";
-  connection.query(sql, [req.body.courseID], (error, result) => {
-    if (error) throw error;
-
-    let all = JSON.parse(JSON.stringify(result));
-    res.send(all);
-    // console.log(all);
-  });
-});
-
 app.post("/trainer_dee/edit_course", (req, res) => {
   let sql =
     "UPDATE course \
