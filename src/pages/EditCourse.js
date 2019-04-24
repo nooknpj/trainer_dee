@@ -122,7 +122,9 @@ export class EditCourse extends Component {
 
     async fetchSaveTimeTable(){
         try {
-            this.state.schedule.sort();
+            this.state.schedule.sort(function(a,b){
+                return b.date - a.date;
+              });
             let dateTime = [this.state.schedule[0], this.state.schedule[this.state.schedule.length - 1]]; // contains startTime and endTime
             let timestamp = [];
             console.log(`line 128 date time >>> ${dateTime} `);
