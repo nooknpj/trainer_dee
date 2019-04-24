@@ -125,66 +125,65 @@ export class TrainerAccount extends Component {
     return (
       <div>
         <div className="accountInfoContainer">
-          <a className="accountInfoTitle" style={accountTypeStyle}>
+          <a className="accountInfoTitle">
             {" "}
             {this.getAccountType()}
           </a>
         </div>
 
-        <img className="trainerImage" src={this.state.TrainerImg} />
+        <img className="trainerImage" src={this.state.TrainerImg} style={{ marginBottom: "30px" }} />
 
-        <div className="accountInfoContainer" style={{ marginTop: "30px" }}>
-          <a className="accountInfoTitle">Email Address</a>
-          <div className="accountInfoBox">
-            <a> {this.state.Email}</a>
-          </div>
-        </div>
+        <div className="inLineContainer">
 
-        <div className="infoLine">
-          <div className="accountTitleContainer">
-            <a className="accountTitle">Name Gender Rating</a>
+          <div className="accountInfoContainer">
+            <a className="accountInfoTitle">Email Address</a>
+            <div className="accountInfoBox">
+              <a> {this.state.Email}</a>
+            </div>
           </div>
-          <div className="accountNameContainer">
-            <div>
+
+          <div className="accountInfoContainer">
+            <a className="accountInfoTitle">Name Gender Rating</a>
+            <div className="accountInfoBox">
               <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
               <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
+              <div style={this.getGenderStyle()}>
+                <a> {this.state.Gender}</a>
+              </div>
+              <a style={ratingStyle}>Rating</a>
+              <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
+              <img className="starIconStyle" src={starIcon} />
             </div>
-            <div style={this.getGenderStyle()}>
-              <a> {this.state.Gender}</a>
+          </div>
+
+        </div>
+        <div className="inLineContainer">
+
+          <div className="accountInfoContainer">
+            <a className="accountInfoTitle">SSN (or Citizen ID)</a>
+            <div className="accountInfoBox">
+              <a> {this.state.Ssn}</a>
             </div>
-            <a style={ratingStyle}>Rating</a>
-            <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
-            <img style={starIconStyle} src={starIcon} />
           </div>
+
+          <div className="accountInfoContainer">
+            <a className="accountInfoTitle">Telephone Number</a>
+            <div className="accountInfoBox">
+              <a> {this.state.TelNo}</a>
+            </div>
+          </div>
+
         </div>
 
-        <div className="infoLine">
-          <div className="accountTitleContainer">
-            <a className="infoTitle">SSN (or Citizen ID)</a>
-          </div>
-          <div className="accountNameContainer">
-            <a> {this.state.Ssn}</a>
-          </div>
-        </div>
-
-        <div className="infoLine">
-          <div className="accountTitleContainer">
-            <a className="infoTitle">Telephone Number</a>
-          </div>
-          <div className="accountNameContainer">
-            <a> {this.state.TelNo}</a>
-          </div>
-        </div>
-
-        <div className="descriptionLine">
-          <a className="descriptionTitle">Trainer Description</a>
-          <div className="courseDescriptionBox">
+        <div className="accountDescriptionContainer">
+          <a className="accountDescriptionTitle">Trainer Description</a>
+          <div className="accountDescriptionBox">
             <a> {this.state.TrainerDescription} </a>
           </div>
         </div>
-        <div className="descriptionLine">
-          <a className="descriptionTitle">Address</a>
-          <div className="courseDescriptionBox">
+        <div className="accountDescriptionContainer">
+          <a className="accountDescriptionTitle">Address</a>
+          <div className="accountDescriptionBox">
             <a> {this.state.Address} </a>
           </div>
         </div>
@@ -206,18 +205,6 @@ export class TrainerAccount extends Component {
     );
   }
 }
-
-const accountTypeStyle = {
-  fontSize: "20px"
-};
-const starIconStyle = {
-  maxWidth: "20px",
-  maxHeight: "20px",
-  align: "center",
-  paddingTop: "1px",
-  paddingBottom: "3px",
-  marginLeft: "10px"
-};
 
 const ratingStyle = {
   marginLeft: "10px",
