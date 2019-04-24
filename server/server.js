@@ -29,15 +29,26 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 app.post("/trainer_dee/reserve_session",(req,res)=>{
-
+  let sql = "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";
+  connection.query(sql,[req.body.clientID],(error)=>{
+    if(error) {
+      console.dir(error);
+      console.log('error to reserve session');
+      res.sendStatus(400);
+    }
+    else {
+      res.sendStatus(200);
+    }
+    
+  })
 });
-app.post("/trainer_dee/get_client_avaliable",(req,res)=>{
-  let sql = ""
-});
+// app.post("/trainer_dee/get_client_avaliable",(req,res)=>{
+//   let sql = "";
+// });
 
 app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
   let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID = ?;";
-  connection.query(sql,[req.body.clientID] ,(error, result) => {
+  connection.query(sql,[req.body.clientID] ,(error) => {
     if (error) throw error;
   });
   sql ="INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
