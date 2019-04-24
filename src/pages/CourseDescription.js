@@ -208,13 +208,14 @@ export class CourseDescription extends Component {
             </div>
           </div>
 
-          <div style={{ display: "Block" }}>
+          <div style={{ display: "flex", marginTop: "20px" }}>
             {this.state.trainerID == localStorage.getItem("clientID") ? (
               <Button
                 variant="primary"
                 size="small"
                 type="submit"
                 href="/editCourse"
+                style={{ marginLeft: "auto" }}
               >
                 Edit course
               </Button>
@@ -224,6 +225,7 @@ export class CourseDescription extends Component {
                 size="small"
                 type="submit"
                 onClick={this.onRequestToBuyClick}
+                style={{ marginLeft: "auto" }}
               >
                 Request to buy this course
               </Button>

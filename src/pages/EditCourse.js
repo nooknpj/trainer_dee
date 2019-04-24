@@ -102,10 +102,10 @@ export class EditCourse extends Component {
         this.fetchSaveCourse();
         this.fetchSaveTimeTable();
         e.preventDefault();
-        //window.location = document.referrer;
+        window.location = document.referrer;
     }
 
-    handleToggleChange(checked) {
+    handleToggleChange = checked => {
         this.setState({ courseStatus: checked });
     }
 

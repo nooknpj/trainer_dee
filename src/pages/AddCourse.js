@@ -28,12 +28,9 @@ export class AddCourse extends Component {
         lng: 100.523186
       }
     };
-
-    // Bind
-    this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
-  handleLocationChange({ position, address }) {
+  handleLocationChange = ({ position, address }) => {
     this.setState({ position, address });
   }
 
