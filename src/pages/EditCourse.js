@@ -145,7 +145,7 @@ export class EditCourse extends Component {
             }
             console.log(`line 139  date time >>> ${dateTime} `);
             timestamp.sort();
-            console.log(`line 141  date time >>> ${dateTime} `);
+            
             const data = {clientID: localStorage.getItem("clientID"), timestamp: timestamp};
 
             const response = await fetch("/trainer_dee/set_trainer_timetable", {
