@@ -8,14 +8,11 @@ const defaultPosition = {
   lng: 100.523186
 };
 
-const google = window.google;
-
 export class AddCourse extends Component {
   componentDidMount() {
     this.setState({
       clientID: localStorage.getItem("clientID")
     });
-    //this.getMockUpResult();
   }
 
   constructor(props) {

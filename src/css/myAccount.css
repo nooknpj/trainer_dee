@@ -1,38 +1,32 @@
-.buttonArea {
-  margin-top: 20px;
-  background-color: #21366e;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 10px;
+@media screen and (min-width: 768px) {
+  .accountInfoBox {
+    display: flex;
+    margin-right: 30px;
+    /* width: 70%; */
+    /* max-width: 600px; */
+  }
+
+  .accountDescriptionContainer{
+    margin-right: 30px;
+  }
 }
 
-.accountTitleContainer {
-  /* width: 25%; */
+@media screen and (max-width: 768px) {
+  .trainerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-.accountTitle {
-  background-color: #21366e;
-  font-weight: bold;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-radius: 5px;
-  border: #21366e solid 2px;
-}
+@media screen and (min-width: 1200px){
+  .inLineContainer {
+    display: flex;
+  }
 
-.accountNameContainer {
-  font-weight: bold;
-  font-size: 16px;
-  color: #21366e;
-  background-color: white;
-  border-radius: 10px;
-  width: 65%;
-  max-width: 65%;
-  padding-left: 20px;
-  text-align: center;
-  flex-direction: row;
-  border: #21366e solid 2px;
+  .accountInfoContainer{
+    width: 50%;
+  }
 }
 
 .trainerImage {
@@ -45,27 +39,81 @@
   margin-top: 10px;
 }
 
-;
-@media screen and (min-width: 768px) {
-  .accountNameContainer {
-    display: flex;
-  }
-  #accountInfo {
-    width: 75%;
-    max-width: 75%;
-    min-width: 75%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .trainerImage {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.starIconStyle {
+  max-width: 20px;
+  max-height: 20px;
+  align-content: center;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  margin-left: 10px;
 }
 
 .buttonContainer {
   margin-top: 40px;
   margin-bottom: 10px;
 }
+
+.accountInfoContainer {
+  margin-top: 10px;
+  color: white;
+  /* display: inline-block; */
+  flex-direction: row;
+  font-size: 1.2em;
+}
+
+.accountInfoTitle {
+  background-color: #21366e;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  width: 100%;
+  border: #21366e solid 2px;
+}
+
+.accountInfoBox {
+  font-weight: bold;
+  font-size: 0.9em;
+  color: #21366e;
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+  flex-direction: row;
+  border: #21366e solid 2px;
+  /* display: inline-block; */
+}
+
+.accountDescriptionContainer {
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 5px;
+  color: white;
+  border: #21366e solid 3px;
+}
+
+.accountDescriptionTitle {
+  background-color: #21366e;
+  padding-top: 1px;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+}
+
+.accountDescriptionBox {
+  font-size: 1.2em;
+  color: #21366e;
+  margin-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.accountInfoRight {
+  margin-left: auto;
+  display: flex;
+}
+
