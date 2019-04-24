@@ -3,6 +3,7 @@
   text-decoration: none;
   background-color: red;
 }
+
 #courseItem {
   border: solid white 5px;
   border-radius: 10px;
@@ -36,6 +37,7 @@
   /* min-height: 300px;
     max-height: 300px; */
 }
+
 @media screen and (min-width: 500px) {
   #courseItem {
     display: flex;
@@ -43,6 +45,7 @@
 }
 
 /* for small screen */
+
 @media screen and (max-width: 900px) {
   .infoContainer {
     min-width: 95%;
@@ -51,6 +54,7 @@
 }
 
 /* for big screen */
+
 @media screen and (max-width: 900px) {
   .infoContainer {
     min-width: 95%;
@@ -77,6 +81,7 @@
   display: flex;
   flex-direction: row;
 }
+
 #courseTitleContainer {
   display: flex;
   flex-direction: row;
@@ -118,6 +123,7 @@
   text-align: center;
   vertical-align: middle;
 }
+
 .infoLine {
   margin-top: 10px;
   /* background-color: white; */
@@ -131,6 +137,7 @@
   /* max-width: 70%; */
   text-align: center;
 }
+
 .infoTitle {
   /* width: 100%; */
   background-color: #21366e;
@@ -140,7 +147,7 @@
   border-radius: 0.2em; */
   margin-right: 0.5em;
   /* min-width: 5em; */
-  max-width: 60%;
+  max-width: 170px;
   /* display: flex; */
   border: #21366e solid 2px;
   color: white;
@@ -148,7 +155,7 @@
 
 .infoContainer {
   width: 50%;
-  /* max-width: 80%; */
+  max-width: 300px;
   font-weight: bold;
   display: flex;
   flex-direction: bold;
@@ -171,6 +178,7 @@
     text-align: center; */
   background-color: blue;
 }
+
 .trainerInfoContainer {
   width: auto;
   /* max-width: 80%; */
@@ -195,6 +203,7 @@
   color: #fed141;
   max-height: 30px;
 }
+
 .descriptionTitle {
   background-color: #21366e;
   padding-top: 1px;
@@ -231,7 +240,6 @@
   text-align: center;
   display: flex;
   flex-direction: row;
-
   border: #21366e solid 2px;
 }
 
@@ -240,13 +248,11 @@
     margin-right: 15px;
     max-width: 25%;
   }
-
   #courseItemInfo {
     width: 75%;
     max-width: 75%;
     min-width: 75%;
   }
-
   .courseTitle {
     margin-right: 15px;
   }
@@ -259,21 +265,30 @@
   .courseService {
     width: 90%;
   }
-
   .infoTitleContainerNew {
     width: 30%;
     min-width: 30%;
     max-width: 30%;
     /* background-color: blue; */
   }
-
   .trainerInfoContainer {
     margin-right: 10px;
   }
-
   .ratingContainer {
     margin-left: 10px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .test {
+    display: flex;
+  }
+
+  .infoContainer{
+    width: auto;
+    margin-right: 15px;
+    padding: 10px;
   }
 }
