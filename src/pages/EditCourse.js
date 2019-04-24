@@ -128,24 +128,20 @@ export class EditCourse extends Component {
     async fetchSaveTimeTable(){
         try {
             this.state.schedule.sort(function(a,b){
-                return b.date - a.date;
+                return b.getTime() - a.getTime() > 0? -1: 1;
               });
             let dateTime = [this.state.schedule[0], this.state.schedule[this.state.schedule.length - 1]]; // contains startTime and endTime
             let timestamp = [];
-            console.log(`line 128 date time >>> ${dateTime} `);
             for(let i = 1; i < this.state.schedule.length; i++){
                 if(this.state.schedule[i] - this.state.schedule[i-1] > 3600000){
                     dateTime.push(this.state.schedule[i-1]);
                     dateTime.push(this.state.schedule[i]);
                 }
             }
-            console.log(`line 139  date time >>> ${dateTime} `);
             for(let i =0; i < dateTime.length; i++){
                 timestamp.push(dateTime[i].toJSON().slice(0, 19).replace('T', ' '));
             }
-            console.log(`line 139  date time >>> ${dateTime} `);
             timestamp.sort();
-            
             const data = {clientID: localStorage.getItem("clientID"), timestamp: timestamp};
 
             const response = await fetch("/trainer_dee/set_trainer_timetable", {
@@ -164,7 +160,6 @@ export class EditCourse extends Component {
         try {
             const data = this.state;
             data.courseID = document.referrer.split("/")[4]
-            console.log(data.courseID)
 
             const response = await fetch("/trainer_dee/edit_course", {
                 method: "POST",
