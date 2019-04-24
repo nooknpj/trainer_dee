@@ -25,7 +25,6 @@ export class TrainerAccount extends Component {
   componentDidMount() {
     this.getProfile();
     this.getTrainerProfile();
-    //this.getMockUpResult();
   }
 
   async getProfile() {
@@ -50,17 +49,6 @@ export class TrainerAccount extends Component {
         isTrainer: results[0].isTrainer,
         Email: results[0].Email
       });
-      console.log(this.state);
-      if (this.state.isTrainer == 1) {
-        // const response = await fetch("/trainer_dee/view_profile", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify(data)
-        // });
-        // const results = await response.json();
-      }
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }

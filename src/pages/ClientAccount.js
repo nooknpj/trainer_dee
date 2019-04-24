@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../css/myAccount.css";
-import "../css/courseBox.css";
 import { Button } from "react-bootstrap";
 
 export class ClientAccount extends Component {
@@ -20,7 +19,6 @@ export class ClientAccount extends Component {
 
   componentDidMount() {
     this.getProfile();
-    //this.getMockUpResult();
   }
 
   async getProfile() {
@@ -45,17 +43,6 @@ export class ClientAccount extends Component {
         isTrainer: results[0].isTrainer,
         Email: results[0].Email
       });
-      console.log(this.state);
-      if (this.state.isTrainer == 1) {
-        // const response = await fetch("/trainer_dee/view_profile", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json"
-        //   },
-        //   body: JSON.stringify(data)
-        // });
-        // const results = await response.json();
-      }
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
