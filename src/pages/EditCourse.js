@@ -4,6 +4,11 @@ import "../css/editCourse.css";
 import Switch from "react-switch";
 import ScheduleSelector from "react-schedule-selector";
 
+Date.prototype.addHours= function(h){
+    this.setHours(this.getHours()+h);
+    return this;
+}
+
 export class EditCourse extends Component {
     constructor() {
         super();
@@ -59,38 +64,38 @@ export class EditCourse extends Component {
     }
 
     async getTrainerTimeTable(){
-        // try {
-        //     let data = {clientID: localStorage.getItem("clientID")}
-        //     const response = await fetch("/trainer_dee/get_trainer_timetable", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(data)
-        //     });
+        try {
+            let data = {clientID: localStorage.getItem("clientID")}
+            const response = await fetch("/trainer_dee/get_trainer_timetable", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
 
-        //     const results = await response.json();
-        //     if (results.length != 0) {
-        //         let timestamp = [];
-        //         let dateTime = [];
-        //         for(let i = 0; i < results.length; i++){
-        //             timestamp.push(results[i].startTime);
-        //             timestamp.push(results[i].endTime);
-        //             let duration = (results[i].endTime - results[i].startTime)/3600
-        //             for(let j = 1; j < duration; j++){
-        //                 timestamp.push(results[i].startTime + 3600*j);
-        //             }
-        //         }
-        //         for(let i = 0; i < timestamp.length; i++){
-        //             dateTime.push(new Date(timestamp[i]));
-        //         }
-        //         this.setState({
-        //             schedule: dateTime
-        //         });
-        //     }
-        // } catch (error) {
-        //     console.log("defaultFetchError : ", error);
-        // }
+            const results = await response.json();
+            if (results.length != 0) {
+                let timestamp = [];
+                let dateTime = [];
+                for(let i = 0; i < results.length; i++){
+                    timestamp.push(results[i].startTime);
+                    timestamp.push(results[i].endTime);
+                    let duration = (new Date(results[i].endTime).getTime() - new Date(results[i].startTime).getTime())/3600000
+                    for(let j = 1; j < duration; j++){
+                        timestamp.push(new Date(results[i].startTime).getTime() + 3600000*j);
+                    }
+                }
+                for(let i = 0; i < timestamp.length; i++){
+                    dateTime.push(new Date(timestamp[i]).addHours(7));
+                }
+                this.setState({
+                    schedule: dateTime
+                });
+            }
+        } catch (error) {
+            console.log("defaultFetchError : ", error);
+        }
     }
 
     onFormChange = e => {
