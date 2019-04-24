@@ -42,16 +42,32 @@ app.post("/trainer_dee/reserve_session", (req, res) => {
   });
 });
 
+// get_trainer_timetable_byDate is used by reserve page
+app.post("/trainer_dee/get_trainer_timetable_byDate", (req, res) => {
+  let sql =
+    "SELECT * FROM TimeTable WHERE tableClientID = ? AND startTime > ? AND endTime < ?;";
+  connection.query(
+    sql,
+    [req.body.clientID, req.body.startDate, req.body.endDate],
+    (error, result) => {
+      if (error) {
+        console.log("error at get trainer timetable");
+        console.dir(error);
+      } else {
+        console.log("get Trainer_timetable successful");
+        res.send(result);
+      }
+    }
+  );
+});
 app.post("/trainer_dee/get_info_for_reservation", (req, res) => {
   sql =
-    "SELECT c.cName,c.service,c.cost,c.courseHour,cl.fName,cl.lName,cl.telno,cl.clientID from client cl,course c,transaction ts where\
+    "SELECT ts.remainingHour,c.cName,c.service,c.cost,c.courseHour,cl.fName,cl.lName,cl.telno,cl.clientID from client cl,course c,transaction ts where\
           cl.clientID = c.trainerID and ts.courseID = c.courseID and ts.transactionID=?;";
   connection.query(sql, [req.body.transactionID], (error, result) => {
     if (error) {
-      console.log("error at get trainer timetable");
       console.dir(error);
     } else {
-      console.log("get Trainer_timetable successful");
       res.send(result);
     }
   });
