@@ -9,7 +9,6 @@ class ReserveSession extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trainerTimeTable: [],
       trainerTimeTableByDate: [],
       remainingHour: 0,
       targetDate: "",
@@ -23,9 +22,8 @@ class ReserveSession extends Component {
   componentDidMount() {
     this.getInfoForReservation();
     this.getTargetDateList();
-
-    console.log(this.state);
-    console.log(this.state.trainerTimeTable);
+    this.getTrainerTimeTableByDate();
+    console.log(this.state.trainerTimeTableByDate);
   }
 
   async getInfoForReservation() {
@@ -47,32 +45,6 @@ class ReserveSession extends Component {
       this.setState({
         remainingHour: results[0].remainingHour,
         trainerID: results[0].clientID
-      });
-
-      this.getTrainerTimeTable();
-    } catch (error) {
-      console.log("defaultFetchError : ", error);
-    }
-  }
-
-  async getTrainerTimeTable() {
-    try {
-      // id is trainer's id but the name of parameter in backend is clientID
-
-      let data = { clientID: this.state.trainerID };
-      const response = await fetch("/trainer_dee/get_trainer_timetable", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      const results = await response.json();
-      console.log(results);
-      this.setState({
-        trainerTimeTable: results,
-        trainerTimeTableByDate: results
       });
     } catch (error) {
       console.log("defaultFetchError : ", error);
@@ -111,14 +83,16 @@ class ReserveSession extends Component {
     console.log(e.target.value);
     let nextValue = parseInt(e.target.value) + 1;
     console.log(nextValue);
-    this.state.targetDate = this.state.targetDateList[e.target.value]
-      .toJSON()
-      .slice(0, 10)
-      .replace("T", " ");
-    this.state.targetEndDate = this.state.targetDateList[nextValue]
-      .toJSON()
-      .slice(0, 10)
-      .replace("T", " ");
+    // this.state.targetDate = this.state.targetDateList[e.target.value];
+    this.state.targetDate = this.convertDateFormat(
+      this.state.targetDateList[e.target.value]
+    );
+    this.state.targetEndDate = this.convertDateFormat(
+      this.state.targetDateList[nextValue]
+    );
+    //   .toLocaleTimeString("en-US", { hour12: false })
+    //   .slice(0, 8)
+    //   .split(":");
     console.log(this.state.targetDate);
     console.log(this.state.targetEndDate);
     this.getTrainerTimeTableByDate();
@@ -141,8 +115,11 @@ class ReserveSession extends Component {
   };
 
   convertDateFormat = e => {
-    // return e.toJSON().slice(0, 19);
-    // (dateTime[i].toJSON().slice(0, 19).replace('T', ' ')
+    let list = e.toLocaleDateString("en-US", { hour12: false });
+    list = list.split("/");
+    // console.log(list);
+    let result = `${list[2]}-${list[0]}-${list[1]}`;
+    return result;
   };
 
   // async getOnGoingCourse() {
