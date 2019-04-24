@@ -103,8 +103,11 @@ export class ClientAccount extends Component {
             <div className="accountInfoBox">
               <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
               <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
-              <div style={this.getGenderStyle()}>
-                <a> {this.state.Gender}</a>
+
+              <div className="accountInfoRight">
+                <div style={this.getGenderStyle()}>
+                  <a> {this.state.Gender}</a>
+                </div>
               </div>
             </div>
           </div>

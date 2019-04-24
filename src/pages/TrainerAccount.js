@@ -89,7 +89,7 @@ export class TrainerAccount extends Component {
       marginLeft: "5px",
       align: "center",
       maxHeight: "30px",
-      maxWidth: "30px"
+      maxWidth: "40px"
     };
     if (this.state.Gender == "M") {
       genderStyle["backgroundColor"] = "#0084D5";
@@ -135,12 +135,16 @@ export class TrainerAccount extends Component {
             <div className="accountInfoBox">
               <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
               <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
-              <div style={this.getGenderStyle()}>
-                <a> {this.state.Gender}</a>
+
+              <div className="accountInfoRight">
+                <div style={this.getGenderStyle()}>
+                  <a> {this.state.Gender}</a>
+                </div>
+                <a style={ratingStyle}>Rating</a>
+                <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
+                <img className="starIconStyle" src={starIcon} />
               </div>
-              <a style={ratingStyle}>Rating</a>
-              <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
-              <img className="starIconStyle" src={starIcon} />
+
             </div>
           </div>
 
@@ -196,8 +200,8 @@ export class TrainerAccount extends Component {
 
 const ratingStyle = {
   marginLeft: "10px",
-  paddingLeft: "3px",
-  paddingRight: "3px",
+  paddingLeft: "5px",
+  paddingRight: "5px",
   color: "white",
   borderRadius: "5px",
   backgroundColor: "#006cb0"

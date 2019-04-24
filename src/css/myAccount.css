@@ -77,8 +77,10 @@
   color: #21366e;
   background-color: white;
   border-radius: 10px;
+  padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
+  padding-bottom: 10px;
   text-align: center;
   flex-direction: row;
   border: #21366e solid 2px;
@@ -106,5 +108,12 @@
   font-size: 1.2em;
   color: #21366e;
   margin-left: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.accountInfoRight {
+  margin-left: auto;
+  display: flex;
 }
 
