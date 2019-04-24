@@ -87,7 +87,7 @@ export class EditCourse extends Component {
                     }
                 }
                 for(let i = 0; i < timestamp.length; i++){
-                    dateTime.push(new Date(timestamp[i]).addHours(7));
+                    dateTime.push(new Date(timestamp[i]));
                 }
                 this.setState({
                     schedule: dateTime
@@ -138,8 +138,14 @@ export class EditCourse extends Component {
                     dateTime.push(this.state.schedule[i]);
                 }
             }
+            dateTime.sort(function(a,b){
+                return b.getTime() - a.getTime() > 0? -1: 1;
+              });
             for(let i =0; i < dateTime.length; i++){
-                timestamp.push(dateTime[i].toJSON().slice(0, 19).replace('T', ' '));
+                let date = dateTime[i].toLocaleDateString().split('/');
+                let time = dateTime[i].toLocaleTimeString('en-US', { hour12: false }).slice(0, 8).split(':');
+                timestamp.push(`${date[2]}-${date[0]}-${date[1]} ${time[0]}:${time[1]}:${time[2]}`);
+                console.log(`${date[2]}-${date[0]}-${date[1]} ${time[0]}:${time[1]}:${time[2]}`)
             }
             timestamp.sort();
             const data = {clientID: localStorage.getItem("clientID"), timestamp: timestamp};
