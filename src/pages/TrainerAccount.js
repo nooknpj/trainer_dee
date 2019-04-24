@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../css/myAccount.css";
-import "../css/courseBox.css";
 import starIcon from "../img/star.png";
 import { Button } from "react-bootstrap";
 
@@ -125,89 +124,84 @@ export class TrainerAccount extends Component {
   render() {
     return (
       <div>
-        <div className="infoLine">
-          <div className="accountTitleContainer">
-            <a className="infoTitle" style={accountTypeStyle}>
-              {" "}
-              {this.getAccountType()}
-            </a>
-          </div>
+        <div className="accountInfoContainer">
+          <a className="accountInfoTitle" style={accountTypeStyle}>
+            {" "}
+            {this.getAccountType()}
+          </a>
         </div>
 
         <img className="trainerImage" src={this.state.TrainerImg} />
 
-        <div id="accountInfo">
-          <div className="infoLine" style={{ marginTop: "30px" }}>
-            <div className="accountTitleContainer">
-              <a className="accountTitle">Email Address</a>
-            </div>
-            <div className="accountNameContainer">
-              <a> {this.state.Email}</a>
-            </div>
+        <div className="accountInfoContainer" style={{ marginTop: "30px" }}>
+          <a className="accountInfoTitle">Email Address</a>
+          <div className="accountInfoBox">
+            <a> {this.state.Email}</a>
           </div>
+        </div>
 
-          <div className="infoLine">
-            <div className="accountTitleContainer">
-              <a className="accountTitle">Name Gender Rating</a>
-            </div>
-            <div className="accountNameContainer">
-              <div>
-                <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
-                <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
-              </div>
-              <div style={this.getGenderStyle()}>
-                <a> {this.state.Gender}</a>
-              </div>
-              <a style={ratingStyle}>Rating</a>
-              <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
-              <img style={starIconStyle} src={starIcon} />
-            </div>
+        <div className="infoLine">
+          <div className="accountTitleContainer">
+            <a className="accountTitle">Name Gender Rating</a>
           </div>
+          <div className="accountNameContainer">
+            <div>
+              <a style={{ marginRight: "15px" }}> {this.state.FName}</a>
+              <a style={{ marginRight: "15px" }}> {this.state.LName} </a>
+            </div>
+            <div style={this.getGenderStyle()}>
+              <a> {this.state.Gender}</a>
+            </div>
+            <a style={ratingStyle}>Rating</a>
+            <a style={{ marginLeft: "15px" }}> {this.state.Rating}</a>
+            <img style={starIconStyle} src={starIcon} />
+          </div>
+        </div>
 
-          <div className="infoLine">
-            <div className="accountTitleContainer">
-              <a className="infoTitle">SSN (or Citizen ID)</a>
-            </div>
-            <div className="accountNameContainer">
-              <a> {this.state.Ssn}</a>
-            </div>
+        <div className="infoLine">
+          <div className="accountTitleContainer">
+            <a className="infoTitle">SSN (or Citizen ID)</a>
           </div>
+          <div className="accountNameContainer">
+            <a> {this.state.Ssn}</a>
+          </div>
+        </div>
 
-          <div className="infoLine">
-            <div className="accountTitleContainer">
-              <a className="infoTitle">Telephone Number</a>
-            </div>
-            <div className="accountNameContainer">
-              <a> {this.state.TelNo}</a>
-            </div>
+        <div className="infoLine">
+          <div className="accountTitleContainer">
+            <a className="infoTitle">Telephone Number</a>
           </div>
+          <div className="accountNameContainer">
+            <a> {this.state.TelNo}</a>
+          </div>
+        </div>
 
-          <div className="descriptionLine">
-            <a className="descriptionTitle">Trainer Description</a>
-            <div className="courseDescriptionBox">
-              <a> {this.state.TrainerDescription} </a>
-            </div>
+        <div className="descriptionLine">
+          <a className="descriptionTitle">Trainer Description</a>
+          <div className="courseDescriptionBox">
+            <a> {this.state.TrainerDescription} </a>
           </div>
-          <div className="descriptionLine">
-            <a className="descriptionTitle">Address</a>
-            <div className="courseDescriptionBox">
-              <a> {this.state.Address} </a>
-            </div>
+        </div>
+        <div className="descriptionLine">
+          <a className="descriptionTitle">Address</a>
+          <div className="courseDescriptionBox">
+            <a> {this.state.Address} </a>
           </div>
+        </div>
 
-          {this.state.isTrainer == 0 ? (
+        {this.state.isTrainer == 0 ? (
+          <div className="buttonContainer">
+            <Button href="/editProfile">Edit</Button>
+            <Button style={{ marginLeft: "20px" }} href="/upgrade">
+              Upgrade
+              </Button>
+          </div>
+        ) : (
             <div className="buttonContainer">
               <Button href="/editProfile">Edit</Button>
-              <Button style={{ marginLeft: "20px" }} href="/upgrade">
-                Upgrade
-              </Button>
             </div>
-          ) : (
-              <div className="buttonContainer">
-                <Button href="/editProfile">Edit</Button>
-              </div>
-            )}
-        </div>
+          )}
+
       </div >
     );
   }

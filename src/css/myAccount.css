@@ -8,10 +8,6 @@
   border-radius: 10px;
 }
 
-.accountTitleContainer {
-  /* width: 25%; */
-}
-
 .accountTitle {
   background-color: #21366e;
   font-weight: bold;
@@ -21,7 +17,7 @@
   border: #21366e solid 2px;
 }
 
-.accountNameContainer {
+.accountInfoBox {
   font-weight: bold;
   font-size: 16px;
   color: #21366e;
@@ -45,9 +41,31 @@
   margin-top: 10px;
 }
 
-;
+.accountInfoContainer {
+  margin-top: 10px;
+  /* background-color: white; */
+  color: white;
+  /* display: inline-block; */
+  flex-direction: row;
+  font-size: 1.2em;
+  /* background-color: red; */
+  width: auto;
+  /* max-width: 70%; */
+  /* text-align: center; */
+}
+
+.accountInfoTitle {
+  background-color: #21366e;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  width: 100%;
+  border: #21366e solid 2px;
+}
+
 @media screen and (min-width: 768px) {
-  .accountNameContainer {
+  .accountInfoBox {
     display: flex;
   }
   #accountInfo {
