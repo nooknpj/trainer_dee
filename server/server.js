@@ -49,7 +49,7 @@ app.post("/trainer_dee/reserve_session",(req,res)=>{
 app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
   let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID = ?;";
   connection.query(sql,[req.body.clientID] ,(error) => {
-    if (error) throw error;s
+    if (error) throw error;
   });
   sql ="INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
   console.log(req.body);
