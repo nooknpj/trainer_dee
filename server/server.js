@@ -28,48 +28,67 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
-app.post("/trainer_dee/reserve_session",(req,res)=>{
-  let sql = "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";
-  connection.query(sql,[req.body.clientID],(error)=>{
-    if(error) {
+app.post("/trainer_dee/reserve_session", (req, res) => {
+  let sql =
+    "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";
+  connection.query(sql, [req.body.clientID], error => {
+    if (error) {
       console.dir(error);
-      console.log('error to reserve session');
+      console.log("error to reserve session");
       res.sendStatus(400);
-    }
-    else {
+    } else {
       res.sendStatus(200);
     }
-    
-  })
+  });
 });
+
+app.post("/trainer_dee/get_info_for_reservation", (req, res) => {
+  sql =
+    "SELECT c.cName,c.service,c.cost,c.courseHour,cl.fName,cl.lName,cl.telno,cl.clientID from client cl,course c,transaction ts where\
+          cl.clientID = c.trainerID and ts.courseID = c.courseID and ts.transactionID=?;";
+  connection.query(sql, [req.body.transactionID], (error, result) => {
+    if (error) {
+      console.log("error at get trainer timetable");
+      console.dir(error);
+    } else {
+      console.log("get Trainer_timetable successful");
+      res.send(result);
+    }
+  });
+});
+
 // app.post("/trainer_dee/get_client_avaliable",(req,res)=>{
 //   let sql = "";
 // });
 
 app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
   let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID = ?;";
-  connection.query(sql,[req.body.clientID] ,(error) => {
+  connection.query(sql, [req.body.clientID], error => {
     if (error) throw error;
   });
-  sql ="INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
+  sql =
+    "INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
   console.log(req.body);
-  for(let i = 1; i < req.body.timestamp.length; i+=2){
-    connection.query(sql, [req.body.clientID, req.body.timestamp[i-1], req.body.timestamp[i]], (error, result) => {
-      if (error) throw error;
-    });
+  for (let i = 1; i < req.body.timestamp.length; i += 2) {
+    connection.query(
+      sql,
+      [req.body.clientID, req.body.timestamp[i - 1], req.body.timestamp[i]],
+      (error, result) => {
+        if (error) throw error;
+      }
+    );
   }
   res.end();
 });
 
-app.post("/trainer_dee/get_trainer_timetable",(req,res)=>{
-  let sql  = "SELECT * FROM TimeTable WHERE tableClientID = ?;";
-  connection.query(sql,[req.body.clientID],(error,result)=>{
-    if(error) {
-      console.log('error at get trainer timetable');
+app.post("/trainer_dee/get_trainer_timetable", (req, res) => {
+  let sql = "SELECT * FROM TimeTable WHERE tableClientID = ?;";
+  connection.query(sql, [req.body.clientID], (error, result) => {
+    if (error) {
+      console.log("error at get trainer timetable");
       console.dir(error);
-    }
-    else {
-      console.log('get Trainer_timetable successful');
+    } else {
+      console.log("get Trainer_timetable successful");
       res.send(result);
     }
   });
@@ -276,10 +295,15 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
         }
       }
       const transactionID = crypto.randomBytes(13).toString("hex"); // unique
-      let sqlCreateTransaction = `INSERT INTO transaction(transactionID,clientID,courseID,status,token) VALUES('${transactionID}',?,?,?,'0');`;
+      let sqlCreateTransaction = `INSERT INTO transaction(transactionID,clientID,courseID,remainingHour,status,token) VALUES('${transactionID}',?,?,?,?,'0');`;
       connection.query(
         sqlCreateTransaction,
-        [req.body.clientID, req.body.courseID, req.body.status],
+        [
+          req.body.clientID,
+          req.body.courseID,
+          req.body.courseHour,
+          req.body.status
+        ],
         error => {
           if (error) {
             console.log(transactionID);
@@ -348,8 +372,6 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 //     // console.log(all);
 //   });
 // });
-
-
 
 app.post("/trainer_dee/update_rating", (req, res) => {
   let sql = "UPDATE trainer SET rating = ?, rateCount = ? WHERE trainerID = ?";

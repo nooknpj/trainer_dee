@@ -64,7 +64,6 @@ create table TimeTable (
             delete cascade on
             update cascade
 );
-
 create table Location (
   LocationID int(10) auto_increment,
   LocateCourseID int (10),
@@ -111,6 +110,7 @@ create table Transaction (
   transactionID varchar (50),
   clientID varchar (13),
   courseID int,
+  remainingHour tinyint,
   status varchar (20),
   token varchar(20),
   primary key (transactionID),

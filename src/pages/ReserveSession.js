@@ -10,14 +10,16 @@ class ReserveSession extends Component {
   }
 
   componentDidMount() {
+    this.getInfoForReservation();
     // this.getTrainerTimeTable();
     console.log(this.state.trainerTimeTable);
   }
 
-  async getTrainerID() {
+  async getInfoForReservation() {
     try {
       let data = { transactionID: sessionStorage.getItem("transactionID") };
-      const response = await fetch("/trainer_dee/get_trainer_timetable", {
+      console.log(data);
+      const response = await fetch("/trainer_dee/get_info_for_reservation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -26,10 +28,11 @@ class ReserveSession extends Component {
       });
 
       const results = await response.json();
+
       console.log(results);
-      this.setState({
-        trainerTimeTable: results
-      });
+      //   this.setState({
+      //     trainerTimeTable: results
+      //   });
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
