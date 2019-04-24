@@ -169,29 +169,29 @@ export class CourseItem extends Component {
 
               <div className="infoLine">
                 {window.location.pathname != "/myCourse" ||
-                (window.location.pathname == "/myCourse" &&
-                  this.props.isAttendedPage == 1) ? (
-                  <div className="trainerInfoContainer">
-                    <div>
-                      <span className="infoTitle"> Trainer</span>
-                      <a> {this.props.fName}</a>
-                      <a> {this.props.lName} </a>
-                    </div>
-                    <div style={this.getGenderStyle()}>
-                      <a> {this.props.gender}</a>
-                    </div>
+                  (window.location.pathname == "/myCourse" &&
+                    this.props.isAttendedPage == 1) ? (
+                    <div className="trainerInfoContainer">
+                      <div>
+                        <span className="infoTitle"> Trainer</span>
+                        <a> {this.props.fName}</a>
+                        <a> {this.props.lName} </a>
+                      </div>
+                      <div style={this.getGenderStyle()}>
+                        <a> {this.props.gender}</a>
+                      </div>
 
-                    <div className="ratingContainer">
-                      <a style={{ marginRight: "5px" }}>
-                        {" "}
-                        {this.props.rating.toFixed(1)}
-                      </a>
-                      <img style={starIconStyle} src={starIcon} />
+                      <div className="ratingContainer">
+                        <a style={{ marginRight: "5px" }}>
+                          {" "}
+                          {this.props.rating.toFixed(1)}
+                        </a>
+                        <img style={starIconStyle} src={starIcon} />
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div />
-                )}
+                  ) : (
+                    <div />
+                  )}
               </div>
 
               <div className="descriptionLine">
@@ -201,125 +201,130 @@ export class CourseItem extends Component {
                 </div>
               </div>
 
-              <div className="infoLine">
-                <div className="infoContainer">
-                  <span className="infoTitle"> Course Duration</span>
-                  <span> {this.props.courseHour}</span>
-                  <span> Hours</span>
-                </div>
-              </div>
+              <div className="test">
 
-              <div className="infoLine">
-                <div className="infoContainer">
-                  <span className="infoTitle"> Course Cost</span>
-                  <span> {this.props.cost}</span>
-                  <span> Baht</span>
-                </div>
-              </div>
-              {window.location.pathname == "/myCourse" &&
-              this.props.isAttendedPage == 1 ? (
-                <div>
-                  <div className="infoLine">
-                    <div className="infoContainer">
-                      <span className="infoTitle">Status</span>
-                      <span> {this.props.status}</span>
-                    </div>
-                  </div>
-                  {this.props.status == "toBePaid" ? (
-                    <div style={{ display: "flex", marginTop: "20px" }}>
-                      <Button
-                        variant="primary"
-                        size="small"
-                        type="submit"
-                        style={{ marginLeft: "auto", marginRight: "15px" }}
-                        onClick={this.onPayClick}
-                      >
-                        Pay
-                      </Button>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                  {this.props.status == "onGoing" ? (
-                    <div style={{ display: "flex", marginTop: "20px" }}>
-                      <Button
-                        variant="primary"
-                        size="small"
-                        type="submit"
-                        style={{ marginLeft: "auto", marginRight: "15px" }}
-                        onClick={this.onReserveClick}
-                      >
-                        Reserve
-                      </Button>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                  {this.props.status == "finished" ? (
-                    <div style={{ display: "flex", marginTop: "20px" }}>
-                      <Button
-                        variant="primary"
-                        size="small"
-                        type="submit"
-                        style={{ marginLeft: "auto", marginRight: "15px" }}
-                        href="javascript:void(0);"
-                        onClick={this.onRateClick}
-                      >
-                        Rate
-                      </Button>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-                </div>
-              ) : (
-                <div />
-              )}
-              {(window.location.pathname.includes("/courseDesc") &&
-                this.props.trainerID == localStorage.getItem("clientID")) ||
-              (window.location.pathname == "/myCourse" &&
-                this.props.isAttendedPage != 1) ? (
                 <div className="infoLine">
                   <div className="infoContainer">
-                    <span className="infoTitle">Course Status</span>
-                    <span>
-                      {" "}
-                      {this.props.courseStatus == 1 ? "Show" : "Hide"}
-                    </span>
+                    <span className="infoTitle"> Course Duration</span>
+                    <span> {this.props.courseHour}</span>
+                    <span> Hours</span>
                   </div>
                 </div>
-              ) : (
-                <div />
-              )}
-              <div className="">
-                {window.location.pathname == "/myCourse" &&
-                this.props.isAttendedPage != 1 ? (
-                  <div className="descriptionLine">
-                    <a className="descriptionTitle">Attended Client</a>
-                    <div className="courseDescriptionBox">
-                      <Table responsive hover size="sm">
-                        <thead>
-                          <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Telephone No.</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {this.state.coursesClient.map(courseClient => (
-                            <tr>
-                              <td>{courseClient.fName}</td>
-                              <td>{courseClient.lName}</td>
-                              <td>{courseClient.telNo}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
+
+                <div className="infoLine">
+                  <div className="infoContainer">
+                    <span className="infoTitle"> Course Cost</span>
+                    <span> {this.props.cost}</span>
+                    <span> Baht</span>
+                  </div>
+                </div>
+
+              </div>
+
+              {window.location.pathname == "/myCourse" &&
+                this.props.isAttendedPage == 1 ? (
+                  <div>
+                    <div className="infoLine">
+                      <div className="infoContainer">
+                        <span className="infoTitle">Status</span>
+                        <span> {this.props.status}</span>
+                      </div>
+                    </div>
+                    {this.props.status == "toBePaid" ? (
+                      <div style={{ display: "flex", marginTop: "20px" }}>
+                        <Button
+                          variant="primary"
+                          size="small"
+                          type="submit"
+                          style={{ marginLeft: "auto", marginRight: "15px" }}
+                          onClick={this.onPayClick}
+                        >
+                          Pay
+                      </Button>
+                      </div>
+                    ) : (
+                        <div />
+                      )}
+                    {this.props.status == "onGoing" ? (
+                      <div style={{ display: "flex", marginTop: "20px" }}>
+                        <Button
+                          variant="primary"
+                          size="small"
+                          type="submit"
+                          style={{ marginLeft: "auto", marginRight: "15px" }}
+                          onClick={this.onReserveClick}
+                        >
+                          Reserve
+                      </Button>
+                      </div>
+                    ) : (
+                        <div />
+                      )}
+                    {this.props.status == "finished" ? (
+                      <div style={{ display: "flex", marginTop: "20px" }}>
+                        <Button
+                          variant="primary"
+                          size="small"
+                          type="submit"
+                          style={{ marginLeft: "auto", marginRight: "15px" }}
+                          href="javascript:void(0);"
+                          onClick={this.onRateClick}
+                        >
+                          Rate
+                      </Button>
+                      </div>
+                    ) : (
+                        <div />
+                      )}
+                  </div>
+                ) : (
+                  <div />
+                )}
+              {(window.location.pathname.includes("/courseDesc") &&
+                this.props.trainerID == localStorage.getItem("clientID")) ||
+                (window.location.pathname == "/myCourse" &&
+                  this.props.isAttendedPage != 1) ? (
+                  <div className="infoLine">
+                    <div className="infoContainer">
+                      <span className="infoTitle">Course Status</span>
+                      <span>
+                        {" "}
+                        {this.props.courseStatus == 1 ? "Show" : "Hide"}
+                      </span>
                     </div>
                   </div>
                 ) : (
                   <div />
                 )}
+              <div className="">
+                {window.location.pathname == "/myCourse" &&
+                  this.props.isAttendedPage != 1 ? (
+                    <div className="descriptionLine">
+                      <a className="descriptionTitle">Attended Client</a>
+                      <div className="courseDescriptionBox">
+                        <Table responsive hover size="sm">
+                          <thead>
+                            <tr>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Telephone No.</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {this.state.coursesClient.map(courseClient => (
+                              <tr>
+                                <td>{courseClient.fName}</td>
+                                <td>{courseClient.lName}</td>
+                                <td>{courseClient.telNo}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </div>
+                    </div>
+                  ) : (
+                    <div />
+                  )}
               </div>
             </div>
           </div>
