@@ -102,7 +102,7 @@ export class EditCourse extends Component {
         this.fetchSaveCourse();
         this.fetchSaveTimeTable();
         e.preventDefault();
-        window.location = document.referrer;
+        //window.location = document.referrer;
     }
 
     handleToggleChange(checked) {
@@ -125,16 +125,20 @@ export class EditCourse extends Component {
             this.state.schedule.sort();
             let dateTime = [this.state.schedule[0], this.state.schedule[this.state.schedule.length - 1]]; // contains startTime and endTime
             let timestamp = [];
+            console.log(`line 128 date time >>> ${dateTime} `);
             for(let i = 1; i < this.state.schedule.length; i++){
                 if(this.state.schedule[i] - this.state.schedule[i-1] > 3600000){
                     dateTime.push(this.state.schedule[i-1]);
                     dateTime.push(this.state.schedule[i]);
                 }
             }
+            console.log(`line 139  date time >>> ${dateTime} `);
             for(let i =0; i < dateTime.length; i++){
                 timestamp.push(dateTime[i].toJSON().slice(0, 19).replace('T', ' '));
             }
+            console.log(`line 139  date time >>> ${dateTime} `);
             timestamp.sort();
+            console.log(`line 141  date time >>> ${dateTime} `);
             const data = {clientID: localStorage.getItem("clientID"), timestamp: timestamp};
 
             const response = await fetch("/trainer_dee/set_trainer_timetable", {

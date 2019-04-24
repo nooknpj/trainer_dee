@@ -29,7 +29,17 @@ connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
 app.post("/trainer_dee/get_trainer_timetable",(req,res)=>{
-  let sql  = "SELECT *";
+  let sql  = "SELECT * FROM TimeTable WHERE tableClientID = ?;";
+  connection.query(sql,[req.body.clientID],(error,result)=>{
+    if(error) {
+      console.log('error at get trainer timetable');
+      console.dir(error);
+    }
+    else {
+      console.log('get Trainer_timetable successful');
+      res.send(result);
+    }
+  });
 });
 
 app.post("/trainer_dee/confirmPayment", (req, res) => {
@@ -307,8 +317,8 @@ app.post("/trainer_dee/create_transaction", (req, res) => {
 // });
 
 app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
-  let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID != 'a';";
-  connection.query(sql, (error, result) => {
+  let sql = "DELETE FROM trainer_dee.timetable WHERE tableClientID = ?;";
+  connection.query(sql,[req.body.clientID] ,(error, result) => {
     if (error) throw error;
   });
   sql ="INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
