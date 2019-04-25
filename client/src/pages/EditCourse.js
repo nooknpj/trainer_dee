@@ -77,8 +77,10 @@ export class EditCourse extends Component {
       const results = await response.json();
       if (results.length != 0) {
         let dateTime = [];
-        for(let i = 0; i < results.length; i++){
-          dateTime.push(new Date(`${results[i].startDate} ${results[i].startTime}:00:00`));
+        for (let i = 0; i < results.length; i++) {
+          dateTime.push(
+            new Date(`${results[i].startDate} ${results[i].startTime}:00:00`)
+          );
         }
         // let timestamp = [];
         // let dateTime = [];
@@ -116,7 +118,6 @@ export class EditCourse extends Component {
     this.fetchSaveCourse();
     this.fetchSaveTimeTable();
     e.preventDefault();
-    
   };
 
   handleToggleChange = checked => {
@@ -156,7 +157,7 @@ export class EditCourse extends Component {
       let date = [];
       let time = [];
       for (let i = 0; i < this.state.schedule.length; i++) {
-        console.log(i)
+        console.log(i);
         let dateSplit = this.state.schedule[i].toLocaleDateString().split("/");
         let timeSplit = this.state.schedule[i]
           .toLocaleTimeString("en-US", { hour12: false })
@@ -165,7 +166,6 @@ export class EditCourse extends Component {
         date.push(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
         time.push(`${timeSplit[0]}`);
         console.log(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
-        window.location = "/courseDesc/" + this.state.courseID;
       }
       // timestamp.sort();
       const data = {
@@ -183,6 +183,8 @@ export class EditCourse extends Component {
       });
     } catch (error) {
       console.log("Edit timetable failed", error);
+    } finally {
+      window.location = "/courseDesc/" + this.state.courseID;
     }
   }
 

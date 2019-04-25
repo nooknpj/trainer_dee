@@ -18,7 +18,8 @@ class ReserveSession extends Component {
       targetDateList: [],
       targetDateString: [],
       timeTableResult: [],
-      emptyTimeTableResult: this.getDefaultTimeTableResult()
+      emptyTimeTableResult: this.getDefaultTimeTableResult(),
+      selectedTimeSlots: []
     };
   }
 
@@ -198,7 +199,7 @@ class ReserveSession extends Component {
   getDefaultTimeTableResult = e => {
     let timeTableResult = [];
 
-    for (let startTime = 5; startTime <= 21; startTime++) {
+    for (let startTime = 5; startTime <= 22; startTime++) {
       let timeSlot = {};
       timeSlot.startTime = startTime;
       timeSlot.status = "notAvailable";
@@ -227,6 +228,25 @@ class ReserveSession extends Component {
 
   getHour = e => {
     console.log(e);
+  };
+
+  //-------------------------------------reserve and timeslot
+  addToSelectedList = e => {
+    this.state.selectedTimeSlots.push(e);
+    console.log(this.state.selectedTimeSlots);
+  };
+
+  removeFromSelectedList = e => {
+    let newList = this.state.selectedTimeSlots;
+    console.log(e);
+    // // let targetIndex = newList.findIndex(function());
+    // console.log(targetIndex);
+    // delete newList[targetIndex];
+    newList = this.state.selectedTimeSlots.filter(function(ts) {
+      return ts != e;
+    });
+    this.state.selectedTimeSlots = newList;
+    console.log(this.state.selectedTimeSlots);
   };
 
   // async getOnGoingCourse() {
@@ -285,7 +305,11 @@ class ReserveSession extends Component {
           </Form.Group>
           <div className="timeTableRow">
             {/* {console.log("before passing props", this.state.timeTableResult)} */}
-            <TimeTableRow timeTableResult={this.state.timeTableResult} />
+            <TimeTableRow
+              timeTableResult={this.state.timeTableResult}
+              addToSelectedList={this.addToSelectedList}
+              removeFromSelectedList={this.removeFromSelectedList}
+            />
           </div>
 
           {/* <DropdownButton

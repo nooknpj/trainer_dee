@@ -1,13 +1,43 @@
 .timeTableRow {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   color: white;
 }
 
 .timeSlot {
-  width: 5em;
-  font-size: 0.8em;
+  width: 7.5em;
+  font-size: 1em;
   text-align: center;
   margin-right: 1em;
-  background-color: black;
+  margin-bottom: 1em;
+  border-radius: 0.4em;
+  /* padding-left: 0.2em;
+  padding-right: 0.2em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em; */
+  border: solid black 0.15em;
+  background-color: #75787b;
+}
+
+.availableTimeSlot {
+  width: 7.5em;
+  font-size: 1em;
+  text-align: center;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  border-radius: 0.4em;
+  /* padding-left: 0.2em;
+  padding-right: 0.2em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em; */
+  border: solid black 0.15em;
+  background-color: #5bc500;
+  transition-delay: 50ms;
+}
+
+.availableTimeSlot:hover {
+  /* border: solid white 0.15em; */
+  /* background-color: #275d38; */
+  border: solid white 0.15em;
+  transition-delay: 50ms;
 }

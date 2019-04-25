@@ -11,7 +11,12 @@ export class TimeTableRow extends Component {
       //     <span> {timeSlot.status}</span>
       //   </div>
 
-      <TimeSlot startTime={timeSlot.startTime} status={timeSlot.status} />
+      <TimeSlot
+        startTime={timeSlot.startTime}
+        status={timeSlot.status}
+        addToSelectedList={this.props.addToSelectedList}
+        removeFromSelectedList={this.props.removeFromSelectedList}
+      />
 
       //   <CourseItem
       //     courseID={courseItem.courseID}
