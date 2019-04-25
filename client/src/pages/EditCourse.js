@@ -162,13 +162,9 @@ export class EditCourse extends Component {
           .toLocaleTimeString("en-US", { hour12: false })
           .slice(0, 8)
           .split(":");
-        date.push(
-          `${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`
-        );
-        time.push(`${timeSplit[0]}`)
-        console.log(
-          `${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`
-        );
+        date.push(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
+        time.push(`${timeSplit[0]}`);
+        console.log(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
       }
       // timestamp.sort();
       const data = {

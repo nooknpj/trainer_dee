@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Dropdown, DropdownButton, Button, Form } from "react-bootstrap";
+import TimeTableRow from "../components/TimeTableRow";
 
 Date.prototype.AddDays = function(days) {
   days = parseInt(days, 10);
@@ -16,15 +17,25 @@ class ReserveSession extends Component {
       trainerID: "defaultTrainerID",
       targetDateList: [],
       targetDateString: [],
-      possibleRange: []
+      timeTableResult: [],
+      emptyTimeTableResult: this.getDefaultTimeTableResult()
     };
   }
 
   componentDidMount() {
-    this.getInfoForReservation();
+    let defaultTargetDate = new Date();
+    this.setState({
+      targetDate: this.convertDateFormat(defaultTargetDate)
+    });
+
     this.getTargetDateList();
-    this.getTrainerTimeTableByDate();
-    console.log(this.state.trainerTimeTableByDate);
+    this.getInfoForReservation();
+    // this.getTargetDateList();
+    // this.getTrainerTimeTableByDate();
+    // this.getTrainerTimeTableByDate();
+    // this.updateTimeTableResult();
+    console.log(this.state);
+    // console.log(this.state.trainerTimeTableByDate);
   }
 
   async getInfoForReservation() {
@@ -47,6 +58,7 @@ class ReserveSession extends Component {
         remainingHour: results[0].remainingHour,
         trainerID: results[0].clientID
       });
+      this.getTrainerTimeTableByDate();
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
@@ -55,8 +67,11 @@ class ReserveSession extends Component {
   async getTrainerTimeTableByDate() {
     try {
       // id is trainer's id but the name of parameter in backend is clientID
+
       let startDate = this.state.targetDate;
       // let endDate = this.state.targetEndDate;
+      console.log("1:  ", this.state.trainerID);
+      console.log("2:  ", startDate);
       let data = { clientID: this.state.trainerID, startDate };
       const response = await fetch(
         "/trainer_dee/get_trainer_timetable_byDate",
@@ -69,16 +84,70 @@ class ReserveSession extends Component {
         }
       );
       const results = await response.json();
-      console.log(results);
-      this.state.trainerTimeTableByDate = results;
-      console.log(this.state.trainerTimeTableByDate);
+      // console.log(results);
+      // console.log(results);
       // this.setState({
       //   trainerTimeTableByDate: results
       // });
+      this.state.trainerTimeTableByDate = results;
+      this.setState({
+        trainerTimeTableByDate: results
+      });
+      console.log(this.state.trainerTimeTableByDate);
+
+      this.updateTimeTableResult();
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
   }
+
+  // updateTimeTableResult = e => {
+  //   let timeTableResult = this.state.timeTableResult;
+  //   let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
+  //   console.log(trainerTimeTableByDate);
+  //   console.log(timeTableResult);
+
+  //   for (let i = 0; i < trainerTimeTableByDate.length; i++) {
+  //     // console.log(trainerTimeTableByDate[i]);
+  //     let timeSlot = this.state.trainerTimeTableByDate[i];
+  //     let targetTimeSlot = this.getTargetTimeSlot(timeSlot.startTime);
+  //     // console.log(targetTimeSlot);
+
+  //     targetTimeSlot.status = timeSlot.tableStatus;
+  //   }
+
+  //   console.log(timeTableResult);
+
+  //   this.setState({
+  //     timeTableResult: timeTableResult
+  //   });
+  //   console.log(this.state.timeTableResult);
+  // };
+
+  updateTimeTableResult = e => {
+    let timeTableResult = this.getDefaultTimeTableResult();
+    this.setState({
+      timeTableResult: this.getDefaultTimeTableResult()
+    });
+
+    let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
+    // console.log("state.tableByDate", trainerTimeTableByDate);
+    // console.log("empty:->", this.state.timeTableResult);
+
+    for (let i = 0; i < trainerTimeTableByDate.length; i++) {
+      // console.log(trainerTimeTableByDate[i]);
+      let timeSlot = this.state.trainerTimeTableByDate[i];
+      console.log(timeSlot);
+      let targetTimeSlot = this.getTargetTimeSlot(timeSlot.startTime);
+      // console.log("targetTimeSlot", targetTimeSlot);
+      targetTimeSlot.status = timeSlot.tableStatus;
+      // console.log("targetTimeSlot", targetTimeSlot);
+    }
+
+    this.setState({});
+
+    // console.log(this.state.timeTableResult);
+  };
 
   onFormChange = e => {
     console.log(e.target.value);
@@ -91,15 +160,26 @@ class ReserveSession extends Component {
     this.state.targetEndDate = this.convertDateFormat(
       this.state.targetDateList[nextValue]
     );
-    //   .toLocaleTimeString("en-US", { hour12: false })
-    //   .slice(0, 8)
-    //   .split(":");
-    console.log(this.state.targetDate);
-    console.log(this.state.targetEndDate);
+
     this.getTrainerTimeTableByDate();
-    this.getPossibleRange();
   };
 
+  getTargetTimeSlot = startTime => {
+    console.log(this.state.timeTableResult);
+    let targetTimeSlot = this.state.timeTableResult.find(
+      obj => obj.startTime == startTime
+    );
+
+    if (typeof targetTimeSlot == "undefined") {
+      targetTimeSlot = {
+        startDate: "default",
+        startTime: "default",
+        status: "default"
+      };
+    }
+    return targetTimeSlot;
+  };
+  // --------------------------------initialize constant---------------------------------------------------------------------
   getTargetDateList = () => {
     let date = new Date();
     let targetDateList = [];
@@ -115,6 +195,20 @@ class ReserveSession extends Component {
     this.state.targetDateString = targetDateString;
   };
 
+  getDefaultTimeTableResult = e => {
+    let timeTableResult = [];
+
+    for (let startTime = 5; startTime <= 21; startTime++) {
+      let timeSlot = {};
+      timeSlot.startTime = startTime;
+      timeSlot.status = "notAvailable";
+      timeTableResult.push(timeSlot);
+    }
+    return timeTableResult;
+    // this.state.timeTableResult = timeTableResult;
+    // console.log(this.state.timeTableResult);
+  };
+
   convertDateFormat = e => {
     let list = e.toLocaleDateString("en-US", { hour12: false });
     list = list.split("/");
@@ -123,13 +217,13 @@ class ReserveSession extends Component {
     return result;
   };
 
-  getPossibleRange = e => {
-    let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
-    console.log(this.state.trainerTimeTableByDate);
-    for (let i = 0; i < trainerTimeTableByDate.length; i++) {
-      console.log("possible range", trainerTimeTableByDate[i]);
-    }
-  };
+  // getPossibleRange = e => {
+  //   let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
+  //   console.log(this.state.trainerTimeTableByDate);
+  //   for (let i = 0; i < trainerTimeTableByDate.length; i++) {
+  //     console.log("possible range", trainerTimeTableByDate[i]);
+  //   }
+  // };
 
   getHour = e => {
     console.log(e);
@@ -163,7 +257,13 @@ class ReserveSession extends Component {
         <p> Remaining Hour: {this.state.remainingHour} Hours</p>
         {/* <p> {this.state.trainerID}</p> */}
 
-        <div style={{ display: "flex", marginTop: "20px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "20px"
+          }}
+        >
           <Form.Group>
             <Form.Label>Select Date</Form.Label>
             <Form.Control
@@ -183,6 +283,11 @@ class ReserveSession extends Component {
               <option value="7">{this.state.targetDateString[7]}</option>
             </Form.Control>
           </Form.Group>
+          <div className="timeTableRow">
+            {/* {console.log("before passing props", this.state.timeTableResult)} */}
+            <TimeTableRow timeTableResult={this.state.timeTableResult} />
+          </div>
+
           {/* <DropdownButton
             id="dropdown-basic-button"
             title="Select duration"
