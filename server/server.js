@@ -83,12 +83,12 @@ app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
     if (error) throw error;
   });
   sql =
-    "INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
+    "INSERT INTO timetable (tableClientID, startDate, startTime, tableStatus) values (?, ?, ?, 'available')";
   console.log(req.body);
-  for (let i = 1; i < req.body.timestamp.length; i += 2) {
+  for (let i = 0; i < req.body.startDate.length; i += 1) {
     connection.query(
       sql,
-      [req.body.clientID, req.body.timestamp[i - 1], req.body.timestamp[i]],
+      [req.body.clientID, req.body.startDate[i], req.body.startTime[i]],
       (error, result) => {
         if (error) throw error;
       }

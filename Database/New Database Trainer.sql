@@ -60,7 +60,7 @@ create table TimeTable (
   startTime tinyint,
   -- endTime timestamp,
   tableStatus varchar(20),
-  primary key (tableClientID, startTime),
+  primary key (tableClientID, startDate, startTime),
   foreign key (tableClientID) references Client (clientID) on
             delete cascade on
             update cascade
