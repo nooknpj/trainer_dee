@@ -77,7 +77,7 @@ export class EditCourse extends Component {
       const results = await response.json();
       if (results.length != 0) {
         let dateTime = [];
-        for(let i = 0; i < results.length; i++){
+        for (let i = 0; i < results.length; i++) {
           dateTime.push(`${results.startDate[i]} ${results.startTime}:00:00`);
         }
         // let timestamp = [];
@@ -161,13 +161,9 @@ export class EditCourse extends Component {
           .toLocaleTimeString("en-US", { hour12: false })
           .slice(0, 8)
           .split(":");
-        date.push(
-          `${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`
-        );
-        time.push(`${timeSplit[0]}`)
-        console.log(
-          `${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`
-        );
+        date.push(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
+        time.push(`${timeSplit[0]}`);
+        console.log(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
       }
       // timestamp.sort();
       const data = {
