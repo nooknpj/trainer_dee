@@ -116,7 +116,7 @@ export class EditCourse extends Component {
     this.fetchSaveCourse();
     this.fetchSaveTimeTable();
     e.preventDefault();
-    window.location = "/courseDesc/" + this.state.courseID;
+    
   };
 
   handleToggleChange = checked => {
@@ -165,6 +165,7 @@ export class EditCourse extends Component {
         date.push(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
         time.push(`${timeSplit[0]}`);
         console.log(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
+        window.location = "/courseDesc/" + this.state.courseID;
       }
       // timestamp.sort();
       const data = {
