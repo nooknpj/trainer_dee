@@ -286,7 +286,16 @@ class ReserveSession extends Component {
       duration: duration
     };
 
+    // the parameter tableClientID is trainer's id (to match db)
+    let timeTableData = {
+      tableClientID: trainerID,
+      startDate: startDate,
+      startTime: startTime,
+      duration: duration
+    };
+
     this.insertReserveSession(sessionData);
+    this.reserveTrainerTimetable(timeTableData);
   };
 
   // calls backend to create session
@@ -312,27 +321,28 @@ class ReserveSession extends Component {
     }
   }
 
-  updateTrainerTimeTable = e => {};
+  async reserveTrainerTimetable(e) {
+    try {
+      let data = {
+        tableClientID: e.tableClientID,
+        startDate: e.startDate,
+        startTime: e.startTime,
+        duration: e.duration
+      };
 
-  // async getOnGoingCourse() {
-  //     try {
-  //         let data = { clientID: localStorage.getItem("clientID") };
-  //         const response = await fetch("/trainer_dee/get_ongoing_course", {
-  //             method: "POST",
-  //             headers: {
-  //                 "Content-Type": "application/json"
-  //             },
-  //             body: JSON.stringify(data)
-  //         });
-
-  //         const results = await response.json();
-  //         this.setState({
-  //             onGoingCourse: results
-  //         });
-  //     } catch (error) {
-  //         console.log("defaultFetchError : ", error);
-  //     }
-  // }
+      const response = await fetch("/trainer_dee/reserve_trainer_timetable", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      const results = await response;
+    } catch (error) {
+      throw error;
+      console.log("defaultFetchError : ", error);
+    }
+  }
 
   render() {
     return (

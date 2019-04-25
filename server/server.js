@@ -109,18 +109,48 @@ app.post("/trainer_dee/create_reserve_session", (req, res) => {
   );
 });
 
-app.post("/trainer_dee/reserve_session", (req, res) => {
+app.post("/trainer_dee/reserve_trainer_timetable", (req, res) => {
   let sql =
-    "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";
-  connection.query(sql, [req.body.clientID], error => {
-    if (error) {
-      console.dir(error);
-      console.log("error to reserve session");
-      res.sendStatus(400);
-    } else {
-      res.sendStatus(200);
-    }
-  });
+    "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND startDate = ? AND startTime = ? AND tableStatus = ?;";
+
+  for (let i = 0; i < req.body.duration; i += 1) {
+    connection.query(
+      sql,
+      [
+        req.body.tableClientID,
+        req.body.startDate,
+        parseInt(req.body.startTime) + i,
+        "available"
+      ],
+      error => {
+        if (error) {
+          console.dir(error);
+          console.log("error to reserve session");
+          // res.sendStatus(400);
+        } else {
+          // res.sendStatus(200);
+        }
+      }
+    );
+  }
+  // connection.query(
+  //   sql,
+  //   [
+  //     req.body.tableClientID,
+  //     req.body.startDate,
+  //     req.body.startTime,
+  //     "available"
+  //   ],
+  //   error => {
+  //     if (error) {
+  //       console.dir(error);
+  //       console.log("error to reserve session");
+  //       res.sendStatus(400);
+  //     } else {
+  //       res.sendStatus(200);
+  //     }
+  //   }
+  // );
 });
 
 // get_trainer_timetable_byDate is used by reserve page
