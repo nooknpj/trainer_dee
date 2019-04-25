@@ -56,7 +56,7 @@ create table Authen (
 create table TimeTable (
   tableClientID varchar(13),
   -- Date date,
-  date date,
+  startDate date,
   startTime tinyint,
   -- endTime timestamp,
   tableStatus varchar(20),
