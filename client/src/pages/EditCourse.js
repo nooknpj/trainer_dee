@@ -78,7 +78,7 @@ export class EditCourse extends Component {
       if (results.length != 0) {
         let dateTime = [];
         for(let i = 0; i < results.length; i++){
-          dateTime.push(`${results.startDate[i]} ${results.startTime}:00:00`);
+          dateTime.push(new Date(`${results[i].startDate} ${results[i].startTime}:00:00`));
         }
         // let timestamp = [];
         // let dateTime = [];
@@ -116,7 +116,7 @@ export class EditCourse extends Component {
     this.fetchSaveCourse();
     this.fetchSaveTimeTable();
     e.preventDefault();
-    window.location = document.referrer;
+    window.location = "/courseDesc/" + this.state.courseID;
   };
 
   handleToggleChange = checked => {
@@ -156,6 +156,7 @@ export class EditCourse extends Component {
       let date = [];
       let time = [];
       for (let i = 0; i < this.state.schedule.length; i++) {
+        console.log(i)
         let dateSplit = this.state.schedule[i].toLocaleDateString().split("/");
         let timeSplit = this.state.schedule[i]
           .toLocaleTimeString("en-US", { hour12: false })
@@ -261,7 +262,7 @@ export class EditCourse extends Component {
                   onChange={this.handleScheduleChange}
                   numDays={8}
                   minTime={5}
-                  maxTime={22}
+                  maxTime={23}
                   dateFormat="ddd M/D"
                   renderDateCell={this.renderCustomDateCell}
                 />
