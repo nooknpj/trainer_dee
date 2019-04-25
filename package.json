@@ -33,18 +33,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "client": "npm start",
+    "client": "cd client && npm start",
     "server": "cd server && nodemon server.js",
     "dev": " concurrently --kill-others-on-fail \"npm run client\" \"npm run server \""
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "proxy": "http://localhost:5000/",
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  }
 }
