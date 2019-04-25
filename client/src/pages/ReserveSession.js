@@ -366,8 +366,11 @@ class ReserveSession extends Component {
     return (
       <div className="box">
         <p className="pageHeader">Reserve Session</p>
-        <p> {sessionStorage.getItem("transactionID")}</p>
-        <p> Remaining Hour: {this.state.remainingHour} Hours</p>
+        {/* <p> {sessionStorage.getItem("transactionID")}</p> */}
+        <p className="lineTitle" style={{ marginTop: "2em" }}>
+          {" "}
+          Remaining Hour : {this.state.remainingHour} Hours
+        </p>
         {/* <p> {this.state.trainerID}</p> */}
 
         <div
@@ -377,8 +380,8 @@ class ReserveSession extends Component {
             marginTop: "20px"
           }}
         >
-          <Form.Group>
-            <Form.Label>Select Date</Form.Label>
+          <Form.Group style={{ marginRight: "2em" }}>
+            <Form.Label className="lineTitle">Select Date</Form.Label>
             <Form.Control
               required
               type="date"
