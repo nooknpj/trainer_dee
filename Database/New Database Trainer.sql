@@ -56,8 +56,9 @@ create table Authen (
 create table TimeTable (
   tableClientID varchar(13),
   -- Date date,
-  startTime timestamp,
-  endTime timestamp,
+  date date,
+  startTime tinyint,
+  -- endTime timestamp,
   tableStatus varchar(20),
   primary key (tableClientID, startTime),
   foreign key (tableClientID) references Client (clientID) on
@@ -222,11 +223,46 @@ insert into
     rateCount
   )
 values
-  ('0000000001', '1234567890123', 'helloTrainer', 0.0, '', 0),
-  ('0000000002', '1234567890123', 'helloTrainer', 2.0, '', 3),
-  ('0000000003', '1234567890123', 'helloTrainer', 4.7, '', 4),
-  ('0000000004', '1234567890123', 'helloTrainer', 5.0, '', 1),
-  ('0000000005', '1234567890123', 'helloTrainer', 3.2, '', 2),
+  (
+    '0000000001',
+    '1234567890123',
+    'helloTrainer',
+    0.0,
+    '',
+    0
+  ),
+  (
+    '0000000002',
+    '1234567890123',
+    'helloTrainer',
+    2.0,
+    '',
+    3
+  ),
+  (
+    '0000000003',
+    '1234567890123',
+    'helloTrainer',
+    4.7,
+    '',
+    4
+  ),
+  (
+    '0000000004',
+    '1234567890123',
+    'helloTrainer',
+    5.0,
+    '',
+    1
+  ),
+  (
+    '0000000005',
+    '1234567890123',
+    'helloTrainer',
+    3.2,
+    '',
+    2
+  ),
   (
     '9999999999',
     '111111',
