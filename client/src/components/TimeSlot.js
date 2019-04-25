@@ -36,10 +36,13 @@ export class TimeSlot extends Component {
     let timeSlotStyle = {
       //   backgroundColor: "red"
     };
-
     // render according to timeSlot.status
-    if (this.state.selected) {
+    if (this.state.selected && this.props.status == "available") {
       timeSlotStyle["backgroundColor"] = "#275d38";
+    } else if (!this.state.selected && this.props.status == "available") {
+      timeSlotStyle["backgroundColor"] = "#5bc500";
+    } else if (!this.state.selected && this.props.status == "notavailable") {
+      timeSlotStyle["backgroundColor"] = "#75787b";
     }
 
     return timeSlotStyle;
@@ -49,13 +52,17 @@ export class TimeSlot extends Component {
   //     this.setState({ hover: !this.state.hover });
   //   };
   onTimeSlotClick = () => {
-    if (!this.props.haveEnoughRemainingHour()) {
-      alert(notEnoughRemainingHourAlertText);
+    if (!this.props.isContinuous(this.props.startTime)) {
+      alert(notContinuousAlertText);
       return;
     }
 
     // console.log(this.state.selected);
     if (!this.state.selected) {
+      if (!this.props.haveEnoughRemainingHour()) {
+        alert(notEnoughRemainingHourAlertText);
+        return;
+      }
       this.props.addToSelectedList(this.props.startTime);
 
       this.setState(
@@ -96,5 +103,8 @@ export class TimeSlot extends Component {
 }
 
 const notEnoughRemainingHourAlertText =
-  " Your timeslots duration exceeds remaining hour. You can not select more timeslots.";
+  "Your timeslots duration exceeds remaining hour.\nYou can not select more timeslots.";
+
+const notContinuousAlertText =
+  "Your timeslots have to be continuos.\nPlease select a consecutive time range.";
 export default TimeSlot;

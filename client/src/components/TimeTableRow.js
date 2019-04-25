@@ -17,6 +17,7 @@ export class TimeTableRow extends Component {
         addToSelectedList={this.props.addToSelectedList}
         removeFromSelectedList={this.props.removeFromSelectedList}
         haveEnoughRemainingHour={this.props.haveEnoughRemainingHour}
+        isContinuous={this.props.isContinuous}
       />
 
       //   <CourseItem

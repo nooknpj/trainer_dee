@@ -102,29 +102,6 @@ class ReserveSession extends Component {
     }
   }
 
-  // updateTimeTableResult = e => {
-  //   let timeTableResult = this.state.timeTableResult;
-  //   let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
-  //   console.log(trainerTimeTableByDate);
-  //   console.log(timeTableResult);
-
-  //   for (let i = 0; i < trainerTimeTableByDate.length; i++) {
-  //     // console.log(trainerTimeTableByDate[i]);
-  //     let timeSlot = this.state.trainerTimeTableByDate[i];
-  //     let targetTimeSlot = this.getTargetTimeSlot(timeSlot.startTime);
-  //     // console.log(targetTimeSlot);
-
-  //     targetTimeSlot.status = timeSlot.tableStatus;
-  //   }
-
-  //   console.log(timeTableResult);
-
-  //   this.setState({
-  //     timeTableResult: timeTableResult
-  //   });
-  //   console.log(this.state.timeTableResult);
-  // };
-
   updateTimeTableResult = e => {
     let timeTableResult = this.getDefaultTimeTableResult();
     this.setState({
@@ -221,14 +198,6 @@ class ReserveSession extends Component {
     return result;
   };
 
-  // getPossibleRange = e => {
-  //   let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
-  //   console.log(this.state.trainerTimeTableByDate);
-  //   for (let i = 0; i < trainerTimeTableByDate.length; i++) {
-  //     console.log("possible range", trainerTimeTableByDate[i]);
-  //   }
-  // };
-
   getHour = e => {
     console.log(e);
   };
@@ -258,6 +227,35 @@ class ReserveSession extends Component {
 
     let remainingHour = this.state.remainingHour;
     if (this.state.selectedTimeSlots.length >= remainingHour) {
+      return 0;
+    }
+    return 1;
+  };
+
+  isContinuous = e => {
+    let selectedTimeSlots = this.state.selectedTimeSlots;
+    if (selectedTimeSlots.length == 0) return 1;
+
+    console.log(selectedTimeSlots);
+    let startTime = Math.min(...selectedTimeSlots);
+    let duration = selectedTimeSlots.length;
+    let endTime = parseInt(startTime) + duration;
+    // console.log("StartTime = ", startTime);
+    // console.log("EndTime = ", endTime);
+    // console.log(startTime - 1);
+    // console.log(endTime + 1);
+
+    if (
+      !(
+        e == startTime ||
+        e == endTime - 1 ||
+        e == startTime - 1 ||
+        e == endTime
+      )
+    ) {
+      console.log("possibleStartTime", startTime - 1);
+      console.log("possibleEndTime", endTime);
+      console.log(e);
       return 0;
     }
     return 1;
@@ -324,6 +322,7 @@ class ReserveSession extends Component {
               addToSelectedList={this.addToSelectedList}
               removeFromSelectedList={this.removeFromSelectedList}
               haveEnoughRemainingHour={this.haveEnoughRemainingHour}
+              isContinuous={this.isContinuous}
             />
           </div>
 
