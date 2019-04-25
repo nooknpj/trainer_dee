@@ -28,6 +28,87 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
+// app.post("/trainer_dee/create_reserve_session", (req, res) => {
+//   console.log(req.body);
+
+//   let mockUpSessionNo = "12345";
+//   let sessionStatus = "active";
+//   sql =
+//     "insert into reserveSession\
+//   (transactionID,sessionNo,startTime,duration,status) \
+//   values (?, ?, ?, ?, ?)";
+//   connection.query(
+//     sql,
+//     [
+//       req.body.transactionID,
+//       mockUpSessionNo,
+//       req.body.startTime,
+//       req.body.duration,
+//       sessionStatus
+//     ],
+//     (error, result) => {
+//       if (error) {
+//         res.sendStatus(450);
+//       } else {
+//         res.sendStatus(200);
+//       }
+//     }
+//   );
+// });
+
+app.post("/trainer_dee/create_reserve_session", (req, res) => {
+  console.log(req.body);
+
+  let sessionNo = "12345";
+  let sessionStatus = "active";
+  getLatestSessionNoSql =
+    "SELECT * FROM reserveSession WHERE transactionID = ? ORDER BY sessionNo DESC LIMIT 1";
+  connection.query(
+    getLatestSessionNoSql,
+    [req.body.transactionID],
+    (error, result) => {
+      if (error) {
+        res.sendStatus(450);
+      } else {
+        if (result.length == 0) {
+          console.log("first session of this transaction");
+          sessionNo = 0;
+        } else {
+          console.log("not first session of this transaction");
+          console.log(result);
+
+          let latestSessionNo = parseInt(result[0].sessionNo);
+          sessionNo = latestSessionNo + 1;
+        }
+
+        sql =
+          "insert into reserveSession\
+  (transactionID,sessionNo,startTime,duration,status) \
+  values (?, ?, ?, ?, ?)";
+        connection.query(
+          sql,
+          [
+            req.body.transactionID,
+            sessionNo,
+            req.body.startTime,
+            req.body.duration,
+            sessionStatus
+          ],
+          (error, result) => {
+            if (error) {
+              console.log("insert session failed");
+              res.sendStatus(450);
+            } else {
+              console.log("insert session succesful");
+              res.sendStatus(200);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 app.post("/trainer_dee/reserve_session", (req, res) => {
   let sql =
     "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";

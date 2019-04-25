@@ -10,6 +10,7 @@ class ReserveSession extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      transactionID: sessionStorage.getItem("transactionID"),
       trainerTimeTableByDate: [],
       remainingHour: 0,
       targetDate: "",
@@ -261,6 +262,58 @@ class ReserveSession extends Component {
     return 1;
   };
 
+  onReserveButtonClick = e => {
+    let transactionID = this.state.transactionID;
+    let trainerID = this.state.trainerID;
+    let selectedTimeSlots = this.state.selectedTimeSlots;
+
+    let startTime = Math.min(...selectedTimeSlots);
+    let startDate = this.state.targetDate;
+    let dateTime = `${startDate} ${startTime}:00:00`;
+    let duration = selectedTimeSlots.length;
+    console.log("transactionID: ", transactionID);
+    console.log("trainerID: ", trainerID);
+    console.log("startDate: ", startDate);
+    console.log("selectedTimeSlots: ", selectedTimeSlots);
+    console.log("startTime: ", startTime);
+    console.log("DateTime: ", dateTime);
+    console.log("Duration: ", duration);
+
+    // dateTime is startTime of session in dateTime format for database
+    let sessionData = {
+      transactionID: transactionID,
+      startTime: dateTime,
+      duration: duration
+    };
+
+    this.insertReserveSession(sessionData);
+  };
+
+  // calls backend to create session
+  async insertReserveSession(e) {
+    try {
+      let data = {
+        transactionID: e.transactionID,
+        startTime: e.startTime,
+        duration: e.duration
+      };
+
+      const response = await fetch("/trainer_dee/create_reserve_session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+      const results = await response;
+    } catch (error) {
+      throw error;
+      console.log("defaultFetchError : ", error);
+    }
+  }
+
+  updateTrainerTimeTable = e => {};
+
   // async getOnGoingCourse() {
   //     try {
   //         let data = { clientID: localStorage.getItem("clientID") };
@@ -349,6 +402,7 @@ class ReserveSession extends Component {
             size="small"
             type="submit"
             style={{ marginLeft: "auto" }}
+            onClick={this.onReserveButtonClick}
           >
             Reserve
           </Button>

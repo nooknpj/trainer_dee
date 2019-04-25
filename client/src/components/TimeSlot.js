@@ -41,7 +41,7 @@ export class TimeSlot extends Component {
       timeSlotStyle["backgroundColor"] = "#275d38";
     } else if (!this.state.selected && this.props.status == "available") {
       timeSlotStyle["backgroundColor"] = "#5bc500";
-    } else if (!this.state.selected && this.props.status == "notavailable") {
+    } else if (!this.state.selected && this.props.status != "available") {
       timeSlotStyle["backgroundColor"] = "#75787b";
     }
 
