@@ -35,14 +35,14 @@ class ReserveSession extends Component {
     // this.getTrainerTimeTableByDate();
     // this.getTrainerTimeTableByDate();
     // this.updateTimeTableResult();
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(this.state.trainerTimeTableByDate);
   }
 
   async getInfoForReservation() {
     try {
       let data = { transactionID: sessionStorage.getItem("transactionID") };
-      console.log(data);
+      // console.log(data);
       const response = await fetch("/trainer_dee/get_info_for_reservation", {
         method: "POST",
         headers: {
@@ -53,7 +53,7 @@ class ReserveSession extends Component {
 
       const results = await response.json();
 
-      console.log(results);
+      // console.log(results);
       this.state.trainerID = results[0].clientID;
       this.setState({
         remainingHour: results[0].remainingHour,
@@ -94,7 +94,7 @@ class ReserveSession extends Component {
       this.setState({
         trainerTimeTableByDate: results
       });
-      console.log(this.state.trainerTimeTableByDate);
+      // console.log(this.state.trainerTimeTableByDate);
 
       this.updateTimeTableResult();
     } catch (error) {
@@ -138,7 +138,7 @@ class ReserveSession extends Component {
     for (let i = 0; i < trainerTimeTableByDate.length; i++) {
       // console.log(trainerTimeTableByDate[i]);
       let timeSlot = this.state.trainerTimeTableByDate[i];
-      console.log(timeSlot);
+      // console.log(timeSlot);
       let targetTimeSlot = this.getTargetTimeSlot(timeSlot.startTime);
       // console.log("targetTimeSlot", targetTimeSlot);
       targetTimeSlot.status = timeSlot.tableStatus;
@@ -151,9 +151,9 @@ class ReserveSession extends Component {
   };
 
   onFormChange = e => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     let nextValue = parseInt(e.target.value) + 1;
-    console.log(nextValue);
+    // console.log(nextValue);
     // this.state.targetDate = this.state.targetDateList[e.target.value];
     this.state.targetDate = this.convertDateFormat(
       this.state.targetDateList[e.target.value]
@@ -163,10 +163,13 @@ class ReserveSession extends Component {
     );
 
     this.getTrainerTimeTableByDate();
+    this.setState({
+      selectedTimeSlots: []
+    });
   };
 
   getTargetTimeSlot = startTime => {
-    console.log(this.state.timeTableResult);
+    // console.log(this.state.timeTableResult);
     let targetTimeSlot = this.state.timeTableResult.find(
       obj => obj.startTime == startTime
     );
@@ -238,7 +241,7 @@ class ReserveSession extends Component {
 
   removeFromSelectedList = e => {
     let newList = this.state.selectedTimeSlots;
-    console.log(e);
+    // console.log(e);
     // // let targetIndex = newList.findIndex(function());
     // console.log(targetIndex);
     // delete newList[targetIndex];
@@ -247,6 +250,17 @@ class ReserveSession extends Component {
     });
     this.state.selectedTimeSlots = newList;
     console.log(this.state.selectedTimeSlots);
+  };
+
+  haveEnoughRemainingHour = e => {
+    console.log("remainingHour = ", this.state.selectedTimeSlots);
+    console.log("currentDuration= ", this.state.selectedTimeSlots.length);
+
+    let remainingHour = this.state.remainingHour;
+    if (this.state.selectedTimeSlots.length >= remainingHour) {
+      return 0;
+    }
+    return 1;
   };
 
   // async getOnGoingCourse() {
@@ -309,6 +323,7 @@ class ReserveSession extends Component {
               timeTableResult={this.state.timeTableResult}
               addToSelectedList={this.addToSelectedList}
               removeFromSelectedList={this.removeFromSelectedList}
+              haveEnoughRemainingHour={this.haveEnoughRemainingHour}
             />
           </div>
 

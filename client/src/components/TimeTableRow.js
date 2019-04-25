@@ -16,6 +16,7 @@ export class TimeTableRow extends Component {
         status={timeSlot.status}
         addToSelectedList={this.props.addToSelectedList}
         removeFromSelectedList={this.props.removeFromSelectedList}
+        haveEnoughRemainingHour={this.props.haveEnoughRemainingHour}
       />
 
       //   <CourseItem

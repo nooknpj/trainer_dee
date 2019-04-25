@@ -12,7 +12,8 @@ export class TimeSlot extends Component {
     let endTime = parseInt(this.props.startTime) + 1;
     var timeString = `${this.props.startTime}.00 - ${endTime}.00`;
     this.setState({
-      timeString: timeString
+      timeString: timeString,
+      selected: 0
     });
   }
 
@@ -48,7 +49,12 @@ export class TimeSlot extends Component {
   //     this.setState({ hover: !this.state.hover });
   //   };
   onTimeSlotClick = () => {
-    console.log(this.state.selected);
+    if (!this.props.haveEnoughRemainingHour()) {
+      alert(notEnoughRemainingHourAlertText);
+      return;
+    }
+
+    // console.log(this.state.selected);
     if (!this.state.selected) {
       this.props.addToSelectedList(this.props.startTime);
 
@@ -89,4 +95,6 @@ export class TimeSlot extends Component {
   }
 }
 
+const notEnoughRemainingHourAlertText =
+  " Your timeslots duration exceeds remaining hour. You can not select more timeslots.";
 export default TimeSlot;
