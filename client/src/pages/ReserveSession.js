@@ -56,8 +56,8 @@ class ReserveSession extends Component {
     try {
       // id is trainer's id but the name of parameter in backend is clientID
       let startDate = this.state.targetDate;
-      let endDate = this.state.targetEndDate;
-      let data = { clientID: this.state.trainerID, startDate, endDate };
+      // let endDate = this.state.targetEndDate;
+      let data = { clientID: this.state.trainerID, startDate };
       const response = await fetch(
         "/trainer_dee/get_trainer_timetable_byDate",
         {

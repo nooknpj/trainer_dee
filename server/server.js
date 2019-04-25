@@ -45,10 +45,10 @@ app.post("/trainer_dee/reserve_session", (req, res) => {
 // get_trainer_timetable_byDate is used by reserve page
 app.post("/trainer_dee/get_trainer_timetable_byDate", (req, res) => {
   let sql =
-    "SELECT * FROM TimeTable WHERE tableClientID = ? AND startTime > ? AND endTime < ?;";
+    "SELECT * FROM TimeTable WHERE tableClientID = ? AND startDate = ?;";
   connection.query(
     sql,
-    [req.body.clientID, req.body.startDate, req.body.endDate],
+    [req.body.clientID, req.body.startDate],
     (error, result) => {
       if (error) {
         console.log("error at get trainer timetable");
