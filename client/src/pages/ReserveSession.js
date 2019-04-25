@@ -15,7 +15,8 @@ class ReserveSession extends Component {
       targetEndDate: "",
       trainerID: "defaultTrainerID",
       targetDateList: [],
-      targetDateString: []
+      targetDateString: [],
+      possibleRange: []
     };
   }
 
@@ -67,13 +68,13 @@ class ReserveSession extends Component {
           body: JSON.stringify(data)
         }
       );
-
       const results = await response.json();
       console.log(results);
-      //   this.setState({
-      //     trainerTimeTable: results,
-      //     trainerTimeTableByDate: results
-      //   });
+      this.state.trainerTimeTableByDate = results;
+      console.log(this.state.trainerTimeTableByDate);
+      // this.setState({
+      //   trainerTimeTableByDate: results
+      // });
     } catch (error) {
       console.log("defaultFetchError : ", error);
     }
@@ -96,7 +97,7 @@ class ReserveSession extends Component {
     console.log(this.state.targetDate);
     console.log(this.state.targetEndDate);
     this.getTrainerTimeTableByDate();
-    // console.log(this.getTrainerTimeTableByDate());
+    this.getPossibleRange();
   };
 
   getTargetDateList = () => {
@@ -120,6 +121,18 @@ class ReserveSession extends Component {
     // console.log(list);
     let result = `${list[2]}-${list[0]}-${list[1]}`;
     return result;
+  };
+
+  getPossibleRange = e => {
+    let trainerTimeTableByDate = this.state.trainerTimeTableByDate;
+    console.log(this.state.trainerTimeTableByDate);
+    for (let i = 0; i < trainerTimeTableByDate.length; i++) {
+      console.log("possible range", trainerTimeTableByDate[i]);
+    }
+  };
+
+  getHour = e => {
+    console.log(e);
   };
 
   // async getOnGoingCourse() {
