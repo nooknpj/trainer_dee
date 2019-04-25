@@ -56,7 +56,6 @@ export class Payment extends Component {
 
     async fetchPayCourse() {
         try {
-            console.log("TEST")
             const data = { clientID: localStorage.getItem("clientID"), courseID: sessionStorage.getItem("courseID") };
 
             const response = await fetch("/trainer_dee/confirmPayment", {

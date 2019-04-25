@@ -201,7 +201,7 @@ export class CourseItem extends Component {
                 </div>
               </div>
 
-              <div className="test">
+              <div className="inLineInfo">
 
                 <div className="infoLine">
                   <div className="infoContainer">

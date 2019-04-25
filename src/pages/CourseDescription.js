@@ -160,9 +160,6 @@ export class CourseDescription extends Component {
       "You successfully sent buy request to the trainer. Please wait 48 hours for trainer to accept your request."
     );
     window.location = "/myCourse";
-
-    console.log("TEST");
-    //window.location = "/";
   }
 
   render() {

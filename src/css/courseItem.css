@@ -282,7 +282,7 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .test {
+  .inLineInfo {
     display: flex;
   }
 
