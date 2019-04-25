@@ -96,11 +96,29 @@ app.post("/trainer_dee/create_reserve_session", (req, res) => {
           ],
           (error, result) => {
             if (error) {
+              console.dir(error);
               console.log("insert session failed");
               res.sendStatus(450);
             } else {
               console.log("insert session succesful");
               res.sendStatus(200);
+            }
+          }
+        );
+
+        let updateHourSql =
+          "UPDATE transaction SET remainingHour = ? WHERE transactionID = ?;";
+        connection.query(
+          updateHourSql,
+          [req.body.newRemainingHour, req.body.transactionID],
+          (error, result) => {
+            if (error) {
+              console.dir(error);
+              console.log("update remaining hour failed");
+              // res.sendStatus(450);
+            } else {
+              console.log("update remaining hour succesful");
+              // res.sendStatus(200);
             }
           }
         );
@@ -110,6 +128,7 @@ app.post("/trainer_dee/create_reserve_session", (req, res) => {
 });
 
 app.post("/trainer_dee/reserve_trainer_timetable", (req, res) => {
+  let resStatus = 200;
   let sql =
     "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND startDate = ? AND startTime = ? AND tableStatus = ?;";
 
@@ -124,33 +143,17 @@ app.post("/trainer_dee/reserve_trainer_timetable", (req, res) => {
       ],
       error => {
         if (error) {
-          console.dir(error);
-          console.log("error to reserve session");
-          // res.sendStatus(400);
+          // console.dir(error);
+          // console.log("error to reserve session");
+          res.status = 450;
         } else {
           // res.sendStatus(200);
         }
       }
     );
   }
-  // connection.query(
-  //   sql,
-  //   [
-  //     req.body.tableClientID,
-  //     req.body.startDate,
-  //     req.body.startTime,
-  //     "available"
-  //   ],
-  //   error => {
-  //     if (error) {
-  //       console.dir(error);
-  //       console.log("error to reserve session");
-  //       res.sendStatus(400);
-  //     } else {
-  //       res.sendStatus(200);
-  //     }
-  //   }
-  // );
+
+  res.sendStatus(resStatus);
 });
 
 // get_trainer_timetable_byDate is used by reserve page

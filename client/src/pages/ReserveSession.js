@@ -271,6 +271,7 @@ class ReserveSession extends Component {
     let startDate = this.state.targetDate;
     let dateTime = `${startDate} ${startTime}:00:00`;
     let duration = selectedTimeSlots.length;
+    let newRemainingHour = parseInt(this.state.remainingHour) - duration;
     console.log("transactionID: ", transactionID);
     console.log("trainerID: ", trainerID);
     console.log("startDate: ", startDate);
@@ -278,12 +279,14 @@ class ReserveSession extends Component {
     console.log("startTime: ", startTime);
     console.log("DateTime: ", dateTime);
     console.log("Duration: ", duration);
+    console.log("newRemainingHour", newRemainingHour);
 
     // dateTime is startTime of session in dateTime format for database
     let sessionData = {
       transactionID: transactionID,
       startTime: dateTime,
-      duration: duration
+      duration: duration,
+      newRemainingHour: newRemainingHour
     };
 
     // the parameter tableClientID is trainer's id (to match db)
@@ -294,17 +297,24 @@ class ReserveSession extends Component {
       duration: duration
     };
 
-    this.insertReserveSession(sessionData);
-    this.reserveTrainerTimetable(timeTableData);
+    this.handleReserve(sessionData, timeTableData);
+    // this.insertReserveSession(sessionData);
+    // this.reserveTrainerTimetable(timeTableData);
   };
 
+  async handleReserve(sessionData, timeTableData) {
+    await this.insertReserveSession(sessionData);
+    this.reserveTrainerTimetable(timeTableData);
+  }
   // calls backend to create session
   async insertReserveSession(e) {
+    console.log("start insert reserve session");
     try {
       let data = {
         transactionID: e.transactionID,
         startTime: e.startTime,
-        duration: e.duration
+        duration: e.duration,
+        newRemainingHour: e.newRemainingHour
       };
 
       const response = await fetch("/trainer_dee/create_reserve_session", {
@@ -319,9 +329,11 @@ class ReserveSession extends Component {
       throw error;
       console.log("defaultFetchError : ", error);
     }
+    console.log("end insert reserve session");
   }
 
   async reserveTrainerTimetable(e) {
+    console.log("start reserve trainer timetable");
     try {
       let data = {
         tableClientID: e.tableClientID,
@@ -338,8 +350,14 @@ class ReserveSession extends Component {
         body: JSON.stringify(data)
       });
       const results = await response;
+      if (results.status == "200") {
+        alert("reserve Successful");
+
+        //currently refresh
+        window.location.reload();
+      }
     } catch (error) {
-      throw error;
+      // throw error;
       console.log("defaultFetchError : ", error);
     }
   }
