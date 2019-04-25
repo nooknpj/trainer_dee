@@ -1,0 +1,14 @@
+version: '3'
+services:
+    server:
+        build: 
+            context: ./server
+        container_name: server
+        ports:
+            - '5000:5000'
+    client:
+        build:
+            context: ./my-app
+        container_name: client
+        ports:
+            - '3000:3000'
