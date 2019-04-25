@@ -121,7 +121,7 @@ create table Transaction (
 create table ReserveSession (
   transactionID varchar (50),
   sessionNo int(5),
-  startTime int(2),
+  startTime dateTime,
   duration int(5),
   status varchar(20),
   primary key (transactionID, sessionNo),
