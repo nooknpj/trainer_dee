@@ -4,10 +4,10 @@ import "../css/editCourse.css";
 import Switch from "react-switch";
 import ScheduleSelector from "react-schedule-selector";
 
-Date.prototype.addHours = function(h) {
-  this.setHours(this.getHours() + h);
-  return this;
-};
+// Date.prototype.addHours = function (h) {
+//   this.setHours(this.getHours() + h);
+//   return this;
+// };
 
 export class EditCourse extends Component {
   constructor() {
@@ -76,24 +76,30 @@ export class EditCourse extends Component {
 
       const results = await response.json();
       if (results.length != 0) {
-        let timestamp = [];
         let dateTime = [];
         for (let i = 0; i < results.length; i++) {
-          timestamp.push(results[i].startTime);
-          timestamp.push(results[i].endTime);
-          let duration =
-            (new Date(results[i].endTime).getTime() -
-              new Date(results[i].startTime).getTime()) /
-            3600000;
-          for (let j = 1; j < duration; j++) {
-            timestamp.push(
-              new Date(results[i].startTime).getTime() + 3600000 * j
-            );
-          }
+          dateTime.push(
+            new Date(`${results[i].startDate} ${results[i].startTime}:00:00`)
+          );
         }
-        for (let i = 0; i < timestamp.length; i++) {
-          dateTime.push(new Date(timestamp[i]));
-        }
+        // let timestamp = [];
+        // let dateTime = [];
+        // for (let i = 0; i < results.length; i++) {
+        //   timestamp.push(results[i].startTime);
+        //   timestamp.push(results[i].endTime);
+        //   let duration =
+        //     (new Date(results[i].endTime).getTime() -
+        //       new Date(results[i].startTime).getTime()) /
+        //     3600000;
+        //   for (let j = 1; j < duration; j++) {
+        //     timestamp.push(
+        //       new Date(results[i].startTime).getTime() + 3600000 * j
+        //     );
+        //   }
+        // }
+        // for (let i = 0; i < timestamp.length; i++) {
+        //   dateTime.push(new Date(timestamp[i]));
+        // }
         this.setState({
           schedule: dateTime
         });
@@ -112,7 +118,6 @@ export class EditCourse extends Component {
     this.fetchSaveCourse();
     this.fetchSaveTimeTable();
     e.preventDefault();
-    window.location = document.referrer;
   };
 
   handleToggleChange = checked => {
@@ -132,40 +137,41 @@ export class EditCourse extends Component {
 
   async fetchSaveTimeTable() {
     try {
-      this.state.schedule.sort(function(a, b) {
-        return b.getTime() - a.getTime() > 0 ? -1 : 1;
-      });
-      let dateTime = [
-        this.state.schedule[0],
-        this.state.schedule[this.state.schedule.length - 1]
-      ]; // contains startTime and endTime
-      let timestamp = [];
-      for (let i = 1; i < this.state.schedule.length; i++) {
-        if (this.state.schedule[i] - this.state.schedule[i - 1] > 3600000) {
-          dateTime.push(this.state.schedule[i - 1]);
-          dateTime.push(this.state.schedule[i]);
-        }
-      }
-      dateTime.sort(function(a, b) {
-        return b.getTime() - a.getTime() > 0 ? -1 : 1;
-      });
-      for (let i = 0; i < dateTime.length; i++) {
-        let date = dateTime[i].toLocaleDateString().split("/");
-        let time = dateTime[i]
+      // this.state.schedule.sort(function (a, b) {
+      //   return b.getTime() - a.getTime() > 0 ? -1 : 1;
+      // });
+      // let dateTime = [
+      //   this.state.schedule[0],
+      //   this.state.schedule[this.state.schedule.length - 1]
+      // ]; // contains startTime and endTime
+      // let timestamp = [];
+      // for (let i = 1; i < this.state.schedule.length; i++) {
+      //   if (this.state.schedule[i] - this.state.schedule[i - 1] > 3600000) {
+      //     dateTime.push(this.state.schedule[i - 1]);
+      //     dateTime.push(this.state.schedule[i]);
+      //   }
+      // }
+      // dateTime.sort(function(a, b) {
+      //   return b.getTime() - a.getTime() > 0 ? -1 : 1;
+      // });
+      let date = [];
+      let time = [];
+      for (let i = 0; i < this.state.schedule.length; i++) {
+        console.log(i);
+        let dateSplit = this.state.schedule[i].toLocaleDateString().split("/");
+        let timeSplit = this.state.schedule[i]
           .toLocaleTimeString("en-US", { hour12: false })
           .slice(0, 8)
           .split(":");
-        timestamp.push(
-          `${date[2]}-${date[0]}-${date[1]} ${time[0]}:${time[1]}:${time[2]}`
-        );
-        console.log(
-          `${date[2]}-${date[0]}-${date[1]} ${time[0]}:${time[1]}:${time[2]}`
-        );
+        date.push(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
+        time.push(`${timeSplit[0]}`);
+        console.log(`${dateSplit[2]}-${dateSplit[0]}-${dateSplit[1]}`);
       }
-      timestamp.sort();
+      // timestamp.sort();
       const data = {
         clientID: localStorage.getItem("clientID"),
-        timestamp: timestamp
+        startDate: date,
+        startTime: time
       };
 
       const response = await fetch("/trainer_dee/set_trainer_timetable", {
@@ -177,6 +183,8 @@ export class EditCourse extends Component {
       });
     } catch (error) {
       console.log("Edit timetable failed", error);
+    } finally {
+      window.location = "/courseDesc/" + this.state.courseID;
     }
   }
 
@@ -253,7 +261,7 @@ export class EditCourse extends Component {
                   onChange={this.handleScheduleChange}
                   numDays={8}
                   minTime={5}
-                  maxTime={22}
+                  maxTime={23}
                   dateFormat="ddd M/D"
                   renderDateCell={this.renderCustomDateCell}
                 />

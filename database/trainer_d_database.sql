@@ -27,13 +27,13 @@ create table Course (
   CName varchar (30) not null,
   Service tinyint not null,
   Cost int,
-  CourseHour tinyint,
+  CourseHour integer(3),
   ImageUrl varchar (2000),
   CourseStatus boolean not null,
   CourseDescription varchar (200),
   trainerID varchar (13),
   primary key (CourseID),
-  foreign key (trainerID) references client (clientID) on
+  foreign key (trainerID) references Client (clientID) on
     delete cascade on
     update cascade
 );
@@ -56,10 +56,11 @@ create table Authen (
 create table TimeTable (
   tableClientID varchar(13),
   -- Date date,
-  startTime timestamp,
-  endTime timestamp,
+  startDate date,
+  startTime int(2),
+  -- endTime timestamp,
   tableStatus varchar(20),
-  primary key (tableClientID, startTime),
+  primary key (tableClientID, startDate, startTime),
   foreign key (tableClientID) references Client (clientID) on
             delete cascade on
             update cascade
@@ -110,7 +111,7 @@ create table Transaction (
   transactionID varchar (50),
   clientID varchar (13),
   courseID int,
-  remainingHour tinyint,
+  remainingHour int(3),
   status varchar (20),
   token varchar(20),
   primary key (transactionID),
@@ -120,7 +121,7 @@ create table Transaction (
 create table ReserveSession (
   transactionID varchar (50),
   sessionNo int(5),
-  startTime int(2),
+  startTime dateTime,
   duration int(5),
   status varchar(20),
   primary key (transactionID, sessionNo),
@@ -213,7 +214,7 @@ A. Phuket 83130 Thailand',
     1
   );
 insert into
-  trainer (
+  Trainer (
     TrainerID,
     SSN,
     TrainerDescription,
@@ -222,11 +223,46 @@ insert into
     rateCount
   )
 values
-  ('0000000001', '1234567890123', 'helloTrainer', 0.0, '', 0),
-  ('0000000002', '1234567890123', 'helloTrainer', 2.0, '', 3),
-  ('0000000003', '1234567890123', 'helloTrainer', 4.7, '', 4),
-  ('0000000004', '1234567890123', 'helloTrainer', 5.0, '', 1),
-  ('0000000005', '1234567890123', 'helloTrainer', 3.2, '', 2),
+  (
+    '0000000001',
+    '1234567890123',
+    'helloTrainer',
+    0.0,
+    '',
+    0
+  ),
+  (
+    '0000000002',
+    '1234567890123',
+    'helloTrainer',
+    2.0,
+    '',
+    3
+  ),
+  (
+    '0000000003',
+    '1234567890123',
+    'helloTrainer',
+    4.7,
+    '',
+    4
+  ),
+  (
+    '0000000004',
+    '1234567890123',
+    'helloTrainer',
+    5.0,
+    '',
+    1
+  ),
+  (
+    '0000000005',
+    '1234567890123',
+    'helloTrainer',
+    3.2,
+    '',
+    2
+  ),
   (
     '9999999999',
     '111111',
@@ -356,7 +392,7 @@ values
     true
   );
 insert into
-  location (LocateCourseID, Lname, lat, lng)
+  Location (LocateCourseID, Lname, lat, lng)
 values
   (
     1,
@@ -453,7 +489,7 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (transactionID, clientID, courseID, status, token)
+  Transaction (transactionID, clientID, courseID, status, token)
 values
   ('adddddd1', '0000000000', '1', 'onGoing', '0'),
   (

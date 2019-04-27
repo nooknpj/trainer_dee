@@ -28,27 +28,141 @@ var connection = mysql.createConnection({
 connection.connect();
 
 // ---------------------------------------------------- DID NOT TEST YET ----------------------------------------------------
-app.post("/trainer_dee/reserve_session", (req, res) => {
-  let sql =
-    "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND tableStatus = 'avaliable'";
-  connection.query(sql, [req.body.clientID], error => {
-    if (error) {
-      console.dir(error);
-      console.log("error to reserve session");
-      res.sendStatus(400);
-    } else {
-      res.sendStatus(200);
+// app.post("/trainer_dee/create_reserve_session", (req, res) => {
+//   console.log(req.body);
+
+//   let mockUpSessionNo = "12345";
+//   let sessionStatus = "active";
+//   sql =
+//     "insert into reserveSession\
+//   (transactionID,sessionNo,startTime,duration,status) \
+//   values (?, ?, ?, ?, ?)";
+//   connection.query(
+//     sql,
+//     [
+//       req.body.transactionID,
+//       mockUpSessionNo,
+//       req.body.startTime,
+//       req.body.duration,
+//       sessionStatus
+//     ],
+//     (error, result) => {
+//       if (error) {
+//         res.sendStatus(450);
+//       } else {
+//         res.sendStatus(200);
+//       }
+//     }
+//   );
+// });
+
+app.post("/trainer_dee/create_reserve_session", (req, res) => {
+  console.log(req.body);
+
+  let sessionNo = "12345";
+  let sessionStatus = "active";
+  getLatestSessionNoSql =
+    "SELECT * FROM reserveSession WHERE transactionID = ? ORDER BY sessionNo DESC LIMIT 1";
+  connection.query(
+    getLatestSessionNoSql,
+    [req.body.transactionID],
+    (error, result) => {
+      if (error) {
+        res.sendStatus(450);
+      } else {
+        if (result.length == 0) {
+          console.log("first session of this transaction");
+          sessionNo = 0;
+        } else {
+          console.log("not first session of this transaction");
+          console.log(result);
+
+          let latestSessionNo = parseInt(result[0].sessionNo);
+          sessionNo = latestSessionNo + 1;
+        }
+
+        sql =
+          "insert into reserveSession\
+  (transactionID,sessionNo,startTime,duration,status) \
+  values (?, ?, ?, ?, ?)";
+        connection.query(
+          sql,
+          [
+            req.body.transactionID,
+            sessionNo,
+            req.body.startTime,
+            req.body.duration,
+            sessionStatus
+          ],
+          (error, result) => {
+            if (error) {
+              console.dir(error);
+              console.log("insert session failed");
+              res.sendStatus(450);
+            } else {
+              console.log("insert session succesful");
+              res.sendStatus(200);
+            }
+          }
+        );
+
+        let updateHourSql =
+          "UPDATE transaction SET remainingHour = ? WHERE transactionID = ?;";
+        connection.query(
+          updateHourSql,
+          [req.body.newRemainingHour, req.body.transactionID],
+          (error, result) => {
+            if (error) {
+              console.dir(error);
+              console.log("update remaining hour failed");
+              // res.sendStatus(450);
+            } else {
+              console.log("update remaining hour succesful");
+              // res.sendStatus(200);
+            }
+          }
+        );
+      }
     }
-  });
+  );
+});
+
+app.post("/trainer_dee/reserve_trainer_timetable", (req, res) => {
+  let resStatus = 200;
+  let sql =
+    "UPDATE TimeTable SET tableStatus = 'reserved' WHERE tableClientID = ? AND startDate = ? AND startTime = ? AND tableStatus = ?;";
+
+  for (let i = 0; i < req.body.duration; i += 1) {
+    connection.query(
+      sql,
+      [
+        req.body.tableClientID,
+        req.body.startDate,
+        parseInt(req.body.startTime) + i,
+        "available"
+      ],
+      error => {
+        if (error) {
+          // console.dir(error);
+          // console.log("error to reserve session");
+          res.status = 450;
+        } else {
+          // res.sendStatus(200);
+        }
+      }
+    );
+  }
+
+  res.sendStatus(resStatus);
 });
 
 // get_trainer_timetable_byDate is used by reserve page
 app.post("/trainer_dee/get_trainer_timetable_byDate", (req, res) => {
   let sql =
-    "SELECT * FROM TimeTable WHERE tableClientID = ? AND startTime > ? AND endTime < ?;";
+    "SELECT * FROM TimeTable WHERE tableClientID = ? AND startDate = ?;";
   connection.query(
     sql,
-    [req.body.clientID, req.body.startDate, req.body.endDate],
+    [req.body.clientID, req.body.startDate],
     (error, result) => {
       if (error) {
         console.log("error at get trainer timetable");
@@ -83,12 +197,14 @@ app.post("/trainer_dee/set_trainer_timetable", (req, res) => {
     if (error) throw error;
   });
   sql =
-    "INSERT INTO timetable (tableClientID, startTime, endTime, tableStatus) values (?, ?, ?, 'available')";
+    "INSERT INTO timetable (tableClientID, startDate, startTime, tableStatus) values (?, ?, ?, 'available')";
   console.log(req.body);
-  for (let i = 1; i < req.body.timestamp.length; i += 2) {
+  for (let i = 0; i < req.body.startDate.length; i += 1) {
+    console.log(req.body.startDate[i]);
+    console.log(req.body.startTime[i]);
     connection.query(
       sql,
-      [req.body.clientID, req.body.timestamp[i - 1], req.body.timestamp[i]],
+      [req.body.clientID, req.body.startDate[i], req.body.startTime[i]],
       (error, result) => {
         if (error) throw error;
       }
