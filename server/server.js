@@ -56,6 +56,48 @@ connection.connect();
 //   );
 // });
 
+app.post("/trainer_dee/get_client_session", (req, res) => {
+  console.log("REQ BOY OF GET CLIET SESSION -> ", req.body);
+  let sql =
+    "select ts.transactionID,s.sessionNo,s.startTime,s.duration,s.status as sessionStatus,c.cName,c.service,cl.fName,cl.lName,cl.telNo\
+    from reserveSession s,transaction ts,course c,client cl\
+    where ts.transactionID = s.transactionID AND ts.courseID = c.courseID\
+     AND cl.clientID = c.trainerID AND ts.clientID=? \
+     ORDER BY s.startTime";
+  connection.query(sql, [req.body.clientID], (error, result) => {
+    if (error) {
+      console.dir("error");
+      res.sendStatus(450);
+      return;
+    }
+    let all = JSON.parse(JSON.stringify(result)); //change to string
+    res.send(all);
+
+    // console.log(all);
+  });
+});
+
+app.post("/trainer_dee/get_trainer_session", (req, res) => {
+  console.log("REQ BOY OF GET trainer SESSION -> ", req.body);
+  let sql =
+    "select ts.transactionID,s.sessionNo,s.startTime,s.duration,s.status as sessionStatus,c.cName,c.service,cl.fName,cl.lName,cl.telNo\
+  from reserveSession s,transaction ts,course c,client cl\
+  where ts.transactionID = s.transactionID AND ts.courseID = c.courseID\
+   AND cl.clientID = ts.clientID AND c.trainerID=?\
+   order by startTime";
+  connection.query(sql, [req.body.clientID], (error, result) => {
+    if (error) {
+      console.dir("error");
+      res.sendStatus(450);
+      return;
+    }
+    let all = JSON.parse(JSON.stringify(result)); //change to string
+    res.send(all);
+
+    // console.log(all);
+  });
+});
+
 app.post("/trainer_dee/create_reserve_session", (req, res) => {
   console.log(req.body);
 
