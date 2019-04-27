@@ -106,5 +106,5 @@ const notEnoughRemainingHourAlertText =
   "Your timeslots duration exceeds remaining hour.\nYou can not select more timeslots.";
 
 const notContinuousAlertText =
-  "Your timeslots have to be continuos.\nPlease select a consecutive time range.";
+  "Your timeslots have to be continuous.\nPlease select a consecutive time range.";
 export default TimeSlot;
