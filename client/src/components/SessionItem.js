@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../css/sessionItem.css";
 
 export class SessionItem extends Component {
   constructor() {
@@ -27,9 +28,16 @@ export class SessionItem extends Component {
     return timeString;
   };
 
+  getService = service => {
+    if (service == 0) return "Yoga";
+    if (service == 1) return "Cardio";
+    if (service == 2) return "WeightTraining";
+    else return "others";
+  };
   render() {
     return (
       <div
+        className="sessionItem"
         style={{ display: "flex", flexDirection: "row", marginBottom: "2em" }}
         // className={this.getClassName()}
         // style={this.getSelectedTimeSlotStyle()}
@@ -38,28 +46,80 @@ export class SessionItem extends Component {
         // }
       >
         <div>
-          <span> TransactionID : {this.props.transactionID}</span>
-          <span> SessionNo : {this.props.sessionNo}</span>
-          <span> Course Name : {this.props.cName} </span>
-          <span> Course Service : {this.props.service} </span>
+          <div style={lineStyle}>
+            <div className="fieldItem">
+              <span className="fieldTitle">TransactionID</span>
+              <span className="fieldInfo">{this.props.transactionID}</span>
+            </div>
+          </div>
 
-          <br />
+          <div style={lineStyle}>
+            <div className="fieldItem">
+              <span className="fieldTitle">Course Name</span>{" "}
+              <span className="fieldInfo">{this.props.cName} </span>
+            </div>
+            <div className="fieldItem">
+              <span className="fieldTitle"> Course Service </span>
+              <span className="fieldInfo">
+                {this.getService(this.props.service)}{" "}
+              </span>
+            </div>
+            <div className="fieldItem">
+              <span className="fieldTitle">{this.props.collegueRole}</span>{" "}
+              <span className="fieldInfo">
+                {this.props.fName} {this.props.lName}
+              </span>
+            </div>
 
-          <span> Session Date : {this.getDate()} </span>
-          <span> Session Time : {this.getTime()} </span>
-          <span> Duration : {this.props.duration} Hours</span>
-          <span> Session Status : {this.props.sessionStatus} </span>
-          <br />
-          <span>
-            {this.props.collegueRole} : {this.props.fName} {this.props.lName}{" "}
-          </span>
-          <span>TelNo : {this.props.telNo} </span>
+            <div className="fieldItem">
+              <span className="fieldTitle">TelNo</span>{" "}
+              <span className="fieldInfo">{this.props.telNo} </span>
+            </div>
+          </div>
+          <div style={lineStyle}>
+            <div className="fieldItem">
+              <span className="fieldTitle">SessionNo</span>
+              <span className="fieldInfo">{this.props.sessionNo}</span>
+            </div>
+            <div className="fieldItem">
+              <span className="fieldTitle"> Session Date </span>
+              <span className="fieldInfo"> {this.getDate()} </span>
+            </div>
+            <div className="fieldItem">
+              <span className="fieldTitle"> Session Time</span>
+              <span className="fieldInfo">{this.getTime()} </span>
+            </div>
+
+            {/* <div className="fieldItem">
+              <span className="fieldTitle">Duration </span>
+              <span className="fieldInfo">{this.props.duration} Hours</span>
+            </div> */}
+
+            <div className="fieldItem">
+              <span className="fieldTitle"> Session Status</span>
+              <span className="fieldInfo">{this.props.sessionStatus} </span>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
 
+const lineStyle = {
+  marginTop: "0.3em",
+
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap"
+};
+
+const infoItemStyle = {
+  marginTop: "0.3em",
+  marginRight: "0.3em",
+  border: "solid #21366e 0.ๅem",
+  borderRadius: "0.2em"
+};
 const notEnoughRemainingHourAlertText =
   "Your timeslots duration exceeds remaining hour.\nYou can not select more timeslots.";
 
