@@ -33,7 +33,7 @@ create table Course (
   CourseDescription varchar (200),
   trainerID varchar (13),
   primary key (CourseID),
-  foreign key (trainerID) references client (clientID) on
+  foreign key (trainerID) references Client (clientID) on
     delete cascade on
     update cascade
 );
@@ -214,7 +214,7 @@ A. Phuket 83130 Thailand',
     1
   );
 insert into
-  trainer (
+  Trainer (
     TrainerID,
     SSN,
     TrainerDescription,
@@ -392,7 +392,7 @@ values
     true
   );
 insert into
-  location (LocateCourseID, Lname, lat, lng)
+  Location (LocateCourseID, Lname, lat, lng)
 values
   (
     1,
@@ -489,7 +489,7 @@ values
     'dplop4trainer'
   );
 INSERT INTO
-  transaction (transactionID, clientID, courseID, status, token)
+  Transaction (transactionID, clientID, courseID, status, token)
 values
   ('adddddd1', '0000000000', '1', 'onGoing', '0'),
   (
