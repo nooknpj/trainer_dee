@@ -23,13 +23,13 @@ export class ResponseRequest extends Component {
         let transactionID = url[2];
         let token = url[3];
         const response = await fetch(`/trainer_dee/${responseRequest}/${transactionID}/${token}`);
-        if(response.status == 450){
+        if (response.status == 450) {
             this.setState({
                 isInvalid: 1
             });
-        } else{
-            setTimeout(function() { //Start the timer
-                this.setState({redirect: true}) //After 5 second, set render to true
+        } else {
+            setTimeout(function () { //Start the timer
+                this.setState({ redirect: true }) //After 5 second, set render to true
             }.bind(this), 5000)
         }
     }
@@ -37,15 +37,16 @@ export class ResponseRequest extends Component {
     render() {
         return (
             <div className="box">
-            {this.state.isInvalid ?(
-                <p>Invalid token!</p>
-            ):(
-                this.state.redirect ? (
-                    window.location = "/"
-                ):(
-                    <p>Website will redirect to Home in 5 seconds if {url[1]} is finished.</p>
-                )
-            )}
+                <p className="pageHeader">Redirecting to Homepage</p>
+                {this.state.isInvalid ? (
+                    <p>Invalid token!</p>
+                ) : (
+                        this.state.redirect ? (
+                            window.location = "/"
+                        ) : (
+                                <p>Website will redirect to Home in 5 seconds if {url[1]} is finished.</p>
+                            )
+                    )}
             </div>
         );
     }
