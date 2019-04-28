@@ -29,13 +29,14 @@ export class SearchCourses extends Component {
     //console.log(this.state);
     return (
       <div className="box">
+        <p className="pageHeader"> Search Courses</p>
         {localStorage.getItem("isLoggedIn") == 0 ? (
           // notlogin
-          <p>'you are not logged in'</p>
+          <p>You are not logged in. Please click the "Login" button to login first.</p>
         ) : (
             //login
             <div>
-              <p className="pageHeader"> Search Courses</p>
+
 
               <div id="searchContainer">
                 <SearchBox upDateSearchResults={this.upDateSearchResults} />
