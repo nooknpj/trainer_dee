@@ -157,7 +157,7 @@ export class CourseDescription extends Component {
     //alert("Request to buy successful");
 
     alert(
-      "You successfully sent buy request to the trainer. Please wait 48 hours for trainer to accept your request."
+      "You successfully sent buy request to the trainer. \nPlease wait 48 hours for trainer to accept your request."
     );
     window.location = "/myCourse";
   }

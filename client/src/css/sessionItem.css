@@ -1,0 +1,59 @@
+@media screen and (max-width: 900px) {
+  .sessionItem {
+    font-size: 0.7em;
+
+    /* min-height: 300px;
+            max-height: 300px; */
+  }
+  .fieldItem {
+    font-size: 0.65em;
+  }
+
+  .fieldTitle {
+    font-size: 0.65em;
+  }
+}
+
+.sessionItem {
+  border: solid white 5px;
+  border-radius: 10px;
+  color: #21366e;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  flex-direction: row;
+  font-size: 1.3em;
+  background-color: #bde9c9;
+  width: 95%;
+  /* min-height: 300px;
+      max-height: 300px; */
+}
+
+.fieldItem {
+  margin-top: 0.3em;
+  margin-right: 0.3em;
+  border: solid #21366e 0.1em;
+  border-radius: 0.2em;
+  background-color: white;
+}
+.fieldTitle {
+  font-size: 1em;
+  font-weight: bold;
+  color: white;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  padding-right: 0.3em;
+  padding-left: 0.2em;
+  margin-right: 0.2em;
+
+  background-color: #21366e;
+  /* border: solid #21366e 0.05em; */
+  border-radius: 0.1em;
+}
+
+.fieldInfo {
+  margin-left: 0.15em;
+  margin-right: 0.15em;
+}

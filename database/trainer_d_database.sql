@@ -506,6 +506,40 @@ values
   ('adddddd7', '0000000003', '6', 'onGoing', '0'),
   ('adddddd8', '0000000004', '4', 'finished', '0'),
   ('adddddd9', '0000000004', '5', 'finished', '0');
+  
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',6,'reserved');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',7,'reserved');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',8,'reserved');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',9,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',10,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',11,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',15,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',16,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',17,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',18,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-28',19,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',12,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',13,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',14,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',15,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',16,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-29',17,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',8,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',9,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',10,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',13,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',14,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',15,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',18,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',19,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-04-30',20,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',10,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',11,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',12,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',13,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',14,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',15,'available');
+INSERT INTO timetable (`tableClientID`,`startDate`,`startTime`,`tableStatus`) VALUES ('5555555555','2019-05-01',16,'available');
 -- create table Payment (
   --   PaymentID int auto_increment,
   --   PaymentRequestID int,

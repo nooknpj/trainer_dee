@@ -38,12 +38,6 @@
     max-height: 300px; */
 }
 
-@media screen and (min-width: 500px) {
-  #courseItem {
-    display: flex;
-  }
-}
-
 /* for small screen */
 
 @media screen and (max-width: 900px) {
@@ -244,6 +238,10 @@
 }
 
 @media screen and (min-width: 500px) {
+  #courseItem {
+    display: flex;
+  }
+
   #courseImgContainer {
     margin-right: 15px;
     max-width: 25%;
