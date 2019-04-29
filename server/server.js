@@ -777,7 +777,7 @@ values (?, ?, ?, ?, ?, ?, ?, 1)";
 
 app.post("/trainer_dee/search_location", (req, res) => {
   let sql =
-    "select c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
+    "select c.courseID, c.cName,c.service,c.courseHour,c.cost,c.imageUrl,c.courseDescription,t.rating,cl.fName,cl.lName,cl.gender,cl.telNo \
   from trainer t, client cl, location l, course c \
   where l.locatecourseid = c.courseid and c.TrainerId = cl.clientID and cl.clientID=t.TrainerID and (l.lat BETWEEN ? - 0.0090909 AND ? + 0.0090909) and (l.lng between ? - 0.0090909 and ? + 0.0090909)";
   connection.query(
