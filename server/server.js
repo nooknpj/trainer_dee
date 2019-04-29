@@ -653,12 +653,12 @@ app.post("/trainer_dee/edit_profile", (req, res) => {
   connection.query(
     sql,
     [
-      req.body.firstName,
-      req.body.lastName,
-      req.body.gender,
-      req.body.address,
-      req.body.telNo,
-      req.body.clientID
+      req.body.FName,
+      req.body.LName,
+      req.body.Gender,
+      req.body.Address,
+      req.body.TelNo,
+      req.body.ClientID
     ],
     (error, result) => {
       if (error) throw error;
@@ -676,7 +676,7 @@ app.post("/trainer_dee/edit_trainer_profile", (req, res) => {
   console.log(req.body.trainerDescription);
   connection.query(
     sql,
-    [req.body.trainerDescription, req.body.trainerImg, req.body.clientID],
+    [req.body.TrainerDescription, req.body.TrainerImg, req.body.ClientID],
     (error, result) => {
       if (error) throw error;
       // console.log(all);
