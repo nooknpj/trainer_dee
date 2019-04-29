@@ -151,7 +151,7 @@ export class CourseDescription extends Component {
         );
         return;
       }
-    } catch (error) {}
+    } catch (error) { }
     //----------------------------------------------------------------------------
 
     //alert("Request to buy successful");
@@ -164,7 +164,12 @@ export class CourseDescription extends Component {
 
   render() {
     if (this.state.courseID == 0) {
-      return <p>No course!</p>;
+      return (
+        <div className="box">
+          <p className="pageHeader">Course Description</p>
+          <p>There is no course in this website!</p>
+        </div>
+      )
     }
     return (
       <div className="box">
@@ -217,16 +222,16 @@ export class CourseDescription extends Component {
                 Edit course
               </Button>
             ) : (
-              <Button
-                variant="primary"
-                size="small"
-                type="submit"
-                onClick={this.onRequestToBuyClick}
-                style={{ marginLeft: "auto" }}
-              >
-                Request to buy this course
+                <Button
+                  variant="primary"
+                  size="small"
+                  type="submit"
+                  onClick={this.onRequestToBuyClick}
+                  style={{ marginLeft: "auto" }}
+                >
+                  Request to buy this course
               </Button>
-            )}
+              )}
           </div>
         </div>
       </div>
