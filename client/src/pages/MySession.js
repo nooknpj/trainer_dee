@@ -109,13 +109,13 @@ export class MySession extends Component {
                     />
                   ))
                 ) : (
-                  <h5>No Trainer Sessions.</h5>
-                )}
+                    <h5>No Trainer Sessions.</h5>
+                  )}
               </div>
             </Tab>
           ) : (
-            <div />
-          )}
+              <div />
+            )}
 
           <Tab eventKey="clientSession" title="Client Sessions">
             <div className="box">
@@ -138,8 +138,8 @@ export class MySession extends Component {
                   />
                 ))
               ) : (
-                <h5>No client Sessions.</h5>
-              )}
+                  <h5>No client Sessions.</h5>
+                )}
             </div>
           </Tab>
         </Tabs>

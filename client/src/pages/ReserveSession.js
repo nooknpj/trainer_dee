@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Dropdown, DropdownButton, Button, Form } from "react-bootstrap";
 import TimeTableRow from "../components/TimeTableRow";
 
-Date.prototype.AddDays = function(days) {
+Date.prototype.AddDays = function (days) {
   days = parseInt(days, 10);
   return new Date(this.valueOf() + 1000 * 60 * 60 * 24 * days);
 };
@@ -215,7 +215,7 @@ class ReserveSession extends Component {
     // // let targetIndex = newList.findIndex(function());
     // console.log(targetIndex);
     // delete newList[targetIndex];
-    newList = this.state.selectedTimeSlots.filter(function(ts) {
+    newList = this.state.selectedTimeSlots.filter(function (ts) {
       return ts != e;
     });
     this.state.selectedTimeSlots = newList;

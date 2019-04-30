@@ -11,10 +11,10 @@ export class TestCss extends Component {
 
   onDrop(picture) {
     this.setState({
-        pictures: this.state.pictures.concat(picture),
+      pictures: this.state.pictures.concat(picture),
     });
     console.log(this.state.pictures)
-}
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -49,7 +49,7 @@ export class TestCss extends Component {
     }
 
     return (
-      
+
       <div className="previewComponent">
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <input className="fileInput"
@@ -64,12 +64,12 @@ export class TestCss extends Component {
         </div>
 
         <ImageUploader
-                withIcon={true}
-                buttonText='Choose images'
-                onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                maxFileSize={5242880}
-            />
+          withIcon={true}
+          buttonText='Choose images'
+          onChange={this.onDrop}
+          imgExtension={['.jpg', '.gif', '.png', '.gif']}
+          maxFileSize={5242880}
+        />
       </div>
     )
   }

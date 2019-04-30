@@ -70,33 +70,33 @@ export class MyCourse extends Component {
                     activeKey={this.state.key}
                     onSelect={key => this.setState({ key })}
                 >
-                {localStorage.getItem("isTrainer") == 1 ? (
-                    <Tab style={tabStyle} eventKey="created" title="Created Course">
-                    <div className="box">
-                        <p className="pageHeader">Created Course</p>
-                        {this.state.createdCourse.length != 0 ? (
-                            this.state.createdCourse.map(courseItem => (
-                                <CourseItem
-                                    courseID={courseItem.CourseID}
-                                    cName={courseItem.CName}
-                                    service={courseItem.Service}
-                                    courseDescription={courseItem.CourseDescription}
-                                    cost={courseItem.Cost}
-                                    courseHour={courseItem.CourseHour}
-                                    imageUrl={courseItem.ImageUrl}
-                                    courseStatus={courseItem.CourseStatus}
-                                />
-                            ))
-                        ) : (
-                                <h5>No created course.</h5>
-                            )}
-                    </div>
+                    {localStorage.getItem("isTrainer") == 1 ? (
+                        <Tab style={tabStyle} eventKey="created" title="Created Course">
+                            <div className="box">
+                                <p className="pageHeader">Created Course</p>
+                                {this.state.createdCourse.length != 0 ? (
+                                    this.state.createdCourse.map(courseItem => (
+                                        <CourseItem
+                                            courseID={courseItem.CourseID}
+                                            cName={courseItem.CName}
+                                            service={courseItem.Service}
+                                            courseDescription={courseItem.CourseDescription}
+                                            cost={courseItem.Cost}
+                                            courseHour={courseItem.CourseHour}
+                                            imageUrl={courseItem.ImageUrl}
+                                            courseStatus={courseItem.CourseStatus}
+                                        />
+                                    ))
+                                ) : (
+                                        <h5>No created course.</h5>
+                                    )}
+                            </div>
 
-                </Tab>
-                ):(
-                    <div/>
-                )}
-                    
+                        </Tab>
+                    ) : (
+                            <div />
+                        )}
+
                     <Tab eventKey="attended" title="Attended Course">
                         <div className="box">
                             <p className="pageHeader">Attended Course</p>
